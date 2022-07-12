@@ -1,0 +1,1 @@
+nuget pack "..\src\Metroit.Win.GcSpread.CodeDesign\Metroit.Win.GcSpread.CodeDesign.csproj" -Prop Configuration=Release

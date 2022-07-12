@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <title>$title$</title>
+    <version>$version$</version>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <description>$description$</description>
+    <licenseUrl>https://github.com/takiru/Metroit.Win.GcSpread.CodeDesign/blob/main/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/takiru/Metroit.Win.GcSpread.CodeDesign</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <copyright>Copyright 2022 Takeru Yamaguchi.</copyright>
+    <tags>Metroit winforms GrapeCity GcSpread spreadsheet</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.5">
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32407.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metroit.Win.GcSpread.CodeDesign", "Metroit.Win.GcSpread.CodeDesign\Metroit.Win.GcSpread.CodeDesign.csproj", "{7D7A1555-655F-4EB7-9B05-0E67F757E87D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metroit.Win.GcSpread.CodeDesign.Test", "Metroit.Win.GcSpread.CodeDesign.Test\Metroit.Win.GcSpread.CodeDesign.Test.csproj", "{FA63879A-1AE9-49AA-B8D3-1D78FBF02FD3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D7A1555-655F-4EB7-9B05-0E67F757E87D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D7A1555-655F-4EB7-9B05-0E67F757E87D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D7A1555-655F-4EB7-9B05-0E67F757E87D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D7A1555-655F-4EB7-9B05-0E67F757E87D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA63879A-1AE9-49AA-B8D3-1D78FBF02FD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA63879A-1AE9-49AA-B8D3-1D78FBF02FD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA63879A-1AE9-49AA-B8D3-1D78FBF02FD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA63879A-1AE9-49AA-B8D3-1D78FBF02FD3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6905C035-5407-4813-B2D9-37AEF7AE7FD1}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,594 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Metroit.Win.GcSpread.CodeDesign</name>
+    </assembly>
+    <members>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult">
+            <summary>
+            列の移動を行った情報を提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult.#ctor(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            新しいインスタンスを生成します。
+            </summary>
+            <param name="originalColumnIndex">オリジナルの列インデックス。</param>
+            <param name="beforeColumnIndex">移動前列インデックス。</param>
+            <param name="afterColumnIndex">移動後列インデックス。</param>
+            <param name="dataField">列の DataField プロパティ値。</param>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult.OriginalColumnIndex">
+            <summary>
+            オリジナルの列インデックスを取得します。
+            MoveColumnKeepDataField() の実行結果では、かならず BeforeColumnIndex と同一になります。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult.BeforeColumnIndex">
+            <summary>
+            移動前の列インデックスを取得します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult.AfterColumnIndex">
+            <summary>
+            移動後の列インデックスを取得します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult.DataField">
+            <summary>
+            列の DataField プロパティ値を取得します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView のレイアウトを構成する列の全体要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions.HorizontalAlignment">
+            <summary>
+            水平位置を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions.VerticalAlignment">
+            <summary>
+            垂直位置を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions.AllowAutoFilter">
+            <summary>
+            自動フィルター機能を利用するかどうかを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions.AllowAutoSort">
+            <summary>
+            自動ソート機能を利用するかどうかを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions.Width">
+            <summary>
+            幅を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions.Visible">
+            <summary>
+            表示状態を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions.ImeMode">
+            <summary>
+            IMEモードを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions.Locked">
+            <summary>
+            ロック状態を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView のレイアウトを構成する列要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.DataField">
+            <summary>
+            データバインドするフィールド名を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.HorizontalAlignment">
+            <summary>
+            水平位置を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.VerticalAlignment">
+            <summary>
+            垂直位置を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.AllowAutoFilter">
+            <summary>
+            自動フィルター機能を利用するかどうかを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.AllowAutoSort">
+            <summary>
+            自動ソート機能を利用するかどうかを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.Width">
+            <summary>
+            幅を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.Visible">
+            <summary>
+            表示状態を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.CellType">
+            <summary>
+            セルタイプを取得または設定します。
+            TextCellType, DateTimeCellType, NumberCellType, ComboBoxCellType をサポートします。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.CellTypeProperties">
+            <summary>
+            セルタイプのプロパティを取得または設定します。
+            サポートするプロパティはセルタイプによって異なります。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.ImeMode">
+            <summary>
+            IMEモードを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.Locked">
+            <summary>
+            ロック状態を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.Options">
+            <summary>
+            外部オプション情報を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView のレイアウトを構成する列ヘッダー要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderDefinitions.Rows">
+            <summary>
+            列ヘッダーの行情報を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderDefinitions.Spans">
+            <summary>
+            セル結合情報を提供します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.HeaderColumnDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView のレイアウトを構成する列ヘッダーの列要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderColumnDefinitions.Value">
+            <summary>
+            列タイトルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderColumnDefinitions.HorizontalAlignment">
+            <summary>
+            水平位置を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderColumnDefinitions.VerticalAlignment">
+            <summary>
+            垂直位置を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.HeaderRowDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView のレイアウトを構成する列ヘッダーの行要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderRowDefinitions.Height">
+            <summary>
+            高さを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderRowDefinitions.HorizontalAlignment">
+            <summary>
+            水平位置を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderRowDefinitions.VerticalAlignment">
+            <summary>
+            垂直位置を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderRowDefinitions.Columns">
+            <summary>
+            列ヘッダーの列情報を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.JsonConvert">
+            <summary>
+            GrapeCity SPREAD SheetView に対応したJSONデータのシリアライザーを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.JsonConvert.SerializeSheetView(Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions)">
+            <summary>
+            シートの定義情報 SheetViewDefinitions をシリアライズします。
+            </summary>
+            <param name="data">SheetViewRootJson オブジェクト。</param>
+            <returns>JSONデータ文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.JsonConvert.DeserializeSheetView(System.String)">
+            <summary>
+            シートの定義情報 SheetViewDefinitions にデシリアライズします。
+            </summary>
+            <param name="json">JSONデータ文字列。</param>
+            <returns>SheetViewRootJson オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.JsonConvert.SerializeSpecialColumnHeader(Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnHeaderDefinitions)">
+            <summary>
+            列ヘッダーの特定定義情報 SpecialColumnHeaderDefinitions をシリアライズします。
+            </summary>
+            <param name="data">列の特定要素のみを構成する SpecialColumnHeaderRootJson オブジェクト。</param>
+            <returns>JSONデータ文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.JsonConvert.DeserializeSpecialColumnHeader(System.String)">
+            <summary>
+            列ヘッダーの特定定義情報 SpecialColumnHeaderDefinitions にデシリアライズします。
+            </summary>
+            <param name="json">列の特定要素のみを構成するJSONデータ文字列。</param>
+            <returns>SpecialColumnHeaderRootJson オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.JsonConvert.SerializeSpecialColumn(Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnsDefinitions)">
+            <summary>
+            列の特定定義情報 SpecialColumnsDefinitions をシリアライズします。
+            </summary>
+            <param name="data">列の特定要素のみを構成する SpecialColumnRootJson オブジェクト。</param>
+            <returns>JSONデータ文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.JsonConvert.DeserializeSpecialColumn(System.String)">
+            <summary>
+            列の特定定義情報 SpecialColumnsDefinitions にデシリアライズします。
+            </summary>
+            <param name="json">列の特定要素のみを構成するJSONデータ文字列。</param>
+            <returns>SpecialColumnRootJson オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView のレイアウトを構成するルート要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions.ColumnHeader">
+            <summary>
+            列ヘッダー情報を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions.AllColumn">
+            <summary>
+            列の全体情報を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions.Columns">
+            <summary>
+            列情報を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.SpanDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView のレイアウトを構成するセル結合要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpanDefinitions.Row">
+            <summary>
+            行インデックスを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpanDefinitions.Column">
+            <summary>
+            列インデックスを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpanDefinitions.RowCount">
+            <summary>
+            行数を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpanDefinitions.ColumnCount">
+            <summary>
+            列数を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView の特定要素のみを構成する列要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnDefinitions.DataField">
+            <summary>
+            データバインドするフィールド名を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnDefinitions.Width">
+            <summary>
+            幅を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnDefinitions.Visible">
+            <summary>
+            表示状態を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnHeaderDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView の列ヘッダーの特定要素のみを構成するルート要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnHeaderDefinitions.Rows">
+            <summary>
+            列ヘッダーの行情報を提供します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnsDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView の列の特定要素のみを構成するルート要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnsDefinitions.Columns">
+            <summary>
+            列情報を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.SpecialHeaderColumnDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView の列ヘッダーの特定列要素のみを提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpecialHeaderColumnDefinitions.Value">
+            <summary>
+            列タイトルを取得または設定します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.SpecialHeaderRowDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView の列ヘッダーの特定行要素のみを提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpecialHeaderRowDefinitions.Columns">
+            <summary>
+            列ヘッダーの列情報を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions">
+            <summary>
+            GrapeCity SPREAD SheetView の拡張メソッドを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.BindJsonLayout(FarPoint.Win.Spread.SheetView,System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult}})">
+            <summary>
+            指定したJSONファイルでシートをバインドします。
+            </summary>
+            <param name="sheetView">SheetView オブジェクト。</param>
+            <param name="path">JSONファイルパス。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.BindJsonLayout(FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult}})">
+            <summary>
+            指定したJSONオブジェクトでシートをバインドします。
+            </summary>
+            <param name="sheetView">SheetView オブジェクト。</param>
+            <param name="jsonObj">バインドするJSONオブジェクト。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.BindJsonLayoutWithoutColumns(FarPoint.Win.Spread.SheetView,System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult}})">
+            <summary>
+            指定したJSONファイルでシートのヘッダー部のみをバインドします。
+            </summary>
+            <param name="sheetView">SheetView オブジェクト。</param>
+            <param name="path">JSONファイルパス。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.BindJsonLayoutWithoutColumns(FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult}})">
+            <summary>
+            指定したJSONオブジェクトでシートのヘッダー部のみをバインドします。
+            </summary>
+            <param name="sheetView">SheetView オブジェクト。</param>
+            <param name="jsonObj">バインドするJSONオブジェクト。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.MoveColumnKeepDataField(FarPoint.Win.Spread.SheetView,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            DataField プロパティを保持したまま列の移動を行います。
+            列タイトルのセル結合を保持するため、SheetView.MoveColumn() の第四引数 moveContent は true として実行されます。
+            </summary>
+            <param name="sheetView">SheetView オブジェクト。</param>
+            <param name="fromIndex">移動元の列インデックス。</param>
+            <param name="toIndex">移動先の列インデックス。</param>
+            <param name="columnCount">移動する列数。</param>
+            <returns>列の移動を行った情報のリスト。移動が行われなかった時は空のリストを返却します。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CreateSheetDefinitions(FarPoint.Win.Spread.SheetView,System.Func{FarPoint.Win.Spread.Column,System.Collections.Generic.Dictionary{System.String,System.Object}})">
+            <summary>
+            シート情報からJSONデータオブジェクトを生成します。
+            </summary>
+            <param name="sheetView">SheetView オブジェクト。</param>
+            <param name="columnOptions">列のオプション情報設定アクションデリゲート。</param>
+            <returns>JSONデータオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CreateSpecialColumnHeaderDefinitions(FarPoint.Win.Spread.SheetView)">
+            <summary>
+            シート情報から列ヘッダーの特定のみのJSONデータオブジェクトを生成します。
+            </summary>
+            <param name="sheetView">SheetView オブジェクト。</param>
+            <returns>JSONデータオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CreateSpecialColumnDefinitions(FarPoint.Win.Spread.SheetView)">
+            <summary>
+            シート情報から列の特定のみのJSONデータオブジェクトを生成します。
+            </summary>
+            <param name="sheetView">SheetView オブジェクト。</param>
+            <returns>JSONデータオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.PrepareCompilation(FarPoint.Win.Spread.SheetView)">
+            <summary>
+            バインド準備を行う。
+            </summary>
+            <param name="sheetView">SheetView オブジェクト。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.ComplieColumnHeader(FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderDefinitions,System.Func{FarPoint.Win.Spread.Cell,System.Object})">
+            <summary>
+            ヘッダー情報をコンパイルする。
+            </summary>
+            <param name="sheetView">SheetView オブジェクト。</param>
+            <param name="columnHeader">Json.ColumnHeader オブジェクト。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CompileColumnHeaderSpans(FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SpanDefinitions[],System.Collections.Generic.IList{Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult})">
+            <summary>
+            ヘッダースパン情報をコンパイルする。
+            </summary>
+            <param name="sheetView">SheetView オブジェクト。</param>
+            <param name="spans">Span[] オブジェクト。</param>
+            <param name="columnMoveResults">列の移動を行った情報のリスト。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CompileColumns(FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions)">
+            <summary>
+            列情報をコンパイルする。
+            </summary>
+            <param name="sheetView">SheetView オブジェクト。</param>
+            <param name="root">Root オブジェクト。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CompileTextCellType(FarPoint.Win.Spread.CellType.TextCellType,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            TextCellType をコンパイルする。
+            </summary>
+            <param name="cellType">TextCellType オブジェクト。</param>
+            <param name="cellTypeProperties">セルタイプ情報。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CompileDateTimeCellType(FarPoint.Win.Spread.CellType.DateTimeCellType,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            DateTimeCellType をコンパイルする。
+            </summary>
+            <param name="cellType">DateTimeCellType オブジェクト。</param>
+            <param name="cellTypeProperties">セルタイプ情報。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CompileNumberCellType(FarPoint.Win.Spread.CellType.NumberCellType,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            NumberCellType をコンパイルする。
+            </summary>
+            <param name="cellType">NumberCellType オブジェクト。</param>
+            <param name="cellTypeProperties">セルタイプ情報。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CompileComboBoxCellType(FarPoint.Win.Spread.CellType.ComboBoxCellType,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            ComboBoxCellType をコンパイルする。
+            </summary>
+            <param name="cellType">ComboBoxCellType オブジェクト。</param>
+            <param name="cellTypeProperties">セルタイプ情報。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CompileCheckBoxCellType(FarPoint.Win.Spread.CellType.CheckBoxCellType,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            CheckBoxCellType をコンパイルする。
+            </summary>
+            <param name="cellType">CheckBoxCellType オブジェクト。</param>
+            <param name="cellTypeProperties">セルタイプ情報。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CompileButtonCellType(FarPoint.Win.Spread.CellType.ButtonCellType,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            ButtonCellType をコンパイルする。
+            </summary>
+            <param name="cellType">ButtonCellType オブジェクト。</param>
+            <param name="cellTypeProperties">セルタイプ情報。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileColumnHeaderRows(FarPoint.Win.Spread.SheetView)">
+            <summary>
+            現在のシートからヘッダー行/列情報を逆コンパイルする。
+            </summary>
+            <param name="sheetView">SheetView オブジェクト。</param>
+            <returns>HeaderRowJson[] オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileColumnHeaderSpans(FarPoint.Win.Spread.SheetView)">
+            <summary>
+            現在のシートからヘッダースパン情報を逆コンパイルする。
+            </summary>
+            <param name="sheetView">SheetView オブジェクト。</param>
+            <returns>SpanJson[] オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileColumns(FarPoint.Win.Spread.SheetView,System.Func{FarPoint.Win.Spread.Column,System.Collections.Generic.Dictionary{System.String,System.Object}})">
+            <summary>
+            現在のシートから列情報を逆コンパイルする。
+            </summary>
+            <param name="sheetView">SheetView オブジェクト。</param>
+            <param name="columnOptions">列のオプション情報設定アクションデリゲート。</param>
+            <returns>ColumnJson[] オブジェクト</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileTextCellTypeProperties(FarPoint.Win.Spread.CellType.TextCellType)">
+            <summary>
+            TextCellType からプロパティ情報を逆コンパイルする。
+            </summary>
+            <param name="cellType">TextCellType オブジェクト。</param>
+            <returns>プロパティ情報。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileDateTimeCellTypeProperties(FarPoint.Win.Spread.CellType.DateTimeCellType)">
+            <summary>
+            DateTieCellType からプロパティ情報を逆コンパイルする。
+            </summary>
+            <param name="cellType">DateTieCellType オブジェクト。</param>
+            <returns>プロパティ情報。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileNumberCellTypeProperties(FarPoint.Win.Spread.CellType.NumberCellType)">
+            <summary>
+            NumberCellType からプロパティ情報を逆コンパイルする。
+            </summary>
+            <param name="cellType">NumberCellType オブジェクト。</param>
+            <returns>プロパティ情報。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileComboBoxCellTypeProperties(FarPoint.Win.Spread.CellType.ComboBoxCellType)">
+            <summary>
+            ComboBoxCellType からプロパティ情報を逆コンパイルする。
+            </summary>
+            <param name="cellType">ComboBoxCellType オブジェクト。</param>
+            <returns>プロパティ情報。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileCheckBoxCellTypeProperties(FarPoint.Win.Spread.CellType.CheckBoxCellType)">
+            <summary>
+            CheckCellType からプロパティ情報を逆コンパイルする。
+            </summary>
+            <param name="cellType">CheckBoxCellType オブジェクト。</param>
+            <returns>プロパティ情報。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileButtonCellTypeProperties(FarPoint.Win.Spread.CellType.ButtonCellType)">
+            <summary>
+            ButtonCellType からプロパティ情報を逆コンパイルする。
+            </summary>
+            <param name="cellType">ButtonCellType オブジェクト。</param>
+            <returns>プロパティ情報。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.EnumExt">
+            <summary>
+            Enum の安全な型変換を提供する。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.EnumExt.TryParse``1(System.String,``0@)">
+            <summary>
+            Enum の安全な型変換を検証する。
+            </summary>
+            <typeparam name="TEnum">Enum 型。</typeparam>
+            <param name="value">Enum に変換する文字列。</param>
+            <param name="enumValue">変換された Enum 型の値。</param>
+            <returns>true:成功, false:失敗。</returns>
+        </member>
+    </members>
+</doc>
