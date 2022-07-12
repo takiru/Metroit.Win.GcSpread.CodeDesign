@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Metroit.Win.GcSpread.CodeDesign</RootNamespace>
     <AssemblyName>Metroit.Win.GcSpread.CodeDesign</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,14 +33,17 @@
     <DocumentationFile>bin\Release\Metroit.Win.GcSpread.CodeDesign.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FarPoint.CalcEngine, Version=7.0.2021.2008, Culture=neutral, PublicKeyToken=a5fa960294d899e7" />
-    <Reference Include="FarPoint.Excel, Version=7.0.2021.2008, Culture=neutral, PublicKeyToken=a5fa960294d899e7" />
-    <Reference Include="FarPoint.PDF, Version=7.0.2021.2008, Culture=neutral, PublicKeyToken=a5fa960294d899e7" />
-    <Reference Include="FarPoint.PluginCalendar.WinForms, Version=7.0.2021.2008, Culture=neutral, PublicKeyToken=a5fa960294d899e7" />
-    <Reference Include="FarPoint.Win, Version=7.0.2021.2008, Culture=neutral, PublicKeyToken=a5fa960294d899e7" />
-    <Reference Include="FarPoint.Win.Chart, Version=7.0.2021.2008, Culture=neutral, PublicKeyToken=a5fa960294d899e7" />
-    <Reference Include="FarPoint.Win.SpreadJ, Version=7.0.2021.2008, Culture=neutral, PublicKeyToken=a5fa960294d899e7, processorArchitecture=MSIL" />
-    <Reference Include="GrapeCity.Win.PluginInputMan, Version=7.0.2021.2008, Culture=neutral, PublicKeyToken=a5fa960294d899e7, processorArchitecture=MSIL" />
+    <Reference Include="FarPoint.CalcEngine, Version=11.0.4505.2012, Culture=neutral, PublicKeyToken=a5fa960294d899e7" />
+    <Reference Include="FarPoint.Excel, Version=11.0.4505.2012, Culture=neutral, PublicKeyToken=a5fa960294d899e7" />
+    <Reference Include="FarPoint.PDF, Version=11.0.4505.2012, Culture=neutral, PublicKeyToken=a5fa960294d899e7" />
+    <Reference Include="FarPoint.PluginCalendar.WinForms, Version=11.0.4505.2012, Culture=neutral, PublicKeyToken=a5fa960294d899e7" />
+    <Reference Include="FarPoint.Win, Version=11.0.4505.2012, Culture=neutral, PublicKeyToken=a5fa960294d899e7" />
+    <Reference Include="FarPoint.Win.Chart, Version=11.0.4505.2012, Culture=neutral, PublicKeyToken=a5fa960294d899e7" />
+    <Reference Include="FarPoint.Win.SpreadJ, Version=11.0.4505.2012, Culture=neutral, PublicKeyToken=a5fa960294d899e7, processorArchitecture=MSIL" />
+    <Reference Include="GrapeCity.CalcEngine, Version=11.0.4505.2012, Culture=neutral, PublicKeyToken=a5fa960294d899e7" />
+    <Reference Include="GrapeCity.Spreadsheet, Version=11.0.4505.2012, Culture=neutral, PublicKeyToken=a5fa960294d899e7" />
+    <Reference Include="GrapeCity.Spreadsheet.Win, Version=11.0.4505.2012, Culture=neutral, PublicKeyToken=a5fa960294d899e7" />
+    <Reference Include="GrapeCity.Win.PluginInputMan, Version=11.0.4505.2012, Culture=neutral, PublicKeyToken=a5fa960294d899e7, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
