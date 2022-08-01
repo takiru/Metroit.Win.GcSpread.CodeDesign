@@ -1,5 +1,6 @@
 ﻿using FarPoint.Win.Spread;
 using FarPoint.Win.Spread.CellType;
+using GrapeCity.Win.Spread.InputMan.CellType;
 using Metroit.Win.GcSpread.CodeDesign;
 using Metroit.Win.GcSpread.CodeDesign.Json;
 using System;
@@ -107,6 +108,33 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             var comboBoxCellType = (ComboBoxCellType)comboBoxColumn.CellType;
             comboBoxCellType.Items = new string[] { "item1", "item2", "item3" };
             comboBoxCellType.ItemData = new string[] { "value1", "value2", "value3" };
+
+            // GcComboBox のアイテム設定
+            var cellType = fpSpread1.ActiveSheet.Columns[10].CellType as GcComboBoxCellType;
+
+            cellType.DropDownStyle = ComboBoxStyle.DropDownList;
+            cellType.EditorValue = GcComboBoxEditorValue.Value; // 実際の値はValueとする
+
+            // 列や行の境界線が邪魔なので消す
+            cellType.ListGridLines.HorizontalLines.Style = LineStyle.None;
+            cellType.ListGridLines.VerticalLines.Style = LineStyle.None;
+
+            cellType.ListHeaderPane.Visible = false;    // ヘッダー列名を表示しない
+            cellType.DropDown.AutoWidth = true; // 列非表示に伴い、幅調整されるようにする
+            cellType.DropDown.AllowResize = false;  // ユーザーによってドロップダウンのサイズを変更することを許可しない
+            cellType.UseCompatibleDrawing = true;   // ドロップダウンを開いているときに入力エリア部分が灰色にならないようにする
+
+            cellType.AutoGenerateColumns = true;
+            cellType.DataSource = comboItems;
+
+            // 内部の値と画面に表示される値を設定
+            cellType.ValueSubItemIndex = cellType.ListColumns.IndexOf(cellType.ListColumns.Cast<ListColumnInfo>().Where(x => x.DataPropertyName == "Value").First());
+            cellType.TextSubItemIndex = cellType.ListColumns.IndexOf(cellType.ListColumns.Cast<ListColumnInfo>().Where(x => x.DataPropertyName == "Display").First());
+
+            cellType.ListDefaultColumn.Visible = false; // 何もリスト表示しない状態をデフォルトにする
+            cellType.ListColumns.Cast<ListColumnInfo>().Where(x => x.DataPropertyName == "Display").First().Visible = true;  // 表示したい列だけ表示する
+
+
 
             fpSpread1.ActiveSheet.DataSource = dataSource;
         }

@@ -8,6 +8,11 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using GrapeCity.Win.Spread.InputMan.CellType;
+using LengthUnit = GrapeCity.Win.Spread.InputMan.CellType.LengthUnit;
+using System.Drawing;
+using GrapeCity.Win.Spread.InputMan.CellType.Fields;
+using Newtonsoft.Json.Linq;
 
 namespace Metroit.Win.GcSpread.CodeDesign
 {
@@ -443,6 +448,31 @@ namespace Metroit.Win.GcSpread.CodeDesign
                         sheetView.Columns[column.Index].CellType = cellType;
                         CompileButtonCellType((ButtonCellType)cellType, column.Item.CellTypeProperties);
                         break;
+
+                    case "gctextboxcelltype":
+                        cellType = new GcTextBoxCellType();
+                        sheetView.Columns[column.Index].CellType = cellType;
+                        CompileGcTextBoxCellType((GcTextBoxCellType)cellType, column.Item.CellTypeProperties);
+                        break;
+
+                    case "gcdatetimecelltype":
+                        cellType = new GcDateTimeCellType();
+                        sheetView.Columns[column.Index].CellType = cellType;
+                        CompileGcDateTimeCellType((GcDateTimeCellType)cellType, column.Item.CellTypeProperties);
+                        break;
+
+                    case "gcnumbercelltype":
+                        cellType = new GcNumberCellType();
+                        sheetView.Columns[column.Index].CellType = cellType;
+                        CompileGcNumberCellType((GcNumberCellType)cellType, column.Item.CellTypeProperties);
+                        break;
+
+                    case "gccomboboxcelltype":
+                        cellType = new GcComboBoxCellType();
+                        sheetView.Columns[column.Index].CellType = cellType;
+                        CompileGcComboBoxCellType((GcComboBoxCellType)cellType, column.Item.CellTypeProperties);
+                        break;
+
                 }
 
                 // 列全体の定義を反映
@@ -839,6 +869,688 @@ namespace Metroit.Win.GcSpread.CodeDesign
         }
 
         /// <summary>
+        /// GcTextBoxCellType をコンパイルする。
+        /// </summary>
+        /// <param name="cellType">GcTextBoxCellType オブジェクト。</param>
+        /// <param name="cellTypeProperties">セルタイプ情報。</param>
+        private static void CompileGcTextBoxCellType(GcTextBoxCellType cellType, Dictionary<string, object> cellTypeProperties)
+        {
+            if (cellTypeProperties == null)
+            {
+                return;
+            }
+
+            foreach (var prop in cellTypeProperties)
+            {
+                var propKey = prop.Key.ToLower();
+
+                if (propKey == "acceptscrlf")
+                {
+                    CrLfMode crLfMode;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out crLfMode))
+                    {
+                        cellType.AcceptsCrLf = crLfMode;
+                    }
+                }
+                if (propKey == "acceptstabchar")
+                {
+                    TabCharMode tabCharMode;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out tabCharMode))
+                    {
+                        cellType.AcceptsTabChar = tabCharMode;
+                    }
+                }
+                if (propKey == "allowspace")
+                {
+                    AllowSpace allowSpace;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out allowSpace))
+                    {
+                        cellType.AllowSpace = allowSpace;
+                    }
+                }
+                if (propKey == "autoconvert")
+                {
+                    cellType.AutoConvert = (bool)prop.Value;
+                }
+                if (propKey == "editmode")
+                {
+                    EditMode editMode;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out editMode))
+                    {
+                        cellType.EditMode = editMode;
+                    }
+                }
+                if (propKey == "ellipsis")
+                {
+                    EllipsisMode ellipsisMode;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out ellipsisMode))
+                    {
+                        cellType.Ellipsis = ellipsisMode;
+                    }
+                }
+                if (propKey == "ellipsisstring")
+                {
+                    cellType.EllipsisString = (string)prop.Value;
+                }
+                if (propKey == "excelexportformat")
+                {
+                    cellType.ExcelExportFormat = (string)prop.Value;
+                }
+                if (propKey == "exitonlastchar")
+                {
+                    cellType.ExitOnLastChar = (bool)prop.Value;
+                }
+                if (propKey == "focusposition")
+                {
+                    EditorBaseFocusCursorPosition editorBaseFocusCursorPosition;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out editorBaseFocusCursorPosition))
+                    {
+                        cellType.FocusPosition = editorBaseFocusCursorPosition;
+                    }
+                }
+                if (propKey == "formatstring")
+                {
+                    cellType.FormatString = (string)prop.Value;
+                }
+                if (propKey == "linespace")
+                {
+                    cellType.LineSpace = Convert.ToInt32(prop.Value);
+                }
+                if (propKey == "maxlength")
+                {
+                    cellType.MaxLength = Convert.ToInt32(prop.Value);
+                }
+                if (propKey == "maxlengthcodepage")
+                {
+                    cellType.MaxLengthCodePage = Convert.ToInt32(prop.Value);
+                }
+                if (propKey == "maxlengthunit")
+                {
+                    LengthUnit lengthUnit;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out lengthUnit))
+                    {
+                        cellType.MaxLengthUnit = lengthUnit;
+                    }
+                }
+                if (propKey == "maxlinecount")
+                {
+                    cellType.MaxLineCount = Convert.ToInt32(prop.Value);
+                }
+                if (propKey == "multiline")
+                {
+                    cellType.Multiline = (bool)prop.Value;
+                }
+                if (propKey == "passwordchar")
+                {
+                    cellType.PasswordChar = Convert.ToChar(prop.Value);
+                }
+                if (propKey == "passwordrevelationmode")
+                {
+                    PasswordRevelationMode passwordRevelationMode;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out passwordRevelationMode))
+                    {
+                        cellType.PasswordRevelationMode = passwordRevelationMode;
+                    }
+                }
+                if (propKey == "readonly")
+                {
+                    cellType.ReadOnly = (bool)prop.Value;
+                }
+                if (propKey == "recommendedvalue")
+                {
+                    cellType.RecommendedValue = (string)prop.Value;
+                }
+                if (propKey == "showrecommendedvalue")
+                {
+                    cellType.ShowRecommendedValue = (bool)prop.Value;
+                }
+                if (propKey == "static")
+                {
+                    cellType.Static = (bool)prop.Value;
+                }
+                if (propKey == "usesystempasswordchar")
+                {
+                    cellType.UseSystemPasswordChar = (bool)prop.Value;
+                }
+                if (propKey == "wrapmode")
+                {
+                    WrapMode wrapMode;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out wrapMode))
+                    {
+                        cellType.WrapMode = wrapMode;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// GcDateTimeCellType をコンパイルする。
+        /// </summary>
+        /// <param name="cellType">GcDateTimeCellType オブジェクト。</param>
+        /// <param name="cellTypeProperties">セルタイプ情報。</param>
+        private static void CompileGcDateTimeCellType(GcDateTimeCellType cellType, Dictionary<string, object> cellTypeProperties)
+        {
+            if (cellTypeProperties == null)
+            {
+                return;
+            }
+
+            foreach (var prop in cellTypeProperties)
+            {
+                var propKey = prop.Key.ToLower();
+
+                if (propKey == "acceptscrlf")
+                {
+                    CrLfMode crLfMode;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out crLfMode))
+                    {
+                        cellType.AcceptsCrLf = crLfMode;
+                    }
+                }
+                if (propKey == "clipcontent")
+                {
+                    ClipContent clipContent;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out clipContent))
+                    {
+                        cellType.ClipContent = clipContent;
+                    }
+                }
+                if (propKey == "defaultactivefield")
+                {
+                    cellType.SerializationDefaultActiveFieldIndex = Convert.ToInt32(prop.Value);
+                }
+                if (propKey == "editmode")
+                {
+                    EditMode editMode;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out editMode))
+                    {
+                        cellType.EditMode = editMode;
+                    }
+                }
+                if (propKey == "displayfields")
+                {
+                    cellType.DisplayFields.Clear();
+                    if (prop.Value is JArray)
+                    {
+                        var list = ((JArray)prop.Value).ToList();
+                        DateDisplayFieldInfo info;
+                        foreach (var item in list)
+                        {
+                            switch (item["Type"].ToString().ToLower())
+                            {
+                                case "dateyeardisplayfieldinfo":
+                                    info = item.ToObject<DateYearDisplayFieldInfo>();
+                                    cellType.DisplayFields.Add(info);
+                                    break;
+                                case "datemonthdisplayfieldinfo":
+                                    info = item.ToObject<DateMonthDisplayFieldInfo>();
+                                    cellType.DisplayFields.Add(info);
+                                    break;
+                                case "datedaydisplayfieldinfo":
+                                    info = item.ToObject<DateDayDisplayFieldInfo>();
+                                    cellType.DisplayFields.Add(info);
+                                    break;
+                                case "datehourdisplayfieldinfo":
+                                    info = item.ToObject<DateHourDisplayFieldInfo>();
+                                    cellType.DisplayFields.Add(info);
+                                    break;
+                                case "dateminutedisplayfieldinfo":
+                                    info = item.ToObject<DateMinuteDisplayFieldInfo>();
+                                    cellType.DisplayFields.Add(info);
+                                    break;
+                                case "dateseconddisplayfieldinfo":
+                                    info = item.ToObject<DateSecondDisplayFieldInfo>();
+                                    cellType.DisplayFields.Add(info);
+                                    break;
+                                case "dateliteraldisplayfieldinfo":
+                                    info = item.ToObject<DateLiteralDisplayFieldInfo>();
+                                    cellType.DisplayFields.Add(info);
+                                    break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        cellType.DisplayFields.AddRange((string)prop.Value);
+                    }
+                }
+                if (propKey == "excelexportformat")
+                {
+                    cellType.ExcelExportFormat = (string)prop.Value;
+                }
+                if (propKey == "exitonlastchar")
+                {
+                    cellType.ExitOnLastChar = (bool)prop.Value;
+                }
+                if (propKey == "fields")
+                {
+                    cellType.Fields.Clear();
+                    if (prop.Value is JArray)
+                    {
+                        var list = ((JArray)prop.Value).ToList();
+                        DateFieldInfo info;
+                        foreach (var item in list)
+                        {
+                            switch (item["Type"].ToString().ToLower())
+                            {
+                                case "dateyearfieldinfo":
+                                    info = item.ToObject<DateYearFieldInfo>();
+                                    cellType.Fields.Add(info);
+                                    break;
+                                case "datemonthfieldinfo":
+                                    info = item.ToObject<DateMonthFieldInfo>();
+                                    cellType.Fields.Add(info);
+                                    break;
+                                case "datedayfieldinfo":
+                                    info = item.ToObject<DateDayFieldInfo>();
+                                    cellType.Fields.Add(info);
+                                    break;
+                                case "datehourfieldinfo":
+                                    info = item.ToObject<DateHourFieldInfo>();
+                                    cellType.Fields.Add(info);
+                                    break;
+                                case "dateminutefieldinfo":
+                                    info = item.ToObject<DateMinuteFieldInfo>();
+                                    cellType.Fields.Add(info);
+                                    break;
+                                case "datesecondfieldinfo":
+                                    info = item.ToObject<DateSecondFieldInfo>();
+                                    cellType.Fields.Add(info);
+                                    break;
+                                case "dateliteralfieldinfo":
+                                    info = item.ToObject<DateLiteralFieldInfo>();
+                                    cellType.Fields.Add(info);
+                                    break;
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        cellType.Fields.AddRange((string)prop.Value);
+                    }
+                }
+                if (propKey == "fieldseditmode")
+                {
+                    FieldsEditMode fieldsEditMode;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out fieldsEditMode))
+                    {
+                        cellType.FieldsEditMode = fieldsEditMode;
+                    }
+                }
+                if (propKey == "focusposition")
+                {
+                    FieldsEditorFocusCursorPosition fieldsEditorFocusCursorPosition;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out fieldsEditorFocusCursorPosition))
+                    {
+                        cellType.FocusPosition = fieldsEditorFocusCursorPosition;
+                    }
+                }
+                if (propKey == "maxdate")
+                {
+                    cellType.MaxDate = Convert.ToDateTime(prop.Value);
+                }
+                if (propKey == "maxminbehavior")
+                {
+                    MaxMinBehavior maxMinBehavior;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out maxMinBehavior))
+                    {
+                        cellType.MaxMinBehavior = maxMinBehavior;
+                    }
+                }
+                if (propKey == "promptchar")
+                {
+                    cellType.PromptChar = Convert.ToChar(prop.Value);
+                }
+                if (propKey == "readonly")
+                {
+                    cellType.ReadOnly = (bool)prop.Value;
+                }
+                if (propKey == "recommendedvalue")
+                {
+                    if (prop.Value == null)
+                    {
+                        cellType.RecommendedValue = null;
+                        continue;
+                    }
+                    cellType.RecommendedValue = Convert.ToDateTime(prop.Value);
+                }
+                if (propKey == "showliterals")
+                {
+                    ShowLiterals showLiterals;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out showLiterals))
+                    {
+                        cellType.ShowLiterals = showLiterals;
+                    }
+                }
+                if (propKey == "showrecommendedvalue")
+                {
+                    cellType.ShowRecommendedValue = (bool)prop.Value;
+                }
+                if (propKey == "static")
+                {
+                    cellType.Static = (bool)prop.Value;
+                }
+                if (propKey == "tabaction")
+                {
+                    TabAction tabAction;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out tabAction))
+                    {
+                        cellType.TabAction = tabAction;
+                    }
+                }
+                if (propKey == "validatemode")
+                {
+                    ValidateModeEx validateModeEx;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out validateModeEx))
+                    {
+                        cellType.ValidateMode = validateModeEx;
+                    }
+                }
+                if (propKey == "dropdownallowdrop")
+                {
+                    cellType.DropDown.AllowDrop = (bool)prop.Value;
+                }
+                if (propKey == "sidebuttonsclear")
+                {
+                    if ((bool)prop.Value)
+                    {
+                        cellType.SideButtons.Clear();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// GcNumberCellType をコンパイルする。
+        /// </summary>
+        /// <param name="cellType">GcNumberCellType オブジェクト。</param>
+        /// <param name="cellTypeProperties">セルタイプ情報。</param>
+        private static void CompileGcNumberCellType(GcNumberCellType cellType, Dictionary<string, object> cellTypeProperties)
+        {
+            if (cellTypeProperties == null)
+            {
+                return;
+            }
+
+            foreach (var prop in cellTypeProperties)
+            {
+                var propKey = prop.Key.ToLower();
+
+                if (propKey == "acceptscrlf")
+                {
+                    CrLfMode crLfMode;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out crLfMode))
+                    {
+                        cellType.AcceptsCrLf = crLfMode;
+                    }
+                }
+                if (propKey == "acceptsdecimal")
+                {
+                    DecimalMode decimalMode;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out decimalMode))
+                    {
+                        cellType.AcceptsDecimal = decimalMode;
+                    }
+                }
+                if (propKey == "allowdeletetonull")
+                {
+                    cellType.AllowDeleteToNull = (bool)prop.Value;
+                }
+                if (propKey == "clipcontent")
+                {
+                    ClipContent clipContent;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out clipContent))
+                    {
+                        cellType.ClipContent = clipContent;
+                    }
+                }
+
+                if (propKey == "displayfields")
+                {
+                    cellType.DisplayFields.Clear();
+                    var list = ((JArray)prop.Value).ToList();
+                    NumberDisplayFieldInfo info;
+                    foreach (var item in list)
+                    {
+                        switch (item["Type"].ToString().ToLower())
+                        {
+                            case "numbersigndisplayfieldinfo":
+                                info = item.ToObject<NumberSignDisplayFieldInfo>();
+                                cellType.DisplayFields.Add(info);
+                                break;
+                            case "numberintegerpartdisplayfieldinfo":
+                                info = item.ToObject<NumberIntegerPartDisplayFieldInfo>();
+                                cellType.DisplayFields.Add(info);
+                                break;
+                            case "numberdecimalseparatordisplayfieldinfo":
+                                info = item.ToObject<NumberDecimalSeparatorDisplayFieldInfo>();
+                                cellType.DisplayFields.Add(info);
+                                break;
+                            case "numberdecimalpartdisplayfieldinfo":
+                                info = item.ToObject<NumberDecimalPartDisplayFieldInfo>();
+                                cellType.DisplayFields.Add(info);
+                                break;
+                        }
+                    }
+                }
+
+                if (propKey == "editmode")
+                {
+                    EditMode editMode;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out editMode))
+                    {
+                        cellType.EditMode = editMode;
+                    }
+                }
+                if (propKey == "excelexportformat")
+                {
+                    cellType.ExcelExportFormat = (string)prop.Value;
+                }
+                if (propKey == "exitonlastchar")
+                {
+                    cellType.ExitOnLastChar = (bool)prop.Value;
+                }
+
+                if (propKey == "fields")
+                {
+                    var list = ((JArray)prop.Value).ToList();
+
+                    foreach (var field in cellType.Fields.Select((Item, Index) => new { Item, Index }))
+                    {
+                        switch (field.Index)
+                        {
+                            case 0:
+                            case 4:
+                                var itemExpression = list.Where(x => x["Type"].ToString().ToLower() == "numbersignfieldinfo").Select((Item, Index) => new { Item, Index });
+
+                                NumberSignFieldInfo signInfo;
+                                NumberSignFieldInfo signSetInfo;
+                                if (field.Index == 0)
+                                {
+                                    // NOTE: NumberSignFieldInfo の定義が1つある場合は必ず最初の NumberSignFieldInfo とみなす。
+                                    signInfo = cellType.Fields[0] as NumberSignFieldInfo;
+                                    signSetInfo = itemExpression.FirstOrDefault()?.Item.ToObject<NumberSignFieldInfo>();
+                                }
+                                else
+                                {
+                                    // NOTE: NumberSignFieldInfo の定義が2つ以上ない場合は制御せず、必ず最後の NumberSignFieldInfo とみなす。
+                                    if (itemExpression.Count() < 2)
+                                    {
+                                        continue;
+                                    }
+                                    signInfo = cellType.Fields[4] as NumberSignFieldInfo;
+                                    signSetInfo = itemExpression.LastOrDefault()?.Item.ToObject<NumberSignFieldInfo>();
+                                }
+                                if (signSetInfo == null)
+                                {
+                                    continue;
+                                }
+                                signInfo.BackColor = signSetInfo.BackColor;
+                                signInfo.Font = signSetInfo.Font;
+                                signInfo.ForeColor = signSetInfo.ForeColor;
+                                signInfo.Margin = signSetInfo.Margin;
+                                signInfo.NegativePattern = signSetInfo.NegativePattern;
+                                signInfo.Padding = signSetInfo.Padding;
+                                signInfo.PositivePattern = signSetInfo.PositivePattern;
+                                signInfo.Text = signSetInfo.Text;
+                                break;
+
+                            case 1:
+                                var intPartSetInfoItem = list.Where(x => x["Type"].ToString().ToLower() == "numberintegerpartfieldinfo").FirstOrDefault();
+                                if (intPartSetInfoItem == null)
+                                {
+                                    continue;
+                                }
+                                var intPartInfo = cellType.Fields[1] as NumberIntegerPartFieldInfo;
+                                var intPartSetInfo = intPartSetInfoItem.ToObject<NumberIntegerPartFieldInfo>();
+                                intPartInfo.BackColor = intPartSetInfo.BackColor;
+                                intPartInfo.Font = intPartSetInfo.Font;
+                                intPartInfo.ForeColor = intPartSetInfo.ForeColor;
+                                intPartInfo.GroupSeparator = intPartSetInfo.GroupSeparator;
+                                intPartInfo.GroupSizes = intPartSetInfo.GroupSizes;
+                                intPartInfo.Margin = intPartSetInfo.Margin;
+                                intPartInfo.MaxDigits = intPartSetInfo.MaxDigits;
+                                intPartInfo.MinDigits = intPartSetInfo.MinDigits;
+                                intPartInfo.Padding = intPartSetInfo.Padding;
+                                intPartInfo.SpinIncrement = intPartSetInfo.SpinIncrement;
+                                intPartInfo.Text = intPartSetInfo.Text;
+                                break;
+
+                            case 2:
+                                var decSepSetInfoItem = list.Where(x => x["Type"].ToString().ToLower() == "numberdecimalseparatorfieldinfo").FirstOrDefault();
+                                if (decSepSetInfoItem == null)
+                                {
+                                    continue;
+                                }
+                                var decSepInfo = cellType.Fields[2] as NumberDecimalSeparatorFieldInfo;
+                                var decSepSetInfo = decSepSetInfoItem.ToObject<NumberDecimalSeparatorFieldInfo>();
+                                decSepInfo.BackColor = decSepSetInfo.BackColor;
+                                decSepInfo.DecimalSeparator = decSepSetInfo.DecimalSeparator;
+                                decSepInfo.Font = decSepSetInfo.Font;
+                                decSepInfo.ForeColor = decSepSetInfo.ForeColor;
+                                decSepInfo.Margin = decSepSetInfo.Margin;
+                                decSepInfo.Padding = decSepSetInfo.Padding;
+                                decSepInfo.Text = decSepSetInfo.Text;
+                                break;
+
+                            case 3:
+                                var decPartSetInfoItem = list.Where(x => x["Type"].ToString().ToLower() == "numberdecimalpartfieldinfo").FirstOrDefault();
+                                var decPartInfo = cellType.Fields[3] as NumberDecimalPartFieldInfo;
+                                var decPartSetInfo = decPartSetInfoItem.ToObject<NumberDecimalPartFieldInfo>();
+                                decPartInfo.BackColor = decPartSetInfo.BackColor;
+                                decPartInfo.Font = decPartSetInfo.Font;
+                                decPartInfo.ForeColor = decPartSetInfo.ForeColor;
+                                decPartInfo.Margin = decPartSetInfo.Margin;
+                                decPartInfo.MaxDigits = decPartSetInfo.MaxDigits;
+                                decPartInfo.MinDigits = decPartSetInfo.MinDigits;
+                                decPartInfo.Padding = decPartSetInfo.Padding;
+                                decPartInfo.SpinIncrement = decPartSetInfo.SpinIncrement;
+                                decPartInfo.Text = decPartSetInfo.Text;
+                                break;
+                        }
+                    }
+                }
+
+                if (propKey == "focusposition")
+                {
+                    EditorBaseFocusCursorPosition editorBaseFocusCursorPosition;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out editorBaseFocusCursorPosition))
+                    {
+                        cellType.FocusPosition = editorBaseFocusCursorPosition;
+                    }
+                }
+                if (propKey == "maxminbehavior")
+                {
+                    MaxMinBehavior maxMinBehavior;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out maxMinBehavior))
+                    {
+                        cellType.MaxMinBehavior = maxMinBehavior;
+                    }
+                }
+                if (propKey == "maxvalue")
+                {
+                    cellType.MaxValue = Convert.ToDecimal(prop.Value);
+                }
+                if (propKey == "minvalue")
+                {
+                    cellType.MinValue = Convert.ToDecimal(prop.Value);
+                }
+                if (propKey == "negativecolor")
+                {
+                    cellType.NegativeColor = ColorTranslator.FromHtml((string)prop.Value);
+                }
+                if (propKey == "readonly")
+                {
+                    cellType.ReadOnly = (bool)prop.Value;
+                }
+                if (propKey == "recommendedvalue")
+                {
+                    cellType.RecommendedValue = Convert.ToDecimal(prop.Value);
+                }
+                if (propKey == "roundpattern")
+                {
+                    RoundPattern roundPattern;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out roundPattern))
+                    {
+                        cellType.RoundPattern = roundPattern;
+                    }
+                }
+                if (propKey == "showrecommendedvalue")
+                {
+                    cellType.ShowRecommendedValue = (bool)prop.Value;
+                }
+                if (propKey == "static")
+                {
+                    cellType.Static = (bool)prop.Value;
+                }
+                if (propKey == "usenegativecolor")
+                {
+                    cellType.UseNegativeColor = (bool)prop.Value;
+                }
+                if (propKey == "valuesign")
+                {
+                    ValueSignControl valueSignControl;
+                    if (EnumExt.TryParse(prop.Value.ToString(), out valueSignControl))
+                    {
+                        cellType.ValueSign = valueSignControl;
+                    }
+                }
+                if (propKey == "dropdownallowdrop")
+                {
+                    cellType.DropDown.AllowDrop = (bool)prop.Value;
+                }
+                if (propKey == "sidebuttonsclear")
+                {
+                    if ((bool)prop.Value)
+                    {
+                        cellType.SideButtons.Clear();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// GcComboBoxCellType をコンパイルする。
+        /// </summary>
+        /// <param name="cellType">GcComboBoxCellType オブジェクト。</param>
+        /// <param name="cellTypeProperties">セルタイプ情報。</param>
+        private static void CompileGcComboBoxCellType(GcComboBoxCellType cellType, Dictionary<string, object> cellTypeProperties)
+        {
+            if (cellTypeProperties == null)
+            {
+                return;
+            }
+
+            foreach (var prop in cellTypeProperties)
+            {
+                var propKey = prop.Key.ToLower();
+
+
+            }
+        }
+
+        /// <summary>
         /// 現在のシートからヘッダー行/列情報を逆コンパイルする。
         /// </summary>
         /// <param name="sheetView">SheetView オブジェクト。</param>
@@ -958,6 +1670,22 @@ namespace Metroit.Win.GcSpread.CodeDesign
                 if (svColumn.CellType is ButtonCellType)
                 {
                     column.CellTypeProperties = DecompileButtonCellTypeProperties((ButtonCellType)svColumn.CellType);
+                }
+                if (svColumn.CellType is GcTextBoxCellType)
+                {
+                    column.CellTypeProperties = DecompileGcTextBoxCellTypeProperties((GcTextBoxCellType)svColumn.CellType);
+                }
+                if (svColumn.CellType is GcDateTimeCellType)
+                {
+                    column.CellTypeProperties = DecompileGcDateTimeCellTypeProperties((GcDateTimeCellType)svColumn.CellType);
+                }
+                if (svColumn.CellType is GcNumberCellType)
+                {
+                    column.CellTypeProperties = DecompileGcNumberCellTypeProperties((GcNumberCellType)svColumn.CellType);
+                }
+                if (svColumn.CellType is GcComboBoxCellType)
+                {
+                    column.CellTypeProperties = DecompileGcComboBoxCellTypeProperties((GcComboBoxCellType)svColumn.CellType);
                 }
 
                 column.Options = columnOptions?.Invoke(svColumn);
@@ -1097,6 +1825,325 @@ namespace Metroit.Win.GcSpread.CodeDesign
             result.Add(nameof(cellType.TwoState), cellType.TwoState);
             result.Add(nameof(cellType.TextDown), cellType.TextDown);
             result.Add(nameof(cellType.WordWrap), cellType.WordWrap);
+
+            return result;
+        }
+
+        /// <summary>
+        /// GcTextBoxCellType からプロパティ情報を逆コンパイルする。
+        /// </summary>
+        /// <param name="cellType">GcTextBoxCellType オブジェクト。</param>
+        /// <returns>プロパティ情報。</returns>
+        private static Dictionary<string, object> DecompileGcTextBoxCellTypeProperties(GcTextBoxCellType cellType)
+        {
+            var result = new Dictionary<string, object>();
+            result.Add(nameof(cellType.AcceptsCrLf), cellType.AcceptsCrLf);
+            result.Add(nameof(cellType.AcceptsTabChar), cellType.AcceptsTabChar);
+            result.Add(nameof(cellType.AllowSpace), cellType.AllowSpace);
+            result.Add(nameof(cellType.AutoConvert), cellType.AutoConvert);
+            result.Add(nameof(cellType.EditMode), cellType.EditMode);
+            result.Add(nameof(cellType.Ellipsis), cellType.Ellipsis);
+            result.Add(nameof(cellType.EllipsisString), cellType.EllipsisString);
+            result.Add(nameof(cellType.ExcelExportFormat), cellType.ExcelExportFormat);
+            result.Add(nameof(cellType.ExitOnLastChar), cellType.ExitOnLastChar);
+            result.Add(nameof(cellType.FocusPosition), cellType.FocusPosition);
+            result.Add(nameof(cellType.FormatString), cellType.FormatString);
+            result.Add(nameof(cellType.LineSpace), cellType.LineSpace);
+            result.Add(nameof(cellType.MaxLength), cellType.MaxLength);
+            result.Add(nameof(cellType.MaxLengthCodePage), cellType.MaxLengthCodePage);
+            result.Add(nameof(cellType.MaxLengthUnit), cellType.MaxLengthUnit);
+            result.Add(nameof(cellType.MaxLineCount), cellType.MaxLineCount);
+            result.Add(nameof(cellType.Multiline), cellType.Multiline);
+            result.Add(nameof(cellType.PasswordChar), cellType.PasswordChar);
+            result.Add(nameof(cellType.PasswordRevelationMode), cellType.PasswordRevelationMode);
+            result.Add(nameof(cellType.ReadOnly), cellType.ReadOnly);
+            result.Add(nameof(cellType.RecommendedValue), cellType.RecommendedValue);
+            result.Add(nameof(cellType.ShowRecommendedValue), cellType.ShowRecommendedValue);
+            result.Add(nameof(cellType.Static), cellType.Static);
+            result.Add(nameof(cellType.UseSystemPasswordChar), cellType.UseSystemPasswordChar);
+            result.Add(nameof(cellType.WrapMode), cellType.WrapMode);
+
+            return result;
+        }
+
+        /// <summary>
+        /// GcDateTimeCellType からプロパティ情報を逆コンパイルする。
+        /// </summary>
+        /// <param name="cellType">GcDateTimeCellType オブジェクト。</param>
+        /// <returns>プロパティ情報。</returns>
+        private static Dictionary<string, object> DecompileGcDateTimeCellTypeProperties(GcDateTimeCellType cellType)
+        {
+            var result = new Dictionary<string, object>();
+            result.Add(nameof(cellType.AcceptsCrLf), cellType.AcceptsCrLf);
+            result.Add(nameof(cellType.ClipContent), cellType.ClipContent);
+            result.Add("DefaultActiveField", cellType.SerializationDefaultActiveFieldIndex);
+            result.Add(nameof(cellType.EditMode), cellType.EditMode);
+
+            var displayFieldsArray = new JArray();
+            foreach (DateDisplayFieldInfo field in cellType.DisplayFields)
+            {
+                var jobj = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(field));
+                jobj.AddFirst(new JProperty("Type", field.GetType().Name));
+                displayFieldsArray.Add(jobj);
+            }
+            result.Add(nameof(cellType.DisplayFields), displayFieldsArray);
+
+            result.Add(nameof(cellType.ExcelExportFormat), cellType.ExcelExportFormat);
+            result.Add(nameof(cellType.ExitOnLastChar), cellType.ExitOnLastChar);
+
+            var fieldsArray = new JArray();
+            foreach (DateFieldInfo field in cellType.Fields)
+            {
+                var jobj = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(field));
+                jobj.AddFirst(new JProperty("Type", field.GetType().Name));
+                fieldsArray.Add(jobj);
+            }
+            result.Add(nameof(cellType.Fields), fieldsArray);
+
+            result.Add(nameof(cellType.FieldsEditMode), cellType.FieldsEditMode);
+            result.Add(nameof(cellType.FocusPosition), cellType.FocusPosition);
+            result.Add(nameof(cellType.MaxDate), cellType.MaxDate);
+            result.Add(nameof(cellType.MaxMinBehavior), cellType.MaxMinBehavior);
+            result.Add(nameof(cellType.PromptChar), cellType.PromptChar);
+            result.Add(nameof(cellType.ReadOnly), cellType.ReadOnly);
+            result.Add(nameof(cellType.RecommendedValue), cellType.RecommendedValue);
+            result.Add(nameof(cellType.ShowLiterals), cellType.ShowLiterals);
+            result.Add(nameof(cellType.ShowRecommendedValue), cellType.ShowRecommendedValue);
+            result.Add(nameof(cellType.Static), cellType.Static);
+            result.Add(nameof(cellType.TabAction), cellType.TabAction);
+            result.Add(nameof(cellType.ValidateMode), cellType.ValidateMode);
+            result.Add("DropDownAllowDrop", cellType.DropDown.AllowDrop);
+
+            return result;
+        }
+
+        /// <summary>
+        /// GcNumberCellType からプロパティ情報を逆コンパイルする。
+        /// </summary>
+        /// <param name="cellType">GcNumberCellType オブジェクト。</param>
+        /// <returns>プロパティ情報。</returns>
+        private static Dictionary<string, object> DecompileGcNumberCellTypeProperties(GcNumberCellType cellType)
+        {
+            var result = new Dictionary<string, object>();
+            result.Add(nameof(cellType.AcceptsCrLf), cellType.AcceptsCrLf);
+            result.Add(nameof(cellType.AcceptsDecimal), cellType.AcceptsDecimal);
+            result.Add(nameof(cellType.AllowDeleteToNull), cellType.AllowDeleteToNull);
+            result.Add(nameof(cellType.ClipContent), cellType.ClipContent);
+
+            var displayFieldsArray = new JArray();
+            foreach (NumberDisplayFieldInfo field in cellType.DisplayFields)
+            {
+                var jobj = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(field));
+                jobj.AddFirst(new JProperty("Type", field.GetType().Name));
+                displayFieldsArray.Add(jobj);
+            }
+            result.Add(nameof(cellType.DisplayFields), displayFieldsArray);
+
+            result.Add(nameof(cellType.EditMode), cellType.EditMode);
+            result.Add(nameof(cellType.ExcelExportFormat), cellType.ExcelExportFormat);
+            result.Add(nameof(cellType.ExitOnLastChar), cellType.ExitOnLastChar);
+
+            var fieldsArray = new JArray();
+            foreach (NumberFieldInfo field in cellType.Fields)
+            {
+                var jobj = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(field));
+                jobj.AddFirst(new JProperty("Type", field.GetType().Name));
+                fieldsArray.Add(jobj);
+            }
+            result.Add(nameof(cellType.Fields), fieldsArray);
+
+            result.Add(nameof(cellType.FocusPosition), cellType.FocusPosition);
+            result.Add(nameof(cellType.MaxMinBehavior), cellType.MaxMinBehavior);
+            result.Add(nameof(cellType.MaxValue), cellType.MaxValue);
+            result.Add(nameof(cellType.MinValue), cellType.MinValue);
+            result.Add(nameof(cellType.NegativeColor), ColorTranslator.ToHtml(cellType.NegativeColor));
+            result.Add(nameof(cellType.ReadOnly), cellType.ReadOnly);
+            result.Add(nameof(cellType.RecommendedValue), cellType.RecommendedValue);
+            result.Add(nameof(cellType.RoundPattern), cellType.RoundPattern);
+            result.Add(nameof(cellType.ShowRecommendedValue), cellType.ShowRecommendedValue);
+            result.Add(nameof(cellType.Static), cellType.Static);
+            result.Add(nameof(cellType.UseNegativeColor), cellType.UseNegativeColor);
+            result.Add(nameof(cellType.ValueSign), cellType.ValueSign);
+            result.Add("DropDownAllowDrop", cellType.DropDown.AllowDrop);
+
+            return result;
+        }
+
+        /// <summary>
+        /// GcComboBoxCellType からプロパティ情報を逆コンパイルする。
+        /// </summary>
+        /// <param name="cellType">GcComboBoxCellType オブジェクト。</param>
+        /// <returns>プロパティ情報。</returns>
+        private static Dictionary<string, object> DecompileGcComboBoxCellTypeProperties(GcComboBoxCellType cellType)
+        {
+            var result = new Dictionary<string, object>();
+            result.Add(nameof(cellType.AcceptsArrowKeys), cellType.AcceptsArrowKeys);
+            result.Add(nameof(cellType.AcceptsCrLf), cellType.AcceptsCrLf);
+            result.Add(nameof(cellType.AcceptsTabChar), cellType.AcceptsTabChar);
+            result.Add(nameof(cellType.AllowSpace), cellType.AllowSpace);
+
+            //result.Add(nameof(cellType.AlternateText), cellType.AlternateText);
+            var alternateTextProps = new JObject();
+            var displayNullProps = new JObject();
+            displayNullProps.Add(new JProperty(nameof(cellType.AlternateText.DisplayNull.ForeColor), ColorTranslator.ToHtml(cellType.AlternateText.DisplayNull.ForeColor)));
+            displayNullProps.Add(new JProperty(nameof(cellType.AlternateText.DisplayNull.Text), cellType.AlternateText.DisplayNull.Text));
+            var nullProps = new JObject();
+            nullProps.Add(new JProperty(nameof(cellType.AlternateText.Null.ForeColor), ColorTranslator.ToHtml(cellType.AlternateText.Null.ForeColor)));
+            nullProps.Add(new JProperty(nameof(cellType.AlternateText.Null.Text), cellType.AlternateText.Null.Text));
+            alternateTextProps.Add(new JProperty(nameof(cellType.AlternateText.DisplayNull), displayNullProps));
+            alternateTextProps.Add(new JProperty(nameof(cellType.AlternateText.Null), nullProps));
+            result.Add(nameof(cellType.AlternateText), alternateTextProps);
+
+
+            //result.Add(nameof(cellType.AutoComplete), cellType.AutoComplete);
+            var autoCompleteProps = new JObject();
+            autoCompleteProps.Add(new JProperty(nameof(cellType.AutoComplete.CandidateListItemFont), Newtonsoft.Json.JsonConvert.SerializeObject(cellType.AutoComplete.CandidateListItemFont)));
+            autoCompleteProps.Add(new JProperty(nameof(cellType.AutoComplete.HighlightMatchedText), cellType.AutoComplete.HighlightMatchedText));
+            var highlightStyleProps = new JObject();
+            highlightStyleProps.Add(new JProperty(nameof(cellType.AutoComplete.HighlightStyle.BackColor), ColorTranslator.ToHtml(cellType.AutoComplete.HighlightStyle.BackColor)));
+            highlightStyleProps.Add(new JProperty(nameof(cellType.AutoComplete.HighlightStyle.Font), Newtonsoft.Json.JsonConvert.SerializeObject(cellType.AutoComplete.HighlightStyle.Font)));
+            highlightStyleProps.Add(new JProperty(nameof(cellType.AutoComplete.HighlightStyle.ForeColor), ColorTranslator.ToHtml(cellType.AutoComplete.HighlightStyle.ForeColor)));
+            autoCompleteProps.Add(new JProperty(nameof(cellType.AutoComplete.HighlightStyle), highlightStyleProps));
+            autoCompleteProps.Add(new JProperty(nameof(cellType.AutoComplete.MatchingMode), cellType.AutoComplete.MatchingMode));
+            result.Add(nameof(cellType.AutoComplete), autoCompleteProps);
+
+
+            result.Add(nameof(cellType.AutoCompleteCustomSource), cellType.AutoCompleteCustomSource);
+            result.Add(nameof(cellType.AutoCompleteMode), cellType.AutoCompleteMode);
+            result.Add(nameof(cellType.AutoCompleteSource), cellType.AutoCompleteSource);
+            result.Add(nameof(cellType.AutoConvert), cellType.AutoConvert);
+
+
+            //result.Add(nameof(cellType.AutoFilter), cellType.AutoFilter);
+            var autoFilterProps = new JObject();
+            autoFilterProps.Add(new JProperty(nameof(cellType.AutoFilter.Enabled), cellType.AutoFilter.Enabled));
+            autoFilterProps.Add(new JProperty(nameof(cellType.AutoFilter.Interval), cellType.AutoFilter.Interval));
+            autoFilterProps.Add(new JProperty(nameof(cellType.AutoFilter.MatchingMode), cellType.AutoFilter.MatchingMode));
+            autoFilterProps.Add(new JProperty(nameof(cellType.AutoFilter.MatchingSource), cellType.AutoFilter.MatchingSource));
+            autoFilterProps.Add(new JProperty(nameof(cellType.AutoFilter.MaxFilteredItems), cellType.AutoFilter.MaxFilteredItems));
+            autoFilterProps.Add(new JProperty(nameof(cellType.AutoFilter.MinimumPrefixLength), cellType.AutoFilter.MinimumPrefixLength));
+            result.Add(nameof(cellType.AutoFilter), autoFilterProps);
+
+
+            result.Add(nameof(cellType.AutoGenerateColumns), cellType.AutoGenerateColumns);
+            result.Add(nameof(cellType.AutoSelect), cellType.AutoSelect);
+            result.Add(nameof(cellType.BackgroundImage), cellType.BackgroundImage);
+            result.Add(nameof(cellType.DataMember), cellType.DataMember);
+            result.Add(nameof(cellType.DataSource), cellType.DataSource);
+
+
+            //result.Add(nameof(cellType.DropDown), cellType.DropDown);
+            var dropdownProps = new JObject();
+            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.AllowDrop), cellType.DropDown.AllowDrop));
+            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.AllowResize), cellType.DropDown.AllowResize));
+            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.AutoDropDown), cellType.DropDown.AutoDropDown));
+            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.AutoHideTouchKeyboard), cellType.DropDown.AutoHideTouchKeyboard));
+            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.AutoWidth), cellType.DropDown.AutoWidth));
+            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.ClosingAnimation), cellType.DropDown.ClosingAnimation));
+            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.Direction), cellType.DropDown.Direction));
+            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.Height), cellType.DropDown.Height));
+            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.OpeningAnimation), cellType.DropDown.OpeningAnimation));
+            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.ShowShadow), cellType.DropDown.ShowShadow));
+            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.Width), cellType.DropDown.Width));
+            result.Add(nameof(cellType.DropDown), dropdownProps);
+
+
+            result.Add(nameof(cellType.DropDownMaxHeight), cellType.DropDownMaxHeight);
+            result.Add(nameof(cellType.DropDownStyle), cellType.DropDownStyle);
+            result.Add(nameof(cellType.EditMode), cellType.EditMode);
+            result.Add(nameof(cellType.EditorValue), cellType.EditorValue);
+            result.Add(nameof(cellType.Ellipsis), cellType.Ellipsis);
+            result.Add(nameof(cellType.EllipsisString), cellType.EllipsisString);
+            result.Add(nameof(cellType.ExcelExportFormat), cellType.ExcelExportFormat);
+            result.Add(nameof(cellType.ExitOnLastChar), cellType.ExitOnLastChar);
+            result.Add(nameof(cellType.FocusPosition), cellType.FocusPosition);
+            result.Add(nameof(cellType.FormatString), cellType.FormatString);
+            result.Add(nameof(cellType.ImageAlign), cellType.ImageAlign);
+            result.Add(nameof(cellType.ImageList), cellType.ImageList);
+            result.Add(nameof(cellType.ImageWidth), cellType.ImageWidth);
+
+
+            // Items は DataSource 指定もしくは直接指定があるため、シリアライズ化対象外
+            //result.Add(nameof(cellType.Items), cellType.Items);
+
+            // ListColumns は DataSource 指定もしくは直接指定があるため、シリアライズ化対象外
+            //result.Add(nameof(cellType.ListColumns), cellType.ListColumns);
+
+
+            //result.Add(nameof(cellType.ListDefaultColumn), cellType.ListDefaultColumn);
+            var listDefaultColumnProps = new JObject();
+            listDefaultColumnProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.AutoWidth), cellType.ListDefaultColumn.AutoWidth));
+            listDefaultColumnProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.DataDisplayType), cellType.ListDefaultColumn.DataDisplayType));
+            var defaultSubItemProps = new JObject();
+            defaultSubItemProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.DefaultSubItem.ContentAlignment), cellType.ListDefaultColumn.DefaultSubItem.ContentAlignment));
+            defaultSubItemProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.DefaultSubItem.Ellipsis), cellType.ListDefaultColumn.DefaultSubItem.Ellipsis));
+            defaultSubItemProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.DefaultSubItem.Padding), Newtonsoft.Json.JsonConvert.SerializeObject(cellType.ListDefaultColumn.DefaultSubItem.Padding)));
+            defaultSubItemProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.DefaultSubItem.WordWrap), cellType.ListDefaultColumn.DefaultSubItem.WordWrap));
+            listDefaultColumnProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.DefaultSubItem), defaultSubItemProps));
+
+            var headerProps = new JObject();
+            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.AllowResize), cellType.ListDefaultColumn.Header.ContentAlignment));
+            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.BackColor), cellType.ListDefaultColumn.Header.Ellipsis));
+            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.Clickable), Newtonsoft.Json.JsonConvert.SerializeObject(cellType.ListDefaultColumn.Header.Padding)));
+            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.ContentAlignment), cellType.ListDefaultColumn.Header.WordWrap));
+            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.Ellipsis), cellType.ListDefaultColumn.Header.WordWrap));
+            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.ForeColor), cellType.ListDefaultColumn.Header.WordWrap));
+            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.GradientEffect), cellType.ListDefaultColumn.Header.WordWrap));
+            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.Image), cellType.ListDefaultColumn.Header.WordWrap));
+            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.ImageTextSpace), cellType.ListDefaultColumn.Header.WordWrap));
+            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.SortIndicatorAlignment), cellType.ListDefaultColumn.Header.WordWrap));
+            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.Text), cellType.ListDefaultColumn.Header.WordWrap));
+            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.TextAttachAlignment), cellType.ListDefaultColumn.Header.WordWrap));
+            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.TextEffect), cellType.ListDefaultColumn.Header.WordWrap));
+            listDefaultColumnProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header), headerProps));
+
+            //listDefaultColumnProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header), cellType.ListDefaultColumn.Header));
+            listDefaultColumnProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.SortOrder), cellType.ListDefaultColumn.SortOrder));
+            listDefaultColumnProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Width), cellType.ListDefaultColumn.Width));
+            result.Add(nameof(cellType.ListDefaultColumn), listDefaultColumnProps);
+
+
+
+            result.Add(nameof(cellType.ListDescriptionFormat), cellType.ListDescriptionFormat);
+            result.Add(nameof(cellType.ListDescriptionSubItemIndex), cellType.ListDescriptionSubItemIndex);
+            result.Add(nameof(cellType.ListDisabledItemStyle), cellType.ListDisabledItemStyle);
+            result.Add(nameof(cellType.ListGradientEffect), cellType.ListGradientEffect);
+            result.Add(nameof(cellType.ListGridLines), cellType.ListGridLines);
+            result.Add(nameof(cellType.ListHeaderPane), cellType.ListHeaderPane);
+            result.Add(nameof(cellType.ListItemTemplates), cellType.ListItemTemplates);
+            result.Add(nameof(cellType.ListSelectedItemStyle), cellType.ListSelectedItemStyle);
+            result.Add(nameof(cellType.ListSortColumnIndex), cellType.ListSortColumnIndex);
+            result.Add(nameof(cellType.MaxDropDownItems), cellType.MaxDropDownItems);
+            result.Add(nameof(cellType.MaxLength), cellType.MaxLength);
+            result.Add(nameof(cellType.MaxLengthCodePage), cellType.MaxLengthCodePage);
+            result.Add(nameof(cellType.MaxLengthUnit), cellType.MaxLengthUnit);
+            result.Add(nameof(cellType.PaintByControl), cellType.PaintByControl);
+            result.Add(nameof(cellType.ReadOnly), cellType.ReadOnly);
+            result.Add(nameof(cellType.RecommendedValue), cellType.RecommendedValue);
+            result.Add(nameof(cellType.ScrollBarMode), cellType.ScrollBarMode);
+            result.Add(nameof(cellType.ScrollBars), cellType.ScrollBars);
+            result.Add(nameof(cellType.ShortcutKeys), cellType.ShortcutKeys);
+            result.Add(nameof(cellType.ShowItemTip), cellType.ShowItemTip);
+            result.Add(nameof(cellType.ShowListBoxImage), cellType.ShowListBoxImage);
+            result.Add(nameof(cellType.ShowOverflowTip), cellType.ShowOverflowTip);
+            result.Add(nameof(cellType.ShowRecommendedValue), cellType.ShowRecommendedValue);
+            result.Add(nameof(cellType.ShowTouchToolBar), cellType.ShowTouchToolBar);
+            result.Add(nameof(cellType.SideButtons), cellType.SideButtons);
+            result.Add(nameof(cellType.Spin), cellType.Spin);
+            result.Add(nameof(cellType.Static), cellType.Static);
+            result.Add(nameof(cellType.StatusBar), cellType.StatusBar);
+            result.Add(nameof(cellType.SubEditor), cellType.SubEditor);
+            result.Add(nameof(cellType.TextBoxStyle), cellType.TextBoxStyle);
+            result.Add(nameof(cellType.TextFormat), cellType.TextFormat);
+            result.Add(nameof(cellType.TextSubItemIndex), cellType.TextSubItemIndex);
+            result.Add(nameof(cellType.TouchContextMenuScale), cellType.TouchContextMenuScale);
+            //result.Add(nameof(cellType.TouchToolBar), cellType.TouchToolBar); // これやるとStackOverFlowになる
+            result.Add(nameof(cellType.UnSelectedImageIndex), cellType.UnSelectedImageIndex);
+            result.Add(nameof(cellType.UseCompatibleDrawing), cellType.UseCompatibleDrawing);
+            result.Add(nameof(cellType.UseSpreadDropDownButtonRender), cellType.UseSpreadDropDownButtonRender);
+            result.Add(nameof(cellType.ValueSubItemIndex), cellType.ValueSubItemIndex);
+
+            result.Add("DropDownAllowDrop", cellType.DropDown.AllowDrop);
 
             return result;
         }

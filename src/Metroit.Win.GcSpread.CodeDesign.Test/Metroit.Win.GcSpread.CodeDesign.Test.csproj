@@ -103,7 +103,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SampleJson.txt" />
+    <None Include="SampleJson.json" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.ValueTuple">

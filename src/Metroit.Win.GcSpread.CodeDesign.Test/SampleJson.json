@@ -1,0 +1,509 @@
+﻿{
+  // 列ヘッダーの設定
+  "ColumnHeader": {
+    // HorizontalAlignment, VerticalAlignment を指定すると、Columnsより強い
+    "Rows": [
+      {
+        "RowProperties": {
+          "Height": 40,
+          "HorizontalAlignment": "Left",
+          "VerticalAlignment": "Bottom"
+        },
+        // 列の設定
+        "Columns": [
+          {
+            "Value": "タイトル3",
+            "HorizontalAlignment": "Right",
+            "VerticalAlignment": "Top"
+          },
+          {
+            "Value": "タイトル6",
+            "HorizontalAlignment": "Left",
+            "VerticalAlignment": "Bottom"
+          },
+          {
+            "Value": "タイトル1",
+            "HorizontalAlignment": "Right",
+            "VerticalAlignment": "Top"
+          },
+          {
+            "Value": "タイトル2",
+            "HorizontalAlignment": "Center",
+            "VerticalAlignment": "Bottom"
+          },
+          {
+            "Value": "タイトル4",
+            "HorizontalAlignment": "Left",
+            "VerticalAlignment": "Bottom"
+          },
+          {
+            "Value": "タイトル5",
+            "HorizontalAlignment": "Left",
+            "VerticalAlignment": "Bottom"
+          },
+          {
+            "Value": "チェックボックス",
+            "HorizontalAlignment": "Left",
+            "VerticalAlignment": "Bottom"
+          },
+          {
+            "Value": "GcTextBoxCellType",
+            "HorizontalAlignment": "Left",
+            "VerticalAlignment": "Bottom"
+          },
+          {
+            "Value": "GcNumberCellType",
+            "HorizontalAlignment": "Left",
+            "VerticalAlignment": "Bottom"
+          },
+          {
+            "Value": "GcDateTimeCellType",
+            "HorizontalAlignment": "Left",
+            "VerticalAlignment": "Bottom"
+          },
+          {
+            "Value": "GcComboBoxCellType",
+            "HorizontalAlignment": "Left",
+            "VerticalAlignment": "Bottom"
+          }
+        ]
+      },
+      {
+        "RowProperties": {
+          "Height": 20,
+          "HorizontalAlignment": "Left",
+          "VerticalAlignment": "Bottom"
+        },
+        // 列の設定
+        "Columns": [
+          {
+            "Value": "タイトル3-2",
+            "HorizontalAlignment": "Left",
+            "VerticalAlignment": "Bottom"
+          }
+        ]
+      }
+    ],
+    // 結合の設定
+    "Spans": [
+      {
+        "Row": 0,
+        "Column": 2,
+        "RowCount": 2,
+        "ColumnCount": 2
+      },
+      {
+        "Row": 0,
+        "Column": 4,
+        "RowCount": 2,
+        "ColumnCount": 1
+      }
+    ]
+  },
+  // 列全体の設定
+  "AllColumn": {
+    "HorizontalAlignment": "Right"
+  },
+  // 列の設定
+  "Columns": [
+    {
+      "DataField": "Column3",
+      "HorizontalAlignment": "Left",
+      "VerticalAlignment": "Bottom",
+      "AllowAutoFilter": false,
+      "AllowAutoSort": false,
+      "Width": 100,
+      "Visible": true,
+      "CellType": "TextCellType",
+      "CellTypeProperties": {
+        "MaxLength": 255,
+        "CharacterCasing": "Upper",
+        "CharacterSet": "AllIME",
+        "Multiline": false,
+        "ReadOnly": false,
+        "Static": false
+      },
+      "ImeMode": "On",
+      "Locked": false,
+      "Options": {
+        "UseFreeWords": false,
+        "ExtendWordsEnabled": false
+      }
+    },
+    {
+      "DataField": "Column6",
+      "HorizontalAlignment": "Left",
+      "VerticalAlignment": "Bottom",
+      "AllowAutoFilter": false,
+      "AllowAutoSort": false,
+      "Width": 100,
+      "Visible": true,
+      "CellType": "TextCellType",
+      "CellTypeProperties": {
+        "MaxLength": 255,
+        "CharacterCasing": "Upper",
+        "CharacterSet": "AllIME",
+        "Multiline": false,
+        "ReadOnly": false,
+        "Static": false
+      },
+      "ImeMode": "On",
+      "Locked": false,
+      "Options": {
+        "UseFreeWords": false,
+        "ExtendWordsEnabled": false
+      }
+    },
+    {
+      "DataField": "Column1",
+      "HorizontalAlignment": "Center",
+      "VerticalAlignment": "Bottom",
+      "AllowAutoFilter": true,
+      "AllowAutoSort": true,
+      "Width": 100,
+      "Visible": true,
+      "CellType": "DateTimeCellType",
+      "CellTypeProperties": {
+        "Calendar": "GregorianLocalized",
+        "DateTimeFormat": "LongDate",
+        "MaximumDate": "9999/12/31",
+        "MaximumTime": "23:59:59",
+        "MinumumDate": "0001/01/01",
+        "MinumumTime": "00:00:00",
+        "ReadOnly": false,
+        "Static": false
+      },
+      "ImeMode": "On",
+      "Locked": false,
+      "Options": {
+        "UseFreeWords": true,
+        "ExtendWordsEnabled": true
+      }
+    },
+    {
+      "DataField": "Column2",
+      "VerticalAlignment": "Bottom",
+      "AllowAutoFilter": false,
+      "AllowAutoSort": false,
+      "Width": 50,
+      "Visible": true,
+      "CellType": "NumberCellType",
+      "CellTypeProperties": {
+        "DecimalPlaces": -1,
+        "DecimalSeparator": ".",
+        "FixedPoint": true,
+        "LeadingZero": "Yes",
+        "MaximumValue": 9999999.99,
+        "MinimumValue": -9999999.99,
+        "NegativeFormat": "UseRegional",
+        "NegativeRed": false,
+        "ReadOnly": false,
+        "Separator": ",",
+        "ShowSeparator": true,
+        "Static": false
+      },
+      "ImeMode": "On",
+      "Locked": false,
+      "Options": {
+        "UseFreeWords": true,
+        "ExtendWordsEnabled": true
+      }
+    },
+    {
+      "DataField": "Column4",
+      "HorizontalAlignment": "Left",
+      "VerticalAlignment": "Bottom",
+      "AllowAutoFilter": false,
+      "AllowAutoSort": false,
+      "Width": 100,
+      "Visible": true,
+      "CellType": "ComboBoxCellType",
+      "CellTypeProperties": {
+        "MaxDrop": 8
+      },
+      "ImeMode": "On",
+      "Locked": false,
+      "Options": {
+        "UseFreeWords": true,
+        "ExtendWordsEnabled": true
+      }
+    },
+    {
+      "DataField": "Column5",
+      "HorizontalAlignment": "Left",
+      "VerticalAlignment": "Bottom",
+      "AllowAutoFilter": false,
+      "AllowAutoSort": false,
+      "Width": 100,
+      "Visible": true,
+      "CellType": "TextCellType",
+      "CellTypeProperties": {
+        "MaxLength": 255,
+        "CharacterCasing": "Upper",
+        "CharacterSet": "AllIME",
+        "Multiline": false,
+        "ReadOnly": false,
+        "Static": false
+      },
+      "ImeMode": "On",
+      "Locked": false,
+      "Options": {
+        "UseFreeWords": false,
+        "ExtendWordsEnabled": false
+      }
+    },
+    {
+      "DataField": "Column7",
+      "HorizontalAlignment": "Left",
+      "VerticalAlignment": "Bottom",
+      "AllowAutoFilter": false,
+      "AllowAutoSort": false,
+      "Width": 100,
+      "Visible": true,
+      "CellType": "CheckBoxCellType",
+      "CellTypeProperties": {
+        "TextTrue": "True!",
+        "TextFalse": "False!",
+        "TextIndeterminate": "不確定",
+        "ThreeState": true
+      },
+      "ImeMode": "On",
+      "Locked": false,
+      "Options": {
+        "UseFreeWords": false,
+        "ExtendWordsEnabled": false
+      }
+    },
+    {
+      "HorizontalAlignment": "Left",
+      "VerticalAlignment": "Bottom",
+      "AllowAutoFilter": false,
+      "AllowAutoSort": false,
+      "Width": 150,
+      "Visible": true,
+      "CellType": "GcTextBoxCellType",
+      "CellTypeProperties": {
+        "FormatString": "Ａ９",
+        "AutoConvert": true,
+        "Ellipsis": "EllipsisEnd",
+        "EllipsisString": "...",
+        "PasswordChar": "*"
+      },
+      "ImeMode": "Off",
+      "Locked": false,
+      "Options": {
+        "UseFreeWords": false,
+        "ExtendWordsEnabled": false
+      }
+    },
+    {
+      "HorizontalAlignment": "Right",
+      "VerticalAlignment": "Bottom",
+      "AllowAutoFilter": false,
+      "AllowAutoSort": false,
+      "Width": 150,
+      "Visible": true,
+      "CellType": "GcNumberCellType",
+      "CellTypeProperties": {
+        "AllowDeleteToNull": false,
+        "MaxValue": 10000.99,
+        "MinValue": -10000.99,
+        "NegativeColor": "#123456",
+        "UseNegativeColor": true,
+        "DropDownAllowDrop": true,
+        "SideButtonsClear": false,
+        "DisplayFields": [
+          {
+            "Type": "NumberIntegerPartDisplayFieldInfo",
+            "GroupSeparator": "#"
+          },
+          {
+            "Type": "NumberDecimalSeparatorDisplayFieldInfo"
+          },
+          {
+            "Type": "NumberDecimalPartDisplayFieldInfo",
+            "MinDigits": 2,
+            "MaxDigits": 2
+          }
+        ],
+        "Fields": [
+          {
+            "Type": "NumberIntegerPartFieldInfo",
+            "MinDigits": 1,
+            "MaxDigits": 5
+          },
+          {
+            "Type": "NumberDecimalPartFieldInfo",
+            "MinDigits": 2,
+            "MaxDigits": 2
+          }
+        ]
+      },
+      "ImeMode": "Off",
+      "Locked": false,
+      "Options": {
+        "UseFreeWords": false,
+        "ExtendWordsEnabled": false
+      }
+    },
+    {
+      "HorizontalAlignment": "Center",
+      "VerticalAlignment": "Bottom",
+      "AllowAutoFilter": false,
+      "AllowAutoSort": false,
+      "Width": 150,
+      "Visible": true,
+      "CellType": "GcDateTimeCellType",
+      "CellTypeProperties": {
+        "--Fields": "yy/MM/dd",
+        "Fields": [
+          {
+            "Type": "DateYearFieldInfo",
+            "TwoDigitYearMax": 2049,
+            "YearDigit": 1,
+            "PromptChar": null,
+            "SpinIncrement": null,
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0",
+            "Text": ""
+          },
+          {
+            "Type": "DateLiteralFieldInfo",
+            "Text": "/",
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0"
+          },
+          {
+            "Type": "DateMonthFieldInfo",
+            "AutoDropDown": false,
+            "DropDownEnabled": false,
+            "Pattern": 2,
+            "PromptChar": null,
+            "SpinIncrement": null,
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0",
+            "Text": ""
+          },
+          {
+            "Type": "DateLiteralFieldInfo",
+            "Text": "/",
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0"
+          },
+          {
+            "Type": "DateDayFieldInfo",
+            "PromptChar": null,
+            "SpinIncrement": null,
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0",
+            "Text": ""
+          }
+        ],
+        "--DisplayFields": "yyyy/MM/dd",
+        "DisplayFields": [
+          {
+            "Type": "DateYearDisplayFieldInfo",
+            "ShowLeadingZero": true,
+            "YearDigit": 0,
+            "PromptChar": null,
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0"
+          },
+          {
+            "Type": "DateLiteralDisplayFieldInfo",
+            "Text": "/",
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0"
+          },
+          {
+            "Type": "DateMonthDisplayFieldInfo",
+            "Pattern": 2,
+            "ShowLeadingZero": true,
+            "PromptChar": null,
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0"
+          },
+          {
+            "Type": "DateLiteralDisplayFieldInfo",
+            "Text": "/",
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0"
+          },
+          {
+            "Type": "DateDayDisplayFieldInfo",
+            "ShowLeadingZero": true,
+            "PromptChar": null,
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0"
+          }
+        ],
+        "DefaultActiveField": 0,
+        "DropDownAllowDrop": false,
+        "SideButtonsClear": true
+      },
+      "ImeMode": "Off",
+      "Locked": false,
+      "Options": {
+        "UseFreeWords": false,
+        "ExtendWordsEnabled": false
+      }
+    },
+    {
+      "HorizontalAlignment": "Center",
+      "VerticalAlignment": "Bottom",
+      "AllowAutoFilter": false,
+      "AllowAutoSort": false,
+      "Width": 150,
+      "Visible": true,
+      "CellType": "GcComboBoxCellType",
+      "CellTypeProperties": {
+      },
+      "ImeMode": "Off",
+      "Locked": false,
+      "Options": {
+        "UseFreeWords": false,
+        "ExtendWordsEnabled": false
+      }
+    }
+  ]
+}
