@@ -11,6 +11,12 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
     public class ColumnDefinitions
     {
         /// <summary>
+        /// テンプレート名を取得または設定します。
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string TemplateName { get; set; }
+
+        /// <summary>
         /// データバインドするフィールド名を取得または設定します。
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]

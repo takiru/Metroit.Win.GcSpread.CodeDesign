@@ -47,9 +47,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             // JSONからレイアウトオブジェクトを取得
             var json = SampleRex.SampleJson;
             var root = JsonConvert.DeserializeSheetView(json);
+            var template = JsonConvert.DeserializeTemplateColumns(SampleRex.Template);
 
             // レイアウトオブジェクトからレイアウトをバインドする
             fpSpread1.ActiveSheet.BindJsonLayout(root,
+                template,
                 null,
                 (sheet, root2) =>
                 {

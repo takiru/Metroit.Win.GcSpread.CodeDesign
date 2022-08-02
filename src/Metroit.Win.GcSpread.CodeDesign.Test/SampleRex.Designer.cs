@@ -81,11 +81,40 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test {
         ///          },
         ///          {
         ///            &quot;Value&quot;: &quot;タイトル6&quot;,
-        ///          [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        ///            &quot;HorizontalAlignm [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string SampleJson {
             get {
                 return ResourceManager.GetString("SampleJson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {
+        ///  // 列ヘッダーの設定
+        ///  &quot;ColumnHeader&quot;: {
+        ///    // HorizontalAlignment, VerticalAlignment を指定すると、Columnsより強い
+        ///    &quot;Rows&quot;: [
+        ///      {
+        ///        &quot;RowProperties&quot;: {
+        ///          &quot;Height&quot;: 40,
+        ///          &quot;HorizontalAlignment&quot;: &quot;Left&quot;,
+        ///          &quot;VerticalAlignment&quot;: &quot;Bottom&quot;
+        ///        },
+        ///        // 列の設定
+        ///        &quot;Columns&quot;: [
+        ///          {
+        ///            &quot;Value&quot;: &quot;タイトル3&quot;,
+        ///            &quot;HorizontalAlignment&quot;: &quot;Right&quot;,
+        ///            &quot;VerticalAlignment&quot;: &quot;Top&quot;
+        ///          },
+        ///          {
+        ///            &quot;Value&quot;: &quot;タイトル6&quot;,
+        ///            &quot;HorizontalAlignm [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Template {
+            get {
+                return ResourceManager.GetString("Template", resourceCulture);
             }
         }
     }
