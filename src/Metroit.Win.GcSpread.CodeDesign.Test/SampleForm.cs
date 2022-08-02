@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -134,7 +135,8 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             cellType.ListDefaultColumn.Visible = false; // 何もリスト表示しない状態をデフォルトにする
             cellType.ListColumns.Cast<ListColumnInfo>().Where(x => x.DataPropertyName == "Display").First().Visible = true;  // 表示したい列だけ表示する
 
-
+            cellType.ListItemTemplates.Add(new ItemTemplateInfo() { AutoItemHeight = false, BackColor = Color.Red, Font = new Font(FontFamily.GenericSansSerif, 10), Height = 20, Image = Image.FromFile(@"C:\App\sample.png") });
+            cellType.BackgroundImage = new FarPoint.Win.Picture(Image.FromFile(@"C:\App\sample.png"));
 
             fpSpread1.ActiveSheet.DataSource = dataSource;
         }

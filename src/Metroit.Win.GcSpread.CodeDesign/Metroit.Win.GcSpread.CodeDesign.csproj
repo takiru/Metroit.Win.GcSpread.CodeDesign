@@ -58,6 +58,37 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColumnMoveResult.cs" />
+    <Compile Include="GcNumberCellTypeExtensions.cs" />
+    <Compile Include="GcComboBoxCellTypeExtensions.cs" />
+    <Compile Include="Json\Converters\AlternateTextInfoConverter.cs" />
+    <Compile Include="Json\Converters\AutoCompleteHighlightStyleInfoConverter.cs" />
+    <Compile Include="Json\Converters\AutoCompleteInfoConverter.cs" />
+    <Compile Include="Json\Converters\AutoFilterInfoConverter.cs" />
+    <Compile Include="Json\Converters\CalculatorButtonStyleInfoConverter.cs" />
+    <Compile Include="Json\Converters\PopUpCalculatorInfoConverter.cs" />
+    <Compile Include="Json\Converters\DropDownInfoConverter.cs" />
+    <Compile Include="Json\Converters\NumberAlternateTextInfoConverter.cs" />
+    <Compile Include="Json\Converters\ComboBoxAlternateTextInfoConverter.cs" />
+    <Compile Include="Json\Converters\ComboDropDownInfoConverter.cs" />
+    <Compile Include="Json\Converters\DefaultListColumnInfoConverter.cs" />
+    <Compile Include="Json\Converters\DefaultSubItemInfoConverter.cs" />
+    <Compile Include="Json\Converters\FontConverter.cs" />
+    <Compile Include="Json\Converters\GradientEffectConverter.cs" />
+    <Compile Include="Json\Converters\ItemStyleInfoConverter.cs" />
+    <Compile Include="Json\Converters\NumberFieldsInfoConverter.cs" />
+    <Compile Include="Json\Converters\NumberDisplayFieldCollectionInfoConverter.cs" />
+    <Compile Include="Json\Converters\PictureConverter.cs" />
+    <Compile Include="Json\Converters\ItemTemplateCollectionInfoConverter.cs" />
+    <Compile Include="Json\Converters\LineConverter.cs" />
+    <Compile Include="Json\Converters\ListGridLinesInfoConverter.cs" />
+    <Compile Include="Json\Converters\ListHeaderInfoConverter.cs" />
+    <Compile Include="Json\Converters\ListHeaderPaneInfoConverter.cs" />
+    <Compile Include="Json\Converters\ShortcutDictionaryConverter.cs" />
+    <Compile Include="Json\Converters\SideButtonCollectionInfoConverter.cs" />
+    <Compile Include="Json\Converters\NumberSpinConverter.cs" />
+    <Compile Include="Json\Converters\SpinConverter.cs" />
+    <Compile Include="Json\Converters\DropDownCalculatorInfoConverter.cs" />
+    <Compile Include="Json\Converters\StatusBarInfoConverter.cs" />
     <Compile Include="Json\AllColumnDefinitions.cs" />
     <Compile Include="Json\ColumnDefinitions.cs" />
     <Compile Include="Json\ColumnHeaderDefinitions.cs" />

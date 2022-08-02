@@ -46,6 +46,8 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo dropDownButtonInfo2 = new GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo();
             GrapeCity.Win.Spread.InputMan.CellType.GcComboBoxCellType gcComboBoxCellType1 = new GrapeCity.Win.Spread.InputMan.CellType.GcComboBoxCellType();
             GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo dropDownButtonInfo3 = new GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.GcNumberCellType gcNumberCellType2 = new GrapeCity.Win.Spread.InputMan.CellType.GcNumberCellType();
+            GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo dropDownButtonInfo4 = new GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo();
             this.fpSpread1 = new FarPoint.Win.Spread.FpSpread();
             this.fpSpread1_Sheet1 = new FarPoint.Win.Spread.SheetView();
             this.button1 = new System.Windows.Forms.Button();
@@ -125,6 +127,18 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             gcComboBoxCellType1.SideButtons.AddRange(new GrapeCity.Win.Spread.InputMan.CellType.SideButtonBaseInfo[] {
             dropDownButtonInfo3});
             this.fpSpread1_Sheet1.Columns.Get(5).CellType = gcComboBoxCellType1;
+            gcNumberCellType2.BackgroundImage = new FarPoint.Win.Picture(null, FarPoint.Win.RenderStyle.Normal, System.Drawing.Color.Empty, 0, FarPoint.Win.HorizontalAlignment.Left, FarPoint.Win.VerticalAlignment.Top);
+            gcNumberCellType2.ClearCollection = true;
+            gcNumberCellType2.Fields.IntegerPart.MinDigits = 1;
+            gcNumberCellType2.Fields.SignSuffix.NegativePattern = "";
+            gcNumberCellType2.ShortcutKeys.AddRange(new GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionaryEntry[] {
+            new GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionaryEntry(System.Windows.Forms.Keys.F2, "SetZero"),
+            new GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionaryEntry(System.Windows.Forms.Keys.Subtract, "SwitchSign"),
+            new GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionaryEntry(System.Windows.Forms.Keys.OemMinus, "SwitchSign"),
+            new GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionaryEntry(((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Return))), "ApplyRecommendedValue")});
+            gcNumberCellType2.SideButtons.AddRange(new GrapeCity.Win.Spread.InputMan.CellType.SideButtonBaseInfo[] {
+            dropDownButtonInfo4});
+            this.fpSpread1_Sheet1.Columns.Get(6).CellType = gcNumberCellType2;
             this.fpSpread1_Sheet1.RowHeader.Columns.Default.Resizable = false;
             this.fpSpread1_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.A1;
             // 

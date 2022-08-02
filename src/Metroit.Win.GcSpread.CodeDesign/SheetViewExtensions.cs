@@ -413,67 +413,81 @@ namespace Metroit.Win.GcSpread.CodeDesign
                 ICellType cellType;
                 switch (column.Item.CellType.ToLower())
                 {
-                    case "textcelltype":
-                        cellType = new TextCellType();
-                        sheetView.Columns[column.Index].CellType = cellType;
-                        CompileTextCellType((TextCellType)cellType, column.Item.CellTypeProperties);
-                        break;
+                    //case "textcelltype":
+                    //    cellType = new TextCellType();
+                    //    sheetView.Columns[column.Index].CellType = cellType;
+                    //    CompileTextCellType((TextCellType)cellType, column.Item.CellTypeProperties);
+                    //    break;
 
-                    case "datetimecelltype":
-                        cellType = new DateTimeCellType();
-                        sheetView.Columns[column.Index].CellType = cellType;
-                        CompileDateTimeCellType((DateTimeCellType)cellType, column.Item.CellTypeProperties);
-                        break;
+                    //case "datetimecelltype":
+                    //    cellType = new DateTimeCellType();
+                    //    sheetView.Columns[column.Index].CellType = cellType;
+                    //    CompileDateTimeCellType((DateTimeCellType)cellType, column.Item.CellTypeProperties);
+                    //    break;
 
-                    case "numbercelltype":
-                        cellType = new NumberCellType();
-                        sheetView.Columns[column.Index].CellType = cellType;
-                        CompileNumberCellType((NumberCellType)cellType, column.Item.CellTypeProperties);
-                        break;
+                    //case "numbercelltype":
+                    //    cellType = new NumberCellType();
+                    //    sheetView.Columns[column.Index].CellType = cellType;
+                    //    CompileNumberCellType((NumberCellType)cellType, column.Item.CellTypeProperties);
+                    //    break;
 
-                    case "comboboxcelltype":
-                        cellType = new ComboBoxCellType();
-                        sheetView.Columns[column.Index].CellType = cellType;
-                        CompileComboBoxCellType((ComboBoxCellType)cellType, column.Item.CellTypeProperties);
-                        break;
+                    //case "comboboxcelltype":
+                    //    cellType = new ComboBoxCellType();
+                    //    sheetView.Columns[column.Index].CellType = cellType;
+                    //    CompileComboBoxCellType((ComboBoxCellType)cellType, column.Item.CellTypeProperties);
+                    //    break;
 
-                    case "checkboxcelltype":
-                        cellType = new CheckBoxCellType();
-                        sheetView.Columns[column.Index].CellType = cellType;
-                        CompileCheckBoxCellType((CheckBoxCellType)cellType, column.Item.CellTypeProperties);
-                        break;
+                    //case "checkboxcelltype":
+                    //    cellType = new CheckBoxCellType();
+                    //    sheetView.Columns[column.Index].CellType = cellType;
+                    //    CompileCheckBoxCellType((CheckBoxCellType)cellType, column.Item.CellTypeProperties);
+                    //    break;
 
-                    case "buttoncelltype":
-                        cellType = new ButtonCellType();
-                        sheetView.Columns[column.Index].CellType = cellType;
-                        CompileButtonCellType((ButtonCellType)cellType, column.Item.CellTypeProperties);
-                        break;
+                    //case "buttoncelltype":
+                    //    cellType = new ButtonCellType();
+                    //    sheetView.Columns[column.Index].CellType = cellType;
+                    //    CompileButtonCellType((ButtonCellType)cellType, column.Item.CellTypeProperties);
+                    //    break;
 
-                    case "gctextboxcelltype":
-                        cellType = new GcTextBoxCellType();
-                        sheetView.Columns[column.Index].CellType = cellType;
-                        CompileGcTextBoxCellType((GcTextBoxCellType)cellType, column.Item.CellTypeProperties);
-                        break;
+                    //case "gctextboxcelltype":
+                    //    cellType = new GcTextBoxCellType();
+                    //    sheetView.Columns[column.Index].CellType = cellType;
+                    //    CompileGcTextBoxCellType((GcTextBoxCellType)cellType, column.Item.CellTypeProperties);
+                    //    break;
 
-                    case "gcdatetimecelltype":
-                        cellType = new GcDateTimeCellType();
-                        sheetView.Columns[column.Index].CellType = cellType;
-                        CompileGcDateTimeCellType((GcDateTimeCellType)cellType, column.Item.CellTypeProperties);
-                        break;
+                    //case "gcdatetimecelltype":
+                    //    cellType = new GcDateTimeCellType();
+                    //    sheetView.Columns[column.Index].CellType = cellType;
+                    //    CompileGcDateTimeCellType((GcDateTimeCellType)cellType, column.Item.CellTypeProperties);
+                    //    break;
 
-                    case "gcnumbercelltype":
-                        cellType = new GcNumberCellType();
-                        sheetView.Columns[column.Index].CellType = cellType;
-                        CompileGcNumberCellType((GcNumberCellType)cellType, column.Item.CellTypeProperties);
-                        break;
+                    //case "gcnumbercelltype":
+                    //    cellType = new GcNumberCellType();
+                    //    sheetView.Columns[column.Index].CellType = cellType;
+                    //    CompileGcNumberCellType((GcNumberCellType)cellType, column.Item.CellTypeProperties);
+                    //    break;
 
-                    case "gccomboboxcelltype":
-                        cellType = new GcComboBoxCellType();
-                        sheetView.Columns[column.Index].CellType = cellType;
-                        CompileGcComboBoxCellType((GcComboBoxCellType)cellType, column.Item.CellTypeProperties);
-                        break;
-
+                    //case "gccomboboxcelltype":
+                    //    cellType = new GcComboBoxCellType();
+                    //    sheetView.Columns[column.Index].CellType = cellType;
+                    //    ((GcComboBoxCellType)cellType).DeserializeJson(Newtonsoft.Json.JsonConvert.SerializeObject(column.Item.CellTypeProps));
+                    //    break;
                 }
+
+                if (string.Compare(nameof(GcNumberCellType), column.Item.CellType, true) == 0)
+                {
+                    cellType = new GcNumberCellType();
+                    sheetView.Columns[column.Index].CellType = cellType;
+                    ((GcNumberCellType)cellType).DeserializeJson(Newtonsoft.Json.JsonConvert.SerializeObject(column.Item.CellTypeProps));
+                }
+
+                if (string.Compare(nameof(GcComboBoxCellType), column.Item.CellType, true) == 0)
+                {
+                    cellType = new GcComboBoxCellType();
+                    sheetView.Columns[column.Index].CellType = cellType;
+                    ((GcComboBoxCellType)cellType).DeserializeJson(Newtonsoft.Json.JsonConvert.SerializeObject(column.Item.CellTypeProps));
+                }
+
 
                 // 列全体の定義を反映
                 if (root.AllColumn != null)
@@ -1531,26 +1545,6 @@ namespace Metroit.Win.GcSpread.CodeDesign
         }
 
         /// <summary>
-        /// GcComboBoxCellType をコンパイルする。
-        /// </summary>
-        /// <param name="cellType">GcComboBoxCellType オブジェクト。</param>
-        /// <param name="cellTypeProperties">セルタイプ情報。</param>
-        private static void CompileGcComboBoxCellType(GcComboBoxCellType cellType, Dictionary<string, object> cellTypeProperties)
-        {
-            if (cellTypeProperties == null)
-            {
-                return;
-            }
-
-            foreach (var prop in cellTypeProperties)
-            {
-                var propKey = prop.Key.ToLower();
-
-
-            }
-        }
-
-        /// <summary>
         /// 現在のシートからヘッダー行/列情報を逆コンパイルする。
         /// </summary>
         /// <param name="sheetView">SheetView オブジェクト。</param>
@@ -1633,6 +1627,13 @@ namespace Metroit.Win.GcSpread.CodeDesign
 
             foreach (Column svColumn in sheetView.Columns)
             {
+                // TODO: GcComboBoxのみ動くようにする
+                if (!(svColumn.CellType is GcComboBoxCellType) && !(svColumn.CellType is GcNumberCellType))
+                {
+                    continue;
+                }
+
+
                 var column = new ColumnDefinitions()
                 {
                     DataField = svColumn.DataField,
@@ -1649,43 +1650,44 @@ namespace Metroit.Win.GcSpread.CodeDesign
 
                 if (svColumn.CellType is TextCellType)
                 {
-                    column.CellTypeProperties = DecompileTextCellTypeProperties((TextCellType)svColumn.CellType);
+                    column.CellTypeProps = DecompileTextCellTypeProperties((TextCellType)svColumn.CellType);
                 }
                 if (svColumn.CellType is DateTimeCellType)
                 {
-                    column.CellTypeProperties = DecompileDateTimeCellTypeProperties((DateTimeCellType)svColumn.CellType);
+                    column.CellTypeProps = DecompileDateTimeCellTypeProperties((DateTimeCellType)svColumn.CellType);
                 }
                 if (svColumn.CellType is NumberCellType)
                 {
-                    column.CellTypeProperties = DecompileNumberCellTypeProperties((NumberCellType)svColumn.CellType);
+                    column.CellTypeProps = DecompileNumberCellTypeProperties((NumberCellType)svColumn.CellType);
                 }
                 if (svColumn.CellType is ComboBoxCellType)
                 {
-                    column.CellTypeProperties = DecompileComboBoxCellTypeProperties((ComboBoxCellType)svColumn.CellType);
+                    column.CellTypeProps = DecompileComboBoxCellTypeProperties((ComboBoxCellType)svColumn.CellType);
                 }
                 if (svColumn.CellType is CheckBoxCellType)
                 {
-                    column.CellTypeProperties = DecompileCheckBoxCellTypeProperties((CheckBoxCellType)svColumn.CellType);
+                    column.CellTypeProps = DecompileCheckBoxCellTypeProperties((CheckBoxCellType)svColumn.CellType);
                 }
                 if (svColumn.CellType is ButtonCellType)
                 {
-                    column.CellTypeProperties = DecompileButtonCellTypeProperties((ButtonCellType)svColumn.CellType);
+                    column.CellTypeProps = DecompileButtonCellTypeProperties((ButtonCellType)svColumn.CellType);
                 }
                 if (svColumn.CellType is GcTextBoxCellType)
                 {
-                    column.CellTypeProperties = DecompileGcTextBoxCellTypeProperties((GcTextBoxCellType)svColumn.CellType);
+                    column.CellTypeProps = DecompileGcTextBoxCellTypeProperties((GcTextBoxCellType)svColumn.CellType);
                 }
                 if (svColumn.CellType is GcDateTimeCellType)
                 {
-                    column.CellTypeProperties = DecompileGcDateTimeCellTypeProperties((GcDateTimeCellType)svColumn.CellType);
+                    column.CellTypeProps = DecompileGcDateTimeCellTypeProperties((GcDateTimeCellType)svColumn.CellType);
                 }
                 if (svColumn.CellType is GcNumberCellType)
                 {
-                    column.CellTypeProperties = DecompileGcNumberCellTypeProperties((GcNumberCellType)svColumn.CellType);
+                    //column.CellTypeProps = DecompileGcNumberCellTypeProperties((GcNumberCellType)svColumn.CellType);
+                    column.CellTypeProps = JObject.Parse(((GcNumberCellType)svColumn.CellType).SerializeJson());
                 }
                 if (svColumn.CellType is GcComboBoxCellType)
                 {
-                    column.CellTypeProperties = DecompileGcComboBoxCellTypeProperties((GcComboBoxCellType)svColumn.CellType);
+                    column.CellTypeProps = JObject.Parse(((GcComboBoxCellType)svColumn.CellType).SerializeJson());
                 }
 
                 column.Options = columnOptions?.Invoke(svColumn);
@@ -1964,185 +1966,6 @@ namespace Metroit.Win.GcSpread.CodeDesign
             result.Add(nameof(cellType.Static), cellType.Static);
             result.Add(nameof(cellType.UseNegativeColor), cellType.UseNegativeColor);
             result.Add(nameof(cellType.ValueSign), cellType.ValueSign);
-            result.Add("DropDownAllowDrop", cellType.DropDown.AllowDrop);
-
-            return result;
-        }
-
-        /// <summary>
-        /// GcComboBoxCellType からプロパティ情報を逆コンパイルする。
-        /// </summary>
-        /// <param name="cellType">GcComboBoxCellType オブジェクト。</param>
-        /// <returns>プロパティ情報。</returns>
-        private static Dictionary<string, object> DecompileGcComboBoxCellTypeProperties(GcComboBoxCellType cellType)
-        {
-            var result = new Dictionary<string, object>();
-            result.Add(nameof(cellType.AcceptsArrowKeys), cellType.AcceptsArrowKeys);
-            result.Add(nameof(cellType.AcceptsCrLf), cellType.AcceptsCrLf);
-            result.Add(nameof(cellType.AcceptsTabChar), cellType.AcceptsTabChar);
-            result.Add(nameof(cellType.AllowSpace), cellType.AllowSpace);
-
-            //result.Add(nameof(cellType.AlternateText), cellType.AlternateText);
-            var alternateTextProps = new JObject();
-            var displayNullProps = new JObject();
-            displayNullProps.Add(new JProperty(nameof(cellType.AlternateText.DisplayNull.ForeColor), ColorTranslator.ToHtml(cellType.AlternateText.DisplayNull.ForeColor)));
-            displayNullProps.Add(new JProperty(nameof(cellType.AlternateText.DisplayNull.Text), cellType.AlternateText.DisplayNull.Text));
-            var nullProps = new JObject();
-            nullProps.Add(new JProperty(nameof(cellType.AlternateText.Null.ForeColor), ColorTranslator.ToHtml(cellType.AlternateText.Null.ForeColor)));
-            nullProps.Add(new JProperty(nameof(cellType.AlternateText.Null.Text), cellType.AlternateText.Null.Text));
-            alternateTextProps.Add(new JProperty(nameof(cellType.AlternateText.DisplayNull), displayNullProps));
-            alternateTextProps.Add(new JProperty(nameof(cellType.AlternateText.Null), nullProps));
-            result.Add(nameof(cellType.AlternateText), alternateTextProps);
-
-
-            //result.Add(nameof(cellType.AutoComplete), cellType.AutoComplete);
-            var autoCompleteProps = new JObject();
-            autoCompleteProps.Add(new JProperty(nameof(cellType.AutoComplete.CandidateListItemFont), Newtonsoft.Json.JsonConvert.SerializeObject(cellType.AutoComplete.CandidateListItemFont)));
-            autoCompleteProps.Add(new JProperty(nameof(cellType.AutoComplete.HighlightMatchedText), cellType.AutoComplete.HighlightMatchedText));
-            var highlightStyleProps = new JObject();
-            highlightStyleProps.Add(new JProperty(nameof(cellType.AutoComplete.HighlightStyle.BackColor), ColorTranslator.ToHtml(cellType.AutoComplete.HighlightStyle.BackColor)));
-            highlightStyleProps.Add(new JProperty(nameof(cellType.AutoComplete.HighlightStyle.Font), Newtonsoft.Json.JsonConvert.SerializeObject(cellType.AutoComplete.HighlightStyle.Font)));
-            highlightStyleProps.Add(new JProperty(nameof(cellType.AutoComplete.HighlightStyle.ForeColor), ColorTranslator.ToHtml(cellType.AutoComplete.HighlightStyle.ForeColor)));
-            autoCompleteProps.Add(new JProperty(nameof(cellType.AutoComplete.HighlightStyle), highlightStyleProps));
-            autoCompleteProps.Add(new JProperty(nameof(cellType.AutoComplete.MatchingMode), cellType.AutoComplete.MatchingMode));
-            result.Add(nameof(cellType.AutoComplete), autoCompleteProps);
-
-
-            result.Add(nameof(cellType.AutoCompleteCustomSource), cellType.AutoCompleteCustomSource);
-            result.Add(nameof(cellType.AutoCompleteMode), cellType.AutoCompleteMode);
-            result.Add(nameof(cellType.AutoCompleteSource), cellType.AutoCompleteSource);
-            result.Add(nameof(cellType.AutoConvert), cellType.AutoConvert);
-
-
-            //result.Add(nameof(cellType.AutoFilter), cellType.AutoFilter);
-            var autoFilterProps = new JObject();
-            autoFilterProps.Add(new JProperty(nameof(cellType.AutoFilter.Enabled), cellType.AutoFilter.Enabled));
-            autoFilterProps.Add(new JProperty(nameof(cellType.AutoFilter.Interval), cellType.AutoFilter.Interval));
-            autoFilterProps.Add(new JProperty(nameof(cellType.AutoFilter.MatchingMode), cellType.AutoFilter.MatchingMode));
-            autoFilterProps.Add(new JProperty(nameof(cellType.AutoFilter.MatchingSource), cellType.AutoFilter.MatchingSource));
-            autoFilterProps.Add(new JProperty(nameof(cellType.AutoFilter.MaxFilteredItems), cellType.AutoFilter.MaxFilteredItems));
-            autoFilterProps.Add(new JProperty(nameof(cellType.AutoFilter.MinimumPrefixLength), cellType.AutoFilter.MinimumPrefixLength));
-            result.Add(nameof(cellType.AutoFilter), autoFilterProps);
-
-
-            result.Add(nameof(cellType.AutoGenerateColumns), cellType.AutoGenerateColumns);
-            result.Add(nameof(cellType.AutoSelect), cellType.AutoSelect);
-            result.Add(nameof(cellType.BackgroundImage), cellType.BackgroundImage);
-            result.Add(nameof(cellType.DataMember), cellType.DataMember);
-            result.Add(nameof(cellType.DataSource), cellType.DataSource);
-
-
-            //result.Add(nameof(cellType.DropDown), cellType.DropDown);
-            var dropdownProps = new JObject();
-            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.AllowDrop), cellType.DropDown.AllowDrop));
-            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.AllowResize), cellType.DropDown.AllowResize));
-            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.AutoDropDown), cellType.DropDown.AutoDropDown));
-            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.AutoHideTouchKeyboard), cellType.DropDown.AutoHideTouchKeyboard));
-            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.AutoWidth), cellType.DropDown.AutoWidth));
-            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.ClosingAnimation), cellType.DropDown.ClosingAnimation));
-            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.Direction), cellType.DropDown.Direction));
-            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.Height), cellType.DropDown.Height));
-            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.OpeningAnimation), cellType.DropDown.OpeningAnimation));
-            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.ShowShadow), cellType.DropDown.ShowShadow));
-            dropdownProps.Add(new JProperty(nameof(cellType.DropDown.Width), cellType.DropDown.Width));
-            result.Add(nameof(cellType.DropDown), dropdownProps);
-
-
-            result.Add(nameof(cellType.DropDownMaxHeight), cellType.DropDownMaxHeight);
-            result.Add(nameof(cellType.DropDownStyle), cellType.DropDownStyle);
-            result.Add(nameof(cellType.EditMode), cellType.EditMode);
-            result.Add(nameof(cellType.EditorValue), cellType.EditorValue);
-            result.Add(nameof(cellType.Ellipsis), cellType.Ellipsis);
-            result.Add(nameof(cellType.EllipsisString), cellType.EllipsisString);
-            result.Add(nameof(cellType.ExcelExportFormat), cellType.ExcelExportFormat);
-            result.Add(nameof(cellType.ExitOnLastChar), cellType.ExitOnLastChar);
-            result.Add(nameof(cellType.FocusPosition), cellType.FocusPosition);
-            result.Add(nameof(cellType.FormatString), cellType.FormatString);
-            result.Add(nameof(cellType.ImageAlign), cellType.ImageAlign);
-            result.Add(nameof(cellType.ImageList), cellType.ImageList);
-            result.Add(nameof(cellType.ImageWidth), cellType.ImageWidth);
-
-
-            // Items は DataSource 指定もしくは直接指定があるため、シリアライズ化対象外
-            //result.Add(nameof(cellType.Items), cellType.Items);
-
-            // ListColumns は DataSource 指定もしくは直接指定があるため、シリアライズ化対象外
-            //result.Add(nameof(cellType.ListColumns), cellType.ListColumns);
-
-
-            //result.Add(nameof(cellType.ListDefaultColumn), cellType.ListDefaultColumn);
-            var listDefaultColumnProps = new JObject();
-            listDefaultColumnProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.AutoWidth), cellType.ListDefaultColumn.AutoWidth));
-            listDefaultColumnProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.DataDisplayType), cellType.ListDefaultColumn.DataDisplayType));
-            var defaultSubItemProps = new JObject();
-            defaultSubItemProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.DefaultSubItem.ContentAlignment), cellType.ListDefaultColumn.DefaultSubItem.ContentAlignment));
-            defaultSubItemProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.DefaultSubItem.Ellipsis), cellType.ListDefaultColumn.DefaultSubItem.Ellipsis));
-            defaultSubItemProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.DefaultSubItem.Padding), Newtonsoft.Json.JsonConvert.SerializeObject(cellType.ListDefaultColumn.DefaultSubItem.Padding)));
-            defaultSubItemProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.DefaultSubItem.WordWrap), cellType.ListDefaultColumn.DefaultSubItem.WordWrap));
-            listDefaultColumnProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.DefaultSubItem), defaultSubItemProps));
-
-            var headerProps = new JObject();
-            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.AllowResize), cellType.ListDefaultColumn.Header.ContentAlignment));
-            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.BackColor), cellType.ListDefaultColumn.Header.Ellipsis));
-            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.Clickable), Newtonsoft.Json.JsonConvert.SerializeObject(cellType.ListDefaultColumn.Header.Padding)));
-            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.ContentAlignment), cellType.ListDefaultColumn.Header.WordWrap));
-            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.Ellipsis), cellType.ListDefaultColumn.Header.WordWrap));
-            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.ForeColor), cellType.ListDefaultColumn.Header.WordWrap));
-            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.GradientEffect), cellType.ListDefaultColumn.Header.WordWrap));
-            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.Image), cellType.ListDefaultColumn.Header.WordWrap));
-            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.ImageTextSpace), cellType.ListDefaultColumn.Header.WordWrap));
-            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.SortIndicatorAlignment), cellType.ListDefaultColumn.Header.WordWrap));
-            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.Text), cellType.ListDefaultColumn.Header.WordWrap));
-            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.TextAttachAlignment), cellType.ListDefaultColumn.Header.WordWrap));
-            headerProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header.TextEffect), cellType.ListDefaultColumn.Header.WordWrap));
-            listDefaultColumnProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header), headerProps));
-
-            //listDefaultColumnProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Header), cellType.ListDefaultColumn.Header));
-            listDefaultColumnProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.SortOrder), cellType.ListDefaultColumn.SortOrder));
-            listDefaultColumnProps.Add(new JProperty(nameof(cellType.ListDefaultColumn.Width), cellType.ListDefaultColumn.Width));
-            result.Add(nameof(cellType.ListDefaultColumn), listDefaultColumnProps);
-
-
-
-            result.Add(nameof(cellType.ListDescriptionFormat), cellType.ListDescriptionFormat);
-            result.Add(nameof(cellType.ListDescriptionSubItemIndex), cellType.ListDescriptionSubItemIndex);
-            result.Add(nameof(cellType.ListDisabledItemStyle), cellType.ListDisabledItemStyle);
-            result.Add(nameof(cellType.ListGradientEffect), cellType.ListGradientEffect);
-            result.Add(nameof(cellType.ListGridLines), cellType.ListGridLines);
-            result.Add(nameof(cellType.ListHeaderPane), cellType.ListHeaderPane);
-            result.Add(nameof(cellType.ListItemTemplates), cellType.ListItemTemplates);
-            result.Add(nameof(cellType.ListSelectedItemStyle), cellType.ListSelectedItemStyle);
-            result.Add(nameof(cellType.ListSortColumnIndex), cellType.ListSortColumnIndex);
-            result.Add(nameof(cellType.MaxDropDownItems), cellType.MaxDropDownItems);
-            result.Add(nameof(cellType.MaxLength), cellType.MaxLength);
-            result.Add(nameof(cellType.MaxLengthCodePage), cellType.MaxLengthCodePage);
-            result.Add(nameof(cellType.MaxLengthUnit), cellType.MaxLengthUnit);
-            result.Add(nameof(cellType.PaintByControl), cellType.PaintByControl);
-            result.Add(nameof(cellType.ReadOnly), cellType.ReadOnly);
-            result.Add(nameof(cellType.RecommendedValue), cellType.RecommendedValue);
-            result.Add(nameof(cellType.ScrollBarMode), cellType.ScrollBarMode);
-            result.Add(nameof(cellType.ScrollBars), cellType.ScrollBars);
-            result.Add(nameof(cellType.ShortcutKeys), cellType.ShortcutKeys);
-            result.Add(nameof(cellType.ShowItemTip), cellType.ShowItemTip);
-            result.Add(nameof(cellType.ShowListBoxImage), cellType.ShowListBoxImage);
-            result.Add(nameof(cellType.ShowOverflowTip), cellType.ShowOverflowTip);
-            result.Add(nameof(cellType.ShowRecommendedValue), cellType.ShowRecommendedValue);
-            result.Add(nameof(cellType.ShowTouchToolBar), cellType.ShowTouchToolBar);
-            result.Add(nameof(cellType.SideButtons), cellType.SideButtons);
-            result.Add(nameof(cellType.Spin), cellType.Spin);
-            result.Add(nameof(cellType.Static), cellType.Static);
-            result.Add(nameof(cellType.StatusBar), cellType.StatusBar);
-            result.Add(nameof(cellType.SubEditor), cellType.SubEditor);
-            result.Add(nameof(cellType.TextBoxStyle), cellType.TextBoxStyle);
-            result.Add(nameof(cellType.TextFormat), cellType.TextFormat);
-            result.Add(nameof(cellType.TextSubItemIndex), cellType.TextSubItemIndex);
-            result.Add(nameof(cellType.TouchContextMenuScale), cellType.TouchContextMenuScale);
-            //result.Add(nameof(cellType.TouchToolBar), cellType.TouchToolBar); // これやるとStackOverFlowになる
-            result.Add(nameof(cellType.UnSelectedImageIndex), cellType.UnSelectedImageIndex);
-            result.Add(nameof(cellType.UseCompatibleDrawing), cellType.UseCompatibleDrawing);
-            result.Add(nameof(cellType.UseSpreadDropDownButtonRender), cellType.UseSpreadDropDownButtonRender);
-            result.Add(nameof(cellType.ValueSubItemIndex), cellType.ValueSubItemIndex);
-
             result.Add("DropDownAllowDrop", cellType.DropDown.AllowDrop);
 
             return result;

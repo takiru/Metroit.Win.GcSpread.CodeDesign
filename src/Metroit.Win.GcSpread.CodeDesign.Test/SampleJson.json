@@ -304,40 +304,260 @@
       "Width": 150,
       "Visible": true,
       "CellType": "GcNumberCellType",
-      "CellTypeProperties": {
+      "CellTypeProps": {
+        "AcceptsArrowKeys": 3,
+        "AcceptsCrLf": 0,
+        "AcceptsDecimal": 0,
         "AllowDeleteToNull": false,
-        "MaxValue": 10000.99,
-        "MinValue": -10000.99,
-        "NegativeColor": "#123456",
-        "UseNegativeColor": true,
-        "DropDownAllowDrop": true,
-        "SideButtonsClear": false,
+        "AlternateText": {
+          "DisplayNull": {
+            "ForeColor": "",
+            "Text": ""
+          },
+          "DisplayZero": {
+            "ForeColor": "",
+            "Text": ""
+          },
+          "Null": {
+            "ForeColor": "",
+            "Text": ""
+          },
+          "Zero": {
+            "ForeColor": "",
+            "Text": ""
+          }
+        },
+        "BackgroundImage": null,
+        "ClipContent": 0,
         "DisplayFields": [
           {
             "Type": "NumberIntegerPartDisplayFieldInfo",
-            "GroupSeparator": "#"
+            "GroupSeparator": "#",
+            "GroupSizes": [
+              3
+            ],
+            "MinDigits": 1,
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0"
           },
           {
-            "Type": "NumberDecimalSeparatorDisplayFieldInfo"
+            "Type": "NumberDecimalSeparatorDisplayFieldInfo",
+            "DecimalSeparator": ".",
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0"
           },
           {
             "Type": "NumberDecimalPartDisplayFieldInfo",
             "MinDigits": 2,
-            "MaxDigits": 2
+            "MaxDigits": 2,
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0"
           }
         ],
+        "DropDown": {
+          "AllowDrop": true,
+          "AllowResize": false,
+          "AutoDropDown": false,
+          "AutoHideTouchKeyboard": 1,
+          "ClosingAnimation": 0,
+          "Direction": 7,
+          "OpeningAnimation": 0,
+          "ShowShadow": false,
+          "Size": "100, 200"
+        },
+        "DropDownCalculator": {
+          "BackColor": "buttonface",
+          "BackgroundImage": "",
+          "BackgroundImageLayout": 1,
+          "BorderStyle": 1,
+          "ContentAlignment": 64,
+          "EditButtons": {
+            "BackColor": "#010203",
+            "ForeColor": "Red",
+            "TextEffect": 0
+          },
+          "FlatStyle": 2,
+          "Font": null,
+          "MathButtons": {
+            "BackColor": "buttonface",
+            "ForeColor": "Maroon",
+            "TextEffect": 0
+          },
+          "MemoryButtons": {
+            "BackColor": "buttonface",
+            "ForeColor": "Blue",
+            "TextEffect": 0
+          },
+          "MemoryStatus": {
+            "BackColor": "buttonface",
+            "ForeColor": "windowtext",
+            "TextEffect": 0
+          },
+          "NumericButtons": {
+            "BackColor": "buttonface",
+            "ForeColor": "windowtext",
+            "TextEffect": 0
+          },
+          "Output": {
+            "BackColor": "window",
+            "ForeColor": "windowtext",
+            "TextEffect": 0
+          },
+          "OutputHeight": 0,
+          "Padding": "5, 5, 5, 5",
+          "ResetButtons": {
+            "BackColor": "buttonface",
+            "ForeColor": "windowtext",
+            "TextEffect": 0
+          },
+          "ShowOutput": true,
+          "SingleBorderColor": "windowframe"
+        },
+        "EditMode": 0,
+        "ExcelExportFormat": "General",
+        "ExitOnLastChar": false,
         "Fields": [
           {
+            "Type": "NumberSignFieldInfo",
+            "NegativePattern": "-",
+            "PositivePattern": "",
+            "Name": "",
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Padding": "0, 0, 0, 0",
+            "Text": ""
+          },
+          {
             "Type": "NumberIntegerPartFieldInfo",
+            "GroupSeparator": ",",
+            "GroupSizes": [
+              3
+            ],
             "MinDigits": 1,
-            "MaxDigits": 5
+            "MaxDigits": 5,
+            "SpinIncrement": null,
+            "Name": "",
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Padding": "0, 0, 0, 0",
+            "Text": ""
+          },
+          {
+            "Type": "NumberDecimalSeparatorFieldInfo",
+            "DecimalSeparator": ".",
+            "Name": "",
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Padding": "0, 0, 0, 0",
+            "Text": ""
           },
           {
             "Type": "NumberDecimalPartFieldInfo",
             "MinDigits": 2,
-            "MaxDigits": 2
+            "MaxDigits": 2,
+            "SpinIncrement": null,
+            "Name": "",
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Padding": "0, 0, 0, 0",
+            "Text": ""
+          },
+          {
+            "Type": "NumberSignFieldInfo",
+            "NegativePattern": "",
+            "PositivePattern": "",
+            "Name": "",
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Padding": "0, 0, 0, 0",
+            "Text": ""
           }
-        ]
+        ],
+        "FocusPosition": 0,
+        "MaxMinBehavior": 0,
+        "MaxValue": 10000.99,
+        "MinValue": -10000.99,
+        "NegativeColor": "#123456",
+        "PaintByControl": false,
+        "PopUpCalculator": {
+          "Align": 0,
+          "AllowPopUp": true,
+          "BackColor": "window",
+          "BackgroundImage": "",
+          "BackgroundImageLayout": 1,
+          "BorderStyle": 1,
+          "DecimalDigit": 2,
+          "Font": null,
+          "ForeColor": "windowtext",
+          "Lines": 12,
+          "Padding": "1, 2, 3, 4",
+          "TextHAlign": 1,
+          "UseDecimalDigit": false,
+          "Width": 0
+        },
+        "ReadOnly": false,
+        "RecommendedValue": 0.0,
+        "RoundPattern": 2,
+        "ShortcutKeys": {
+          "F2": "SetZero",
+          "Subtract": "SwitchSign",
+          "OemMinus": "SwitchSign",
+          "Return, Control": "ApplyRecommendedValue"
+        },
+        "ShowRecommendedValue": false,
+        "ShowTouchToolBar": 4,
+        "SideButtons": [
+          {
+            "Type": "DropDownButtonInfo",
+            "IsDefaultBehavior": true,
+            "UseVisualStyleBackColor": true,
+            "Tag": null,
+            "BackColor": "Control",
+            "ButtonWidth": 17,
+            "Enabled": true,
+            "FlatAppearance": "",
+            "ForeColor": "ControlText",
+            "Name": "",
+            "Position": 1,
+            "Visible": 1
+          }
+        ],
+        "Spin": {
+          "AllowSpin": true,
+          "Increment": 1,
+          "IncrementValue": 0.0,
+          "SpinMode": 0,
+          "SpinOnKeys": true,
+          "SpinOnWheel": true,
+          "Wrap": true
+        },
+        "Static": false,
+        "TouchContextMenuScale": 1.5,
+        "UseNegativeColor": true,
+        "UseSpreadDropDownButtonRender": true,
+        "ValueSign": 0
       },
       "ImeMode": "Off",
       "Locked": false,
@@ -496,7 +716,225 @@
       "Width": 150,
       "Visible": true,
       "CellType": "GcComboBoxCellType",
-      "CellTypeProperties": {
+      "CellTypeProps": {
+        "AcceptsArrowKeys": 3,
+        "AcceptsCrLf": 0,
+        "AcceptsTabChar": 0,
+        "AllowSpace": 3,
+        "AlternateText": {
+          "DisplayNull": {
+            "ForeColor": "Red",
+            "Text": "aaa"
+          },
+          "Null": {
+            "ForeColor": "",
+            "Text": ""
+          }
+        },
+        "AutoComplete": {
+          "CandidateListItemFont": {
+            "Name": "メイリオ",
+            "Size": 12.0,
+            "Style": 0
+          },
+          "HighlightMatchedText": false,
+          "HighlightStyle": {
+            "BackColor": "",
+            "Font": {
+              "Name": "MS UI Gothic",
+              "Size": 9.0,
+              "Style": 0
+            },
+            "ForeColor": ""
+          },
+          "MatchingMode": 0
+        },
+        "AutoCompleteCustomSource": [
+          "aaa",
+          "bbb",
+          "ccc"
+        ],
+        "AutoCompleteMode": 0,
+        "AutoCompleteSource": 128,
+        "AutoConvert": true,
+        "AutoFilter": {
+          "Enabled": false,
+          "Interval": 500,
+          "MatchingMode": 0,
+          "MatchingSource": 0,
+          "MaxFilteredItems": 0,
+          "MinimumPrefixLength": 1
+        },
+        "AutoGenerateColumns": true,
+        "AutoSelect": false,
+        "BackgroundImage": {
+          "AlignHorz": 0,
+          "AlignVert": 0,
+          "Image": "iVBORw0KGgoAAAANSUhEUgAAAFYAAABGCAIAAADZ4vQ7AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAM1JREFUeF7t1EEKhDAQRUEv7128ZeaDPQMJDuLSpN7OhoBdRLe2fAgQXBIcx7Hvez0s0AVB9t+2hW6HD+GOINdhpmqrvnE6/Ajq6CzVVn3j9PcjOC3Ok9N07jh0PU3z7Z9qt76/BGd1dJZqq75nBDV9T/Xe32rahwABgoQAAYKEAAGChAABgoQAAYKEAAGChAABgoQAAYKEAAGChAABgoQAAYKEAAGChAABgoQAAYKE4CHB26ut+hAgQJAQ3BGsEAIECBICBAgSAgQIWmsftaMDcETzd5cAAAAASUVORK5CYII=",
+          "Style": 0,
+          "TransparencyColor": "",
+          "TransparencyTolerance": 0
+        },
+        "DataMember": null,
+        "DropDown": {
+          "AllowDrop": true,
+          "AllowResize": false,
+          "AutoDropDown": false,
+          "AutoHideTouchKeyboard": 1,
+          "AutoWidth": true,
+          "ClosingAnimation": 0,
+          "Direction": 7,
+          "Height": 38,
+          "OpeningAnimation": 0,
+          "ShowShadow": false,
+          "Width": 120
+        },
+        "DropDownMaxHeight": null,
+        "DropDownStyle": 2,
+        "EditMode": 0,
+        "EditorValue": 2,
+        "Ellipsis": 0,
+        "EllipsisString": "...",
+        "ExcelExportFormat": null,
+        "ExitOnLastChar": false,
+        "FocusPosition": 0,
+        "FormatString": "",
+        "ImageAlign": 0,
+        "ImageWidth": 16,
+        "ListDefaultColumn": {
+          "AutoWidth": false,
+          "DataDisplayType": 0,
+          "DefaultSubItem": {
+            "ContentAlignment": 16,
+            "Ellipsis": false,
+            "Padding": "3, 2, 2, 1",
+            "WordWrap": false
+          },
+          "Header": {
+            "AllowResize": true,
+            "BackColor": "buttonface",
+            "Clickable": false,
+            "ContentAlignment": 16,
+            "Ellipsis": true,
+            "ForeColor": "buttontext",
+            "GradientEffect": null,
+            "Image": null,
+            "ImageTextSpace": 0,
+            "SortIndicatorAlignment": 1,
+            "Text": "Column",
+            "TextAttachAlignment": 512,
+            "TextEffect": 0
+          },
+          "SortOrder": 0,
+          "Visible": false,
+          "Width": 60
+        },
+        "ListDescriptionFormat": "",
+        "ListDescriptionSubItemIndex": 0,
+        "ListDisabledItemStyle": {
+          "BackColor": "buttonface",
+          "ForeColor": "graytext",
+          "GradientEffect": null
+        },
+        "ListGradientEffect": null,
+        "ListGridLines": {
+          "HorizontalLines": {
+            "Color": "buttonshadow",
+            "Style": 0
+          },
+          "VerticalLines": {
+            "Color": "buttonshadow",
+            "Style": 0
+          }
+        },
+        "ListHeaderPane": {
+          "AutoHeight": true,
+          "BackColor": "buttonface",
+          "Font": {
+            "Name": "MS UI Gothic",
+            "Size": 9.0,
+            "Style": 0
+          },
+          "GradientEffect": null,
+          "Height": 19,
+          "Visible": false
+        },
+        "ListItemTemplates": [
+          {
+            "AutoItemHeight": false,
+            "BackColor": "Red",
+            "Font": {
+              "Name": "Microsoft Sans Serif",
+              "Size": 10.0,
+              "Style": 0
+            },
+            "ForeColor": "buttontext",
+            "GradientEffect": null,
+            "Height": 20,
+            "Image": "iVBORw0KGgoAAAANSUhEUgAAAFYAAABGCAIAAADZ4vQ7AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAM1JREFUeF7t1EEKhDAQRUEv7128ZeaDPQMJDuLSpN7OhoBdRLe2fAgQXBIcx7Hvez0s0AVB9t+2hW6HD+GOINdhpmqrvnE6/Ajq6CzVVn3j9PcjOC3Ok9N07jh0PU3z7Z9qt76/BGd1dJZqq75nBDV9T/Xe32rahwABgoQAAYKEAAGChAABgoQAAYKEAAGChAABgoQAAYKEAAGChAABgoQAAYKEAAGChAABgoQAAYKE4CHB26ut+hAgQJAQ3BGsEAIECBICBAgSAgQIWmsftaMDcETzd5cAAAAASUVORK5CYII=",
+            "Indent": 0
+          }
+        ],
+        "ListSelectedItemStyle": {
+          "BackColor": "highlight",
+          "ForeColor": "highlighttext",
+          "GradientEffect": null
+        },
+        "ListSortColumnIndex": -1,
+        "MaxDropDownItems": 8,
+        "MaxLength": 0,
+        "MaxLengthCodePage": -1,
+        "MaxLengthUnit": 0,
+        "PaintByControl": false,
+        "ReadOnly": false,
+        "RecommendedValue": "",
+        "ScrollBarMode": 1,
+        "ScrollBars": 2,
+        "ShortcutKeys": {
+          "F2": "ShortcutClear",
+          "Return, Control": "ApplyRecommendedValue"
+        },
+        "ShowItemTip": false,
+        "ShowListBoxImage": false,
+        "ShowOverflowTip": false,
+        "ShowRecommendedValue": false,
+        "ShowTouchToolBar": 4,
+        "SideButtons": [
+          {
+            "Type": "DropDownButtonInfo",
+            "IsDefaultBehavior": true,
+            "UseVisualStyleBackColor": true,
+            "Tag": null,
+            "BackColor": "Control",
+            "ButtonWidth": 17,
+            "Enabled": true,
+            "FlatAppearance": "",
+            "ForeColor": "ControlText",
+            "Name": "",
+            "Position": 1,
+            "Visible": 1
+          }
+        ],
+        "Spin": {
+          "AllowSpin": true,
+          "Increment": 1,
+          "SpinOnKeys": true,
+          "SpinOnWheel": true,
+          "Wrap": true
+        },
+        "Static": false,
+        "StatusBar": {
+          "Text": "",
+          "Visible": false
+        },
+        "TextBoxStyle": 0,
+        "TextFormat": "",
+        "TextSubItemIndex": 0,
+        "TouchContextMenuScale": 1.5,
+        "UnSelectedImageIndex": -1,
+        "UseCompatibleDrawing": true,
+        "UseSpreadDropDownButtonRender": true,
+        "ValueSubItemIndex": 1
       },
       "ImeMode": "Off",
       "Locked": false,

@@ -64,7 +64,8 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// サポートするプロパティはセルタイプによって異なります。
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public Dictionary<string, object> CellTypeProperties { get; set; }
+        //public Dictionary<string, object> CellTypeProperties { get; set; }
+        public object CellTypeProps { get; set; }
 
         /// <summary>
         /// IMEモードを取得または設定します。
