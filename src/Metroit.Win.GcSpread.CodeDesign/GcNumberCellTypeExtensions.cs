@@ -14,7 +14,7 @@ namespace Metroit.Win.GcSpread.CodeDesign
     {
         /// <summary>
         /// GcNumberCellType をJSONシリアライズします。
-        /// DropDownCalculator, SubEditor, TouchToolBar はシリアライズを行いません。
+        /// SubEditor, TouchToolBar はシリアライズを行いません。
         /// </summary>
         /// <param name="cellType">GcNumberCellType オブジェクト。</param>
         /// <returns>シリアライズオブジェクト。</returns>
@@ -64,7 +64,7 @@ namespace Metroit.Win.GcSpread.CodeDesign
 
         /// <summary>
         /// GcNumberCellType をJSONデシリアライズします。
-        /// DropDownCalculator, SubEditor, TouchToolBar はデシリアライズを行いません。
+        /// SubEditor, TouchToolBar はデシリアライズを行いません。
         /// </summary>
         /// <param name="cellType">GcNumberCellType オブジェクト。</param>
         /// <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
