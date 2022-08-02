@@ -33,10 +33,7 @@ namespace Metroit.Win.GcSpread.CodeDesign
             result.Add(new JProperty(nameof(cellType.ClipContent), cellType.ClipContent));
             result.Add(new JProperty(nameof(cellType.DisplayFields), NumberDisplayFieldCollectionInfoConverter.Serialize(cellType.DisplayFields)));
             result.Add(new JProperty(nameof(cellType.DropDown), DropDownInfoConverter.Serialize(cellType.DropDown)));
-            
-            //result.Add(new JProperty(nameof(cellType.DropDownCalculator), Newtonsoft.Json.JsonConvert.SerializeObject(cellType.DropDownCalculator)));    // TODO
-            result.Add(new JProperty(nameof(cellType.DropDownCalculator), DropDownCalculatorInfoConverter.Serialize(cellType.DropDownCalculator)));    // TODO
-
+            result.Add(new JProperty(nameof(cellType.DropDownCalculator), DropDownCalculatorInfoConverter.Serialize(cellType.DropDownCalculator)));
             result.Add(new JProperty(nameof(cellType.EditMode), cellType.EditMode));
             result.Add(new JProperty(nameof(cellType.ExcelExportFormat), cellType.ExcelExportFormat));
             result.Add(new JProperty(nameof(cellType.ExitOnLastChar), cellType.ExitOnLastChar));
