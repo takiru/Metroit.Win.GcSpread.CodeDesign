@@ -145,7 +145,7 @@ namespace Metroit.Win.GcSpread.CodeDesign
             PrepareCompilation(sheetView);
 
             // ヘッダーを編集
-            var header = new ColumnHeaderConvert(sheetView);
+            var header = new ColumnHeaderSetupProvider(sheetView);
             header.SetupRows(layoutDefs.ColumnHeader.Rows);
             header.SetupCells(layoutDefs.ColumnHeader.Cells, columnHeaderCellTag);
 
@@ -204,7 +204,7 @@ namespace Metroit.Win.GcSpread.CodeDesign
             PrepareCompilation(sheetView);
 
             // ヘッダーを編集
-            var header = new ColumnHeaderConvert(sheetView);
+            var header = new ColumnHeaderSetupProvider(sheetView);
             header.SetupRows(layoutDefs.ColumnHeader.Rows);
             header.SetupCells(layoutDefs.ColumnHeader.Cells, columnHeaderCellTag);
 
@@ -297,7 +297,7 @@ namespace Metroit.Win.GcSpread.CodeDesign
                 ColumnHeader = new ColumnHeaderDefinitions()
             };
 
-            var header = new ColumnHeaderConvert(sheetView);
+            var header = new ColumnHeaderSetupProvider(sheetView);
 
             // ヘッダー行情報
             result.ColumnHeader.Rows = header.CreateRowDefinitions();

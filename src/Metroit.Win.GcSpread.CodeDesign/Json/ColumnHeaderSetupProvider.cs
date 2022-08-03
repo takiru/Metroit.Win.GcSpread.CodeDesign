@@ -5,13 +5,26 @@ using System.Linq;
 
 namespace Metroit.Win.GcSpread.CodeDesign.Json
 {
-    public class ColumnHeaderConvert
+    /// <summary>
+    /// ColumnHeader のセットアップ操作を提供します。
+    /// </summary>
+    public class ColumnHeaderSetupProvider
     {
+        /// <summary>
+        /// 列ヘッダーセルに自動付与される Tag の接頭辞。
+        /// </summary>
         private static readonly string HeaderCellTagPrefix = @"Header";
 
+        /// <summary>
+        /// 処理の対象となる SheetView。
+        /// </summary>
         private SheetView SheetView { get; }
 
-        public ColumnHeaderConvert(SheetView sheetView)
+        /// <summary>
+        /// 新しい ColumnHeaderSetupProvider インスタンスを生成します。
+        /// </summary>
+        /// <param name="sheetView">処理対象とする SheetView。</param>
+        public ColumnHeaderSetupProvider(SheetView sheetView)
         {
             SheetView = sheetView;
         }
@@ -20,9 +33,15 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// 列ヘッダー行定義から列ヘッダー行をセットアップします。
         /// 行は必ず1行目から追加されます。
         /// </summary>
-        /// <param name="columnHeaderDefs">列ヘッダー行定義オブジェクト。</param>
+        /// <param name="headerRowDefs">列ヘッダー行定義オブジェクト。</param>
+        /// <param name="templateLayoutDefsList">テンプレート定義オブジェクト。</param>
         public void SetupRows(HeaderRowDefinitions[] headerRowDefs, List<TemplateSheetViewDefinitions> templateLayoutDefsList = null)
         {
+            if (headerRowDefs == null)
+            {
+                return;
+            }
+
             SheetView.ColumnHeader.Rows.Add(0, headerRowDefs.Length);
             foreach (var row in headerRowDefs.Select((Item, Index) => new { Item, Index }))
             {
@@ -45,7 +64,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// 列ヘッダーセル定義から列ヘッダーセルをセットアップします。
         /// 列は必ず1列目から追加されます。
         /// </summary>
-        /// <param name="columnHeaderDefs">列ヘッダーセル定義オブジェクト。</param>
+        /// <param name="headerCellDefs">列ヘッダーセル定義オブジェクト。</param>
         /// <param name="cellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
         public void SetupCells(HeaderCellDefinitions[][] headerCellDefs, Func<Cell, object> cellTag = null)
         {
@@ -56,10 +75,16 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// 列ヘッダーセル定義から列ヘッダーセルをセットアップします。
         /// 列は必ず1列目から追加されます。
         /// </summary>
-        /// <param name="columnHeaderDefs">列ヘッダーセル定義オブジェクト。</param>
+        /// <param name="headerCellDefs">列ヘッダーセル定義オブジェクト。</param>
+        /// <param name="templateLayoutDefsList">テンプレート定義オブジェクト。</param>
         /// <param name="cellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
         public void SetupCells(HeaderCellDefinitions[][] headerCellDefs, List<TemplateSheetViewDefinitions> templateLayoutDefsList, Func<Cell, object> cellTag = null)
         {
+            if (headerCellDefs == null)
+            {
+                return;
+            }
+
             SheetView.ColumnHeader.Columns.Add(0, headerCellDefs.Max(x => x.Length));
             foreach (var cells in headerCellDefs.Select((Item, Index) => new { Item, Index }))
             {
@@ -94,11 +119,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// <summary>
         /// 列ヘッダースパン定義から列ヘッダーセルスパンを生成します。
         /// </summary>
-        /// <param name="spans">列ヘッダースパン定義オブジェクト。</param>
+        /// <param name="spanDefs">列ヘッダースパン定義オブジェクト。</param>
         /// <param name="columnMoveResults">列移動によって spans の定義情報と合致しない列情報。</param>
-        public void SetupSpans(SpanDefinitions[] spans, IList<ColumnMoveResult> columnMoveResults = null)
+        public void SetupSpans(SpanDefinitions[] spanDefs, IList<ColumnMoveResult> columnMoveResults = null)
         {
-            if (spans == null)
+            if (spanDefs == null)
             {
                 return;
             }
@@ -107,13 +132,13 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
 
             if (columnMoveResults == null)
             {
-                newSpans = spans;
+                newSpans = spanDefs;
             }
             else
             {
                 // 列移動情報がある場合は、オリジナルの列インデックスでマッピングして、移動後のインデックスでセル結合を行う
                 var spanList = new List<SpanDefinitions>();
-                foreach (var span in spans)
+                foreach (var span in spanDefs)
                 {
                     var columnMoveResult = columnMoveResults.Where(x => x.OriginalColumnIndex == span.Column).FirstOrDefault();
                     if (columnMoveResult == null)
@@ -227,8 +252,9 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// <summary>
         /// テンプレートから対象の列ヘッダー行定義テンプレートを取得する。
         /// </summary>
+        /// <param name="templateLayoutDefsList">テンプレート定義オブジェクト。</param>
         /// <param name="headerRowDefs">列ヘッダー行定義オブジェクト。</param>
-        /// <param name="targetTemplates">列ヘッダー行定義テンプレートオブジェクト。</param>
+        /// <param name="targetTemplates">対象となった列ヘッダー行定義オブジェクト。</param>
         private void ReadRowTemplates(List<TemplateSheetViewDefinitions> templateLayoutDefsList, HeaderRowDefinitions headerRowDefs, List<TemplateHeaderRowDefinitions> targetTemplates)
         {
             foreach (var templateLayoutDefs in templateLayoutDefsList)
@@ -249,8 +275,9 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// <summary>
         /// テンプレートから対象の列ヘッダーセル定義テンプレートを取得する。
         /// </summary>
+        /// <param name="templateLayoutDefsList">テンプレート定義オブジェクト。</param>
         /// <param name="headerCellDefs">列ヘッダーセル定義オブジェクト。</param>
-        /// <param name="targetTemplates">列ヘッダーセル定義テンプレートオブジェクト。</param>
+        /// <param name="targetTemplates">対象となった列ヘッダーセル定義オブジェクト。</param>
         private void ReadCellTemplates(List<TemplateSheetViewDefinitions> templateLayoutDefsList, HeaderCellDefinitions headerCellDefs, List<TemplateHeaderCellDefinitions> targetTemplates)
         {
             foreach (var templateLayoutDefs in templateLayoutDefsList)
