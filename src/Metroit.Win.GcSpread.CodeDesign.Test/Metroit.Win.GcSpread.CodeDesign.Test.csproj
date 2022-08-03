@@ -118,4 +118,9 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties template_1json__JsonSchema="" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

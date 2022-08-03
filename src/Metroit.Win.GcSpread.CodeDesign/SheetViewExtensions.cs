@@ -25,69 +25,153 @@ namespace Metroit.Win.GcSpread.CodeDesign
         /// 指定したJSONファイルでシートをバインドします。
         /// </summary>
         /// <param name="sheetView">SheetView オブジェクト。</param>
-        /// <param name="path">JSONファイルパス。</param>
+        /// <param name="layoutPath">JSONファイルパス。</param>
         /// <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
         /// <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
         /// <exception cref="InvalidOperationException"></exception>
-        public static void BindJsonLayout(this SheetView sheetView, string path,
-            string templateColumnsPath = "",
+        public static void BindJsonLayoutFrom(this SheetView sheetView, string layoutPath,
             Func<Cell, object> columnHeaderCellTag = null,
             Func<SheetView, SheetViewDefinitions, IList<ColumnMoveResult>> interceptor = null)
         {
-            var jsonObj = JsonConvert.DeserializeSheetView(File.ReadAllText(path));
-            TemplateColumnsDefinitions templateColumnsObj = null;
-            if (!string.IsNullOrEmpty(templateColumnsPath))
-            {
-                templateColumnsObj = Newtonsoft.Json.JsonConvert.DeserializeObject<TemplateColumnsDefinitions>(File.ReadAllText(templateColumnsPath));
-            }
-            BindJsonLayout(sheetView, jsonObj, templateColumnsObj, columnHeaderCellTag, interceptor);
+            BindJsonLayoutFrom(sheetView, layoutPath, string.Empty, columnHeaderCellTag, interceptor);
         }
 
         /// <summary>
-        /// 指定したJSONオブジェクトでシートをバインドします。
+        /// 指定したJSONファイルでシートをバインドします。
         /// </summary>
         /// <param name="sheetView">SheetView オブジェクト。</param>
-        /// <param name="jsonObj">バインドするJSONオブジェクト。</param>
-        /// <param name="templateColumnsObj">列テンプレートJSONオブジェクト。</param>
+        /// <param name="layoutPath">JSONファイルパス。</param>
+        /// <param name="templateLayoutPath">テンプレートJSONファイルパス。</param>
         /// <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
         /// <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
         /// <exception cref="InvalidOperationException"></exception>
-        public static void BindJsonLayout(this SheetView sheetView, SheetViewDefinitions jsonObj,
-            TemplateColumnsDefinitions templateColumnsObj = null,
+        public static void BindJsonLayoutFrom(this SheetView sheetView, string layoutPath,
+            string templateLayoutPath,
             Func<Cell, object> columnHeaderCellTag = null,
             Func<SheetView, SheetViewDefinitions, IList<ColumnMoveResult>> interceptor = null)
         {
+            BindJsonLayoutFrom(sheetView, layoutPath, new[] { templateLayoutPath }, columnHeaderCellTag, interceptor);
+        }
+
+        /// <summary>
+        /// 指定したJSONファイルでシートをバインドします。
+        /// </summary>
+        /// <param name="sheetView">SheetView オブジェクト。</param>
+        /// <param name="layoutPath">JSONファイルパス。</param>
+        /// <param name="templatePaths">テンプレートJSONファイルパス。</param>
+        /// <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
+        /// <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+        /// <exception cref="InvalidOperationException"></exception>
+        public static void BindJsonLayoutFrom(this SheetView sheetView, string layoutPath,
+            string[] templateLayoutPaths,
+            Func<Cell, object> columnHeaderCellTag = null,
+            Func<SheetView, SheetViewDefinitions, IList<ColumnMoveResult>> interceptor = null)
+        {
+            string layout = File.ReadAllText(layoutPath);
+            var templateLayouts = new List<string>();
+            if (templateLayoutPaths.Length > 0)
+            {
+                foreach (var templateLayoutPath in templateLayoutPaths)
+                {
+                    if (!string.IsNullOrEmpty(templateLayoutPath))
+                    {
+                        templateLayouts.Add(File.ReadAllText(templateLayoutPath));
+                    }
+                }
+            }
+            BindJsonLayout(sheetView, layout, templateLayouts.ToArray(), columnHeaderCellTag, interceptor);
+        }
+
+        /// <summary>
+        /// 指定したJSONテキストでシートをバインドします。
+        /// </summary>
+        /// <param name="sheetView">SheetView オブジェクト。</param>
+        /// <param name="layout">バインドするJSONテキスト。</param>
+        /// <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
+        /// <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+        /// <exception cref="InvalidOperationException"></exception>
+        public static void BindJsonLayout(this SheetView sheetView, string layout,
+            Func<Cell, object> columnHeaderCellTag = null,
+            Func<SheetView, SheetViewDefinitions, IList<ColumnMoveResult>> interceptor = null)
+        {
+            BindJsonLayout(sheetView, layout, string.Empty, columnHeaderCellTag, interceptor);
+        }
+
+        /// <summary>
+        /// 指定したJSONテキストでシートをバインドします。
+        /// </summary>
+        /// <param name="sheetView">SheetView オブジェクト。</param>
+        /// <param name="layout">バインドするJSONテキスト。</param>
+        /// <param name="templateLayout">テンプレートJSONテキスト。</param>
+        /// <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
+        /// <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+        /// <exception cref="InvalidOperationException"></exception>
+        public static void BindJsonLayout(this SheetView sheetView, string layout,
+            string templateLayout,
+            Func<Cell, object> columnHeaderCellTag = null,
+            Func<SheetView, SheetViewDefinitions, IList<ColumnMoveResult>> interceptor = null)
+        {
+            BindJsonLayout(sheetView, layout, new[] { templateLayout }, columnHeaderCellTag, interceptor);
+        }
+
+        /// <summary>
+        /// 指定したJSONテキストでシートをバインドします。
+        /// </summary>
+        /// <param name="sheetView">SheetView オブジェクト。</param>
+        /// <param name="layout">バインドするJSONテキスト。</param>
+        /// <param name="templateLayouts">テンプレートJSONテキスト。</param>
+        /// <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
+        /// <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+        /// <exception cref="InvalidOperationException"></exception>
+        public static void BindJsonLayout(this SheetView sheetView, string layout,
+            string[] templateLayouts,
+            Func<Cell, object> columnHeaderCellTag = null,
+            Func<SheetView, SheetViewDefinitions, IList<ColumnMoveResult>> interceptor = null)
+        {
+            var layoutDefs = Newtonsoft.Json.JsonConvert.DeserializeObject<SheetViewDefinitions>(layout);
+            var templateLayoutDefsList = new List<TemplateSheetViewDefinitions>();
+            if (templateLayouts.Length > 0)
+            {
+                foreach (var templateLayout in templateLayouts)
+                {
+                    if (!string.IsNullOrEmpty(templateLayout))
+                    {
+                        templateLayoutDefsList.Add(Newtonsoft.Json.JsonConvert.DeserializeObject<TemplateSheetViewDefinitions>(templateLayout));
+                    }
+                }
+            }
+
             // バインド準備
             PrepareCompilation(sheetView);
 
             // ヘッダーを編集
-            ComplieColumnHeader(sheetView, jsonObj.ColumnHeader, columnHeaderCellTag);
+            ComplieColumnHeader(sheetView, layoutDefs.ColumnHeader, templateLayoutDefsList, columnHeaderCellTag);
 
             // 列を編集
-            CompileColumns(sheetView, jsonObj, templateColumnsObj);
+            CompileColumns(sheetView, layoutDefs, templateLayoutDefsList);
 
             // JSONデータを超えて列移動やらタイトル変更やらを行いたい場合のインターセプター
-            var bindResults = interceptor?.Invoke(sheetView, jsonObj);
+            var bindResults = interceptor?.Invoke(sheetView, layoutDefs);
 
             // ヘッダースパンを編集
-            CompileColumnHeaderSpans(sheetView, jsonObj.ColumnHeader.Spans, bindResults);
+            CompileColumnHeaderSpans(sheetView, layoutDefs.ColumnHeader.Spans, bindResults);
         }
 
-        /// <summary>
-        /// 指定したJSONファイルでシートのヘッダー部のみをバインドします。
-        /// </summary>
-        /// <param name="sheetView">SheetView オブジェクト。</param>
-        /// <param name="path">JSONファイルパス。</param>
-        /// <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
-        /// <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-        /// <exception cref="InvalidOperationException"></exception>
-        public static void BindJsonLayoutWithoutColumns(this SheetView sheetView, string path,
-            Func<Cell, object> columnHeaderCellTag = null,
-            Func<SheetView, SheetViewDefinitions, IList<ColumnMoveResult>> interceptor = null)
-        {
-            var jsonObj = JsonConvert.DeserializeSheetView(File.ReadAllText(path));
-            BindJsonLayoutWithoutColumns(sheetView, jsonObj, columnHeaderCellTag, interceptor);
-        }
+        ///// <summary>
+        ///// 指定したJSONファイルでシートのヘッダー部のみをバインドします。
+        ///// </summary>
+        ///// <param name="sheetView">SheetView オブジェクト。</param>
+        ///// <param name="path">JSONファイルパス。</param>
+        ///// <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
+        ///// <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+        ///// <exception cref="InvalidOperationException"></exception>
+        //public static void BindJsonLayoutWithoutColumns(this SheetView sheetView, string layoutPath,
+        //    Func<Cell, object> columnHeaderCellTag = null,
+        //    Func<SheetView, SheetViewDefinitions, IList<ColumnMoveResult>> interceptor = null)
+        //{
+        //    var jsonObj = JsonConvert.DeserializeSheetView(File.ReadAllText(path));
+        //    BindJsonLayoutWithoutColumns(sheetView, jsonObj, columnHeaderCellTag, interceptor);
+        //}
 
         /// <summary>
         /// 指定したJSONオブジェクトでシートのヘッダー部のみをバインドします。
@@ -97,21 +181,34 @@ namespace Metroit.Win.GcSpread.CodeDesign
         /// <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
         /// <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
         /// <exception cref="InvalidOperationException"></exception>
-        public static void BindJsonLayoutWithoutColumns(this SheetView sheetView, SheetViewDefinitions jsonObj,
-            Func<Cell, object> columnHeaderCellTag = null,
+        public static void BindJsonLayoutWithoutColumns(this SheetView sheetView, string layout,
+            string[] templateLayouts, Func<Cell, object> columnHeaderCellTag = null,
             Func<SheetView, SheetViewDefinitions, IList<ColumnMoveResult>> interceptor = null)
         {
+            var layoutDefs = Newtonsoft.Json.JsonConvert.DeserializeObject<SheetViewDefinitions>(layout);
+            var templateLayoutDefsList = new List<TemplateSheetViewDefinitions>();
+            if (templateLayouts.Length > 0)
+            {
+                foreach (var templateLayout in templateLayouts)
+                {
+                    if (!string.IsNullOrEmpty(templateLayout))
+                    {
+                        templateLayoutDefsList.Add(Newtonsoft.Json.JsonConvert.DeserializeObject<TemplateSheetViewDefinitions>(templateLayout));
+                    }
+                }
+            }
+
             // バインド準備
             PrepareCompilation(sheetView);
 
             // ヘッダーを編集
-            ComplieColumnHeader(sheetView, jsonObj.ColumnHeader, columnHeaderCellTag);
+            ComplieColumnHeader(sheetView, layoutDefs.ColumnHeader, templateLayoutDefsList, columnHeaderCellTag);
 
             // JSONデータを超えて列移動やらタイトル変更やらを行いたい場合のインターセプター
-            var bindResults = interceptor?.Invoke(sheetView, jsonObj);
+            var bindResults = interceptor?.Invoke(sheetView, layoutDefs);
 
             // ヘッダースパンを編集
-            CompileColumnHeaderSpans(sheetView, jsonObj.ColumnHeader.Spans, bindResults);
+            CompileColumnHeaderSpans(sheetView, layoutDefs.ColumnHeader.Spans, bindResults);
         }
 
         /// <summary>
@@ -193,11 +290,14 @@ namespace Metroit.Win.GcSpread.CodeDesign
         {
             var result = new SheetViewDefinitions()
             {
-                ColumnHeader = new Json.ColumnHeaderDefinitions()
+                ColumnHeader = new ColumnHeaderDefinitions()
             };
 
-            // ヘッダー行/列情報
+            // ヘッダー行情報
             result.ColumnHeader.Rows = DecompileColumnHeaderRows(sheetView);
+
+            // ヘッダーセル情報
+            result.ColumnHeader.Cells = DecompileColumnHeaderCells(sheetView);
 
             // ヘッダースパン情報
             result.ColumnHeader.Spans = DecompileColumnHeaderSpans(sheetView);
@@ -293,56 +393,89 @@ namespace Metroit.Win.GcSpread.CodeDesign
             sheetView.Columns.Count = 0;
         }
 
+
+        private static void SetColumnHeaderRowProps(Row row, HeaderRowDefinitions headerRowDefs)
+        {
+            if (headerRowDefs.Height.HasValue)
+            {
+                row.Height = headerRowDefs.Height.Value;
+            }
+            if (headerRowDefs.HorizontalAlignment.HasValue)
+            {
+                row.HorizontalAlignment = headerRowDefs.HorizontalAlignment.Value;
+            }
+            if (headerRowDefs.VerticalAlignment.HasValue)
+            {
+                row.VerticalAlignment = headerRowDefs.VerticalAlignment.Value;
+            }
+        }
+
+        private static void SetColumnHeaderCellProps(Cell cell, HeaderCellDefinitions headerCellDefs)
+        {
+            if (!string.IsNullOrEmpty(headerCellDefs.Value))
+            {
+                cell.Value = headerCellDefs.Value;
+            }
+            if (headerCellDefs.HorizontalAlignment.HasValue)
+            {
+                cell.HorizontalAlignment = headerCellDefs.HorizontalAlignment.Value;
+            }
+            if (headerCellDefs.VerticalAlignment.HasValue)
+            {
+                cell.VerticalAlignment = headerCellDefs.VerticalAlignment.Value;
+            }
+        }
+
         /// <summary>
         /// ヘッダー情報をコンパイルする。
         /// </summary>
         /// <param name="sheetView">SheetView オブジェクト。</param>
         /// <param name="columnHeader">Json.ColumnHeader オブジェクト。</param>
         /// <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
-        private static void ComplieColumnHeader(SheetView sheetView, ColumnHeaderDefinitions columnHeader, Func<Cell, object> columnHeaderCellTag)
+        private static void ComplieColumnHeader(SheetView sheetView, ColumnHeaderDefinitions columnHeader, List<TemplateSheetViewDefinitions> templateLayoutDefsList, Func<Cell, object> columnHeaderCellTag)
         {
             const string headerTagPrefix = @"Header";
 
-            // ヘッダーの列・行を生成
-            sheetView.ColumnHeader.Columns.Add(0, columnHeader.Rows.Max(x => x.Columns.Length));
+            // 行の設定
             sheetView.ColumnHeader.Rows.Add(0, columnHeader.Rows.Length);
             foreach (var row in columnHeader.Rows.Select((Item, Index) => new { Item, Index }))
             {
-                if (row.Item.Height.HasValue)
+                // テンプレートから対象の列テンプレートを取得する
+                var targetTemplates = new List<TemplateHeaderRowDefinitions>();
+                GetTargetHeaderRowTemplates(templateLayoutDefsList, row.Item, targetTemplates);
+                // テンプレートヘッダー列の定義を反映
+                foreach (var targetTemplate in targetTemplates)
                 {
-                    sheetView.ColumnHeader.Rows[row.Index].Height = row.Item.Height.Value;
-                }
-                if (row.Item.HorizontalAlignment.HasValue)
-                {
-                    sheetView.ColumnHeader.Rows[row.Index].HorizontalAlignment = row.Item.HorizontalAlignment.Value;
-                }
-                if (row.Item.VerticalAlignment.HasValue)
-                {
-                    sheetView.ColumnHeader.Rows[row.Index].VerticalAlignment = row.Item.VerticalAlignment.Value;
+                    SetColumnHeaderRowProps(sheetView.ColumnHeader.Rows[row.Index], targetTemplate);
                 }
 
-                foreach (var column in row.Item.Columns.Select((Item, Index) => new { Item, Index }))
+                SetColumnHeaderRowProps(sheetView.ColumnHeader.Rows[row.Index], row.Item);
+            }
+
+            // 列・セルの設定
+            sheetView.ColumnHeader.Columns.Add(0, columnHeader.Cells.Max(x => x.Length));
+            foreach (var cells in columnHeader.Cells.Select((Item, Index) => new { Item, Index }))
+            {
+                foreach (var cell in cells.Item.Select((Item, Index) => new { Item, Index }))
                 {
+                    // テンプレートから対象のセルテンプレートを取得する
+                    var targetTemplates = new List<TemplateHeaderCellDefinitions>();
+                    GetTargetHeaderCellTemplates(templateLayoutDefsList, cell.Item, targetTemplates);
+                    // テンプレートヘッダー列の定義を反映
+                    foreach (var targetTemplate in targetTemplates)
+                    {
+                        SetColumnHeaderCellProps(sheetView.ColumnHeader.Cells[cells.Index, cell.Index], targetTemplate);
+                    }
+
+                    SetColumnHeaderCellProps(sheetView.ColumnHeader.Cells[cells.Index, cell.Index], cell.Item);
+
                     if (columnHeaderCellTag == null)
                     {
-                        sheetView.ColumnHeader.Cells[row.Index, column.Index].Tag = $"{headerTagPrefix}_{row.Index}_{column.Index}";
+                        sheetView.ColumnHeader.Cells[cells.Index, cell.Index].Tag = $"{headerTagPrefix}_{cells.Index}_{cell.Index}";
                     }
                     else
                     {
-                        sheetView.ColumnHeader.Cells[row.Index, column.Index].Tag = columnHeaderCellTag.Invoke(sheetView.ColumnHeader.Cells[row.Index, column.Index]);
-                    }
-
-                    if (!string.IsNullOrEmpty(column.Item.Value))
-                    {
-                        sheetView.ColumnHeader.Cells[row.Index, column.Index].Value = column.Item.Value;
-                    }
-                    if (column.Item.HorizontalAlignment.HasValue)
-                    {
-                        sheetView.ColumnHeader.Cells[row.Index, column.Index].HorizontalAlignment = column.Item.HorizontalAlignment.Value;
-                    }
-                    if (column.Item.VerticalAlignment.HasValue)
-                    {
-                        sheetView.ColumnHeader.Cells[row.Index, column.Index].VerticalAlignment = column.Item.VerticalAlignment.Value;
+                        sheetView.ColumnHeader.Cells[cells.Index, cell.Index].Tag = columnHeaderCellTag.Invoke(sheetView.ColumnHeader.Cells[cells.Index, cell.Index]);
                     }
                 }
             }
@@ -404,11 +537,80 @@ namespace Metroit.Win.GcSpread.CodeDesign
         }
 
         /// <summary>
+        /// 全テンプレート情報から対象のヘッダー行テンプレート情報を取得する。
+        /// </summary>
+        /// <param name="templateLayoutDefsList"></param>
+        /// <param name="columnDefinitions"></param>
+        /// <param name="targetTemplates"></param>
+        private static void GetTargetHeaderRowTemplates(List<TemplateSheetViewDefinitions> templateLayoutDefsList, HeaderRowDefinitions headerRowDefinitions, List<TemplateHeaderRowDefinitions> targetTemplates)
+        {
+            foreach (var templateLayoutDefs in templateLayoutDefsList)
+            {
+                var templateHeaderRowDefs = templateLayoutDefs.ColumnHeader.Rows.Where(x => x.TemplateName == headerRowDefinitions.BaseTemplate).FirstOrDefault();
+                if (templateHeaderRowDefs == null)
+                {
+                    continue;
+                }
+                if (!string.IsNullOrEmpty(templateHeaderRowDefs.TemplateName))
+                {
+                    GetTargetHeaderRowTemplates(templateLayoutDefsList, templateHeaderRowDefs, targetTemplates);
+                }
+                targetTemplates.Add(templateHeaderRowDefs);
+            }
+        }
+
+        /// <summary>
+        /// 全テンプレート情報から対象のヘッダーセルテンプレート情報を取得する。
+        /// </summary>
+        /// <param name="templateLayoutDefsList"></param>
+        /// <param name="columnDefinitions"></param>
+        /// <param name="targetTemplates"></param>
+        private static void GetTargetHeaderCellTemplates(List<TemplateSheetViewDefinitions> templateLayoutDefsList, HeaderCellDefinitions headerCellDefinitions, List<TemplateHeaderCellDefinitions> targetTemplates)
+        {
+            foreach (var templateLayoutDefs in templateLayoutDefsList)
+            {
+                var templateHeaderCellDefs = templateLayoutDefs.ColumnHeader.Cells.Where(x => x.TemplateName == headerCellDefinitions.BaseTemplate).FirstOrDefault();
+                if (templateHeaderCellDefs == null)
+                {
+                    continue;
+                }
+                if (!string.IsNullOrEmpty(templateHeaderCellDefs.TemplateName))
+                {
+                    GetTargetHeaderCellTemplates(templateLayoutDefsList, templateHeaderCellDefs, targetTemplates);
+                }
+                targetTemplates.Add(templateHeaderCellDefs);
+            }
+        }
+
+        /// <summary>
+        /// 全テンプレート情報から対象の列テンプレート情報を取得する。
+        /// </summary>
+        /// <param name="templateLayoutDefsList"></param>
+        /// <param name="columnDefinitions"></param>
+        /// <param name="targetTemplates"></param>
+        private static void GetTargetColumnTemplates(List<TemplateSheetViewDefinitions> templateLayoutDefsList, ColumnDefinitions columnDefinitions, List<TemplateColumnDefinitions> targetTemplates)
+        {
+            foreach (var templateLayoutDefs in templateLayoutDefsList)
+            {
+                var templateColumnDefs = templateLayoutDefs.Columns.Where(x => x.TemplateName == columnDefinitions.BaseTemplate).FirstOrDefault();
+                if (templateColumnDefs == null)
+                {
+                    continue;
+                }
+                if (!string.IsNullOrEmpty(templateColumnDefs.TemplateName))
+                {
+                    GetTargetColumnTemplates(templateLayoutDefsList, templateColumnDefs, targetTemplates);
+                }
+                targetTemplates.Add(templateColumnDefs);
+            }
+        }
+
+        /// <summary>
         /// 列情報をコンパイルする。
         /// </summary>
         /// <param name="sheetView">SheetView オブジェクト。</param>
         /// <param name="root">Root オブジェクト。</param>
-        private static void CompileColumns(SheetView sheetView, SheetViewDefinitions root, TemplateColumnsDefinitions templateColumnsDefinitions)
+        private static void CompileColumns(SheetView sheetView, SheetViewDefinitions root, List<TemplateSheetViewDefinitions> templateLayoutDefsList)
         {
             var columns = root.Columns;
             if (columns == null)
@@ -416,222 +618,217 @@ namespace Metroit.Win.GcSpread.CodeDesign
                 throw new ArgumentNullException("Columns");
             }
 
-            TemplateColumnDefinitions templateColumn = null;
-
             foreach (var column in columns.Select((Item, Index) => new { Item, Index }))
             {
-                templateColumn = null;
-                ICellType cellType;
-                switch (column.Item.CellType.ToLower())
-                {
-                    //case "textcelltype":
-                    //    cellType = new TextCellType();
-                    //    sheetView.Columns[column.Index].CellType = cellType;
-                    //    CompileTextCellType((TextCellType)cellType, column.Item.CellTypeProperties);
-                    //    break;
-
-                    //case "datetimecelltype":
-                    //    cellType = new DateTimeCellType();
-                    //    sheetView.Columns[column.Index].CellType = cellType;
-                    //    CompileDateTimeCellType((DateTimeCellType)cellType, column.Item.CellTypeProperties);
-                    //    break;
-
-                    //case "numbercelltype":
-                    //    cellType = new NumberCellType();
-                    //    sheetView.Columns[column.Index].CellType = cellType;
-                    //    CompileNumberCellType((NumberCellType)cellType, column.Item.CellTypeProperties);
-                    //    break;
-
-                    //case "comboboxcelltype":
-                    //    cellType = new ComboBoxCellType();
-                    //    sheetView.Columns[column.Index].CellType = cellType;
-                    //    CompileComboBoxCellType((ComboBoxCellType)cellType, column.Item.CellTypeProperties);
-                    //    break;
-
-                    //case "checkboxcelltype":
-                    //    cellType = new CheckBoxCellType();
-                    //    sheetView.Columns[column.Index].CellType = cellType;
-                    //    CompileCheckBoxCellType((CheckBoxCellType)cellType, column.Item.CellTypeProperties);
-                    //    break;
-
-                    //case "buttoncelltype":
-                    //    cellType = new ButtonCellType();
-                    //    sheetView.Columns[column.Index].CellType = cellType;
-                    //    CompileButtonCellType((ButtonCellType)cellType, column.Item.CellTypeProperties);
-                    //    break;
-
-                    //case "gctextboxcelltype":
-                    //    cellType = new GcTextBoxCellType();
-                    //    sheetView.Columns[column.Index].CellType = cellType;
-                    //    CompileGcTextBoxCellType((GcTextBoxCellType)cellType, column.Item.CellTypeProperties);
-                    //    break;
-
-                    //case "gcdatetimecelltype":
-                    //    cellType = new GcDateTimeCellType();
-                    //    sheetView.Columns[column.Index].CellType = cellType;
-                    //    CompileGcDateTimeCellType((GcDateTimeCellType)cellType, column.Item.CellTypeProperties);
-                    //    break;
-
-                    //case "gcnumbercelltype":
-                    //    cellType = new GcNumberCellType();
-                    //    sheetView.Columns[column.Index].CellType = cellType;
-                    //    CompileGcNumberCellType((GcNumberCellType)cellType, column.Item.CellTypeProperties);
-                    //    break;
-
-                    //case "gccomboboxcelltype":
-                    //    cellType = new GcComboBoxCellType();
-                    //    sheetView.Columns[column.Index].CellType = cellType;
-                    //    ((GcComboBoxCellType)cellType).DeserializeJson(Newtonsoft.Json.JsonConvert.SerializeObject(column.Item.CellTypeProps));
-                    //    break;
-                }
-
-                if (string.Compare(nameof(GcNumberCellType), column.Item.CellType, true) == 0)
-                {
-                    cellType = new GcNumberCellType();
-                    sheetView.Columns[column.Index].CellType = cellType;
-
-                    // テンプレートで名前が見つかったら、それさき設定する
-                    if (!string.IsNullOrEmpty(column.Item.TemplateName))
-                    {
-                        templateColumn = templateColumnsDefinitions.Columns.Where(x => x.TemplateName == column.Item.TemplateName).FirstOrDefault();
-                        if (templateColumn != null)
-                        {
-                            if (templateColumn.CellTypeProps != null)
-                            {
-                                ((GcNumberCellType)cellType).DeserializeJson(Newtonsoft.Json.JsonConvert.SerializeObject(templateColumn.CellTypeProps));
-                            }
-                        }
-                    }
-                    if (column.Item.CellTypeProps != null)
-                    {
-                        ((GcNumberCellType)cellType).DeserializeJson(Newtonsoft.Json.JsonConvert.SerializeObject(column.Item.CellTypeProps));
-                    }
-                }
-
-                if (string.Compare(nameof(GcComboBoxCellType), column.Item.CellType, true) == 0)
-                {
-                    cellType = new GcComboBoxCellType();
-                    sheetView.Columns[column.Index].CellType = cellType;
-                    ((GcComboBoxCellType)cellType).DeserializeJson(Newtonsoft.Json.JsonConvert.SerializeObject(column.Item.CellTypeProps));
-                }
-
+                // テンプレートから対象の列テンプレートを取得する
+                var targetTemplates = new List<TemplateColumnDefinitions>();
+                GetTargetColumnTemplates(templateLayoutDefsList, column.Item, targetTemplates);
 
                 // 列全体の定義を反映
-                if (root.AllColumn != null)
+                SetAllColumnProps(sheetView.Columns[column.Index], root.AllColumn);
+
+                // テンプレート列の定義を反映
+                foreach (var targetTemplate in targetTemplates)
                 {
-                    var allColumn = root.AllColumn;
-                    if (allColumn.AllowAutoFilter.HasValue)
-                    {
-                        sheetView.Columns[column.Index].AllowAutoFilter = allColumn.AllowAutoFilter.Value;
-                    }
-                    if (allColumn.AllowAutoSort.HasValue)
-                    {
-                        sheetView.Columns[column.Index].AllowAutoSort = allColumn.AllowAutoSort.Value;
-                    }
-                    if (allColumn.HorizontalAlignment.HasValue)
-                    {
-                        sheetView.Columns[column.Index].HorizontalAlignment = allColumn.HorizontalAlignment.Value;
-                    }
-                    if (allColumn.ImeMode.HasValue)
-                    {
-                        sheetView.Columns[column.Index].ImeMode = allColumn.ImeMode.Value;
-                    }
-                    if (allColumn.Locked.HasValue)
-                    {
-                        sheetView.Columns[column.Index].Locked = allColumn.Locked.Value;
-                    }
-                    if (allColumn.VerticalAlignment.HasValue)
-                    {
-                        sheetView.Columns[column.Index].VerticalAlignment = allColumn.VerticalAlignment.Value;
-                    }
-                    if (allColumn.Visible.HasValue)
-                    {
-                        sheetView.Columns[column.Index].Visible = allColumn.Visible.Value;
-                    }
-                    if (allColumn.Width.HasValue)
-                    {
-                        sheetView.Columns[column.Index].Width = allColumn.Width.Value;
-                    }
+                    SetColumnProps(sheetView, sheetView.Columns[column.Index], targetTemplate);
                 }
 
-                // テンプレート列の定義
-                if (templateColumn != null)
-                {
-                    if (templateColumn.AllowAutoFilter.HasValue)
-                    {
-                        sheetView.Columns[column.Index].AllowAutoFilter = templateColumn.AllowAutoFilter.Value;
-                    }
-                    if (templateColumn.AllowAutoSort.HasValue)
-                    {
-                        sheetView.Columns[column.Index].AllowAutoSort = templateColumn.AllowAutoSort.Value;
-                    }
-                    if (!string.IsNullOrEmpty(templateColumn.DataField))
-                    {
-                        sheetView.BindDataColumn(column.Index, templateColumn.DataField);
-                    }
-                    if (templateColumn.HorizontalAlignment.HasValue)
-                    {
-                        sheetView.Columns[column.Index].HorizontalAlignment = templateColumn.HorizontalAlignment.Value;
-                    }
-                    if (templateColumn.ImeMode.HasValue)
-                    {
-                        sheetView.Columns[column.Index].ImeMode = templateColumn.ImeMode.Value;
-                    }
-                    if (templateColumn.Locked.HasValue)
-                    {
-                        sheetView.Columns[column.Index].Locked = templateColumn.Locked.Value;
-                    }
-                    if (templateColumn.VerticalAlignment.HasValue)
-                    {
-                        sheetView.Columns[column.Index].VerticalAlignment = templateColumn.VerticalAlignment.Value;
-                    }
-                    if (templateColumn.Visible.HasValue)
-                    {
-                        sheetView.Columns[column.Index].Visible = templateColumn.Visible.Value;
-                    }
-                    if (templateColumn.Width.HasValue)
-                    {
-                        sheetView.Columns[column.Index].Width = templateColumn.Width.Value;
-                    }
-                }
+                // 列の定義を反映
+                SetColumnProps(sheetView, sheetView.Columns[column.Index], column.Item);
 
-                // 列の定義
-                if (column.Item.AllowAutoFilter.HasValue)
+                // セルタイプ定義を反映
+                ICellType cellType = CreateCellType(column.Item.CellType);
+                sheetView.Columns[column.Index].CellType = cellType;
+                if (cellType != null)
                 {
-                    sheetView.Columns[column.Index].AllowAutoFilter = column.Item.AllowAutoFilter.Value;
+                    foreach (var targetTemplate in targetTemplates)
+                    {
+                        if (targetTemplate.CellTypeProps == null)
+                        {
+                            continue;
+                        }
+                        cellType.DeserializeJson(Newtonsoft.Json.JsonConvert.SerializeObject(targetTemplate.CellTypeProps));
+                    }
+
+                    if (column.Item.CellTypeProps != null)
+                    {
+                        cellType.DeserializeJson(Newtonsoft.Json.JsonConvert.SerializeObject(column.Item.CellTypeProps));
+                    }
                 }
-                if (column.Item.AllowAutoSort.HasValue)
-                {
-                    sheetView.Columns[column.Index].AllowAutoSort = column.Item.AllowAutoSort.Value;
-                }
-                if (!string.IsNullOrEmpty(column.Item.DataField))
-                {
-                    sheetView.BindDataColumn(column.Index, column.Item.DataField);
-                }
-                if (column.Item.HorizontalAlignment.HasValue)
-                {
-                    sheetView.Columns[column.Index].HorizontalAlignment = column.Item.HorizontalAlignment.Value;
-                }
-                if (column.Item.ImeMode.HasValue)
-                {
-                    sheetView.Columns[column.Index].ImeMode = column.Item.ImeMode.Value;
-                }
-                if (column.Item.Locked.HasValue)
-                {
-                    sheetView.Columns[column.Index].Locked = column.Item.Locked.Value;
-                }
-                if (column.Item.VerticalAlignment.HasValue)
-                {
-                    sheetView.Columns[column.Index].VerticalAlignment = column.Item.VerticalAlignment.Value;
-                }
-                if (column.Item.Visible.HasValue)
-                {
-                    sheetView.Columns[column.Index].Visible = column.Item.Visible.Value;
-                }
-                if (column.Item.Width.HasValue)
-                {
-                    sheetView.Columns[column.Index].Width = column.Item.Width.Value;
-                }
+            }
+        }
+
+        private static ICellType CreateCellType(string cellTypeName)
+        {
+            //switch (column.Item.CellType.ToLower())
+            //{
+            //    //case "textcelltype":
+            //    //    cellType = new TextCellType();
+            //    //    sheetView.Columns[column.Index].CellType = cellType;
+            //    //    CompileTextCellType((TextCellType)cellType, column.Item.CellTypeProperties);
+            //    //    break;
+
+            //    //case "datetimecelltype":
+            //    //    cellType = new DateTimeCellType();
+            //    //    sheetView.Columns[column.Index].CellType = cellType;
+            //    //    CompileDateTimeCellType((DateTimeCellType)cellType, column.Item.CellTypeProperties);
+            //    //    break;
+
+            //    //case "numbercelltype":
+            //    //    cellType = new NumberCellType();
+            //    //    sheetView.Columns[column.Index].CellType = cellType;
+            //    //    CompileNumberCellType((NumberCellType)cellType, column.Item.CellTypeProperties);
+            //    //    break;
+
+            //    //case "comboboxcelltype":
+            //    //    cellType = new ComboBoxCellType();
+            //    //    sheetView.Columns[column.Index].CellType = cellType;
+            //    //    CompileComboBoxCellType((ComboBoxCellType)cellType, column.Item.CellTypeProperties);
+            //    //    break;
+
+            //    //case "checkboxcelltype":
+            //    //    cellType = new CheckBoxCellType();
+            //    //    sheetView.Columns[column.Index].CellType = cellType;
+            //    //    CompileCheckBoxCellType((CheckBoxCellType)cellType, column.Item.CellTypeProperties);
+            //    //    break;
+
+            //    //case "buttoncelltype":
+            //    //    cellType = new ButtonCellType();
+            //    //    sheetView.Columns[column.Index].CellType = cellType;
+            //    //    CompileButtonCellType((ButtonCellType)cellType, column.Item.CellTypeProperties);
+            //    //    break;
+
+            //    //case "gctextboxcelltype":
+            //    //    cellType = new GcTextBoxCellType();
+            //    //    sheetView.Columns[column.Index].CellType = cellType;
+            //    //    CompileGcTextBoxCellType((GcTextBoxCellType)cellType, column.Item.CellTypeProperties);
+            //    //    break;
+
+            //    //case "gcdatetimecelltype":
+            //    //    cellType = new GcDateTimeCellType();
+            //    //    sheetView.Columns[column.Index].CellType = cellType;
+            //    //    CompileGcDateTimeCellType((GcDateTimeCellType)cellType, column.Item.CellTypeProperties);
+            //    //    break;
+
+            //    //case "gcnumbercelltype":
+            //    //    cellType = new GcNumberCellType();
+            //    //    sheetView.Columns[column.Index].CellType = cellType;
+            //    //    CompileGcNumberCellType((GcNumberCellType)cellType, column.Item.CellTypeProperties);
+            //    //    break;
+
+            //    //case "gccomboboxcelltype":
+            //    //    cellType = new GcComboBoxCellType();
+            //    //    sheetView.Columns[column.Index].CellType = cellType;
+            //    //    ((GcComboBoxCellType)cellType).DeserializeJson(Newtonsoft.Json.JsonConvert.SerializeObject(column.Item.CellTypeProps));
+            //    //    break;
+            //}
+
+            if (string.Compare(cellTypeName, nameof(GcNumberCellType), true) == 0)
+            {
+                return new GcNumberCellType();
+            }
+            if (string.Compare(cellTypeName, nameof(GcComboBoxCellType), true) == 0)
+            {
+                return new GcComboBoxCellType();
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 列全体の定義を反映する。
+        /// </summary>
+        /// <param name="column"></param>
+        /// <param name="allColumnDefs"></param>
+        private static void SetAllColumnProps(Column column, AllColumnDefinitions allColumnDefs)
+        {
+            if (allColumnDefs == null)
+            {
+                return;
+            }
+
+            if (allColumnDefs.AllowAutoFilter.HasValue)
+            {
+                column.AllowAutoFilter = allColumnDefs.AllowAutoFilter.Value;
+            }
+            if (allColumnDefs.AllowAutoSort.HasValue)
+            {
+                column.AllowAutoSort = allColumnDefs.AllowAutoSort.Value;
+            }
+            if (allColumnDefs.HorizontalAlignment.HasValue)
+            {
+                column.HorizontalAlignment = allColumnDefs.HorizontalAlignment.Value;
+            }
+            if (allColumnDefs.ImeMode.HasValue)
+            {
+                column.ImeMode = allColumnDefs.ImeMode.Value;
+            }
+            if (allColumnDefs.Locked.HasValue)
+            {
+                column.Locked = allColumnDefs.Locked.Value;
+            }
+            if (allColumnDefs.VerticalAlignment.HasValue)
+            {
+                column.VerticalAlignment = allColumnDefs.VerticalAlignment.Value;
+            }
+            if (allColumnDefs.Visible.HasValue)
+            {
+                column.Visible = allColumnDefs.Visible.Value;
+            }
+            if (allColumnDefs.Width.HasValue)
+            {
+                column.Width = allColumnDefs.Width.Value;
+            }
+        }
+
+        /// <summary>
+        /// 列の定義を反映する。
+        /// </summary>
+        /// <param name="sheetView"></param>
+        /// <param name="column"></param>
+        /// <param name="columnDefs"></param>
+        private static void SetColumnProps(SheetView sheetView, Column column, ColumnDefinitions columnDefs)
+        {
+            if (columnDefs == null)
+            {
+                return;
+            }
+
+            if (columnDefs.AllowAutoFilter.HasValue)
+            {
+                column.AllowAutoFilter = columnDefs.AllowAutoFilter.Value;
+            }
+            if (columnDefs.AllowAutoSort.HasValue)
+            {
+                column.AllowAutoSort = columnDefs.AllowAutoSort.Value;
+            }
+            if (!string.IsNullOrEmpty(columnDefs.DataField))
+            {
+                sheetView.BindDataColumn(column.Index, columnDefs.DataField);
+            }
+            if (columnDefs.HorizontalAlignment.HasValue)
+            {
+                column.HorizontalAlignment = columnDefs.HorizontalAlignment.Value;
+            }
+            if (columnDefs.ImeMode.HasValue)
+            {
+                column.ImeMode = columnDefs.ImeMode.Value;
+            }
+            if (columnDefs.Locked.HasValue)
+            {
+                column.Locked = columnDefs.Locked.Value;
+            }
+            if (columnDefs.VerticalAlignment.HasValue)
+            {
+                column.VerticalAlignment = columnDefs.VerticalAlignment.Value;
+            }
+            if (columnDefs.Visible.HasValue)
+            {
+                column.Visible = columnDefs.Visible.Value;
+            }
+            if (columnDefs.Width.HasValue)
+            {
+                column.Width = columnDefs.Width.Value;
             }
         }
 
@@ -1630,20 +1827,35 @@ namespace Metroit.Win.GcSpread.CodeDesign
                     VerticalAlignment = row.VerticalAlignment
                 };
 
-                var headerColumns = new List<HeaderColumnDefinitions>();
-                foreach (Column column in sheetView.ColumnHeader.Columns)
-                {
-                    var headerColumn = new HeaderColumnDefinitions();
-                    headerColumn.Value = sheetView.ColumnHeader.Cells[row.Index, column.Index].Value?.ToString();
-                    headerColumn.HorizontalAlignment = sheetView.ColumnHeader.Cells[row.Index, column.Index].HorizontalAlignment;
-                    headerColumn.VerticalAlignment = sheetView.ColumnHeader.Cells[row.Index, column.Index].VerticalAlignment;
-                    headerColumns.Add(headerColumn);
-                }
-                headerRow.Columns = headerColumns.ToArray();
                 headerRows.Add(headerRow);
             }
 
             return headerRows.ToArray();
+        }
+
+        /// <summary>
+        /// 現在のシートからヘッダーセル情報を逆コンパイルする。
+        /// </summary>
+        /// <param name="sheetView">SheetView オブジェクト。</param>
+        /// <returns>HeaderCellDefinitions[][] オブジェクト。</returns>
+        private static HeaderCellDefinitions[][] DecompileColumnHeaderCells(SheetView sheetView)
+        {
+            var allCells = new List<HeaderCellDefinitions[]>();
+            foreach (Row row in sheetView.ColumnHeader.Rows)
+            {
+                var cells = new List<HeaderCellDefinitions>();
+                foreach (Column column in sheetView.ColumnHeader.Columns)
+                {
+                    var cell = new HeaderCellDefinitions();
+                    cell.Value = sheetView.ColumnHeader.Cells[row.Index, column.Index].Value?.ToString();
+                    cell.HorizontalAlignment = sheetView.ColumnHeader.Cells[row.Index, column.Index].HorizontalAlignment;
+                    cell.VerticalAlignment = sheetView.ColumnHeader.Cells[row.Index, column.Index].VerticalAlignment;
+                    cells.Add(cell);
+                }
+                allCells.Add(cells.ToArray());
+            }
+
+            return allCells.ToArray();
         }
 
         /// <summary>

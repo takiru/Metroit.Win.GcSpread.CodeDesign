@@ -53,6 +53,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         //         LineWidth: 読み取り専用でデシリアライズできないため。
         public static Line Deserialize(JToken prop, Line source)
         {
+            if (prop.ToObject<object>() == null && source == null)
+            {
+                return null;
+            }
+
             var result = new Line();
             if (source != null)
             {

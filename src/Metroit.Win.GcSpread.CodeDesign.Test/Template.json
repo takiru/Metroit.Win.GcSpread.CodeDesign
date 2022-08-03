@@ -1,14 +1,37 @@
 ﻿{
+  "ColumnHeader": {
+    "Rows": [
+      {
+        "TemplateName": "DefaultRow",
+        "Height": 40,
+        "HorizontalAlignment": "Right",
+        "VerticalAlignment": "Bottom"
+      }
+    ],
+    "Cells": [
+      {
+        "TemplateName": "DefaultCell",
+        "Value": "タイトル6",
+        "HorizontalAlignment": "Left",
+        "VerticalAlignment": "Bottom"
+      }
+    ]
+  },
   // 列の設定
   "Columns": [
     {
-      "TemplateName": "NumberTemplate",
+      "TemplateName": "BaseNumberTemplate",
       "HorizontalAlignment": "Right",
       "VerticalAlignment": "Bottom",
       "AllowAutoFilter": false,
       "AllowAutoSort": false,
       "Width": 150,
       "Visible": true,
+      "CellType": "GcNumberCellType"
+    },
+    {
+      "TemplateName": "NumberTemplate",
+      "BaseTemplate": "BaseNumberTemplate",
       "CellType": "GcNumberCellType",
       "CellTypeProps": {
         "AcceptsArrowKeys": 3,

@@ -44,14 +44,9 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
                 new ListItem() { Column1 = DateTime.Today, Column2=123, Column3="Row3", Column4="item3", Column5="ccc", Column6="zzz", Column7=1 }
             };
 
-            // JSONからレイアウトオブジェクトを取得
-            var json = SampleRex.SampleJson;
-            var root = JsonConvert.DeserializeSheetView(json);
-            var template = JsonConvert.DeserializeTemplateColumns(SampleRex.Template);
-
             // レイアウトオブジェクトからレイアウトをバインドする
-            fpSpread1.ActiveSheet.BindJsonLayout(root,
-                template,
+            fpSpread1.ActiveSheet.BindJsonLayout(SampleRex.SampleJson,
+                SampleRex.Template,
                 null,
                 (sheet, root2) =>
                 {
@@ -123,8 +118,8 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             cellType.ListGridLines.VerticalLines.Style = LineStyle.None;
 
             cellType.ListHeaderPane.Visible = false;    // ヘッダー列名を表示しない
-            cellType.DropDown.AutoWidth = true; // 列非表示に伴い、幅調整されるようにする
-            cellType.DropDown.AllowResize = false;  // ユーザーによってドロップダウンのサイズを変更することを許可しない
+            //cellType.DropDown.AutoWidth = true; // 列非表示に伴い、幅調整されるようにする
+            //cellType.DropDown.AllowResize = false;  // ユーザーによってドロップダウンのサイズを変更することを許可しない
             cellType.UseCompatibleDrawing = true;   // ドロップダウンを開いているときに入力エリア部分が灰色にならないようにする
 
             cellType.AutoGenerateColumns = true;
@@ -137,7 +132,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             cellType.ListDefaultColumn.Visible = false; // 何もリスト表示しない状態をデフォルトにする
             cellType.ListColumns.Cast<ListColumnInfo>().Where(x => x.DataPropertyName == "Display").First().Visible = true;  // 表示したい列だけ表示する
 
-            cellType.ListItemTemplates.Add(new ItemTemplateInfo() { AutoItemHeight = false, BackColor = Color.Red, Font = new Font(FontFamily.GenericSansSerif, 10), Height = 20, Image = Image.FromFile(@"C:\App\sample.png") });
+            //cellType.ListItemTemplates.Add(new ItemTemplateInfo() { AutoItemHeight = false, BackColor = Color.Red, Font = new Font(FontFamily.GenericSansSerif, 10), Height = 20, Image = Image.FromFile(@"C:\App\sample.png") });
             cellType.BackgroundImage = new FarPoint.Win.Picture(Image.FromFile(@"C:\App\sample.png"));
 
             fpSpread1.ActiveSheet.DataSource = dataSource;

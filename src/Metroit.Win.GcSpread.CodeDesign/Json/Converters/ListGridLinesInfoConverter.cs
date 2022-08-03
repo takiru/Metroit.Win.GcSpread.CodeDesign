@@ -46,6 +46,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// <returns>ListGridLinesInfo オブジェクト。</returns>
         public static ListGridLinesInfo Deserialize(JToken prop, ListGridLinesInfo source)
         {
+            if (prop.ToObject<object>() == null && source == null)
+            {
+                return null;
+            }
+
             var result = new ListGridLinesInfo();
             if (source != null)
             {

@@ -108,7 +108,7 @@ namespace Metroit.Win.GcSpread.CodeDesign
                 }
                 if (string.Compare(prop.Key, nameof(GcNumberCellType.BackgroundImage), true) == 0)
                 {
-                    PictureConverter.Deserialize(prop.Value, cellType.BackgroundImage);
+                    cellType.BackgroundImage = PictureConverter.Deserialize(prop.Value, cellType.BackgroundImage);
                     continue;
                 }
                 if (string.Compare(prop.Key, nameof(GcNumberCellType.ClipContent), true) == 0)

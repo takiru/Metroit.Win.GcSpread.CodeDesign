@@ -11,10 +11,10 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
     public class ColumnDefinitions
     {
         /// <summary>
-        /// テンプレート名を取得または設定します。
+        /// 利用するテンプレート名を取得または設定します。
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string TemplateName { get; set; }
+        public string BaseTemplate { get; set; }
 
         /// <summary>
         /// データバインドするフィールド名を取得または設定します。
@@ -60,7 +60,6 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
 
         /// <summary>
         /// セルタイプを取得または設定します。
-        /// TextCellType, DateTimeCellType, NumberCellType, ComboBoxCellType をサポートします。
         /// </summary>
         [JsonProperty(Required = Required.Always)]
         public string CellType { get; set; }
@@ -70,7 +69,6 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// サポートするプロパティはセルタイプによって異なります。
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        //public Dictionary<string, object> CellTypeProperties { get; set; }
         public object CellTypeProps { get; set; }
 
         /// <summary>

@@ -47,6 +47,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// <returns>AlternateTextInfo オブジェクト。</returns>
         public static AlternateTextInfo Deserialize(JToken prop, AlternateTextInfo source)
         {
+            if (prop.ToObject<object>() == null && source == null)
+            {
+                return null;
+            }
+
             var result = new AlternateTextInfo();
             if (source != null)
             {

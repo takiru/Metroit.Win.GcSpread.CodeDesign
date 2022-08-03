@@ -51,6 +51,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// <returns>DefaultSubItemInfo オブジェクト。</returns>
         public static DefaultSubItemInfo Deserialize(JToken prop, DefaultSubItemInfo source)
         {
+            if (prop.ToObject<object>() == null && source == null)
+            {
+                return null;
+            }
+
             var result = new DefaultSubItemInfo();
             if (source != null)
             {

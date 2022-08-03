@@ -4,85 +4,77 @@
     // HorizontalAlignment, VerticalAlignment を指定すると、Columnsより強い
     "Rows": [
       {
-        "RowProperties": {
-          "Height": 40,
-          "HorizontalAlignment": "Left",
-          "VerticalAlignment": "Bottom"
-        },
-        // 列の設定
-        "Columns": [
-          {
-            "Value": "タイトル3",
-            "HorizontalAlignment": "Right",
-            "VerticalAlignment": "Top"
-          },
-          {
-            "Value": "タイトル6",
-            "HorizontalAlignment": "Left",
-            "VerticalAlignment": "Bottom"
-          },
-          {
-            "Value": "タイトル1",
-            "HorizontalAlignment": "Right",
-            "VerticalAlignment": "Top"
-          },
-          {
-            "Value": "タイトル2",
-            "HorizontalAlignment": "Center",
-            "VerticalAlignment": "Bottom"
-          },
-          {
-            "Value": "タイトル4",
-            "HorizontalAlignment": "Left",
-            "VerticalAlignment": "Bottom"
-          },
-          {
-            "Value": "タイトル5",
-            "HorizontalAlignment": "Left",
-            "VerticalAlignment": "Bottom"
-          },
-          {
-            "Value": "チェックボックス",
-            "HorizontalAlignment": "Left",
-            "VerticalAlignment": "Bottom"
-          },
-          {
-            "Value": "GcTextBoxCellType",
-            "HorizontalAlignment": "Left",
-            "VerticalAlignment": "Bottom"
-          },
-          {
-            "Value": "GcNumberCellType",
-            "HorizontalAlignment": "Left",
-            "VerticalAlignment": "Bottom"
-          },
-          {
-            "Value": "GcDateTimeCellType",
-            "HorizontalAlignment": "Left",
-            "VerticalAlignment": "Bottom"
-          },
-          {
-            "Value": "GcComboBoxCellType",
-            "HorizontalAlignment": "Left",
-            "VerticalAlignment": "Bottom"
-          }
-        ]
+        "BaseTemplate": "DefaultRow"
       },
       {
-        "RowProperties": {
-          "Height": 20,
+        "Height": 20,
+        "HorizontalAlignment": "Left",
+        "VerticalAlignment": "Bottom"
+      }
+    ],
+    "Cells": [
+      [
+        {
+          "Value": "タイトル3",
+          "HorizontalAlignment": "Right",
+          "VerticalAlignment": "Top"
+        },
+        {
+          "BaseTemplate": "DefaultCell"
+        },
+        {
+          "Value": "タイトル1",
+          "HorizontalAlignment": "Right",
+          "VerticalAlignment": "Top"
+        },
+        {
+          "Value": "タイトル2",
+          "HorizontalAlignment": "Center",
+          "VerticalAlignment": "Bottom"
+        },
+        {
+          "Value": "タイトル4",
           "HorizontalAlignment": "Left",
           "VerticalAlignment": "Bottom"
         },
-        // 列の設定
-        "Columns": [
-          {
-            "Value": "タイトル3-2",
-            "HorizontalAlignment": "Left",
-            "VerticalAlignment": "Bottom"
-          }
-        ]
-      }
+        {
+          "Value": "タイトル5",
+          "HorizontalAlignment": "Left",
+          "VerticalAlignment": "Bottom"
+        },
+        {
+          "Value": "チェックボックス",
+          "HorizontalAlignment": "Left",
+          "VerticalAlignment": "Bottom"
+        },
+        {
+          "Value": "GcTextBoxCellType",
+          "HorizontalAlignment": "Left",
+          "VerticalAlignment": "Bottom"
+        },
+        {
+          "Value": "GcNumberCellType",
+          "HorizontalAlignment": "Left",
+          "VerticalAlignment": "Bottom"
+        },
+        {
+          "Value": "GcDateTimeCellType",
+          "HorizontalAlignment": "Left",
+          "VerticalAlignment": "Bottom"
+        },
+        {
+          "Value": "GcComboBoxCellType",
+          "HorizontalAlignment": "Left",
+          "VerticalAlignment": "Bottom"
+        }
+      ],
+      [
+        {
+          "Value": "タイトル3-2",
+          "HorizontalAlignment": "Left",
+          "VerticalAlignment": "Bottom"
+        }
+      ]
     ],
     // 結合の設定
     "Spans": [
@@ -297,7 +289,7 @@
       }
     },
     {
-      "TemplateName": "NumberTemplate",
+      "BaseTemplate": "NumberTemplate",
       "CellType": "GcNumberCellType"
     },
     {
@@ -595,7 +587,21 @@
         },
         "ListItemTemplates": [
           {
-            "AutoItemHeight": false,
+            "AutoItemHeight": true,
+            "BackColor": "Green",
+            "Font": {
+              "Name": "Meiryo",
+              "Size": 15.0,
+              "Style": 0
+            },
+            "ForeColor": "buttontext",
+            "GradientEffect": null,
+            "Height": 20,
+            "Image": "iVBORw0KGgoAAAANSUhEUgAAAFYAAABGCAIAAADZ4vQ7AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAM1JREFUeF7t1EEKhDAQRUEv7128ZeaDPQMJDuLSpN7OhoBdRLe2fAgQXBIcx7Hvez0s0AVB9t+2hW6HD+GOINdhpmqrvnE6/Ajq6CzVVn3j9PcjOC3Ok9N07jh0PU3z7Z9qt76/BGd1dJZqq75nBDV9T/Xe32rahwABgoQAAYKEAAGChAABgoQAAYKEAAGChAABgoQAAYKEAAGChAABgoQAAYKEAAGChAABgoQAAYKE4CHB26ut+hAgQJAQ3BGsEAIECBICBAgSAgQIWmsftaMDcETzd5cAAAAASUVORK5CYII=",
+            "Indent": 0
+          },
+          {
+            "AutoItemHeight": true,
             "BackColor": "Red",
             "Font": {
               "Name": "Microsoft Sans Serif",

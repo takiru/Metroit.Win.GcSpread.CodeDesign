@@ -49,6 +49,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// <returns>GradientEffect オブジェクト。</returns>
         public static GradientEffect Deserialize(JToken prop, GradientEffect source)
         {
+            if (prop.ToObject<object>() == null && source == null)
+            {
+                return null;
+            }
+
             var result = new GradientEffect();
             if (source != null)
             {

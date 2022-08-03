@@ -55,6 +55,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// <returns>Picture オブジェクト。</returns>
         public static Picture Deserialize(JToken prop, Picture source)
         {
+            if (prop.ToObject<object>() == null && source == null)
+            {
+                return null;
+            }
+
             var result = new Picture();
             if (source != null)
             {

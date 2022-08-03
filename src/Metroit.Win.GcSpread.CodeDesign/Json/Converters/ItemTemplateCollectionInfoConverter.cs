@@ -68,6 +68,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// <returns>ItemTemplateCollectionInfo オブジェクト。</returns>
         public static ItemTemplateCollectionInfo Deserialize(JArray props, ItemTemplateCollectionInfo source)
         {
+            if (props.ToObject<object>() == null && source == null)
+            {
+                return null;
+            }
+
             var result = new ItemTemplateCollectionInfo();
             foreach (ItemTemplateInfo iti in source)
             {

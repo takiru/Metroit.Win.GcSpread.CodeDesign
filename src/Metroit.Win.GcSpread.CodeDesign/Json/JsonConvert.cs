@@ -22,7 +22,7 @@
         /// <returns>SheetViewRootJson オブジェクト。</returns>
         public static SheetViewDefinitions DeserializeSheetView(string json)
         {
-            return  Newtonsoft.Json.JsonConvert.DeserializeObject<SheetViewDefinitions>(json);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<SheetViewDefinitions>(json);
         }
 
         /// <summary>
@@ -63,16 +63,6 @@
         public static SpecialColumnsDefinitions DeserializeSpecialColumn(string json)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<SpecialColumnsDefinitions>(json);
-        }
-
-        /// <summary>
-        /// テンプレート列の定義情報 TemplateColumnsDefinitions にデシリアライズします。
-        /// </summary>
-        /// <param name="json">JSONデータ文字列。</param>
-        /// <returns>TemplateColumnsDefinitions オブジェクト。</returns>
-        public static TemplateColumnsDefinitions DeserializeTemplateColumns(string json)
-        {
-            return  Newtonsoft.Json.JsonConvert.DeserializeObject<TemplateColumnsDefinitions>(json);
         }
     }
 }

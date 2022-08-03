@@ -52,6 +52,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// <returns>DefaultListColumnInfo オブジェクト。</returns>
         public static DefaultListColumnInfo Deserialize(JToken prop, DefaultListColumnInfo source)
         {
+            if (prop.ToObject<object>() == null && source == null)
+            {
+                return null;
+            }
+
             var result = new DefaultListColumnInfo();
             if (source != null)
             {

@@ -58,6 +58,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// <returns>ListHeaderInfo オブジェクト。</returns>
         public static ListHeaderInfo Deserialize(JToken prop, ListHeaderInfo source)
         {
+            if (prop.ToObject<object>() == null && source == null)
+            {
+                return null;
+            }
+
             var result = new ListHeaderInfo();
             if (source != null)
             {

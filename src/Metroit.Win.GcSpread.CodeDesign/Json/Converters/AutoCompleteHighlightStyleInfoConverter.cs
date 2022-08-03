@@ -48,6 +48,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// <returns>AutoCompleteHighlightStyleInfo オブジェクト。</returns>
         public static AutoCompleteHighlightStyleInfo Deserialize(JToken prop, AutoCompleteHighlightStyleInfo source)
         {
+            if (prop.ToObject<object>() == null && source == null)
+            {
+                return null;
+            }
+
             var result = new AutoCompleteHighlightStyleInfo();
             if (source != null)
             {

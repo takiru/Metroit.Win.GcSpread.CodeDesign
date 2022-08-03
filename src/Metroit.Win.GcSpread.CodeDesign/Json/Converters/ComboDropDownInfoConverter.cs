@@ -68,12 +68,6 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
                 comboDropDownInfo.AutoHideTouchKeyboard = autoHideTouchKeyboard.ToObject<AutoHideTouchKeyboard>();
             }
 
-            var autoWidth = prop.SelectToken(nameof(ComboDropDownInfo.AutoWidth));
-            if (autoWidth != null)
-            {
-                comboDropDownInfo.AutoWidth = autoWidth.ToObject<bool>();
-            }
-
             var closingAnimation = prop.SelectToken(nameof(ComboDropDownInfo.ClosingAnimation));
             if (closingAnimation != null)
             {
@@ -108,6 +102,13 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
             if (width != null)
             {
                 comboDropDownInfo.Width = width.ToObject<int>();
+            }
+
+            // NOTE: Width より後に設定しないと自動調整が効かない
+            var autoWidth = prop.SelectToken(nameof(ComboDropDownInfo.AutoWidth));
+            if (autoWidth != null)
+            {
+                comboDropDownInfo.AutoWidth = autoWidth.ToObject<bool>();
             }
         }
     }

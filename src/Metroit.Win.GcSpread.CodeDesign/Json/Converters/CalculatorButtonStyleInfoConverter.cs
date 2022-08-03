@@ -48,6 +48,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// <returns>CalculatorButtonStyleInfo オブジェクト。</returns>
         public static CalculatorButtonStyleInfo Deserialize(JToken prop, CalculatorButtonStyleInfo source)
         {
+            if (prop.ToObject<object>() == null && source == null)
+            {
+                return null;
+            }
+
             var result = new CalculatorButtonStyleInfo();
             if (source == null)
             {
