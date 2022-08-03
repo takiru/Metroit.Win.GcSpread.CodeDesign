@@ -145,7 +145,9 @@ namespace Metroit.Win.GcSpread.CodeDesign
             PrepareCompilation(sheetView);
 
             // ヘッダーを編集
-            ComplieColumnHeader(sheetView, layoutDefs.ColumnHeader, templateLayoutDefsList, columnHeaderCellTag);
+            var header = new ColumnHeaderConvert(sheetView);
+            header.SetupRows(layoutDefs.ColumnHeader.Rows);
+            header.SetupCells(layoutDefs.ColumnHeader.Cells, columnHeaderCellTag);
 
             // 列を編集
             CompileColumns(sheetView, layoutDefs, templateLayoutDefsList);
@@ -154,7 +156,7 @@ namespace Metroit.Win.GcSpread.CodeDesign
             var bindResults = interceptor?.Invoke(sheetView, layoutDefs);
 
             // ヘッダースパンを編集
-            CompileColumnHeaderSpans(sheetView, layoutDefs.ColumnHeader.Spans, bindResults);
+            header.SetupSpans(layoutDefs.ColumnHeader.Spans, bindResults);
         }
 
         ///// <summary>
@@ -202,13 +204,15 @@ namespace Metroit.Win.GcSpread.CodeDesign
             PrepareCompilation(sheetView);
 
             // ヘッダーを編集
-            ComplieColumnHeader(sheetView, layoutDefs.ColumnHeader, templateLayoutDefsList, columnHeaderCellTag);
+            var header = new ColumnHeaderConvert(sheetView);
+            header.SetupRows(layoutDefs.ColumnHeader.Rows);
+            header.SetupCells(layoutDefs.ColumnHeader.Cells, columnHeaderCellTag);
 
             // JSONデータを超えて列移動やらタイトル変更やらを行いたい場合のインターセプター
             var bindResults = interceptor?.Invoke(sheetView, layoutDefs);
 
             // ヘッダースパンを編集
-            CompileColumnHeaderSpans(sheetView, layoutDefs.ColumnHeader.Spans, bindResults);
+            header.SetupSpans(layoutDefs.ColumnHeader.Spans, bindResults);
         }
 
         /// <summary>
@@ -293,14 +297,16 @@ namespace Metroit.Win.GcSpread.CodeDesign
                 ColumnHeader = new ColumnHeaderDefinitions()
             };
 
+            var header = new ColumnHeaderConvert(sheetView);
+
             // ヘッダー行情報
-            result.ColumnHeader.Rows = DecompileColumnHeaderRows(sheetView);
+            result.ColumnHeader.Rows = header.CreateRowDefinitions();
 
             // ヘッダーセル情報
-            result.ColumnHeader.Cells = DecompileColumnHeaderCells(sheetView);
+            result.ColumnHeader.Cells = header.CreateCellDefinitions();
 
             // ヘッダースパン情報
-            result.ColumnHeader.Spans = DecompileColumnHeaderSpans(sheetView);
+            result.ColumnHeader.Spans = header.CreateSpanDefinitions();
 
             // 列情報
             result.Columns = DecompileColumns(sheetView, columnOptions);
@@ -423,116 +429,6 @@ namespace Metroit.Win.GcSpread.CodeDesign
             if (headerCellDefs.VerticalAlignment.HasValue)
             {
                 cell.VerticalAlignment = headerCellDefs.VerticalAlignment.Value;
-            }
-        }
-
-        /// <summary>
-        /// ヘッダー情報をコンパイルする。
-        /// </summary>
-        /// <param name="sheetView">SheetView オブジェクト。</param>
-        /// <param name="columnHeader">Json.ColumnHeader オブジェクト。</param>
-        /// <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
-        private static void ComplieColumnHeader(SheetView sheetView, ColumnHeaderDefinitions columnHeader, List<TemplateSheetViewDefinitions> templateLayoutDefsList, Func<Cell, object> columnHeaderCellTag)
-        {
-            const string headerTagPrefix = @"Header";
-
-            // 行の設定
-            sheetView.ColumnHeader.Rows.Add(0, columnHeader.Rows.Length);
-            foreach (var row in columnHeader.Rows.Select((Item, Index) => new { Item, Index }))
-            {
-                // テンプレートから対象の列テンプレートを取得する
-                var targetTemplates = new List<TemplateHeaderRowDefinitions>();
-                GetTargetHeaderRowTemplates(templateLayoutDefsList, row.Item, targetTemplates);
-                // テンプレートヘッダー列の定義を反映
-                foreach (var targetTemplate in targetTemplates)
-                {
-                    SetColumnHeaderRowProps(sheetView.ColumnHeader.Rows[row.Index], targetTemplate);
-                }
-
-                SetColumnHeaderRowProps(sheetView.ColumnHeader.Rows[row.Index], row.Item);
-            }
-
-            // 列・セルの設定
-            sheetView.ColumnHeader.Columns.Add(0, columnHeader.Cells.Max(x => x.Length));
-            foreach (var cells in columnHeader.Cells.Select((Item, Index) => new { Item, Index }))
-            {
-                foreach (var cell in cells.Item.Select((Item, Index) => new { Item, Index }))
-                {
-                    // テンプレートから対象のセルテンプレートを取得する
-                    var targetTemplates = new List<TemplateHeaderCellDefinitions>();
-                    GetTargetHeaderCellTemplates(templateLayoutDefsList, cell.Item, targetTemplates);
-                    // テンプレートヘッダー列の定義を反映
-                    foreach (var targetTemplate in targetTemplates)
-                    {
-                        SetColumnHeaderCellProps(sheetView.ColumnHeader.Cells[cells.Index, cell.Index], targetTemplate);
-                    }
-
-                    SetColumnHeaderCellProps(sheetView.ColumnHeader.Cells[cells.Index, cell.Index], cell.Item);
-
-                    if (columnHeaderCellTag == null)
-                    {
-                        sheetView.ColumnHeader.Cells[cells.Index, cell.Index].Tag = $"{headerTagPrefix}_{cells.Index}_{cell.Index}";
-                    }
-                    else
-                    {
-                        sheetView.ColumnHeader.Cells[cells.Index, cell.Index].Tag = columnHeaderCellTag.Invoke(sheetView.ColumnHeader.Cells[cells.Index, cell.Index]);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// ヘッダースパン情報をコンパイルする。
-        /// </summary>
-        /// <param name="sheetView">SheetView オブジェクト。</param>
-        /// <param name="spans">Span[] オブジェクト。</param>
-        /// <param name="columnMoveResults">列の移動を行った情報のリスト。</param>
-        private static void CompileColumnHeaderSpans(SheetView sheetView, SpanDefinitions[] spans, IList<ColumnMoveResult> columnMoveResults)
-        {
-            SpanDefinitions[] newSpans;
-
-            if (columnMoveResults == null)
-            {
-                if (spans == null)
-                {
-                    return;
-                }
-
-                newSpans = spans;
-            }
-            else
-            {
-                if (spans == null)
-                {
-                    return;
-                }
-
-                // 列移動情報がある場合はJSONデータにあるインデックスとマッピングして、移動後のインデックスでセル結合を行う
-                var spanList = new List<SpanDefinitions>();
-                foreach (var span in spans)
-                {
-                    var columnMoveResult = columnMoveResults.Where(x => x.OriginalColumnIndex == span.Column).FirstOrDefault();
-                    if (columnMoveResult == null)
-                    {
-                        spanList.Add(span);
-                    }
-                    else
-                    {
-                        spanList.Add(new SpanDefinitions()
-                        {
-                            Row = span.Row,
-                            Column = columnMoveResult.AfterColumnIndex,
-                            RowCount = span.RowCount,
-                            ColumnCount = span.ColumnCount
-                        });
-                    }
-                }
-                newSpans = spanList.ToArray();
-            }
-
-            foreach (var span in newSpans)
-            {
-                sheetView.AddColumnHeaderSpanCell(span.Row, span.Column, span.RowCount, span.ColumnCount);
             }
         }
 
@@ -1542,361 +1438,6 @@ namespace Metroit.Win.GcSpread.CodeDesign
         }
 
         /// <summary>
-        /// GcNumberCellType をコンパイルする。
-        /// </summary>
-        /// <param name="cellType">GcNumberCellType オブジェクト。</param>
-        /// <param name="cellTypeProperties">セルタイプ情報。</param>
-        private static void CompileGcNumberCellType(GcNumberCellType cellType, Dictionary<string, object> cellTypeProperties)
-        {
-            if (cellTypeProperties == null)
-            {
-                return;
-            }
-
-            foreach (var prop in cellTypeProperties)
-            {
-                var propKey = prop.Key.ToLower();
-
-                if (propKey == "acceptscrlf")
-                {
-                    CrLfMode crLfMode;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out crLfMode))
-                    {
-                        cellType.AcceptsCrLf = crLfMode;
-                    }
-                }
-                if (propKey == "acceptsdecimal")
-                {
-                    DecimalMode decimalMode;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out decimalMode))
-                    {
-                        cellType.AcceptsDecimal = decimalMode;
-                    }
-                }
-                if (propKey == "allowdeletetonull")
-                {
-                    cellType.AllowDeleteToNull = (bool)prop.Value;
-                }
-                if (propKey == "clipcontent")
-                {
-                    ClipContent clipContent;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out clipContent))
-                    {
-                        cellType.ClipContent = clipContent;
-                    }
-                }
-
-                if (propKey == "displayfields")
-                {
-                    cellType.DisplayFields.Clear();
-                    var list = ((JArray)prop.Value).ToList();
-                    NumberDisplayFieldInfo info;
-                    foreach (var item in list)
-                    {
-                        switch (item["Type"].ToString().ToLower())
-                        {
-                            case "numbersigndisplayfieldinfo":
-                                info = item.ToObject<NumberSignDisplayFieldInfo>();
-                                cellType.DisplayFields.Add(info);
-                                break;
-                            case "numberintegerpartdisplayfieldinfo":
-                                info = item.ToObject<NumberIntegerPartDisplayFieldInfo>();
-                                cellType.DisplayFields.Add(info);
-                                break;
-                            case "numberdecimalseparatordisplayfieldinfo":
-                                info = item.ToObject<NumberDecimalSeparatorDisplayFieldInfo>();
-                                cellType.DisplayFields.Add(info);
-                                break;
-                            case "numberdecimalpartdisplayfieldinfo":
-                                info = item.ToObject<NumberDecimalPartDisplayFieldInfo>();
-                                cellType.DisplayFields.Add(info);
-                                break;
-                        }
-                    }
-                }
-
-                if (propKey == "editmode")
-                {
-                    EditMode editMode;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out editMode))
-                    {
-                        cellType.EditMode = editMode;
-                    }
-                }
-                if (propKey == "excelexportformat")
-                {
-                    cellType.ExcelExportFormat = (string)prop.Value;
-                }
-                if (propKey == "exitonlastchar")
-                {
-                    cellType.ExitOnLastChar = (bool)prop.Value;
-                }
-
-                if (propKey == "fields")
-                {
-                    var list = ((JArray)prop.Value).ToList();
-
-                    foreach (var field in cellType.Fields.Select((Item, Index) => new { Item, Index }))
-                    {
-                        switch (field.Index)
-                        {
-                            case 0:
-                            case 4:
-                                var itemExpression = list.Where(x => x["Type"].ToString().ToLower() == "numbersignfieldinfo").Select((Item, Index) => new { Item, Index });
-
-                                NumberSignFieldInfo signInfo;
-                                NumberSignFieldInfo signSetInfo;
-                                if (field.Index == 0)
-                                {
-                                    // NOTE: NumberSignFieldInfo の定義が1つある場合は必ず最初の NumberSignFieldInfo とみなす。
-                                    signInfo = cellType.Fields[0] as NumberSignFieldInfo;
-                                    signSetInfo = itemExpression.FirstOrDefault()?.Item.ToObject<NumberSignFieldInfo>();
-                                }
-                                else
-                                {
-                                    // NOTE: NumberSignFieldInfo の定義が2つ以上ない場合は制御せず、必ず最後の NumberSignFieldInfo とみなす。
-                                    if (itemExpression.Count() < 2)
-                                    {
-                                        continue;
-                                    }
-                                    signInfo = cellType.Fields[4] as NumberSignFieldInfo;
-                                    signSetInfo = itemExpression.LastOrDefault()?.Item.ToObject<NumberSignFieldInfo>();
-                                }
-                                if (signSetInfo == null)
-                                {
-                                    continue;
-                                }
-                                signInfo.BackColor = signSetInfo.BackColor;
-                                signInfo.Font = signSetInfo.Font;
-                                signInfo.ForeColor = signSetInfo.ForeColor;
-                                signInfo.Margin = signSetInfo.Margin;
-                                signInfo.NegativePattern = signSetInfo.NegativePattern;
-                                signInfo.Padding = signSetInfo.Padding;
-                                signInfo.PositivePattern = signSetInfo.PositivePattern;
-                                signInfo.Text = signSetInfo.Text;
-                                break;
-
-                            case 1:
-                                var intPartSetInfoItem = list.Where(x => x["Type"].ToString().ToLower() == "numberintegerpartfieldinfo").FirstOrDefault();
-                                if (intPartSetInfoItem == null)
-                                {
-                                    continue;
-                                }
-                                var intPartInfo = cellType.Fields[1] as NumberIntegerPartFieldInfo;
-                                var intPartSetInfo = intPartSetInfoItem.ToObject<NumberIntegerPartFieldInfo>();
-                                intPartInfo.BackColor = intPartSetInfo.BackColor;
-                                intPartInfo.Font = intPartSetInfo.Font;
-                                intPartInfo.ForeColor = intPartSetInfo.ForeColor;
-                                intPartInfo.GroupSeparator = intPartSetInfo.GroupSeparator;
-                                intPartInfo.GroupSizes = intPartSetInfo.GroupSizes;
-                                intPartInfo.Margin = intPartSetInfo.Margin;
-                                intPartInfo.MaxDigits = intPartSetInfo.MaxDigits;
-                                intPartInfo.MinDigits = intPartSetInfo.MinDigits;
-                                intPartInfo.Padding = intPartSetInfo.Padding;
-                                intPartInfo.SpinIncrement = intPartSetInfo.SpinIncrement;
-                                intPartInfo.Text = intPartSetInfo.Text;
-                                break;
-
-                            case 2:
-                                var decSepSetInfoItem = list.Where(x => x["Type"].ToString().ToLower() == "numberdecimalseparatorfieldinfo").FirstOrDefault();
-                                if (decSepSetInfoItem == null)
-                                {
-                                    continue;
-                                }
-                                var decSepInfo = cellType.Fields[2] as NumberDecimalSeparatorFieldInfo;
-                                var decSepSetInfo = decSepSetInfoItem.ToObject<NumberDecimalSeparatorFieldInfo>();
-                                decSepInfo.BackColor = decSepSetInfo.BackColor;
-                                decSepInfo.DecimalSeparator = decSepSetInfo.DecimalSeparator;
-                                decSepInfo.Font = decSepSetInfo.Font;
-                                decSepInfo.ForeColor = decSepSetInfo.ForeColor;
-                                decSepInfo.Margin = decSepSetInfo.Margin;
-                                decSepInfo.Padding = decSepSetInfo.Padding;
-                                decSepInfo.Text = decSepSetInfo.Text;
-                                break;
-
-                            case 3:
-                                var decPartSetInfoItem = list.Where(x => x["Type"].ToString().ToLower() == "numberdecimalpartfieldinfo").FirstOrDefault();
-                                var decPartInfo = cellType.Fields[3] as NumberDecimalPartFieldInfo;
-                                var decPartSetInfo = decPartSetInfoItem.ToObject<NumberDecimalPartFieldInfo>();
-                                decPartInfo.BackColor = decPartSetInfo.BackColor;
-                                decPartInfo.Font = decPartSetInfo.Font;
-                                decPartInfo.ForeColor = decPartSetInfo.ForeColor;
-                                decPartInfo.Margin = decPartSetInfo.Margin;
-                                decPartInfo.MaxDigits = decPartSetInfo.MaxDigits;
-                                decPartInfo.MinDigits = decPartSetInfo.MinDigits;
-                                decPartInfo.Padding = decPartSetInfo.Padding;
-                                decPartInfo.SpinIncrement = decPartSetInfo.SpinIncrement;
-                                decPartInfo.Text = decPartSetInfo.Text;
-                                break;
-                        }
-                    }
-                }
-
-                if (propKey == "focusposition")
-                {
-                    EditorBaseFocusCursorPosition editorBaseFocusCursorPosition;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out editorBaseFocusCursorPosition))
-                    {
-                        cellType.FocusPosition = editorBaseFocusCursorPosition;
-                    }
-                }
-                if (propKey == "maxminbehavior")
-                {
-                    MaxMinBehavior maxMinBehavior;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out maxMinBehavior))
-                    {
-                        cellType.MaxMinBehavior = maxMinBehavior;
-                    }
-                }
-                if (propKey == "maxvalue")
-                {
-                    cellType.MaxValue = Convert.ToDecimal(prop.Value);
-                }
-                if (propKey == "minvalue")
-                {
-                    cellType.MinValue = Convert.ToDecimal(prop.Value);
-                }
-                if (propKey == "negativecolor")
-                {
-                    cellType.NegativeColor = ColorTranslator.FromHtml((string)prop.Value);
-                }
-                if (propKey == "readonly")
-                {
-                    cellType.ReadOnly = (bool)prop.Value;
-                }
-                if (propKey == "recommendedvalue")
-                {
-                    cellType.RecommendedValue = Convert.ToDecimal(prop.Value);
-                }
-                if (propKey == "roundpattern")
-                {
-                    RoundPattern roundPattern;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out roundPattern))
-                    {
-                        cellType.RoundPattern = roundPattern;
-                    }
-                }
-                if (propKey == "showrecommendedvalue")
-                {
-                    cellType.ShowRecommendedValue = (bool)prop.Value;
-                }
-                if (propKey == "static")
-                {
-                    cellType.Static = (bool)prop.Value;
-                }
-                if (propKey == "usenegativecolor")
-                {
-                    cellType.UseNegativeColor = (bool)prop.Value;
-                }
-                if (propKey == "valuesign")
-                {
-                    ValueSignControl valueSignControl;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out valueSignControl))
-                    {
-                        cellType.ValueSign = valueSignControl;
-                    }
-                }
-                if (propKey == "dropdownallowdrop")
-                {
-                    cellType.DropDown.AllowDrop = (bool)prop.Value;
-                }
-                if (propKey == "sidebuttonsclear")
-                {
-                    if ((bool)prop.Value)
-                    {
-                        cellType.SideButtons.Clear();
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 現在のシートからヘッダー行/列情報を逆コンパイルする。
-        /// </summary>
-        /// <param name="sheetView">SheetView オブジェクト。</param>
-        /// <returns>HeaderRowJson[] オブジェクト。</returns>
-        private static HeaderRowDefinitions[] DecompileColumnHeaderRows(SheetView sheetView)
-        {
-            var headerRows = new List<HeaderRowDefinitions>();
-            foreach (Row row in sheetView.ColumnHeader.Rows)
-            {
-                var headerRow = new HeaderRowDefinitions()
-                {
-                    Height = row.Height,
-                    HorizontalAlignment = row.HorizontalAlignment,
-                    VerticalAlignment = row.VerticalAlignment
-                };
-
-                headerRows.Add(headerRow);
-            }
-
-            return headerRows.ToArray();
-        }
-
-        /// <summary>
-        /// 現在のシートからヘッダーセル情報を逆コンパイルする。
-        /// </summary>
-        /// <param name="sheetView">SheetView オブジェクト。</param>
-        /// <returns>HeaderCellDefinitions[][] オブジェクト。</returns>
-        private static HeaderCellDefinitions[][] DecompileColumnHeaderCells(SheetView sheetView)
-        {
-            var allCells = new List<HeaderCellDefinitions[]>();
-            foreach (Row row in sheetView.ColumnHeader.Rows)
-            {
-                var cells = new List<HeaderCellDefinitions>();
-                foreach (Column column in sheetView.ColumnHeader.Columns)
-                {
-                    var cell = new HeaderCellDefinitions();
-                    cell.Value = sheetView.ColumnHeader.Cells[row.Index, column.Index].Value?.ToString();
-                    cell.HorizontalAlignment = sheetView.ColumnHeader.Cells[row.Index, column.Index].HorizontalAlignment;
-                    cell.VerticalAlignment = sheetView.ColumnHeader.Cells[row.Index, column.Index].VerticalAlignment;
-                    cells.Add(cell);
-                }
-                allCells.Add(cells.ToArray());
-            }
-
-            return allCells.ToArray();
-        }
-
-        /// <summary>
-        /// 現在のシートからヘッダースパン情報を逆コンパイルする。
-        /// </summary>
-        /// <param name="sheetView">SheetView オブジェクト。</param>
-        /// <returns>SpanJson[] オブジェクト。</returns>
-        private static SpanDefinitions[] DecompileColumnHeaderSpans(SheetView sheetView)
-        {
-            var headerSpans = new List<SpanDefinitions>();
-            foreach (Row row in sheetView.ColumnHeader.Rows)
-            {
-                foreach (Column column in sheetView.ColumnHeader.Columns)
-                {
-                    var spanRange = sheetView.GetColumnHeaderSpanCell(row.Index, column.Index);
-                    if (spanRange == null)
-                    {
-                        continue;
-                    }
-                    // 把握済のスパン情報はスキップ
-                    if (headerSpans.Any(x => x.Row == spanRange.Row &&
-                            x.Column == spanRange.Column &&
-                            x.RowCount == spanRange.RowCount &&
-                            x.ColumnCount == spanRange.ColumnCount))
-                    {
-                        continue;
-                    }
-                    headerSpans.Add(new SpanDefinitions()
-                    {
-                        Row = spanRange.Row,
-                        Column = spanRange.Column,
-                        RowCount = spanRange.RowCount,
-                        ColumnCount = spanRange.ColumnCount
-                    });
-                }
-            }
-
-            return headerSpans.ToArray();
-        }
-
-        /// <summary>
         /// 現在のシートから列情報を逆コンパイルする。
         /// </summary>
         /// <param name="sheetView">SheetView オブジェクト。</param>
@@ -2195,58 +1736,6 @@ namespace Metroit.Win.GcSpread.CodeDesign
             result.Add(nameof(cellType.Static), cellType.Static);
             result.Add(nameof(cellType.TabAction), cellType.TabAction);
             result.Add(nameof(cellType.ValidateMode), cellType.ValidateMode);
-            result.Add("DropDownAllowDrop", cellType.DropDown.AllowDrop);
-
-            return result;
-        }
-
-        /// <summary>
-        /// GcNumberCellType からプロパティ情報を逆コンパイルする。
-        /// </summary>
-        /// <param name="cellType">GcNumberCellType オブジェクト。</param>
-        /// <returns>プロパティ情報。</returns>
-        private static Dictionary<string, object> DecompileGcNumberCellTypeProperties(GcNumberCellType cellType)
-        {
-            var result = new Dictionary<string, object>();
-            result.Add(nameof(cellType.AcceptsCrLf), cellType.AcceptsCrLf);
-            result.Add(nameof(cellType.AcceptsDecimal), cellType.AcceptsDecimal);
-            result.Add(nameof(cellType.AllowDeleteToNull), cellType.AllowDeleteToNull);
-            result.Add(nameof(cellType.ClipContent), cellType.ClipContent);
-
-            var displayFieldsArray = new JArray();
-            foreach (NumberDisplayFieldInfo field in cellType.DisplayFields)
-            {
-                var jobj = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(field));
-                jobj.AddFirst(new JProperty("Type", field.GetType().Name));
-                displayFieldsArray.Add(jobj);
-            }
-            result.Add(nameof(cellType.DisplayFields), displayFieldsArray);
-
-            result.Add(nameof(cellType.EditMode), cellType.EditMode);
-            result.Add(nameof(cellType.ExcelExportFormat), cellType.ExcelExportFormat);
-            result.Add(nameof(cellType.ExitOnLastChar), cellType.ExitOnLastChar);
-
-            var fieldsArray = new JArray();
-            foreach (NumberFieldInfo field in cellType.Fields)
-            {
-                var jobj = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(field));
-                jobj.AddFirst(new JProperty("Type", field.GetType().Name));
-                fieldsArray.Add(jobj);
-            }
-            result.Add(nameof(cellType.Fields), fieldsArray);
-
-            result.Add(nameof(cellType.FocusPosition), cellType.FocusPosition);
-            result.Add(nameof(cellType.MaxMinBehavior), cellType.MaxMinBehavior);
-            result.Add(nameof(cellType.MaxValue), cellType.MaxValue);
-            result.Add(nameof(cellType.MinValue), cellType.MinValue);
-            result.Add(nameof(cellType.NegativeColor), ColorTranslator.ToHtml(cellType.NegativeColor));
-            result.Add(nameof(cellType.ReadOnly), cellType.ReadOnly);
-            result.Add(nameof(cellType.RecommendedValue), cellType.RecommendedValue);
-            result.Add(nameof(cellType.RoundPattern), cellType.RoundPattern);
-            result.Add(nameof(cellType.ShowRecommendedValue), cellType.ShowRecommendedValue);
-            result.Add(nameof(cellType.Static), cellType.Static);
-            result.Add(nameof(cellType.UseNegativeColor), cellType.UseNegativeColor);
-            result.Add(nameof(cellType.ValueSign), cellType.ValueSign);
             result.Add("DropDownAllowDrop", cellType.DropDown.AllowDrop);
 
             return result;

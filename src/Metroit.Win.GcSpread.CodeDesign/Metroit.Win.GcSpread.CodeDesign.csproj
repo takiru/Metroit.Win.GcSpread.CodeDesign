@@ -61,6 +61,8 @@
     <Compile Include="GcNumberCellTypeExtensions.cs" />
     <Compile Include="GcComboBoxCellTypeExtensions.cs" />
     <Compile Include="ICellTypeExtensions.cs" />
+    <Compile Include="Json\JsonConvert.cs" />
+    <Compile Include="Json\ColumnHeaderConvert.cs" />
     <Compile Include="Json\TemplateHeaderCellDefinitions.cs" />
     <Compile Include="Json\TemplateHeaderRowDefinitions.cs" />
     <Compile Include="Json\TemplateColumnHeaderDefinitions.cs" />
@@ -100,7 +102,6 @@
     <Compile Include="Json\ColumnDefinitions.cs" />
     <Compile Include="Json\ColumnHeaderDefinitions.cs" />
     <Compile Include="Json\HeaderRowDefinitions.cs" />
-    <Compile Include="Json\JsonConvert.cs" />
     <Compile Include="Json\SheetViewDefinitions.cs" />
     <Compile Include="Json\SpanDefinitions.cs" />
     <Compile Include="Json\SpecialColumnDefinitions.cs" />

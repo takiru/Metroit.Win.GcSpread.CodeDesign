@@ -3,7 +3,6 @@ using GrapeCity.Win.Spread.InputMan.CellType;
 using Metroit.Win.GcSpread.CodeDesign.Json.Converters;
 using Newtonsoft.Json.Linq;
 using System.Drawing;
-using System.Windows.Forms;
 
 namespace Metroit.Win.GcSpread.CodeDesign
 {
