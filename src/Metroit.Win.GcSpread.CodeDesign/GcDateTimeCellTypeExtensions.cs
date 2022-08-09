@@ -37,7 +37,7 @@ namespace Metroit.Win.GcSpread.CodeDesign
             result.Add(new JProperty(nameof(cellType.EditMode), cellType.EditMode));
             result.Add(new JProperty(nameof(cellType.ExcelExportFormat), cellType.ExcelExportFormat));
             result.Add(new JProperty(nameof(cellType.ExitOnLastChar), cellType.ExitOnLastChar));
-            result.Add(new JProperty(nameof(cellType.Fields), cellType.Fields));    // TODO
+            result.Add(new JProperty(nameof(cellType.Fields), DateTimeFieldCollectionInfoConverter.Serialize(cellType.Fields)));
             result.Add(new JProperty(nameof(cellType.FieldsEditMode), cellType.FieldsEditMode));
             result.Add(new JProperty(nameof(cellType.FocusPosition), cellType.FocusPosition));
             result.Add(new JProperty(nameof(cellType.MaxDate), cellType.MaxDate));
