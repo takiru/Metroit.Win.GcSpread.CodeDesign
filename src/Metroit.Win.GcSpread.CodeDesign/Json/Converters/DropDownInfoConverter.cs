@@ -23,15 +23,15 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             var jObj = new JObject();
 
-            jObj.Add(new JProperty(nameof(dropDownInfo.AllowDrop), dropDownInfo.AllowDrop));
-            jObj.Add(new JProperty(nameof(dropDownInfo.AllowResize), dropDownInfo.AllowResize));
-            jObj.Add(new JProperty(nameof(dropDownInfo.AutoDropDown), dropDownInfo.AutoDropDown));
-            jObj.Add(new JProperty(nameof(dropDownInfo.AutoHideTouchKeyboard), dropDownInfo.AutoHideTouchKeyboard));
-            jObj.Add(new JProperty(nameof(dropDownInfo.ClosingAnimation), dropDownInfo.ClosingAnimation));
-            jObj.Add(new JProperty(nameof(dropDownInfo.Direction), dropDownInfo.Direction));
-            jObj.Add(new JProperty(nameof(dropDownInfo.OpeningAnimation), dropDownInfo.OpeningAnimation));
-            jObj.Add(new JProperty(nameof(dropDownInfo.ShowShadow), dropDownInfo.ShowShadow));
-            jObj.Add(new JProperty(nameof(dropDownInfo.Size), $"{dropDownInfo.Size.Width}, {dropDownInfo.Size.Height}"));
+            jObj.Add(new JProperty(nameof(DropDownInfo.AllowDrop), dropDownInfo.AllowDrop));
+            jObj.Add(new JProperty(nameof(DropDownInfo.AllowResize), dropDownInfo.AllowResize));
+            jObj.Add(new JProperty(nameof(DropDownInfo.AutoDropDown), dropDownInfo.AutoDropDown));
+            jObj.Add(new JProperty(nameof(DropDownInfo.AutoHideTouchKeyboard), dropDownInfo.AutoHideTouchKeyboard));
+            jObj.Add(new JProperty(nameof(DropDownInfo.ClosingAnimation), dropDownInfo.ClosingAnimation));
+            jObj.Add(new JProperty(nameof(DropDownInfo.Direction), dropDownInfo.Direction));
+            jObj.Add(new JProperty(nameof(DropDownInfo.OpeningAnimation), dropDownInfo.OpeningAnimation));
+            jObj.Add(new JProperty(nameof(DropDownInfo.ShowShadow), dropDownInfo.ShowShadow));
+            jObj.Add(new JProperty(nameof(DropDownInfo.Size), $"{dropDownInfo.Size.Width}, {dropDownInfo.Size.Height}"));
 
             return jObj;
         }

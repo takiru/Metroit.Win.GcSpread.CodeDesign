@@ -32,7 +32,14 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             ImageConverter imgConverter = new ImageConverter();
             byte[] imageBytes = (byte[])imgConverter.ConvertTo(dropDownCalculatorInfo.BackgroundImage, typeof(byte[]));
-            jObj.Add(new JProperty(nameof(DropDownCalculatorInfo.BackgroundImage), System.Convert.ToBase64String(imageBytes)));
+            if (imageBytes.Length == 0)
+            {
+                jObj.Add(new JProperty(nameof(DropDownCalculatorInfo.BackgroundImage), null));
+            }
+            else
+            {
+                jObj.Add(new JProperty(nameof(DropDownCalculatorInfo.BackgroundImage), System.Convert.ToBase64String(imageBytes)));
+            }
 
             jObj.Add(new JProperty(nameof(DropDownCalculatorInfo.BackgroundImageLayout), dropDownCalculatorInfo.BackgroundImageLayout));
             jObj.Add(new JProperty(nameof(DropDownCalculatorInfo.BorderStyle), dropDownCalculatorInfo.BorderStyle));

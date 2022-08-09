@@ -58,11 +58,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColumnMoveResult.cs" />
+    <Compile Include="GcTextBoxCellTypeExtensions.cs" />
     <Compile Include="GcNumberCellTypeExtensions.cs" />
     <Compile Include="GcComboBoxCellTypeExtensions.cs" />
     <Compile Include="ICellTypeExtensions.cs" />
+    <Compile Include="Json\ColumnDefinitionsBase.cs" />
+    <Compile Include="Json\ColumnsSetupProvider.cs" />
+    <Compile Include="Json\Converters\DropDownEditorInfoConverter.cs" />
+    <Compile Include="Json\Converters\TextBoxAlternateTextInfoConverter.cs" />
     <Compile Include="Json\JsonConvert.cs" />
-    <Compile Include="Json\ColumnHeaderConvert.cs" />
+    <Compile Include="Json\ColumnHeaderSetupProvider.cs" />
     <Compile Include="Json\TemplateHeaderCellDefinitions.cs" />
     <Compile Include="Json\TemplateHeaderRowDefinitions.cs" />
     <Compile Include="Json\TemplateColumnHeaderDefinitions.cs" />

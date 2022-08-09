@@ -30,7 +30,14 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             ImageConverter imgConverter = new ImageConverter();
             byte[] imageBytes = (byte[])imgConverter.ConvertTo(popUpCalculatorInfo.BackgroundImage, typeof(byte[]));
-            jObj.Add(new JProperty(nameof(PopUpCalculatorInfo.BackgroundImage), System.Convert.ToBase64String(imageBytes)));
+            if (imageBytes.Length == 0)
+            {
+                jObj.Add(new JProperty(nameof(PopUpCalculatorInfo.BackgroundImage), null));
+            }
+            else
+            {
+                jObj.Add(new JProperty(nameof(PopUpCalculatorInfo.BackgroundImage), System.Convert.ToBase64String(imageBytes)));
+            }
 
             jObj.Add(new JProperty(nameof(PopUpCalculatorInfo.BackgroundImageLayout), popUpCalculatorInfo.BackgroundImageLayout));
             jObj.Add(new JProperty(nameof(PopUpCalculatorInfo.BorderStyle), popUpCalculatorInfo.BorderStyle));
@@ -38,7 +45,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
             jObj.Add(new JProperty(nameof(PopUpCalculatorInfo.Font), FontConverter.Serialize(popUpCalculatorInfo.Font)));
             jObj.Add(new JProperty(nameof(PopUpCalculatorInfo.ForeColor), ColorTranslator.ToHtml(popUpCalculatorInfo.ForeColor)));
             jObj.Add(new JProperty(nameof(PopUpCalculatorInfo.Lines), popUpCalculatorInfo.Lines));
-            jObj.Add(new JProperty(nameof(PopUpCalculatorInfo.Padding), 
+            jObj.Add(new JProperty(nameof(PopUpCalculatorInfo.Padding),
                 $"{popUpCalculatorInfo.Padding.Left}, {popUpCalculatorInfo.Padding.Top}, {popUpCalculatorInfo.Padding.Right}, {popUpCalculatorInfo.Padding.Bottom}"));
             jObj.Add(new JProperty(nameof(PopUpCalculatorInfo.TextHAlign), popUpCalculatorInfo.TextHAlign));
             jObj.Add(new JProperty(nameof(PopUpCalculatorInfo.UseDecimalDigit), popUpCalculatorInfo.UseDecimalDigit));
@@ -75,7 +82,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
             var backgroundImage = prop.SelectToken(nameof(PopUpCalculatorInfo.BackgroundImage));
             if (backgroundImage != null)
             {
-                if (!string.IsNullOrWhiteSpace( backgroundImage.ToObject<string>()))
+                if (!string.IsNullOrWhiteSpace(backgroundImage.ToObject<string>()))
                 {
                     var imageValue = System.Convert.FromBase64String(backgroundImage.ToObject<string>());
                     ImageConverter imgConverter = new ImageConverter();

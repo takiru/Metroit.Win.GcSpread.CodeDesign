@@ -28,7 +28,14 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             ImageConverter imgConverter = new ImageConverter();
             byte[] imageBytes = (byte[])imgConverter.ConvertTo(picture.Image, typeof(byte[]));
-            jObj.Add(new JProperty(nameof(Picture.Image), System.Convert.ToBase64String(imageBytes)));
+            if (imageBytes.Length == 0)
+            {
+                jObj.Add(new JProperty(nameof(Picture.Image), null));
+            }
+            else
+            {
+                jObj.Add(new JProperty(nameof(Picture.Image), System.Convert.ToBase64String(imageBytes)));
+            }
 
             jObj.Add(new JProperty(nameof(Picture.Style), picture.Style));
             jObj.Add(new JProperty(nameof(Picture.TransparencyColor), ColorTranslator.ToHtml(picture.TransparencyColor)));

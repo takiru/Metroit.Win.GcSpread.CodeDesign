@@ -40,7 +40,14 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
                 ImageConverter imgConverter = new ImageConverter();
                 byte[] imageBytes = (byte[])imgConverter.ConvertTo(iti.Image, typeof(byte[]));
-                jObj.Add(new JProperty(nameof(ItemTemplateInfo.Image), System.Convert.ToBase64String(imageBytes)));
+                if (imageBytes.Length == 0)
+                {
+                    jObj.Add(new JProperty(nameof(ItemTemplateInfo.Image), null));
+                }
+                else
+                {
+                    jObj.Add(new JProperty(nameof(ItemTemplateInfo.Image), System.Convert.ToBase64String(imageBytes)));
+                }
 
                 jObj.Add(new JProperty(nameof(ItemTemplateInfo.Indent), iti.Indent));
 
