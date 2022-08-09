@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 {
@@ -52,46 +53,110 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// <param name="prop">デシリアライズオブジェクト。</param>
         public static void Deserialize(DateTimeDropDownPickerInfo dateTimeDropDownPickerInfo, JToken prop)
         {
-            var allowSpin = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.BackColor));
-            if (allowSpin != null)
+            var backColor = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.BackColor));
+            if (backColor != null)
             {
-                dateSpin.AllowSpin = allowSpin.ToObject<bool>();
+                dateTimeDropDownPickerInfo.BackColor = ColorTranslator.FromHtml(backColor.ToObject<string>());
             }
 
-            var increment = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.BorderStyle));
-            if (increment != null)
+            var borderStyle = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.BorderStyle));
+            if (borderStyle != null)
             {
-                dateSpin.Increment = increment.ToObject<int>();
+                dateTimeDropDownPickerInfo.BorderStyle = borderStyle.ToObject<BorderStyle>();
             }
 
-            var incrementValue = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.ButtonBackColor));
-            if (incrementValue != null)
+            var buttonBackColor = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.ButtonBackColor));
+            if (buttonBackColor != null)
             {
-                dateSpin.IncrementValue = incrementValue.ToObject<TimeSpan>();
+                dateTimeDropDownPickerInfo.ButtonBackColor = ColorTranslator.FromHtml(buttonBackColor.ToObject<string>());
             }
 
-            var spinMode = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.ButtonForeColor));
-            if (spinMode != null)
+            var buttonForeColor = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.ButtonForeColor));
+            if (buttonForeColor != null)
             {
-                dateSpin.SpinMode = spinMode.ToObject<DateSpinMode>();
+                dateTimeDropDownPickerInfo.ButtonForeColor = ColorTranslator.FromHtml(buttonForeColor.ToObject<string>());
             }
 
-            var spinOnKeys = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.SpinOnKeys));
-            if (spinOnKeys != null)
+            var dateTabText = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.DateTabText));
+            if (dateTabText != null)
             {
-                dateSpin.SpinOnKeys = spinOnKeys.ToObject<bool>();
+                dateTimeDropDownPickerInfo.DateTabText = dateTabText.ToObject<string>();
             }
 
-            var spinOnWheel = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.SpinOnWheel));
-            if (spinOnWheel != null)
+            var flatStyle = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.FlatStyle));
+            if (flatStyle != null)
             {
-                dateSpin.SpinOnWheel = spinOnWheel.ToObject<bool>();
+                dateTimeDropDownPickerInfo.FlatStyle = flatStyle.ToObject<FlatStyle>();
             }
 
-            var wrap = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.Wrap));
-            if (wrap != null)
+            var font = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.Font));
+            if (font != null)
             {
-                dateSpin.Wrap = wrap.ToObject<bool>();
+                var fontObj = FontConverter.Deserialize(font);
+                if (fontObj != null)
+                {
+                    dateTimeDropDownPickerInfo.Font = fontObj;
+                }
+            }
+
+            var foreColor = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.ForeColor));
+            if (foreColor != null)
+            {
+                dateTimeDropDownPickerInfo.ForeColor = ColorTranslator.FromHtml(foreColor.ToObject<string>());
+            }
+
+            var headerBackColor = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.HeaderBackColor));
+            if (headerBackColor != null)
+            {
+                dateTimeDropDownPickerInfo.HeaderBackColor = ColorTranslator.FromHtml(headerBackColor.ToObject<string>());
+            }
+
+            var selectedBackColor = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.SelectedBackColor));
+            if (selectedBackColor != null)
+            {
+                dateTimeDropDownPickerInfo.SelectedBackColor = ColorTranslator.FromHtml(selectedBackColor.ToObject<string>());
+            }
+
+            var selectedBorderColor = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.SelectedBorderColor));
+            if (selectedBorderColor != null)
+            {
+                dateTimeDropDownPickerInfo.SelectedBorderColor = ColorTranslator.FromHtml(selectedBorderColor.ToObject<string>());
+            }
+
+            var selectedForeColor = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.SelectedForeColor));
+            if (selectedForeColor != null)
+            {
+                dateTimeDropDownPickerInfo.SelectedForeColor = ColorTranslator.FromHtml(selectedForeColor.ToObject<string>());
+            }
+
+            var selectionRenderMode = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.SelectionRenderMode));
+            if (selectionRenderMode != null)
+            {
+                dateTimeDropDownPickerInfo.SelectionRenderMode = selectionRenderMode.ToObject<SelectionRenderMode>();
+            }
+
+            var showPickers = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.ShowPickers));
+            if (showPickers != null)
+            {
+                dateTimeDropDownPickerInfo.ShowPickers = showPickers.ToObject<PickerDisplayOptions>();
+            }
+
+            var singleBorderColor = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.SingleBorderColor));
+            if (singleBorderColor != null)
+            {
+                dateTimeDropDownPickerInfo.SingleBorderColor = ColorTranslator.FromHtml(singleBorderColor.ToObject<string>());
+            }
+
+            var tabForeColor = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.TabForeColor));
+            if (tabForeColor != null)
+            {
+                dateTimeDropDownPickerInfo.TabForeColor = ColorTranslator.FromHtml(tabForeColor.ToObject<string>());
+            }
+
+            var timeTabText = prop.SelectToken(nameof(DateTimeDropDownPickerInfo.TimeTabText));
+            if (timeTabText != null)
+            {
+                dateTimeDropDownPickerInfo.TimeTabText = timeTabText.ToObject<string>();
             }
         }
     }

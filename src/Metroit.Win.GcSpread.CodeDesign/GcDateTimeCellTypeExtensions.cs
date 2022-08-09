@@ -33,7 +33,7 @@ namespace Metroit.Win.GcSpread.CodeDesign
             result.Add(new JProperty(nameof(cellType.DisplayFields), DateTimeDisplayFieldCollectionInfoConverter.Serialize(cellType.DisplayFields)));
             result.Add(new JProperty(nameof(cellType.DropDown), DateTimeDropDownInfoConverter.Serialize(cellType.DropDown)));
             result.Add(new JProperty(nameof(cellType.DropDownCalendar), cellType.DropDownCalendar));    // TODO
-            result.Add(new JProperty(nameof(cellType.DropDownPicker), cellType.DropDownPicker));    // TODO
+            result.Add(new JProperty(nameof(cellType.DropDownPicker), DateTimeDropDownPickerInfoConverter.Serialize(cellType.DropDownPicker)));
             result.Add(new JProperty(nameof(cellType.EditMode), cellType.EditMode));
             result.Add(new JProperty(nameof(cellType.ExcelExportFormat), cellType.ExcelExportFormat));
             result.Add(new JProperty(nameof(cellType.ExitOnLastChar), cellType.ExitOnLastChar));
