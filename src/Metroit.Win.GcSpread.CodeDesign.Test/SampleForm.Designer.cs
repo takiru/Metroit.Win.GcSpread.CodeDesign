@@ -108,7 +108,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             dateMinuteFieldInfo1,
             dateLiteralFieldInfo5,
             dateSecondFieldInfo1});
-            gcDateTimeCellType1.SerializationDefaultActiveFieldIndex = 8;
+            gcDateTimeCellType1.SerializationDefaultActiveFieldIndex = 0;
             gcDateTimeCellType1.ShortcutKeys.AddRange(new GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionaryEntry[] {
             new GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionaryEntry(System.Windows.Forms.Keys.F2, "ShortcutClear"),
             new GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionaryEntry(System.Windows.Forms.Keys.F5, "SetNow"),

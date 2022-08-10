@@ -71,6 +71,11 @@
           "Value": "GcTextBoxCellType",
           "HorizontalAlignment": "Left",
           "VerticalAlignment": "Bottom"
+        },
+        {
+          "Value": "GcDateTimeCellType",
+          "HorizontalAlignment": "Left",
+          "VerticalAlignment": "Bottom"
         }
       ],
       [
@@ -472,6 +477,489 @@
           "SingleBorderColor": "windowframe"
         }
       }
+    },
+    {
+      "CellType": "GcDateTimeCellType",
+      "CellTypeProps": {
+        "AcceptsArrowKeys": 3,
+        "AcceptsCrLf": 0,
+        "AlternateText": {
+          "DisplayEmptyEra": {
+            "ForeColor": "",
+            "Text": ""
+          },
+          "DisplayNull": {
+            "ForeColor": "",
+            "Text": ""
+          },
+          "EmptyEra": {
+            "ForeColor": "",
+            "Text": ""
+          },
+          "Null": {
+            "ForeColor": "",
+            "Text": ""
+          }
+        },
+        "BackgroundImage": null,
+        "ClipContent": 0,
+        "DefaultActiveField": 0,
+        "DisplayFields": [],
+        "DropDown": {
+          "AllowDrop": true,
+          "AllowResize": false,
+          "AutoDropDown": false,
+          "AutoHideTouchKeyboard": 1,
+          "ClosingAnimation": 0,
+          "Direction": 7,
+          "DropDownType": 0,
+          "OpeningAnimation": 0,
+          "ShowShadow": false,
+          "Size": "0, 0"
+        },
+        "DropDownCalendar": {
+          "ActiveHolidayStyles": [],
+          "AllowSelection": 0,
+          "BackColor": "window",
+          "BackgroundImage": null,
+          "BackgroundImageLayout": 1,
+          "BorderStyle": 1,
+          "CalendarDimensions": "1, 1",
+          "CalendarMargins": "0, 0, 0, 0",
+          "CalendarType": 0,
+          "ControlStyle": {
+            "BackColor": "window",
+            "Bevel": "Blue, 0, 100, -100",
+            "BorderColor": "windowframe",
+            "BorderStyle": 0,
+            "ContentAlignment": 32,
+            "Font": null,
+            "ForeColor": "windowtext",
+            "TextEffect": 0
+          },
+          "EmptyRows": 0,
+          "EnableScrollAnimation": true,
+          "EnableTouchZoom": false,
+          "FirstDayOfWeek": -1,
+          "FirstMonthInView": 0,
+          "FlatStyle": 2,
+          "FocusRectangle": 0,
+          "Font": null,
+          "HeaderFormat": "MMMM yyy",
+          "HeaderHeight": 0,
+          "HeaderStyle": {
+            "BackColor": "buttonface",
+            "Bevel": "Control, 1, 25, -25",
+            "BorderColor": "buttonshadow",
+            "BorderStyle": 0,
+            "ContentAlignment": 32,
+            "Font": null,
+            "ForeColor": "buttontext",
+            "TextEffect": 0
+          },
+          "HolidayStyles": [],
+          "InnerMargins": "8, 0, 8, 0",
+          "InnerSpace": "0, 0",
+          "ItemStyle": {
+            "BackColor": "window",
+            "Bevel": "Control, 0, 25, -25",
+            "BorderColor": "windowframe",
+            "BorderStyle": 0,
+            "ContentAlignment": 64,
+            "Font": null,
+            "ForeColor": "windowtext",
+            "TextEffect": 0
+          },
+          "LegendStyle": {
+            "BackColor": "window",
+            "Bevel": "Control, 0, 25, -25",
+            "BorderColor": "windowframe",
+            "BorderStyle": 0,
+            "ContentAlignment": 16,
+            "Font": null,
+            "ForeColor": "windowtext",
+            "TextEffect": 0
+          },
+          "Lines": {
+            "Bottom": {
+              "Color": "buttonshadow",
+              "Style": 0
+            },
+            "Horizontal": {
+              "Color": "buttonshadow",
+              "Style": 0
+            },
+            "Left": {
+              "Color": "buttonshadow",
+              "Style": 0
+            },
+            "Right": {
+              "Color": "buttonshadow",
+              "Style": 0
+            },
+            "Separator": {
+              "Color": "buttonshadow",
+              "Style": 6
+            },
+            "Top": {
+              "Color": "buttonshadow",
+              "Style": 0
+            },
+            "Vertical": {
+              "Color": "buttonshadow",
+              "Style": 0
+            },
+            "VerticalFlag": 2
+          },
+          "MaxDate": "9999-12-31T23:59:59.9999999",
+          "MinDate": "0001-01-01T00:00:00",
+          "NavigateOnWheel": true,
+          "NavigatorOrientation": 2,
+          "ScrollRate": 1,
+          "ScrollTipAlign": 0,
+          "SelectionStyle": {
+            "BackColor": "highlight",
+            "Bold": false,
+            "ForeColor": "highlighttext",
+            "UnderLine": false
+          },
+          "ShowHeader": true,
+          "ShowNavigator": 3,
+          "ShowScrollTip": true,
+          "ShowToday": false,
+          "ShowTodayMark": true,
+          "ShowTrailing": true,
+          "ShowWeekNumber": false,
+          "ShowZoomButton": false,
+          "SingleBorderColor": "windowframe",
+          "TipInterval": 500,
+          "TitleStyle": {
+            "BackColor": "window",
+            "Bevel": "Control, 0, 25, -25",
+            "BorderColor": "windowframe",
+            "BorderStyle": 0,
+            "ContentAlignment": 64,
+            "Font": null,
+            "ForeColor": "windowtext",
+            "TextEffect": 0
+          },
+          "TodayImage": "iVBORw0KGgoAAAANSUhEUgAAABgAAAAMCAYAAAB4MH11AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAABAUlEQVQ4T6XTMU4CQRjF8VkKLAgxUoqNwYbEE9jgDSjsbCxobejgBJaQWHAFD2ADDQegoLCH0sTENYaQqDEs/5fMbIZhE1e2+JHM22/ekB0wiTFTJAXN0UEZ6kzp4xpZmw6xhA6KkB7wl6OMzHeJIT7hDhrjBDuDcoZHvML/ZqFwn1TRhzvoBcf+QBdfCMtkgxhru/b3hc6hcs2NXHhvg2884Q5XOEUJfkEeF1Bf7II3G7Tsuqg61PfhgoUNGnZd1APUN3WBXomCGXTR/vB/tfEL9d36D3rQZa4wQBP+8zz0H/iByieIwoEbvEMDRehN1MBqny7oGVkb89CvsAK6jNkC7MqcY46i7OIAAAAASUVORK5CYII=",
+          "TodayMarkColor": "Brown",
+          "TrailingStyle": {
+            "BackColor": "window",
+            "Bold": false,
+            "ForeColor": "graytext",
+            "UnderLine": false
+          },
+          "UseControlStyle": false,
+          "UseHeaderFormat": false,
+          "Weekdays": {
+            "Friday": {
+              "DayName": "金",
+              "ReflectToTitle": 0,
+              "SubStyle": {
+                "BackColor": "window",
+                "Bold": false,
+                "ForeColor": "windowtext",
+                "UnderLine": false
+              },
+              "WeekFlags": 0
+            },
+            "Monday": {
+              "DayName": "月",
+              "ReflectToTitle": 0,
+              "SubStyle": {
+                "BackColor": "window",
+                "Bold": false,
+                "ForeColor": "windowtext",
+                "UnderLine": false
+              },
+              "WeekFlags": 0
+            },
+            "Saturday": {
+              "DayName": "土",
+              "ReflectToTitle": 0,
+              "SubStyle": {
+                "BackColor": "window",
+                "Bold": false,
+                "ForeColor": "Blue",
+                "UnderLine": false
+              },
+              "WeekFlags": 0
+            },
+            "Sunday": {
+              "DayName": "日",
+              "ReflectToTitle": 0,
+              "SubStyle": {
+                "BackColor": "window",
+                "Bold": false,
+                "ForeColor": "Red",
+                "UnderLine": false
+              },
+              "WeekFlags": 0
+            },
+            "Thursday": {
+              "DayName": "木",
+              "ReflectToTitle": 0,
+              "SubStyle": {
+                "BackColor": "window",
+                "Bold": false,
+                "ForeColor": "windowtext",
+                "UnderLine": false
+              },
+              "WeekFlags": 0
+            },
+            "Tuesday": {
+              "DayName": "火",
+              "ReflectToTitle": 0,
+              "SubStyle": {
+                "BackColor": "window",
+                "Bold": false,
+                "ForeColor": "windowtext",
+                "UnderLine": false
+              },
+              "WeekFlags": 0
+            },
+            "Wednesday": {
+              "DayName": "水",
+              "ReflectToTitle": 0,
+              "SubStyle": {
+                "BackColor": "window",
+                "Bold": false,
+                "ForeColor": "windowtext",
+                "UnderLine": false
+              },
+              "WeekFlags": 0
+            }
+          },
+          "WeekNumberStyle": {
+            "BackColor": "window",
+            "Bevel": "Control, 0, 25, -25",
+            "BorderColor": "windowframe",
+            "BorderStyle": 0,
+            "ContentAlignment": 64,
+            "Font": null,
+            "ForeColor": "windowtext",
+            "TextEffect": 0
+          },
+          "YearMonthFormat": {
+            "MonthFormat": "MMMM",
+            "YearFormat": "yyy"
+          }
+        },
+        "DropDownPicker": {
+          "BackColor": "window",
+          "BorderStyle": 1,
+          "ButtonBackColor": "buttonface",
+          "ButtonForeColor": "buttontext",
+          "DateTabText": "日付",
+          "FlatStyle": 2,
+          "Font": {
+            "Name": "Microsoft Sans Serif",
+            "Size": 8.25,
+            "Style": 0
+          },
+          "ForeColor": "graytext",
+          "HeaderBackColor": "buttonface",
+          "SelectedBackColor": "window",
+          "SelectedBorderColor": "highlight",
+          "SelectedForeColor": "windowtext",
+          "SelectionRenderMode": 0,
+          "ShowPickers": 0,
+          "SingleBorderColor": "windowframe",
+          "TabForeColor": "windowtext",
+          "TimeTabText": "時刻"
+        },
+        "EditMode": 0,
+        "ExcelExportFormat": "yyyy/MM/dd",
+        "ExitOnLastChar": false,
+        "Fields": [
+          {
+            "Type": "DateYearFieldInfo",
+            "TwoDigitYearMax": 2049,
+            "YearDigit": 0,
+            "PromptChar": null,
+            "SpinIncrement": null,
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0",
+            "Text": ""
+          },
+          {
+            "Type": "DateLiteralFieldInfo",
+            "Text": "/",
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0"
+          },
+          {
+            "Type": "DateMonthFieldInfo",
+            "AutoDropDown": false,
+            "DropDownEnabled": false,
+            "Pattern": 2,
+            "PromptChar": null,
+            "SpinIncrement": null,
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0",
+            "Text": ""
+          },
+          {
+            "Type": "DateLiteralFieldInfo",
+            "Text": "/",
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0"
+          },
+          {
+            "Type": "DateDayFieldInfo",
+            "PromptChar": null,
+            "SpinIncrement": null,
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0",
+            "Text": ""
+          },
+          {
+            "Type": "DateLiteralFieldInfo",
+            "Text": " ",
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0"
+          },
+          {
+            "Type": "DateHourFieldInfo",
+            "MidnightAs24": false,
+            "PromptChar": null,
+            "SpinIncrement": null,
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0",
+            "Text": ""
+          },
+          {
+            "Type": "DateLiteralFieldInfo",
+            "Text": ":",
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0"
+          },
+          {
+            "Type": "DateMinuteFieldInfo",
+            "PromptChar": null,
+            "SpinIncrement": null,
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0",
+            "Text": ""
+          },
+          {
+            "Type": "DateLiteralFieldInfo",
+            "Text": ":",
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0"
+          },
+          {
+            "Type": "DateSecondFieldInfo",
+            "PromptChar": null,
+            "SpinIncrement": null,
+            "BackColor": "Transparent",
+            "Font": null,
+            "ForeColor": "",
+            "Margin": "0, 0, 0, 0",
+            "Name": "",
+            "Padding": "0, 0, 0, 0",
+            "Text": ""
+          }
+        ],
+        "FieldsEditMode": 0,
+        "FocusPosition": 0,
+        "MaxDate": "9999-12-31T23:59:59",
+        "MaxMinBehavior": 0,
+        "MinDate": "0001-01-01T00:00:00",
+        "PaintByControl": false,
+        "PromptChar": "_",
+        "ReadOnly": false,
+        "RecommendedValue": null,
+        "ShortcutKeys": {
+          "F2": "ShortcutClear",
+          "F5": "SetNow",
+          "Return, Control": "ApplyRecommendedValue"
+        },
+        "ShowLiterals": 0,
+        "ShowRecommendedValue": false,
+        "ShowTouchToolBar": 4,
+        "SideButtons": [
+          {
+            "Type": "DropDownButtonInfo",
+            "IsDefaultBehavior": true,
+            "UseVisualStyleBackColor": true,
+            "Tag": null,
+            "BackColor": "Control",
+            "ButtonWidth": 17,
+            "Enabled": true,
+            "FlatAppearance": "",
+            "ForeColor": "ControlText",
+            "Name": "",
+            "Position": 1,
+            "Visible": 1
+          }
+        ],
+        "Spin": {
+          "AllowSpin": true,
+          "Increment": 1,
+          "IncrementValue": "00:00:00",
+          "SpinMode": 0,
+          "SpinOnKeys": true,
+          "SpinOnWheel": true,
+          "Wrap": true
+        },
+        "Static": false,
+        "TabAction": 0,
+        "TouchContextMenuScale": 1.5,
+        "UseSpreadDropDownButtonRender": true,
+        "ValidateMode": 2
+      },
+      "Options": {},
+      "HorizontalAlignment": 3,
+      "VerticalAlignment": 0,
+      "AllowAutoFilter": false,
+      "AllowAutoSort": false,
+      "Width": 60.0,
+      "Visible": true,
+      "ImeMode": -1,
+      "Locked": true
     }
   ]
 }

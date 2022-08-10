@@ -23,7 +23,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             var result = new JArray();
 
-            foreach (NumberDisplayFieldInfo field in dateTimeFieldCollectionInfo)
+            foreach (DateFieldInfo field in dateTimeFieldCollectionInfo)
             {
                 var jobj = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(field));
                 jobj.AddFirst(new JProperty("Type", field.GetType().Name));

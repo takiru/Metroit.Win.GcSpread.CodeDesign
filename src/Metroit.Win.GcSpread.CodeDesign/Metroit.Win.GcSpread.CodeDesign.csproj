@@ -58,13 +58,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColumnMoveResult.cs" />
+    <Compile Include="GcDateTimeCellTypeExtensions.cs" />
     <Compile Include="GcTextBoxCellTypeExtensions.cs" />
     <Compile Include="GcNumberCellTypeExtensions.cs" />
     <Compile Include="GcComboBoxCellTypeExtensions.cs" />
     <Compile Include="ICellTypeExtensions.cs" />
     <Compile Include="Json\ColumnDefinitionsBase.cs" />
     <Compile Include="Json\ColumnsSetupProvider.cs" />
+    <Compile Include="Json\Converters\DateTimeDropDownPickerInfoConverter.cs" />
+    <Compile Include="Json\Converters\DateTimeFieldCollectionInfoConverter.cs" />
+    <Compile Include="Json\Converters\YearMonthFormatConverter.cs" />
     <Compile Include="Json\Converters\DropDownEditorInfoConverter.cs" />
+    <Compile Include="Json\Converters\DateTimeDropDownInfoConverter.cs" />
+    <Compile Include="Json\Converters\DateAlternateTextInfoConverter.cs" />
+    <Compile Include="Json\Converters\DateTimeDisplayFieldCollectionInfoConverter.cs" />
+    <Compile Include="Json\Converters\DateSpinConverter.cs" />
+    <Compile Include="Json\Converters\DropDownCalendarInfoConverter.cs" />
+    <Compile Include="Json\Converters\DayOfWeekStyleConverter.cs" />
+    <Compile Include="Json\Converters\WeekdaysStyleConverter.cs" />
+    <Compile Include="Json\Converters\GridConverter.cs" />
+    <Compile Include="Json\Converters\SubStyleConverter.cs" />
+    <Compile Include="Json\Converters\HolidayCollectionConverter.cs" />
+    <Compile Include="Json\Converters\HolidayStyleCollectionConverter.cs" />
+    <Compile Include="Json\Converters\StyleConverter.cs" />
     <Compile Include="Json\Converters\TextBoxAlternateTextInfoConverter.cs" />
     <Compile Include="Json\JsonConvert.cs" />
     <Compile Include="Json\ColumnHeaderSetupProvider.cs" />

@@ -226,7 +226,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
             foreach (Column svColumn in SheetView.Columns)
             {
                 // TODO: GcComboBoxのみ動くようにする
-                if (!(svColumn.CellType is GcComboBoxCellType) && !(svColumn.CellType is GcNumberCellType) && !(svColumn.CellType is GcTextBoxCellType))
+                if (!(svColumn.CellType is GcComboBoxCellType) && !(svColumn.CellType is GcNumberCellType) && !(svColumn.CellType is GcTextBoxCellType) && !(svColumn.CellType is GcDateTimeCellType))
                 {
                     continue;
                 }

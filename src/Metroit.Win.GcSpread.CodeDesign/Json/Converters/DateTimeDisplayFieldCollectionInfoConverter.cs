@@ -23,7 +23,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             var result = new JArray();
 
-            foreach (NumberDisplayFieldInfo field in dateTimeDisplayFieldCollectionInfo)
+            foreach (DateDisplayFieldInfo field in dateTimeDisplayFieldCollectionInfo)
             {
                 var jobj = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(field));
                 jobj.AddFirst(new JProperty("Type", field.GetType().Name));
@@ -37,7 +37,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// デシリアライズを行います。
         /// </summary>
         /// <param name="prop">デシリアライズオブジェクト。</param>
-        /// <returns>NumberDisplayFieldCollectionInfo オブジェクト。</returns>
+        /// <returns>DateTimeDisplayFieldCollectionInfo オブジェクト。</returns>
         public static DateTimeDisplayFieldCollectionInfo Deserialize(JArray props)
         {
             var result = new DateTimeDisplayFieldCollectionInfo();

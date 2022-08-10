@@ -39,6 +39,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
                 {
                     continue;
                 }
+
                 shortcutDictionary.Add(targetKey, prop.Value.ToObject<string>());
             }
         }
