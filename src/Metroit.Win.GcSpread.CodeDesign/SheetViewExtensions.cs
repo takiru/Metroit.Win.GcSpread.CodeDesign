@@ -1493,7 +1493,8 @@ namespace Metroit.Win.GcSpread.CodeDesign
                 }
                 if (svColumn.CellType is ButtonCellType)
                 {
-                    column.CellTypeProps = DecompileButtonCellTypeProperties((ButtonCellType)svColumn.CellType);
+                    //column.CellTypeProps = DecompileButtonCellTypeProperties((ButtonCellType)svColumn.CellType);
+                    column.CellTypeProps = JObject.Parse(((ButtonCellType)svColumn.CellType).SerializeJson());
                 }
                 if (svColumn.CellType is GcTextBoxCellType)
                 {

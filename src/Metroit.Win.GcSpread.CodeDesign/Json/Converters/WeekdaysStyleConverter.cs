@@ -22,14 +22,14 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             var jObj = new JObject();
 
-            jObj.Add(new JProperty(nameof(WeekdaysStyle.Friday), DayOfWeekStyleConverter.Serialize(weekdaysStyle.Friday)));
-            jObj.Add(new JProperty(nameof(WeekdaysStyle.Monday), DayOfWeekStyleConverter.Serialize(weekdaysStyle.Monday)));
-            jObj.Add(new JProperty(nameof(WeekdaysStyle.Saturday), DayOfWeekStyleConverter.Serialize(weekdaysStyle.Saturday)));
             jObj.Add(new JProperty(nameof(WeekdaysStyle.Sunday), DayOfWeekStyleConverter.Serialize(weekdaysStyle.Sunday)));
-            jObj.Add(new JProperty(nameof(WeekdaysStyle.Thursday), DayOfWeekStyleConverter.Serialize(weekdaysStyle.Thursday)));
+            jObj.Add(new JProperty(nameof(WeekdaysStyle.Monday), DayOfWeekStyleConverter.Serialize(weekdaysStyle.Monday)));
             jObj.Add(new JProperty(nameof(WeekdaysStyle.Tuesday), DayOfWeekStyleConverter.Serialize(weekdaysStyle.Tuesday)));
             jObj.Add(new JProperty(nameof(WeekdaysStyle.Wednesday), DayOfWeekStyleConverter.Serialize(weekdaysStyle.Wednesday)));
-
+            jObj.Add(new JProperty(nameof(WeekdaysStyle.Thursday), DayOfWeekStyleConverter.Serialize(weekdaysStyle.Thursday)));
+            jObj.Add(new JProperty(nameof(WeekdaysStyle.Friday), DayOfWeekStyleConverter.Serialize(weekdaysStyle.Friday)));
+            jObj.Add(new JProperty(nameof(WeekdaysStyle.Saturday), DayOfWeekStyleConverter.Serialize(weekdaysStyle.Saturday)));
+            
             return jObj;
         }
 

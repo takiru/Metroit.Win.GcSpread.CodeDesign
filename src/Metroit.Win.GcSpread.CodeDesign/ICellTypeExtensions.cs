@@ -17,7 +17,10 @@ namespace Metroit.Win.GcSpread.CodeDesign
         public static void DeserializeJson(this ICellType cellType, string cellTypeProps)
         {
             // 通常セルタイプ
-
+            if (cellType is ButtonCellType)
+            {
+                ((ButtonCellType)cellType).DeserializeJson(cellTypeProps);
+            }
 
 
             // InputManセルタイプ
@@ -43,28 +46,31 @@ namespace Metroit.Win.GcSpread.CodeDesign
         /// セルタイプごとにオブジェクトをデシリアライズします。
         /// </summary>
         /// <param name="cellType"></param>
-        public static JObject SerializeJson(this ICellType cellType)
+        public static JObject SerializeJson(this ICellType cellType, string[] includeProps = null)
         {
             // 通常セルタイプ
-
+            if (cellType is ButtonCellType)
+            {
+                return JObject.Parse(((ButtonCellType)cellType).SerializeJson(includeProps));
+            }
 
 
             // InputManセルタイプ
             if (cellType is GcTextBoxCellType)
             {
-                return JObject.Parse(((GcTextBoxCellType)cellType).SerializeJson());
+                return JObject.Parse(((GcTextBoxCellType)cellType).SerializeJson(includeProps));
             }
             if (cellType is GcDateTimeCellType)
             {
-                return JObject.Parse(((GcDateTimeCellType)cellType).SerializeJson());
+                return JObject.Parse(((GcDateTimeCellType)cellType).SerializeJson(includeProps));
             }
             if (cellType is GcNumberCellType)
             {
-                return JObject.Parse(((GcNumberCellType)cellType).SerializeJson());
+                return JObject.Parse(((GcNumberCellType)cellType).SerializeJson(includeProps));
             }
             if (cellType is GcComboBoxCellType)
             {
-                return JObject.Parse(((GcComboBoxCellType)cellType).SerializeJson());
+                return JObject.Parse(((GcComboBoxCellType)cellType).SerializeJson(includeProps));
             }
 
             return null;

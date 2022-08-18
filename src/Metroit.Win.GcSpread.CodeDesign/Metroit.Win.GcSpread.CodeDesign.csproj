@@ -58,13 +58,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColumnMoveResult.cs" />
+    <Compile Include="ButtonCellTypeExtensions.cs" />
     <Compile Include="GcDateTimeCellTypeExtensions.cs" />
     <Compile Include="GcTextBoxCellTypeExtensions.cs" />
     <Compile Include="GcNumberCellTypeExtensions.cs" />
     <Compile Include="GcComboBoxCellTypeExtensions.cs" />
     <Compile Include="ICellTypeExtensions.cs" />
+    <Compile Include="Json\CellTypeConverters\GcComboBoxCellTypeConverter.cs" />
+    <Compile Include="Json\CellTypeConverters\GcDateTimeCellTypeConverter.cs" />
+    <Compile Include="Json\CellTypeConverters\GcNumberCellTypeConverter.cs" />
+    <Compile Include="Json\CellTypeConverters\FieldsEditorControlCellTypeConverter.cs" />
+    <Compile Include="Json\CellTypeConverters\GcTextBoxCellTypeConverter.cs" />
+    <Compile Include="Json\CellTypeConverters\ButtonCellTypeConverter.cs" />
+    <Compile Include="Json\CellTypeConverters\InputManCellTypeBaseConverter.cs" />
     <Compile Include="Json\ColumnDefinitionsBase.cs" />
     <Compile Include="Json\ColumnsSetupProvider.cs" />
+    <Compile Include="Json\CellTypeConverters\CellTypeConverterBase.cs" />
+    <Compile Include="Json\CellTypeConverters\BaseCellTypeConverter.cs" />
     <Compile Include="Json\Converters\DateTimeDropDownPickerInfoConverter.cs" />
     <Compile Include="Json\Converters\DateTimeFieldCollectionInfoConverter.cs" />
     <Compile Include="Json\Converters\YearMonthFormatConverter.cs" />

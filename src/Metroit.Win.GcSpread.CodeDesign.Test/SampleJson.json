@@ -76,6 +76,11 @@
           "Value": "GcDateTimeCellType",
           "HorizontalAlignment": "Left",
           "VerticalAlignment": "Bottom"
+        },
+        {
+          "Value": "ButtonCellType",
+          "HorizontalAlignment": "Left",
+          "VerticalAlignment": "Bottom"
         }
       ],
       [
@@ -960,6 +965,31 @@
       "Visible": true,
       "ImeMode": -1,
       "Locked": true
+    },
+    {
+      "CellType": "ButtonCellType",
+      "CellTypeProps": {
+        "BackgroundStyle": 0,
+        "ButtonColor": "buttonface",
+        "ButtonColor2": "",
+        "DarkColor": "buttonshadow",
+        "GradientMode": 0,
+        "HotkeyPrefix": 0,
+        "LightColor": "buttonhighlight",
+        "Picture": null,
+        "PictureDown": null,
+        "PictureZoomEffect": false,
+        "ShadowSize": 1,
+        "Text": "テスト",
+        "TextAlign": 0,
+        "TextColor": "Red",
+        "TextDown": "押した",
+        "TextOrientation": 0,
+        "TextRotationAngle": 0.0,
+        "TwoState": true,
+        "UseVisualStyleBackColor": true,
+        "WordWrap": false
+      }
     }
   ]
 }

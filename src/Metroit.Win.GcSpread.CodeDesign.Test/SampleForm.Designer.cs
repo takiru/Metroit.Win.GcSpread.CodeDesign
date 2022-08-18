@@ -48,6 +48,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo dropDownButtonInfo3 = new GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo();
             GrapeCity.Win.Spread.InputMan.CellType.GcNumberCellType gcNumberCellType2 = new GrapeCity.Win.Spread.InputMan.CellType.GcNumberCellType();
             GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo dropDownButtonInfo4 = new GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.GcTextBoxCellType gcTextBoxCellType1 = new GrapeCity.Win.Spread.InputMan.CellType.GcTextBoxCellType();
             this.fpSpread1 = new FarPoint.Win.Spread.FpSpread();
             this.fpSpread1_Sheet1 = new FarPoint.Win.Spread.SheetView();
             this.button1 = new System.Windows.Forms.Button();
@@ -139,6 +140,12 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             gcNumberCellType2.SideButtons.AddRange(new GrapeCity.Win.Spread.InputMan.CellType.SideButtonBaseInfo[] {
             dropDownButtonInfo4});
             this.fpSpread1_Sheet1.Columns.Get(6).CellType = gcNumberCellType2;
+            gcTextBoxCellType1.BackgroundImage = new FarPoint.Win.Picture(null, FarPoint.Win.RenderStyle.Normal, System.Drawing.Color.Empty, 0, FarPoint.Win.HorizontalAlignment.Left, FarPoint.Win.VerticalAlignment.Top);
+            gcTextBoxCellType1.ClearCollection = true;
+            gcTextBoxCellType1.FormatString = "A9N@^ｰﾞﾟ!\"\\#$%&\'()=\\^~\\\\|\\@`[{;+:*]},<.>/?";
+            gcTextBoxCellType1.ShortcutKeys.AddRange(new GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionaryEntry[] {
+            new GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionaryEntry(System.Windows.Forms.Keys.F2, "ShortcutClear")});
+            this.fpSpread1_Sheet1.Columns.Get(7).CellType = gcTextBoxCellType1;
             this.fpSpread1_Sheet1.RowHeader.Columns.Default.Resizable = false;
             this.fpSpread1_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.A1;
             // 
