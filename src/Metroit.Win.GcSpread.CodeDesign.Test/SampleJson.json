@@ -96,6 +96,11 @@
           "Value": "NumberCellType",
           "HorizontalAlignment": "Left",
           "VerticalAlignment": "Bottom"
+        },
+        {
+          "Value": "ComboBoxCellType",
+          "HorizontalAlignment": "Left",
+          "VerticalAlignment": "Bottom"
         }
       ],
       [
@@ -1036,6 +1041,14 @@
         "SpinDecimalIncrement": 0.1,
         "SpinIntegerIncrement": 1.0,
         "Static": false
+      }
+    },
+    {
+      "CellType": "ComboBoxCellType",
+      "CellTypeProps": {
+        "ItemData": [ "a", "b", "c" ],
+        "Items": [ "aa", "bb", "cc" ],
+        "EditorValue": "ItemData"
       }
     }
   ]

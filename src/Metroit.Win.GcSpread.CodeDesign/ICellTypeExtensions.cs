@@ -92,7 +92,7 @@ namespace Metroit.Win.GcSpread.CodeDesign
             }
             if (cellType is ComboBoxCellType)
             {
-                //return JObject.Parse(((ComboBoxCellType)cellType).SerializeJson(includeProps));
+                return JObject.Parse(((ComboBoxCellType)cellType).SerializeJson(includeProps));
             }
             if (cellType is CheckBoxCellType)
             {
