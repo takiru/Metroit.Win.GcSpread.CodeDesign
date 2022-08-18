@@ -101,6 +101,11 @@
           "Value": "ComboBoxCellType",
           "HorizontalAlignment": "Left",
           "VerticalAlignment": "Bottom"
+        },
+        {
+          "Value": "CheckBoxCellType",
+          "HorizontalAlignment": "Left",
+          "VerticalAlignment": "Bottom"
         }
       ],
       [
@@ -1049,6 +1054,14 @@
         "ItemData": [ "a", "b", "c" ],
         "Items": [ "aa", "bb", "cc" ],
         "EditorValue": "ItemData"
+      }
+    },
+    {
+      "CellType": "CheckBoxCellType",
+      "CellTypeProps": {
+        "Picture": {
+          "True": "iVBORw0KGgoAAAANSUhEUgAAAFYAAABGCAIAAADZ4vQ7AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAM1JREFUeF7t1EEKhDAQRUEv7128ZeaDPQMJDuLSpN7OhoBdRLe2fAgQXBIcx7Hvez0s0AVB9t+2hW6HD+GOINdhpmqrvnE6/Ajq6CzVVn3j9PcjOC3Ok9N07jh0PU3z7Z9qt76/BGd1dJZqq75nBDV9T/Xe32rahwABgoQAAYKEAAGChAABgoQAAYKEAAGChAABgoQAAYKEAAGChAABgoQAAYKEAAGChAABgoQAAYKE4CHB26ut+hAgQJAQ3BGsEAIECBICBAgSAgQIWmsftaMDcETzd5cAAAAASUVORK5CYII=",
+        }
       }
     }
   ]

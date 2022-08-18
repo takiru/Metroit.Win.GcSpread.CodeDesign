@@ -96,7 +96,7 @@ namespace Metroit.Win.GcSpread.CodeDesign
             }
             if (cellType is CheckBoxCellType)
             {
-                //return JObject.Parse(((CheckBoxCellType)cellType).SerializeJson(includeProps));
+                return JObject.Parse(((CheckBoxCellType)cellType).SerializeJson(includeProps));
             }
             if (cellType is ButtonCellType)
             {
