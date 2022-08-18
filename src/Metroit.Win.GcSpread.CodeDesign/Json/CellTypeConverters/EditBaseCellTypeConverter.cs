@@ -51,7 +51,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters
             {
                 propsObj.Add(new JProperty(nameof(EditBaseCellType.AllowEditorVerticalAlign), c.AllowEditorVerticalAlign));
             }
-            if (includeProps == null || includeProps.Any(x => x.Contains(nameof(EditBaseCellType.AutoCompleteCustomSource))))   // TODO
+            if (includeProps == null || includeProps.Any(x => x.Contains(nameof(EditBaseCellType.AutoCompleteCustomSource))))
             {
                 propsObj.Add(new JProperty(nameof(EditBaseCellType.AutoCompleteCustomSource), c.AutoCompleteCustomSource));
             }

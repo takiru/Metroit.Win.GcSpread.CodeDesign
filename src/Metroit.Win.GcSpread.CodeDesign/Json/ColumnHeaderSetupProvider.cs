@@ -168,18 +168,27 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// <summary>
         /// 列ヘッダー行定義を生成します。
         /// </summary>
+        /// <param name="includeProps">生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
         /// <returns>HeaderRowDefinitions[] オブジェクト。</returns>
-        public HeaderRowDefinitions[] CreateRowDefinitions()
+        public HeaderRowDefinitions[] CreateRowDefinitions(string[] includeProps = null)
         {
             var headerRows = new List<HeaderRowDefinitions>();
             foreach (Row row in SheetView.ColumnHeader.Rows)
             {
-                var headerRow = new HeaderRowDefinitions()
+                var headerRow = new HeaderRowDefinitions();
+
+                if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Row.Height))))
                 {
-                    Height = row.Height,
-                    HorizontalAlignment = row.HorizontalAlignment,
-                    VerticalAlignment = row.VerticalAlignment
-                };
+                    headerRow.Height = row.Height;
+                }
+                if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Row.HorizontalAlignment))))
+                {
+                    headerRow.HorizontalAlignment = row.HorizontalAlignment;
+                }
+                if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Row.VerticalAlignment))))
+                {
+                    headerRow.VerticalAlignment = row.VerticalAlignment;
+                }
 
                 headerRows.Add(headerRow);
             }
@@ -190,8 +199,9 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// <summary>
         /// 列ヘッダーセル定義を生成します。
         /// </summary>
+        /// <param name="includeProps">生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
         /// <returns>HeaderCellDefinitions[][] オブジェクト。</returns>
-        public HeaderCellDefinitions[][] CreateCellDefinitions()
+        public HeaderCellDefinitions[][] CreateCellDefinitions(string[] includeProps = null)
         {
             var allCells = new List<HeaderCellDefinitions[]>();
             foreach (Row row in SheetView.ColumnHeader.Rows)
@@ -200,9 +210,20 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
                 foreach (Column column in SheetView.ColumnHeader.Columns)
                 {
                     var cell = new HeaderCellDefinitions();
-                    cell.Value = SheetView.ColumnHeader.Cells[row.Index, column.Index].Value?.ToString();
-                    cell.HorizontalAlignment = SheetView.ColumnHeader.Cells[row.Index, column.Index].HorizontalAlignment;
-                    cell.VerticalAlignment = SheetView.ColumnHeader.Cells[row.Index, column.Index].VerticalAlignment;
+
+                    if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Cell.Value))))
+                    {
+                        cell.Value = SheetView.ColumnHeader.Cells[row.Index, column.Index].Value?.ToString();
+                    }
+                    if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Cell.HorizontalAlignment))))
+                    {
+                        cell.HorizontalAlignment = SheetView.ColumnHeader.Cells[row.Index, column.Index].HorizontalAlignment;
+                    }
+                    if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Cell.VerticalAlignment))))
+                    {
+                        cell.VerticalAlignment = SheetView.ColumnHeader.Cells[row.Index, column.Index].VerticalAlignment;
+                    }
+
                     cells.Add(cell);
                 }
                 allCells.Add(cells.ToArray());
@@ -214,7 +235,6 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// <summary>
         /// 列ヘッダースパン定義を生成します。
         /// </summary>
-        /// <param name="sheetView">SheetView オブジェクト。</param>
         /// <returns>SpanDefinitions[] オブジェクト。</returns>
         public SpanDefinitions[] CreateSpanDefinitions()
         {

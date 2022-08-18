@@ -284,12 +284,19 @@ namespace Metroit.Win.GcSpread.CodeDesign
         }
 
         /// <summary>
-        /// シート情報からJSONデータオブジェクトを生成します。
+        /// シート情報からシート定義オブジェクトを生成します。
         /// </summary>
         /// <param name="sheetView">SheetView オブジェクト。</param>
         /// <param name="columnOptions">列のオプション情報設定アクションデリゲート。</param>
+        /// <param name="includeHeaderRowProps">ヘッダー行情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+        /// <param name="includeHeaderCellProps">ヘッダーセル情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+        /// <param name="includeColumnProps">列情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+        /// <param name="outputCellTypeProps">セルタイププロパティを生成するかどうか。</param>
+        /// <param name="outputOptions">オプション情報を生成するかどうか。false の場合、第一引数は動作しません。</param>
         /// <returns>JSONデータオブジェクト。</returns>
-        public static SheetViewDefinitions CreateSheetDefinitions(this SheetView sheetView, Func<Column, Dictionary<string, object>> columnOptions = null)
+        public static SheetViewDefinitions CreateSheetDefinitions(this SheetView sheetView, Func<Column, Dictionary<string, object>> columnOptions = null,
+            string[] includeHeaderRowProps = null, string[] includeHeaderCellProps = null,
+            string[] includeColumnProps = null, bool outputCellTypeProps = true, bool outputOptions = true)
         {
             var result = new SheetViewDefinitions()
             {
@@ -299,77 +306,146 @@ namespace Metroit.Win.GcSpread.CodeDesign
             var header = new ColumnHeaderSetupProvider(sheetView);
 
             // ヘッダー行情報
-            result.ColumnHeader.Rows = header.CreateRowDefinitions();
+            result.ColumnHeader.Rows = header.CreateRowDefinitions(includeHeaderRowProps);
 
             // ヘッダーセル情報
-            result.ColumnHeader.Cells = header.CreateCellDefinitions();
+            result.ColumnHeader.Cells = header.CreateCellDefinitions(includeHeaderCellProps);
 
             // ヘッダースパン情報
             result.ColumnHeader.Spans = header.CreateSpanDefinitions();
 
             // 列情報
-            //result.Columns = DecompileColumns(sheetView, columnOptions);
             var columnProvider = new ColumnsSetupProvider(sheetView);
-            result.Columns = columnProvider.CreateColumnsDefinitions(columnOptions);
+            result.Columns = columnProvider.CreateColumnsDefinitions(columnOptions, includeColumnProps, outputCellTypeProps, outputOptions);
 
             return result;
         }
 
         /// <summary>
-        /// シート情報から列ヘッダーの特定のみのJSONデータオブジェクトを生成します。
+        /// シート情報からシリアライズします。
         /// </summary>
         /// <param name="sheetView">SheetView オブジェクト。</param>
-        /// <returns>JSONデータオブジェクト。</returns>
-        public static SpecialColumnHeaderDefinitions CreateSpecialColumnHeaderDefinitions(this SheetView sheetView)
+        /// <param name="columnOptions">列のオプション情報設定アクションデリゲート。</param>
+        /// <param name="includeHeaderRowProps">ヘッダー行情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+        /// <param name="includeHeaderCellProps">ヘッダーセル情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+        /// <param name="includeColumnProps">列情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+        /// <param name="outputCellTypeProps">セルタイププロパティを生成するかどうか。</param>
+        /// <param name="outputOptions">オプション情報を生成するかどうか。false の場合、第一引数は動作しません。</param>
+        /// <returns>JSONデータ文字列。</returns>
+        public static string SerializeJson(this SheetView sheetView, Func<Column, Dictionary<string, object>> columnOptions = null,
+            string[] includeHeaderRowProps = null, string[] includeHeaderCellProps = null,
+            string[] includeColumnProps = null, bool outputCellTypeProps = true, bool outputOptions = true)
         {
-            var result = new SpecialColumnHeaderDefinitions();
-
-            var headerRows = new List<SpecialHeaderRowDefinitions>();
-            foreach (Row row in sheetView.ColumnHeader.Rows)
-            {
-                var headerRow = new SpecialHeaderRowDefinitions();
-
-                var headerColumns = new List<SpecialHeaderColumnDefinitions>();
-                foreach (Column column in sheetView.ColumnHeader.Columns)
-                {
-                    headerColumns.Add(new SpecialHeaderColumnDefinitions()
-                    {
-                        Value = sheetView.ColumnHeader.Cells[row.Index, column.Index].Value?.ToString()
-                    });
-                }
-                headerRow.Columns = headerColumns.ToArray();
-                headerRows.Add(headerRow);
-            }
-            result.Rows = headerRows.ToArray();
-
-            return result;
+            var defs = CreateSheetDefinitions(sheetView, columnOptions, includeHeaderRowProps, includeHeaderCellProps, includeColumnProps, outputCellTypeProps, outputOptions);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(defs);
         }
 
         /// <summary>
-        /// シート情報から列の特定のみのJSONデータオブジェクトを生成します。
+        /// シート定義オブジェクトからシリアライズします。
         /// </summary>
         /// <param name="sheetView">SheetView オブジェクト。</param>
-        /// <returns>JSONデータオブジェクト。</returns>
-        public static SpecialColumnsDefinitions CreateSpecialColumnDefinitions(this SheetView sheetView)
+        /// <param name="defs">シートの定義情報オブジェクト。</param>
+        /// <returns>JSONデータ文字列。</returns>
+        public static string SerializeJson(this SheetView sheetView, SheetViewDefinitions defs)
         {
-            var result = new SpecialColumnsDefinitions();
-
-            var columns = new List<SpecialColumnDefinitions>();
-
-            foreach (Column svColumn in sheetView.Columns)
-            {
-                var column = new SpecialColumnDefinitions()
-                {
-                    Width = svColumn.Width,
-                    Visible = svColumn.Visible,
-                    DataField = svColumn.DataField
-                };
-                columns.Add(column);
-            }
-            result.Columns = columns.ToArray();
-
-            return result;
+            return Newtonsoft.Json.JsonConvert.SerializeObject(defs);
         }
+
+        /// <summary>
+        /// シート情報から列ヘッダー行定義オブジェクトを生成します。
+        /// </summary>
+        /// <param name="sheetView">SheetView オブジェクト。</param>
+        /// <param name="includeProps">ヘッダー行情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+        /// <returns>JSONデータオブジェクト。</returns>
+        public static HeaderRowDefinitions[] CreateHeaderRowDefinitions(this SheetView sheetView,
+            string[] includeProps = null)
+        {
+            var header = new ColumnHeaderSetupProvider(sheetView);
+            return header.CreateRowDefinitions(includeProps);
+        }
+
+        /// <summary>
+        /// シート情報から列ヘッダーセル定義オブジェクトを生成します。
+        /// </summary>
+        /// <param name="sheetView">SheetView オブジェクト。</param>
+        /// <param name="includeProps">ヘッダーセル情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+        /// <returns>JSONデータオブジェクト。</returns>
+        public static HeaderCellDefinitions[][] CreateHeaderCellDefinitions(this SheetView sheetView,
+            string[] includeProps = null)
+        {
+            var header = new ColumnHeaderSetupProvider(sheetView);
+            return header.CreateCellDefinitions(includeProps);
+        }
+
+        /// <summary>
+        /// シート情報から列定義オブジェクトを生成します。
+        /// </summary>
+        /// <param name="sheetView">SheetView オブジェクト。</param>
+        /// <param name="includeProps">列情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+        /// <returns>JSONデータオブジェクト。</returns>
+        public static ColumnDefinitions[] CreateColumnsDefinitions(this SheetView sheetView,
+            Func<Column, Dictionary<string, object>> columnOptions,
+            string[] includeProps = null, bool outputCellTypeProps = true, bool outputOptions = true)
+        {
+            var columns = new ColumnsSetupProvider(sheetView);
+            return columns.CreateColumnsDefinitions(columnOptions, includeProps, outputCellTypeProps, outputOptions);
+        }
+
+        ///// <summary>
+        ///// シート情報から列ヘッダーの特定のみのJSONデータオブジェクトを生成します。
+        ///// </summary>
+        ///// <param name="sheetView">SheetView オブジェクト。</param>
+        ///// <returns>JSONデータオブジェクト。</returns>
+        //public static SpecialColumnHeaderDefinitions CreateSpecialColumnHeaderDefinitions(this SheetView sheetView)
+        //{
+        //    var result = new SpecialColumnHeaderDefinitions();
+
+        //    var headerRows = new List<SpecialHeaderRowDefinitions>();
+        //    foreach (Row row in sheetView.ColumnHeader.Rows)
+        //    {
+        //        var headerRow = new SpecialHeaderRowDefinitions();
+
+        //        var headerColumns = new List<SpecialHeaderColumnDefinitions>();
+        //        foreach (Column column in sheetView.ColumnHeader.Columns)
+        //        {
+        //            headerColumns.Add(new SpecialHeaderColumnDefinitions()
+        //            {
+        //                Value = sheetView.ColumnHeader.Cells[row.Index, column.Index].Value?.ToString()
+        //            });
+        //        }
+        //        headerRow.Columns = headerColumns.ToArray();
+        //        headerRows.Add(headerRow);
+        //    }
+        //    result.Rows = headerRows.ToArray();
+
+        //    return result;
+        //}
+
+        ///// <summary>
+        ///// シート情報から列の特定のみのJSONデータオブジェクトを生成します。
+        ///// </summary>
+        ///// <param name="sheetView">SheetView オブジェクト。</param>
+        ///// <returns>JSONデータオブジェクト。</returns>
+        //public static SpecialColumnsDefinitions CreateSpecialColumnDefinitions(this SheetView sheetView)
+        //{
+        //    var result = new SpecialColumnsDefinitions();
+
+        //    var columns = new List<SpecialColumnDefinitions>();
+
+        //    foreach (Column svColumn in sheetView.Columns)
+        //    {
+        //        var column = new SpecialColumnDefinitions()
+        //        {
+        //            Width = svColumn.Width,
+        //            Visible = svColumn.Visible,
+        //            DataField = svColumn.DataField
+        //        };
+        //        columns.Add(column);
+        //    }
+        //    result.Columns = columns.ToArray();
+
+        //    return result;
+        //}
 
         /// <summary>
         /// バインド準備を行う。
@@ -398,941 +474,6 @@ namespace Metroit.Win.GcSpread.CodeDesign
             sheetView.ColumnHeader.Columns.Count = 0;
             sheetView.ColumnHeader.Rows.Count = 0;
             sheetView.Columns.Count = 0;
-        }
-
-
-        private static void SetColumnHeaderRowProps(Row row, HeaderRowDefinitions headerRowDefs)
-        {
-            if (headerRowDefs.Height.HasValue)
-            {
-                row.Height = headerRowDefs.Height.Value;
-            }
-            if (headerRowDefs.HorizontalAlignment.HasValue)
-            {
-                row.HorizontalAlignment = headerRowDefs.HorizontalAlignment.Value;
-            }
-            if (headerRowDefs.VerticalAlignment.HasValue)
-            {
-                row.VerticalAlignment = headerRowDefs.VerticalAlignment.Value;
-            }
-        }
-
-        private static void SetColumnHeaderCellProps(Cell cell, HeaderCellDefinitions headerCellDefs)
-        {
-            if (!string.IsNullOrEmpty(headerCellDefs.Value))
-            {
-                cell.Value = headerCellDefs.Value;
-            }
-            if (headerCellDefs.HorizontalAlignment.HasValue)
-            {
-                cell.HorizontalAlignment = headerCellDefs.HorizontalAlignment.Value;
-            }
-            if (headerCellDefs.VerticalAlignment.HasValue)
-            {
-                cell.VerticalAlignment = headerCellDefs.VerticalAlignment.Value;
-            }
-        }
-
-        /// <summary>
-        /// 全テンプレート情報から対象のヘッダー行テンプレート情報を取得する。
-        /// </summary>
-        /// <param name="templateLayoutDefsList"></param>
-        /// <param name="columnDefinitions"></param>
-        /// <param name="targetTemplates"></param>
-        private static void GetTargetHeaderRowTemplates(List<TemplateSheetViewDefinitions> templateLayoutDefsList, HeaderRowDefinitions headerRowDefinitions, List<TemplateHeaderRowDefinitions> targetTemplates)
-        {
-            foreach (var templateLayoutDefs in templateLayoutDefsList)
-            {
-                var templateHeaderRowDefs = templateLayoutDefs.ColumnHeader.Rows.Where(x => x.TemplateName == headerRowDefinitions.BaseTemplate).FirstOrDefault();
-                if (templateHeaderRowDefs == null)
-                {
-                    continue;
-                }
-                if (!string.IsNullOrEmpty(templateHeaderRowDefs.TemplateName))
-                {
-                    GetTargetHeaderRowTemplates(templateLayoutDefsList, templateHeaderRowDefs, targetTemplates);
-                }
-                targetTemplates.Add(templateHeaderRowDefs);
-            }
-        }
-
-        /// <summary>
-        /// 全テンプレート情報から対象のヘッダーセルテンプレート情報を取得する。
-        /// </summary>
-        /// <param name="templateLayoutDefsList"></param>
-        /// <param name="columnDefinitions"></param>
-        /// <param name="targetTemplates"></param>
-        private static void GetTargetHeaderCellTemplates(List<TemplateSheetViewDefinitions> templateLayoutDefsList, HeaderCellDefinitions headerCellDefinitions, List<TemplateHeaderCellDefinitions> targetTemplates)
-        {
-            foreach (var templateLayoutDefs in templateLayoutDefsList)
-            {
-                var templateHeaderCellDefs = templateLayoutDefs.ColumnHeader.Cells.Where(x => x.TemplateName == headerCellDefinitions.BaseTemplate).FirstOrDefault();
-                if (templateHeaderCellDefs == null)
-                {
-                    continue;
-                }
-                if (!string.IsNullOrEmpty(templateHeaderCellDefs.TemplateName))
-                {
-                    GetTargetHeaderCellTemplates(templateLayoutDefsList, templateHeaderCellDefs, targetTemplates);
-                }
-                targetTemplates.Add(templateHeaderCellDefs);
-            }
-        }
-
-        /// <summary>
-        /// 全テンプレート情報から対象の列テンプレート情報を取得する。
-        /// </summary>
-        /// <param name="templateLayoutDefsList"></param>
-        /// <param name="columnDefinitions"></param>
-        /// <param name="targetTemplates"></param>
-        private static void GetTargetColumnTemplates(List<TemplateSheetViewDefinitions> templateLayoutDefsList, ColumnDefinitions columnDefinitions, List<TemplateColumnDefinitions> targetTemplates)
-        {
-            foreach (var templateLayoutDefs in templateLayoutDefsList)
-            {
-                var templateColumnDefs = templateLayoutDefs.Columns.Where(x => x.TemplateName == columnDefinitions.BaseTemplate).FirstOrDefault();
-                if (templateColumnDefs == null)
-                {
-                    continue;
-                }
-                if (!string.IsNullOrEmpty(templateColumnDefs.TemplateName))
-                {
-                    GetTargetColumnTemplates(templateLayoutDefsList, templateColumnDefs, targetTemplates);
-                }
-                targetTemplates.Add(templateColumnDefs);
-            }
-        }
-
-        /// <summary>
-        /// TextCellType をコンパイルする。
-        /// </summary>
-        /// <param name="cellType">TextCellType オブジェクト。</param>
-        /// <param name="cellTypeProperties">セルタイプ情報。</param>
-        private static void CompileTextCellType(TextCellType cellType, Dictionary<string, object> cellTypeProperties)
-        {
-            if (cellTypeProperties == null)
-            {
-                return;
-            }
-
-            foreach (var prop in cellTypeProperties)
-            {
-                var propKey = prop.Key.ToLower();
-                if (propKey == "maxlength")
-                {
-                    cellType.MaxLength = Convert.ToInt32(prop.Value);
-                }
-                if (propKey == "charactercasing")
-                {
-                    CharacterCasing characterCasing;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out characterCasing))
-                    {
-                        cellType.CharacterCasing = characterCasing;
-                    }
-                }
-                if (propKey == "characterset")
-                {
-                    CharacterSet characterSet;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out characterSet))
-                    {
-                        cellType.CharacterSet = characterSet;
-                    }
-                }
-                if (propKey == "multiline")
-                {
-                    cellType.Multiline = (bool)prop.Value;
-                }
-                if (propKey == "readonly")
-                {
-                    cellType.ReadOnly = (bool)prop.Value;
-                }
-                if (propKey == "static")
-                {
-                    cellType.Static = (bool)prop.Value;
-                }
-                if (propKey == "enablesubeditor")
-                {
-                    cellType.EnableSubEditor = (bool)prop.Value;
-                }
-            }
-        }
-
-        /// <summary>
-        /// NumberCellType をコンパイルする。
-        /// </summary>
-        /// <param name="cellType">NumberCellType オブジェクト。</param>
-        /// <param name="cellTypeProperties">セルタイプ情報。</param>
-        private static void CompileNumberCellType(NumberCellType cellType, Dictionary<string, object> cellTypeProperties)
-        {
-            if (cellTypeProperties == null)
-            {
-                return;
-            }
-
-            foreach (var prop in cellTypeProperties)
-            {
-                var propKey = prop.Key.ToLower();
-                if (propKey == "decimalplaces")
-                {
-                    cellType.DecimalPlaces = Convert.ToInt32(prop.Value);
-                }
-                if (propKey == "decimalseparator")
-                {
-                    cellType.DecimalSeparator = (string)prop.Value;
-                }
-                if (propKey == "fixedpoint")
-                {
-                    cellType.FixedPoint = (bool)prop.Value;
-                }
-                if (propKey == "leadingzero")
-                {
-                    LeadingZero leadingZero;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out leadingZero))
-                    {
-                        cellType.LeadingZero = leadingZero;
-                    }
-                }
-                if (propKey == "maximumvalue")
-                {
-                    cellType.MaximumValue = Convert.ToDouble(prop.Value);
-                }
-                if (propKey == "minimumvalue")
-                {
-                    cellType.MinimumValue = Convert.ToDouble(prop.Value);
-                }
-                if (propKey == "negativeformat")
-                {
-                    NegativeFormat negativeFormat;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out negativeFormat))
-                    {
-                        cellType.NegativeFormat = negativeFormat;
-                    }
-                }
-                if (propKey == "negativered")
-                {
-                    cellType.NegativeRed = (bool)prop.Value;
-                }
-                if (propKey == "readonly")
-                {
-                    cellType.ReadOnly = (bool)prop.Value;
-                }
-                if (propKey == "separator")
-                {
-                    cellType.Separator = (string)prop.Value;
-                }
-                if (propKey == "showseparator")
-                {
-                    cellType.ShowSeparator = (bool)prop.Value;
-                }
-                if (propKey == "static")
-                {
-                    cellType.Static = (bool)prop.Value;
-                }
-                if (propKey == "enablesubeditor")
-                {
-                    cellType.EnableSubEditor = (bool)prop.Value;
-                }
-            }
-        }
-
-        /// <summary>
-        /// ComboBoxCellType をコンパイルする。
-        /// </summary>
-        /// <param name="cellType">ComboBoxCellType オブジェクト。</param>
-        /// <param name="cellTypeProperties">セルタイプ情報。</param>
-        private static void CompileComboBoxCellType(ComboBoxCellType cellType, Dictionary<string, object> cellTypeProperties)
-        {
-            if (cellTypeProperties == null)
-            {
-                return;
-            }
-
-            foreach (var prop in cellTypeProperties)
-            {
-                var propKey = prop.Key.ToLower();
-                if (propKey == "maxdrop")
-                {
-                    cellType.MaxDrop = Convert.ToInt32(prop.Value);
-                }
-                if (propKey == "editable")
-                {
-                    cellType.Editable = (bool)prop.Value;
-                }
-                if (propKey == "editorvalue")
-                {
-                    EditorValue editorValue;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out editorValue))
-                    {
-                        cellType.EditorValue = editorValue;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// CheckBoxCellType をコンパイルする。
-        /// </summary>
-        /// <param name="cellType">CheckBoxCellType オブジェクト。</param>
-        /// <param name="cellTypeProperties">セルタイプ情報。</param>
-        private static void CompileCheckBoxCellType(CheckBoxCellType cellType, Dictionary<string, object> cellTypeProperties)
-        {
-            if (cellTypeProperties == null)
-            {
-                return;
-            }
-
-            foreach (var prop in cellTypeProperties)
-            {
-                var propKey = prop.Key.ToLower();
-                if (propKey == "texttrue")
-                {
-                    cellType.TextTrue = (string)prop.Value;
-                }
-                if (propKey == "textfalse")
-                {
-                    cellType.TextFalse = (string)prop.Value;
-                }
-                if (propKey == "textindeterminate")
-                {
-                    cellType.TextIndeterminate = (string)prop.Value;
-                }
-                if (propKey == "threestate")
-                {
-                    cellType.ThreeState = (bool)prop.Value;
-                }
-            }
-        }
-
-        /// <summary>
-        /// ButtonCellType をコンパイルする。
-        /// </summary>
-        /// <param name="cellType">ButtonCellType オブジェクト。</param>
-        /// <param name="cellTypeProperties">セルタイプ情報。</param>
-        private static void CompileButtonCellType(ButtonCellType cellType, Dictionary<string, object> cellTypeProperties)
-        {
-            if (cellTypeProperties == null)
-            {
-                return;
-            }
-
-            foreach (var prop in cellTypeProperties)
-            {
-                var propKey = prop.Key.ToLower();
-                if (propKey == "text")
-                {
-                    cellType.Text = (string)prop.Value;
-                }
-                if (propKey == "textalign")
-                {
-                    ButtonTextAlign textAlign;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out textAlign))
-                    {
-                        cellType.TextAlign = textAlign;
-                    }
-                }
-                if (propKey == "twostate")
-                {
-                    cellType.TwoState = (bool)prop.Value;
-                }
-                if (propKey == "textdown")
-                {
-                    cellType.TextDown = (string)prop.Value;
-                }
-                if (propKey == "wordwrap")
-                {
-                    cellType.WordWrap = (bool)prop.Value;
-                }
-            }
-        }
-
-        /// <summary>
-        /// GcTextBoxCellType をコンパイルする。
-        /// </summary>
-        /// <param name="cellType">GcTextBoxCellType オブジェクト。</param>
-        /// <param name="cellTypeProperties">セルタイプ情報。</param>
-        private static void CompileGcTextBoxCellType(GcTextBoxCellType cellType, Dictionary<string, object> cellTypeProperties)
-        {
-            if (cellTypeProperties == null)
-            {
-                return;
-            }
-
-            foreach (var prop in cellTypeProperties)
-            {
-                var propKey = prop.Key.ToLower();
-
-                if (propKey == "acceptscrlf")
-                {
-                    CrLfMode crLfMode;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out crLfMode))
-                    {
-                        cellType.AcceptsCrLf = crLfMode;
-                    }
-                }
-                if (propKey == "acceptstabchar")
-                {
-                    TabCharMode tabCharMode;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out tabCharMode))
-                    {
-                        cellType.AcceptsTabChar = tabCharMode;
-                    }
-                }
-                if (propKey == "allowspace")
-                {
-                    AllowSpace allowSpace;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out allowSpace))
-                    {
-                        cellType.AllowSpace = allowSpace;
-                    }
-                }
-                if (propKey == "autoconvert")
-                {
-                    cellType.AutoConvert = (bool)prop.Value;
-                }
-                if (propKey == "editmode")
-                {
-                    EditMode editMode;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out editMode))
-                    {
-                        cellType.EditMode = editMode;
-                    }
-                }
-                if (propKey == "ellipsis")
-                {
-                    EllipsisMode ellipsisMode;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out ellipsisMode))
-                    {
-                        cellType.Ellipsis = ellipsisMode;
-                    }
-                }
-                if (propKey == "ellipsisstring")
-                {
-                    cellType.EllipsisString = (string)prop.Value;
-                }
-                if (propKey == "excelexportformat")
-                {
-                    cellType.ExcelExportFormat = (string)prop.Value;
-                }
-                if (propKey == "exitonlastchar")
-                {
-                    cellType.ExitOnLastChar = (bool)prop.Value;
-                }
-                if (propKey == "focusposition")
-                {
-                    EditorBaseFocusCursorPosition editorBaseFocusCursorPosition;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out editorBaseFocusCursorPosition))
-                    {
-                        cellType.FocusPosition = editorBaseFocusCursorPosition;
-                    }
-                }
-                if (propKey == "formatstring")
-                {
-                    cellType.FormatString = (string)prop.Value;
-                }
-                if (propKey == "linespace")
-                {
-                    cellType.LineSpace = Convert.ToInt32(prop.Value);
-                }
-                if (propKey == "maxlength")
-                {
-                    cellType.MaxLength = Convert.ToInt32(prop.Value);
-                }
-                if (propKey == "maxlengthcodepage")
-                {
-                    cellType.MaxLengthCodePage = Convert.ToInt32(prop.Value);
-                }
-                if (propKey == "maxlengthunit")
-                {
-                    LengthUnit lengthUnit;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out lengthUnit))
-                    {
-                        cellType.MaxLengthUnit = lengthUnit;
-                    }
-                }
-                if (propKey == "maxlinecount")
-                {
-                    cellType.MaxLineCount = Convert.ToInt32(prop.Value);
-                }
-                if (propKey == "multiline")
-                {
-                    cellType.Multiline = (bool)prop.Value;
-                }
-                if (propKey == "passwordchar")
-                {
-                    cellType.PasswordChar = Convert.ToChar(prop.Value);
-                }
-                if (propKey == "passwordrevelationmode")
-                {
-                    PasswordRevelationMode passwordRevelationMode;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out passwordRevelationMode))
-                    {
-                        cellType.PasswordRevelationMode = passwordRevelationMode;
-                    }
-                }
-                if (propKey == "readonly")
-                {
-                    cellType.ReadOnly = (bool)prop.Value;
-                }
-                if (propKey == "recommendedvalue")
-                {
-                    cellType.RecommendedValue = (string)prop.Value;
-                }
-                if (propKey == "showrecommendedvalue")
-                {
-                    cellType.ShowRecommendedValue = (bool)prop.Value;
-                }
-                if (propKey == "static")
-                {
-                    cellType.Static = (bool)prop.Value;
-                }
-                if (propKey == "usesystempasswordchar")
-                {
-                    cellType.UseSystemPasswordChar = (bool)prop.Value;
-                }
-                if (propKey == "wrapmode")
-                {
-                    WrapMode wrapMode;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out wrapMode))
-                    {
-                        cellType.WrapMode = wrapMode;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// GcDateTimeCellType をコンパイルする。
-        /// </summary>
-        /// <param name="cellType">GcDateTimeCellType オブジェクト。</param>
-        /// <param name="cellTypeProperties">セルタイプ情報。</param>
-        private static void CompileGcDateTimeCellType(GcDateTimeCellType cellType, Dictionary<string, object> cellTypeProperties)
-        {
-            if (cellTypeProperties == null)
-            {
-                return;
-            }
-
-            foreach (var prop in cellTypeProperties)
-            {
-                var propKey = prop.Key.ToLower();
-
-                if (propKey == "acceptscrlf")
-                {
-                    CrLfMode crLfMode;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out crLfMode))
-                    {
-                        cellType.AcceptsCrLf = crLfMode;
-                    }
-                }
-                if (propKey == "clipcontent")
-                {
-                    ClipContent clipContent;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out clipContent))
-                    {
-                        cellType.ClipContent = clipContent;
-                    }
-                }
-                if (propKey == "defaultactivefield")
-                {
-                    cellType.SerializationDefaultActiveFieldIndex = Convert.ToInt32(prop.Value);
-                }
-                if (propKey == "editmode")
-                {
-                    EditMode editMode;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out editMode))
-                    {
-                        cellType.EditMode = editMode;
-                    }
-                }
-                if (propKey == "displayfields")
-                {
-                    cellType.DisplayFields.Clear();
-                    if (prop.Value is JArray)
-                    {
-                        var list = ((JArray)prop.Value).ToList();
-                        DateDisplayFieldInfo info;
-                        foreach (var item in list)
-                        {
-                            switch (item["Type"].ToString().ToLower())
-                            {
-                                case "dateyeardisplayfieldinfo":
-                                    info = item.ToObject<DateYearDisplayFieldInfo>();
-                                    cellType.DisplayFields.Add(info);
-                                    break;
-                                case "datemonthdisplayfieldinfo":
-                                    info = item.ToObject<DateMonthDisplayFieldInfo>();
-                                    cellType.DisplayFields.Add(info);
-                                    break;
-                                case "datedaydisplayfieldinfo":
-                                    info = item.ToObject<DateDayDisplayFieldInfo>();
-                                    cellType.DisplayFields.Add(info);
-                                    break;
-                                case "datehourdisplayfieldinfo":
-                                    info = item.ToObject<DateHourDisplayFieldInfo>();
-                                    cellType.DisplayFields.Add(info);
-                                    break;
-                                case "dateminutedisplayfieldinfo":
-                                    info = item.ToObject<DateMinuteDisplayFieldInfo>();
-                                    cellType.DisplayFields.Add(info);
-                                    break;
-                                case "dateseconddisplayfieldinfo":
-                                    info = item.ToObject<DateSecondDisplayFieldInfo>();
-                                    cellType.DisplayFields.Add(info);
-                                    break;
-                                case "dateliteraldisplayfieldinfo":
-                                    info = item.ToObject<DateLiteralDisplayFieldInfo>();
-                                    cellType.DisplayFields.Add(info);
-                                    break;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        cellType.DisplayFields.AddRange((string)prop.Value);
-                    }
-                }
-                if (propKey == "excelexportformat")
-                {
-                    cellType.ExcelExportFormat = (string)prop.Value;
-                }
-                if (propKey == "exitonlastchar")
-                {
-                    cellType.ExitOnLastChar = (bool)prop.Value;
-                }
-                if (propKey == "fields")
-                {
-                    cellType.Fields.Clear();
-                    if (prop.Value is JArray)
-                    {
-                        var list = ((JArray)prop.Value).ToList();
-                        DateFieldInfo info;
-                        foreach (var item in list)
-                        {
-                            switch (item["Type"].ToString().ToLower())
-                            {
-                                case "dateyearfieldinfo":
-                                    info = item.ToObject<DateYearFieldInfo>();
-                                    cellType.Fields.Add(info);
-                                    break;
-                                case "datemonthfieldinfo":
-                                    info = item.ToObject<DateMonthFieldInfo>();
-                                    cellType.Fields.Add(info);
-                                    break;
-                                case "datedayfieldinfo":
-                                    info = item.ToObject<DateDayFieldInfo>();
-                                    cellType.Fields.Add(info);
-                                    break;
-                                case "datehourfieldinfo":
-                                    info = item.ToObject<DateHourFieldInfo>();
-                                    cellType.Fields.Add(info);
-                                    break;
-                                case "dateminutefieldinfo":
-                                    info = item.ToObject<DateMinuteFieldInfo>();
-                                    cellType.Fields.Add(info);
-                                    break;
-                                case "datesecondfieldinfo":
-                                    info = item.ToObject<DateSecondFieldInfo>();
-                                    cellType.Fields.Add(info);
-                                    break;
-                                case "dateliteralfieldinfo":
-                                    info = item.ToObject<DateLiteralFieldInfo>();
-                                    cellType.Fields.Add(info);
-                                    break;
-                            }
-                        }
-
-                    }
-                    else
-                    {
-                        cellType.Fields.AddRange((string)prop.Value);
-                    }
-                }
-                if (propKey == "fieldseditmode")
-                {
-                    FieldsEditMode fieldsEditMode;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out fieldsEditMode))
-                    {
-                        cellType.FieldsEditMode = fieldsEditMode;
-                    }
-                }
-                if (propKey == "focusposition")
-                {
-                    FieldsEditorFocusCursorPosition fieldsEditorFocusCursorPosition;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out fieldsEditorFocusCursorPosition))
-                    {
-                        cellType.FocusPosition = fieldsEditorFocusCursorPosition;
-                    }
-                }
-                if (propKey == "maxdate")
-                {
-                    cellType.MaxDate = Convert.ToDateTime(prop.Value);
-                }
-                if (propKey == "maxminbehavior")
-                {
-                    MaxMinBehavior maxMinBehavior;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out maxMinBehavior))
-                    {
-                        cellType.MaxMinBehavior = maxMinBehavior;
-                    }
-                }
-                if (propKey == "promptchar")
-                {
-                    cellType.PromptChar = Convert.ToChar(prop.Value);
-                }
-                if (propKey == "readonly")
-                {
-                    cellType.ReadOnly = (bool)prop.Value;
-                }
-                if (propKey == "recommendedvalue")
-                {
-                    if (prop.Value == null)
-                    {
-                        cellType.RecommendedValue = null;
-                        continue;
-                    }
-                    cellType.RecommendedValue = Convert.ToDateTime(prop.Value);
-                }
-                if (propKey == "showliterals")
-                {
-                    ShowLiterals showLiterals;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out showLiterals))
-                    {
-                        cellType.ShowLiterals = showLiterals;
-                    }
-                }
-                if (propKey == "showrecommendedvalue")
-                {
-                    cellType.ShowRecommendedValue = (bool)prop.Value;
-                }
-                if (propKey == "static")
-                {
-                    cellType.Static = (bool)prop.Value;
-                }
-                if (propKey == "tabaction")
-                {
-                    TabAction tabAction;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out tabAction))
-                    {
-                        cellType.TabAction = tabAction;
-                    }
-                }
-                if (propKey == "validatemode")
-                {
-                    ValidateModeEx validateModeEx;
-                    if (EnumExt.TryParse(prop.Value.ToString(), out validateModeEx))
-                    {
-                        cellType.ValidateMode = validateModeEx;
-                    }
-                }
-                if (propKey == "dropdownallowdrop")
-                {
-                    cellType.DropDown.AllowDrop = (bool)prop.Value;
-                }
-                if (propKey == "sidebuttonsclear")
-                {
-                    if ((bool)prop.Value)
-                    {
-                        cellType.SideButtons.Clear();
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// TextCellType からプロパティ情報を逆コンパイルする。
-        /// </summary>
-        /// <param name="cellType">TextCellType オブジェクト。</param>
-        /// <returns>プロパティ情報。</returns>
-        private static Dictionary<string, object> DecompileTextCellTypeProperties(TextCellType cellType)
-        {
-            var result = new Dictionary<string, object>();
-            result.Add(nameof(cellType.MaxLength), cellType.MaxLength);
-            result.Add(nameof(cellType.CharacterCasing), cellType.CharacterCasing);
-            result.Add(nameof(cellType.CharacterSet), cellType.CharacterSet);
-            result.Add(nameof(cellType.Multiline), cellType.Multiline);
-            result.Add(nameof(cellType.ReadOnly), cellType.ReadOnly);
-            result.Add(nameof(cellType.Static), cellType.Static);
-            result.Add(nameof(cellType.EnableSubEditor), cellType.EnableSubEditor);
-
-            return result;
-        }
-
-        /// <summary>
-        /// NumberCellType からプロパティ情報を逆コンパイルする。
-        /// </summary>
-        /// <param name="cellType">NumberCellType オブジェクト。</param>
-        /// <returns>プロパティ情報。</returns>
-        private static Dictionary<string, object> DecompileNumberCellTypeProperties(NumberCellType cellType)
-        {
-            var result = new Dictionary<string, object>();
-            result.Add(nameof(cellType.DecimalPlaces), cellType.DecimalPlaces);
-            result.Add(nameof(cellType.DecimalSeparator), cellType.DecimalSeparator);
-            result.Add(nameof(cellType.FixedPoint), cellType.FixedPoint);
-            result.Add(nameof(cellType.LeadingZero), cellType.LeadingZero);
-            result.Add(nameof(cellType.MaximumValue), cellType.MaximumValue);
-            result.Add(nameof(cellType.MinimumValue), cellType.MinimumValue);
-            result.Add(nameof(cellType.NegativeFormat), cellType.NegativeFormat);
-            result.Add(nameof(cellType.NegativeRed), cellType.NegativeRed);
-            result.Add(nameof(cellType.ReadOnly), cellType.ReadOnly);
-            result.Add(nameof(cellType.Separator), cellType.Separator);
-            result.Add(nameof(cellType.ShowSeparator), cellType.ShowSeparator);
-            result.Add(nameof(cellType.Static), cellType.Static);
-            result.Add(nameof(cellType.EnableSubEditor), cellType.EnableSubEditor);
-
-            return result;
-        }
-
-        /// <summary>
-        /// ComboBoxCellType からプロパティ情報を逆コンパイルする。
-        /// </summary>
-        /// <param name="cellType">ComboBoxCellType オブジェクト。</param>
-        /// <returns>プロパティ情報。</returns>
-        private static Dictionary<string, object> DecompileComboBoxCellTypeProperties(ComboBoxCellType cellType)
-        {
-            var result = new Dictionary<string, object>();
-            result.Add(nameof(cellType.MaxDrop), cellType.MaxDrop);
-            result.Add(nameof(cellType.Editable), cellType.Editable);
-            result.Add(nameof(cellType.EditorValue), cellType.EditorValue);
-
-            return result;
-        }
-
-        /// <summary>
-        /// CheckCellType からプロパティ情報を逆コンパイルする。
-        /// </summary>
-        /// <param name="cellType">CheckBoxCellType オブジェクト。</param>
-        /// <returns>プロパティ情報。</returns>
-        private static Dictionary<string, object> DecompileCheckBoxCellTypeProperties(CheckBoxCellType cellType)
-        {
-            var result = new Dictionary<string, object>();
-            result.Add(nameof(cellType.TextTrue), cellType.TextTrue);
-            result.Add(nameof(cellType.TextFalse), cellType.TextFalse);
-            result.Add(nameof(cellType.TextIndeterminate), cellType.TextIndeterminate);
-            result.Add(nameof(cellType.ThreeState), cellType.ThreeState);
-
-            return result;
-        }
-
-        /// <summary>
-        /// ButtonCellType からプロパティ情報を逆コンパイルする。
-        /// </summary>
-        /// <param name="cellType">ButtonCellType オブジェクト。</param>
-        /// <returns>プロパティ情報。</returns>
-        private static Dictionary<string, object> DecompileButtonCellTypeProperties(ButtonCellType cellType)
-        {
-            var result = new Dictionary<string, object>();
-            result.Add(nameof(cellType.Text), cellType.Text);
-            result.Add(nameof(cellType.TextAlign), cellType.TextAlign);
-            result.Add(nameof(cellType.TwoState), cellType.TwoState);
-            result.Add(nameof(cellType.TextDown), cellType.TextDown);
-            result.Add(nameof(cellType.WordWrap), cellType.WordWrap);
-
-            return result;
-        }
-
-        /// <summary>
-        /// GcTextBoxCellType からプロパティ情報を逆コンパイルする。
-        /// </summary>
-        /// <param name="cellType">GcTextBoxCellType オブジェクト。</param>
-        /// <returns>プロパティ情報。</returns>
-        private static Dictionary<string, object> DecompileGcTextBoxCellTypeProperties(GcTextBoxCellType cellType)
-        {
-            var result = new Dictionary<string, object>();
-            result.Add(nameof(cellType.AcceptsCrLf), cellType.AcceptsCrLf);
-            result.Add(nameof(cellType.AcceptsTabChar), cellType.AcceptsTabChar);
-            result.Add(nameof(cellType.AllowSpace), cellType.AllowSpace);
-            result.Add(nameof(cellType.AutoConvert), cellType.AutoConvert);
-            result.Add(nameof(cellType.EditMode), cellType.EditMode);
-            result.Add(nameof(cellType.Ellipsis), cellType.Ellipsis);
-            result.Add(nameof(cellType.EllipsisString), cellType.EllipsisString);
-            result.Add(nameof(cellType.ExcelExportFormat), cellType.ExcelExportFormat);
-            result.Add(nameof(cellType.ExitOnLastChar), cellType.ExitOnLastChar);
-            result.Add(nameof(cellType.FocusPosition), cellType.FocusPosition);
-            result.Add(nameof(cellType.FormatString), cellType.FormatString);
-            result.Add(nameof(cellType.LineSpace), cellType.LineSpace);
-            result.Add(nameof(cellType.MaxLength), cellType.MaxLength);
-            result.Add(nameof(cellType.MaxLengthCodePage), cellType.MaxLengthCodePage);
-            result.Add(nameof(cellType.MaxLengthUnit), cellType.MaxLengthUnit);
-            result.Add(nameof(cellType.MaxLineCount), cellType.MaxLineCount);
-            result.Add(nameof(cellType.Multiline), cellType.Multiline);
-            result.Add(nameof(cellType.PasswordChar), cellType.PasswordChar);
-            result.Add(nameof(cellType.PasswordRevelationMode), cellType.PasswordRevelationMode);
-            result.Add(nameof(cellType.ReadOnly), cellType.ReadOnly);
-            result.Add(nameof(cellType.RecommendedValue), cellType.RecommendedValue);
-            result.Add(nameof(cellType.ShowRecommendedValue), cellType.ShowRecommendedValue);
-            result.Add(nameof(cellType.Static), cellType.Static);
-            result.Add(nameof(cellType.UseSystemPasswordChar), cellType.UseSystemPasswordChar);
-            result.Add(nameof(cellType.WrapMode), cellType.WrapMode);
-
-            return result;
-        }
-
-        /// <summary>
-        /// GcDateTimeCellType からプロパティ情報を逆コンパイルする。
-        /// </summary>
-        /// <param name="cellType">GcDateTimeCellType オブジェクト。</param>
-        /// <returns>プロパティ情報。</returns>
-        private static Dictionary<string, object> DecompileGcDateTimeCellTypeProperties(GcDateTimeCellType cellType)
-        {
-            var result = new Dictionary<string, object>();
-            result.Add(nameof(cellType.AcceptsCrLf), cellType.AcceptsCrLf);
-            result.Add(nameof(cellType.ClipContent), cellType.ClipContent);
-            result.Add("DefaultActiveField", cellType.SerializationDefaultActiveFieldIndex);
-            result.Add(nameof(cellType.EditMode), cellType.EditMode);
-
-            var displayFieldsArray = new JArray();
-            foreach (DateDisplayFieldInfo field in cellType.DisplayFields)
-            {
-                var jobj = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(field));
-                jobj.AddFirst(new JProperty("Type", field.GetType().Name));
-                displayFieldsArray.Add(jobj);
-            }
-            result.Add(nameof(cellType.DisplayFields), displayFieldsArray);
-
-            result.Add(nameof(cellType.ExcelExportFormat), cellType.ExcelExportFormat);
-            result.Add(nameof(cellType.ExitOnLastChar), cellType.ExitOnLastChar);
-
-            var fieldsArray = new JArray();
-            foreach (DateFieldInfo field in cellType.Fields)
-            {
-                var jobj = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(field));
-                jobj.AddFirst(new JProperty("Type", field.GetType().Name));
-                fieldsArray.Add(jobj);
-            }
-            result.Add(nameof(cellType.Fields), fieldsArray);
-
-            result.Add(nameof(cellType.FieldsEditMode), cellType.FieldsEditMode);
-            result.Add(nameof(cellType.FocusPosition), cellType.FocusPosition);
-            result.Add(nameof(cellType.MaxDate), cellType.MaxDate);
-            result.Add(nameof(cellType.MaxMinBehavior), cellType.MaxMinBehavior);
-            result.Add(nameof(cellType.PromptChar), cellType.PromptChar);
-            result.Add(nameof(cellType.ReadOnly), cellType.ReadOnly);
-            result.Add(nameof(cellType.RecommendedValue), cellType.RecommendedValue);
-            result.Add(nameof(cellType.ShowLiterals), cellType.ShowLiterals);
-            result.Add(nameof(cellType.ShowRecommendedValue), cellType.ShowRecommendedValue);
-            result.Add(nameof(cellType.Static), cellType.Static);
-            result.Add(nameof(cellType.TabAction), cellType.TabAction);
-            result.Add(nameof(cellType.ValidateMode), cellType.ValidateMode);
-            result.Add("DropDownAllowDrop", cellType.DropDown.AllowDrop);
-
-            return result;
-        }
-
-        /// <summary>
-        /// Enum の安全な型変換を提供する。
-        /// </summary>
-        private static class EnumExt
-        {
-            /// <summary>
-            /// Enum の安全な型変換を検証する。
-            /// </summary>
-            /// <typeparam name="TEnum">Enum 型。</typeparam>
-            /// <param name="value">Enum に変換する文字列。</param>
-            /// <param name="enumValue">変換された Enum 型の値。</param>
-            /// <returns>true:成功, false:失敗。</returns>
-            internal static bool TryParse<TEnum>(string value, out TEnum enumValue) where TEnum : struct
-            {
-                return Enum.TryParse(value, out enumValue) && Enum.IsDefined(typeof(TEnum), enumValue);
-            }
         }
     }
 }

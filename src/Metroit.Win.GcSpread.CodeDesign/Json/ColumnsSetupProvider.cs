@@ -217,29 +217,68 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// 列定義を生成します。
         /// </summary>
         /// <param name="columnOptions">列のオプション情報設定アクションデリゲート。</param>
+        /// <param name="includeProps">生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+        /// <param name="outputCellTypeProps">セルタイププロパティを生成するかどうか。</param>
+        /// <param name="outputOptions">オプション情報を生成するかどうか。false の場合、第一引数は動作しません。</param>
         /// <returns>ColumnDefinitions[] オブジェクト。</returns>
-        public ColumnDefinitions[] CreateColumnsDefinitions(Func<Column, Dictionary<string, object>> columnOptions)
+        public ColumnDefinitions[] CreateColumnsDefinitions(Func<Column, Dictionary<string, object>> columnOptions, 
+            string[] includeProps = null, bool outputCellTypeProps = true, bool outputOptions = true)
         {
             var columns = new List<ColumnDefinitions>();
 
             foreach (Column svColumn in SheetView.Columns)
             {
-                var column = new ColumnDefinitions()
-                {
-                    DataField = svColumn.DataField,
-                    HorizontalAlignment = svColumn.HorizontalAlignment,
-                    VerticalAlignment = svColumn.VerticalAlignment,
-                    AllowAutoFilter = svColumn.AllowAutoFilter,
-                    AllowAutoSort = svColumn.AllowAutoSort,
-                    Width = svColumn.Width,
-                    Visible = svColumn.Visible,
-                    CellType = svColumn.CellType.ToString(),
-                    ImeMode = svColumn.ImeMode,
-                    Locked = svColumn.Locked
-                };
+                var column = new ColumnDefinitions();
 
-                column.CellTypeProps = svColumn.CellType.SerializeJson();
-                column.Options = columnOptions?.Invoke(svColumn);
+                if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Column.DataField))))
+                {
+                    column.DataField = svColumn.DataField;
+                }
+                if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Column.HorizontalAlignment))))
+                {
+                    column.HorizontalAlignment = svColumn.HorizontalAlignment;
+                }
+                if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Column.VerticalAlignment))))
+                {
+                    column.VerticalAlignment = svColumn.VerticalAlignment;
+                }
+                if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Column.AllowAutoFilter))))
+                {
+                    column.AllowAutoFilter = svColumn.AllowAutoFilter;
+                }
+                if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Column.AllowAutoSort))))
+                {
+                    column.AllowAutoSort = svColumn.AllowAutoSort;
+                }
+                if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Column.Width))))
+                {
+                    column.Width = svColumn.Width;
+                }
+                if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Column.Visible))))
+                {
+                    column.Visible = svColumn.Visible;
+                }
+                if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Column.CellType))))
+                {
+                    column.CellType = svColumn.CellType.ToString();
+                }
+                if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Column.ImeMode))))
+                {
+                    column.ImeMode = svColumn.ImeMode;
+                }
+                if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Column.Locked))))
+                {
+                    column.Locked = svColumn.Locked;
+                }
+
+                if (outputCellTypeProps)
+                {
+                    column.CellTypeProps = svColumn.CellType.SerializeJson();
+                }
+                if (outputOptions)
+                {
+                    column.Options = columnOptions?.Invoke(svColumn);
+                }
 
                 columns.Add(column);
             }

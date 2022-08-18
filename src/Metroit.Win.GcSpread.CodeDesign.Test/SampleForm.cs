@@ -140,24 +140,38 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var root = fpSpread1.ActiveSheet.CreateSpecialColumnDefinitions();
+            //var root = fpSpread1.ActiveSheet.CreateSpecialColumnDefinitions();
 
-            var json = JsonConvert.SerializeSpecialColumn(root);
-            var deserialize = JsonConvert.DeserializeSpecialColumn(json);
+            //var json = JsonConvert.SerializeSpecialColumn(root);
+            //var deserialize = JsonConvert.DeserializeSpecialColumn(json);
+            //MessageBox.Show(json);
+
+
+            var provider = new ColumnsSetupProvider(fpSpread1.ActiveSheet);
+            var defs = provider.CreateColumnsDefinitions(null, new[] { nameof(Column.Width), nameof(Column.Visible), nameof(Column.DataField) }, false, false);
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(defs);
+
             MessageBox.Show(json);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var root = fpSpread1.ActiveSheet.CreateSpecialColumnHeaderDefinitions();
-            var json = JsonConvert.SerializeSpecialColumnHeader(root);
-            var deserialize = JsonConvert.DeserializeSpecialColumnHeader(json);
+            //var root = fpSpread1.ActiveSheet.CreateSpecialColumnHeaderDefinitions();
+            //var json = JsonConvert.SerializeSpecialColumnHeader(root);
+            //var deserialize = JsonConvert.DeserializeSpecialColumnHeader(json);
+            //MessageBox.Show(json);
+
+            var provider = new ColumnHeaderSetupProvider(fpSpread1.ActiveSheet);
+            var defs = provider.CreateCellDefinitions(new[] { nameof(Cell.Value) });
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(defs);
+
             MessageBox.Show(json);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             var root = fpSpread1.ActiveSheet.CreateSheetDefinitions((column) =>
+            //var root = fpSpread1.ActiveSheet.SerializeJson((column) =>
             {
                 // ここでオプション情報の設定などをする
                 // オプション情報と仮定
@@ -183,7 +197,8 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
 
                 return result;
             });
-            var json = JsonConvert.SerializeSheetView(root);
+            //var json = JsonConvert.SerializeSheetView(root);
+            var json = fpSpread1.ActiveSheet.SerializeJson(root);
             MessageBox.Show(json);
         }
     }
