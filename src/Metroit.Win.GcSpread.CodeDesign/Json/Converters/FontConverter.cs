@@ -22,9 +22,9 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             var jObj = new JObject();
 
-            jObj.Add(new JProperty(nameof(font.FontFamily.Name), font.FontFamily.Name));
-            jObj.Add(new JProperty(nameof(font.Size), font.Size));
-            jObj.Add(new JProperty(nameof(font.Style), font.Style));
+            jObj.Add(new JProperty(nameof(Font.FontFamily.Name), font.FontFamily.Name));
+            jObj.Add(new JProperty(nameof(Font.Size), font.Size));
+            jObj.Add(new JProperty(nameof(Font.Style), font.Style));
 
             return jObj;
         }

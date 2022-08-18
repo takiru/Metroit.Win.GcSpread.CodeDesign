@@ -57,6 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Json\CellTypeConverters\DateTimeCellTypeConverter.cs" />
+    <Compile Include="DateTimeCellTypeExtensions.cs" />
+    <Compile Include="Json\CellTypeConverters\NumberCellTypeConverter.cs" />
+    <Compile Include="NumberCellTypeExtensions.cs" />
+    <Compile Include="TextCellTypeExtensions.cs" />
     <Compile Include="ColumnMoveResult.cs" />
     <Compile Include="ButtonCellTypeExtensions.cs" />
     <Compile Include="GcDateTimeCellTypeExtensions.cs" />
@@ -64,6 +69,8 @@
     <Compile Include="GcNumberCellTypeExtensions.cs" />
     <Compile Include="GcComboBoxCellTypeExtensions.cs" />
     <Compile Include="ICellTypeExtensions.cs" />
+    <Compile Include="Json\CellTypeConverters\TextCellTypeConverter.cs" />
+    <Compile Include="Json\CellTypeConverters\EditBaseCellTypeConverter.cs" />
     <Compile Include="Json\CellTypeConverters\GcComboBoxCellTypeConverter.cs" />
     <Compile Include="Json\CellTypeConverters\GcDateTimeCellTypeConverter.cs" />
     <Compile Include="Json\CellTypeConverters\GcNumberCellTypeConverter.cs" />

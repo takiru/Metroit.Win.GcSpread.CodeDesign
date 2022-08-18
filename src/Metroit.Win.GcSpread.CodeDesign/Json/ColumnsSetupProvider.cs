@@ -1,7 +1,6 @@
 ﻿using FarPoint.Win.Spread;
 using FarPoint.Win.Spread.CellType;
 using GrapeCity.Win.Spread.InputMan.CellType;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -225,13 +224,6 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
 
             foreach (Column svColumn in SheetView.Columns)
             {
-                //// TODO: GcComboBoxのみ動くようにする
-                //if (!(svColumn.CellType is GcComboBoxCellType) && !(svColumn.CellType is GcNumberCellType) && !(svColumn.CellType is GcTextBoxCellType) && !(svColumn.CellType is GcDateTimeCellType))
-                //{
-                //    continue;
-                //}
-
-
                 var column = new ColumnDefinitions()
                 {
                     DataField = svColumn.DataField,
@@ -246,41 +238,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
                     Locked = svColumn.Locked
                 };
 
-                //if (svColumn.CellType is TextCellType)
-                //{
-                //    column.CellTypeProps = DecompileTextCellTypeProperties((TextCellType)svColumn.CellType);
-                //}
-                //if (svColumn.CellType is DateTimeCellType)
-                //{
-                //    column.CellTypeProps = DecompileDateTimeCellTypeProperties((DateTimeCellType)svColumn.CellType);
-                //}
-                //if (svColumn.CellType is NumberCellType)
-                //{
-                //    column.CellTypeProps = DecompileNumberCellTypeProperties((NumberCellType)svColumn.CellType);
-                //}
-                //if (svColumn.CellType is ComboBoxCellType)
-                //{
-                //    column.CellTypeProps = DecompileComboBoxCellTypeProperties((ComboBoxCellType)svColumn.CellType);
-                //}
-                //if (svColumn.CellType is CheckBoxCellType)
-                //{
-                //    column.CellTypeProps = DecompileCheckBoxCellTypeProperties((CheckBoxCellType)svColumn.CellType);
-                //}
-                //if (svColumn.CellType is ButtonCellType)
-                //{
-                //    column.CellTypeProps = DecompileButtonCellTypeProperties((ButtonCellType)svColumn.CellType);
-                //}
-                //if (svColumn.CellType is GcTextBoxCellType)
-                //{
-                //    column.CellTypeProps = DecompileGcTextBoxCellTypeProperties((GcTextBoxCellType)svColumn.CellType);
-                //}
-                //if (svColumn.CellType is GcDateTimeCellType)
-                //{
-                //    column.CellTypeProps = DecompileGcDateTimeCellTypeProperties((GcDateTimeCellType)svColumn.CellType);
-                //}
-
                 column.CellTypeProps = svColumn.CellType.SerializeJson();
-
                 column.Options = columnOptions?.Invoke(svColumn);
 
                 columns.Add(column);

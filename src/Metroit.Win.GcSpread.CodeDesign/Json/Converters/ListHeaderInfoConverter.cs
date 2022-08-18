@@ -23,19 +23,19 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             var jObj = new JObject();
 
-            jObj.Add(new JProperty(nameof(listHeaderInfo.AllowResize), listHeaderInfo.AllowResize));
-            jObj.Add(new JProperty(nameof(listHeaderInfo.BackColor), ColorTranslator.ToHtml(listHeaderInfo.BackColor)));
-            jObj.Add(new JProperty(nameof(listHeaderInfo.Clickable), listHeaderInfo.Clickable));
-            jObj.Add(new JProperty(nameof(listHeaderInfo.ContentAlignment), listHeaderInfo.ContentAlignment));
-            jObj.Add(new JProperty(nameof(listHeaderInfo.Ellipsis), listHeaderInfo.Ellipsis));
-            jObj.Add(new JProperty(nameof(listHeaderInfo.ForeColor), ColorTranslator.ToHtml(listHeaderInfo.ForeColor)));
-            jObj.Add(new JProperty(nameof(listHeaderInfo.GradientEffect), GradientEffectConverter.Serialize(listHeaderInfo.GradientEffect)));
-            jObj.Add(new JProperty(nameof(listHeaderInfo.Image), listHeaderInfo.Image));
-            jObj.Add(new JProperty(nameof(listHeaderInfo.ImageTextSpace), listHeaderInfo.ImageTextSpace));
-            jObj.Add(new JProperty(nameof(listHeaderInfo.SortIndicatorAlignment), listHeaderInfo.SortIndicatorAlignment));
-            jObj.Add(new JProperty(nameof(listHeaderInfo.Text), listHeaderInfo.Text));
-            jObj.Add(new JProperty(nameof(listHeaderInfo.TextAttachAlignment), listHeaderInfo.TextAttachAlignment));
-            jObj.Add(new JProperty(nameof(listHeaderInfo.TextEffect), listHeaderInfo.TextEffect));
+            jObj.Add(new JProperty(nameof(ListHeaderInfo.AllowResize), listHeaderInfo.AllowResize));
+            jObj.Add(new JProperty(nameof(ListHeaderInfo.BackColor), ColorTranslator.ToHtml(listHeaderInfo.BackColor)));
+            jObj.Add(new JProperty(nameof(ListHeaderInfo.Clickable), listHeaderInfo.Clickable));
+            jObj.Add(new JProperty(nameof(ListHeaderInfo.ContentAlignment), listHeaderInfo.ContentAlignment));
+            jObj.Add(new JProperty(nameof(ListHeaderInfo.Ellipsis), listHeaderInfo.Ellipsis));
+            jObj.Add(new JProperty(nameof(ListHeaderInfo.ForeColor), ColorTranslator.ToHtml(listHeaderInfo.ForeColor)));
+            jObj.Add(new JProperty(nameof(ListHeaderInfo.GradientEffect), GradientEffectConverter.Serialize(listHeaderInfo.GradientEffect)));
+            jObj.Add(new JProperty(nameof(ListHeaderInfo.Image), listHeaderInfo.Image));
+            jObj.Add(new JProperty(nameof(ListHeaderInfo.ImageTextSpace), listHeaderInfo.ImageTextSpace));
+            jObj.Add(new JProperty(nameof(ListHeaderInfo.SortIndicatorAlignment), listHeaderInfo.SortIndicatorAlignment));
+            jObj.Add(new JProperty(nameof(ListHeaderInfo.Text), listHeaderInfo.Text));
+            jObj.Add(new JProperty(nameof(ListHeaderInfo.TextAttachAlignment), listHeaderInfo.TextAttachAlignment));
+            jObj.Add(new JProperty(nameof(ListHeaderInfo.TextEffect), listHeaderInfo.TextEffect));
 
             return jObj;
         }

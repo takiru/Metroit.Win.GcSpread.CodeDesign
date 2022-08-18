@@ -17,28 +17,57 @@ namespace Metroit.Win.GcSpread.CodeDesign
         public static void DeserializeJson(this ICellType cellType, string cellTypeProps)
         {
             // 通常セルタイプ
+            if (cellType is TextCellType)
+            {
+                ((TextCellType)cellType).DeserializeJson(cellTypeProps);
+                return;
+            }
+            if (cellType is DateTimeCellType)
+            {
+                ((DateTimeCellType)cellType).DeserializeJson(cellTypeProps);
+                return;
+            }
+            if (cellType is NumberCellType)
+            {
+                ((NumberCellType)cellType).DeserializeJson(cellTypeProps);
+                return;
+            }
+            if (cellType is ComboBoxCellType)
+            {
+                ((ComboBoxCellType)cellType).DeserializeJson(cellTypeProps);
+                return;
+            }
+            if (cellType is CheckBoxCellType)
+            {
+                ((CheckBoxCellType)cellType).DeserializeJson(cellTypeProps);
+                return;
+            }
             if (cellType is ButtonCellType)
             {
                 ((ButtonCellType)cellType).DeserializeJson(cellTypeProps);
+                return;
             }
-
 
             // InputManセルタイプ
             if (cellType is GcTextBoxCellType)
             {
                 ((GcTextBoxCellType)cellType).DeserializeJson(cellTypeProps);
+                return;
             }
             if (cellType is GcDateTimeCellType)
             {
                 ((GcDateTimeCellType)cellType).DeserializeJson(cellTypeProps);
+                return;
             }
             if (cellType is GcNumberCellType)
             {
                 ((GcNumberCellType)cellType).DeserializeJson(cellTypeProps);
+                return;
             }
             if (cellType is GcComboBoxCellType)
             {
                 ((GcComboBoxCellType)cellType).DeserializeJson(cellTypeProps);
+                return;
             }
         }
 
@@ -49,11 +78,30 @@ namespace Metroit.Win.GcSpread.CodeDesign
         public static JObject SerializeJson(this ICellType cellType, string[] includeProps = null)
         {
             // 通常セルタイプ
+            if (cellType is TextCellType)
+            {
+                return JObject.Parse(((TextCellType)cellType).SerializeJson(includeProps));
+            }
+            if (cellType is DateTimeCellType)
+            {
+                return JObject.Parse(((DateTimeCellType)cellType).SerializeJson(includeProps));
+            }
+            if (cellType is NumberCellType)
+            {
+                return JObject.Parse(((NumberCellType)cellType).SerializeJson(includeProps));
+            }
+            if (cellType is ComboBoxCellType)
+            {
+                //return JObject.Parse(((ComboBoxCellType)cellType).SerializeJson(includeProps));
+            }
+            if (cellType is CheckBoxCellType)
+            {
+                //return JObject.Parse(((CheckBoxCellType)cellType).SerializeJson(includeProps));
+            }
             if (cellType is ButtonCellType)
             {
                 return JObject.Parse(((ButtonCellType)cellType).SerializeJson(includeProps));
             }
-
 
             // InputManセルタイプ
             if (cellType is GcTextBoxCellType)

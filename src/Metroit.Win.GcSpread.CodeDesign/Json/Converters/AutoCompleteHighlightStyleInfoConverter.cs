@@ -23,9 +23,9 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             var jObj = new JObject();
 
-            jObj.Add(new JProperty(nameof(autoCompleteHighlightStyleInfo.BackColor), ColorTranslator.ToHtml(autoCompleteHighlightStyleInfo.BackColor)));
-            jObj.Add(new JProperty(nameof(autoCompleteHighlightStyleInfo.Font), FontConverter.Serialize(autoCompleteHighlightStyleInfo.Font)));
-            jObj.Add(new JProperty(nameof(autoCompleteHighlightStyleInfo.ForeColor), ColorTranslator.ToHtml(autoCompleteHighlightStyleInfo.ForeColor)));
+            jObj.Add(new JProperty(nameof(AutoCompleteHighlightStyleInfo.BackColor), ColorTranslator.ToHtml(autoCompleteHighlightStyleInfo.BackColor)));
+            jObj.Add(new JProperty(nameof(AutoCompleteHighlightStyleInfo.Font), FontConverter.Serialize(autoCompleteHighlightStyleInfo.Font)));
+            jObj.Add(new JProperty(nameof(AutoCompleteHighlightStyleInfo.ForeColor), ColorTranslator.ToHtml(autoCompleteHighlightStyleInfo.ForeColor)));
 
             return jObj;
         }

@@ -23,10 +23,10 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             var jObj = new JObject();
 
-            jObj.Add(new JProperty(nameof(autoCompleteInfo.CandidateListItemFont), FontConverter.Serialize(autoCompleteInfo.CandidateListItemFont)));
-            jObj.Add(new JProperty(nameof(autoCompleteInfo.HighlightMatchedText), autoCompleteInfo.HighlightMatchedText));
-            jObj.Add(new JProperty(nameof(autoCompleteInfo.HighlightStyle), AutoCompleteHighlightStyleInfoConverter.Serialize(autoCompleteInfo.HighlightStyle)));
-            jObj.Add(new JProperty(nameof(autoCompleteInfo.MatchingMode), autoCompleteInfo.MatchingMode));
+            jObj.Add(new JProperty(nameof(AutoCompleteInfo.CandidateListItemFont), FontConverter.Serialize(autoCompleteInfo.CandidateListItemFont)));
+            jObj.Add(new JProperty(nameof(AutoCompleteInfo.HighlightMatchedText), autoCompleteInfo.HighlightMatchedText));
+            jObj.Add(new JProperty(nameof(AutoCompleteInfo.HighlightStyle), AutoCompleteHighlightStyleInfoConverter.Serialize(autoCompleteInfo.HighlightStyle)));
+            jObj.Add(new JProperty(nameof(AutoCompleteInfo.MatchingMode), autoCompleteInfo.MatchingMode));
 
             return jObj;
         }

@@ -81,6 +81,21 @@
           "Value": "ButtonCellType",
           "HorizontalAlignment": "Left",
           "VerticalAlignment": "Bottom"
+        },
+        {
+          "Value": "TextCellType",
+          "HorizontalAlignment": "Left",
+          "VerticalAlignment": "Bottom"
+        },
+        {
+          "Value": "DateTimeCellType",
+          "HorizontalAlignment": "Left",
+          "VerticalAlignment": "Bottom"
+        },
+        {
+          "Value": "NumberCellType",
+          "HorizontalAlignment": "Left",
+          "VerticalAlignment": "Bottom"
         }
       ],
       [
@@ -989,6 +1004,38 @@
         "TwoState": true,
         "UseVisualStyleBackColor": true,
         "WordWrap": false
+      }
+    },
+    {
+      "CellType": "TextCellType",
+      "CellTypeProps": {
+        "AutoCompleteCustomSource": [ "a", "b", "c" ]
+      }
+    },
+    {
+      "CellType": "DateTimeCellType",
+      "CellTypeProps": {
+        "Calendar": "Japanese"
+      }
+    },
+    {
+      "CellType": "NumberCellType",
+      "CellTypeProps": {
+        "Separator": "#",
+        "DecimalPlaces": -1,
+        "DecimalSeparator": "!",
+        "FixedPoint": true,
+        "LeadingZero": "Yes",
+        "MaximumValue": 9999999.99,
+        "MinimumValue": -9999999.99,
+        "NegativeFormat": "UseRegional",
+        "NegativeRed": false,
+        "ReadOnly": false,
+        "ShowSeparator": true,
+        "SpinButton": true,
+        "SpinDecimalIncrement": 0.1,
+        "SpinIntegerIncrement": 1.0,
+        "Static": false
       }
     }
   ]

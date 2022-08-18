@@ -23,13 +23,13 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             var jObj = new JObject();
 
-            jObj.Add(new JProperty(nameof(defaultListColumnInfo.AutoWidth), defaultListColumnInfo.AutoWidth));
-            jObj.Add(new JProperty(nameof(defaultListColumnInfo.DataDisplayType), defaultListColumnInfo.DataDisplayType));
-            jObj.Add(new JProperty(nameof(defaultListColumnInfo.DefaultSubItem), DefaultSubItemInfoConverter.Serialize(defaultListColumnInfo.DefaultSubItem)));
-            jObj.Add(new JProperty(nameof(defaultListColumnInfo.Header), ListHeaderInfoConverter.Serialize(defaultListColumnInfo.Header)));
-            jObj.Add(new JProperty(nameof(defaultListColumnInfo.SortOrder), defaultListColumnInfo.SortOrder));
-            jObj.Add(new JProperty(nameof(defaultListColumnInfo.Visible), defaultListColumnInfo.Visible));
-            jObj.Add(new JProperty(nameof(defaultListColumnInfo.Width), defaultListColumnInfo.Width));
+            jObj.Add(new JProperty(nameof(DefaultListColumnInfo.AutoWidth), defaultListColumnInfo.AutoWidth));
+            jObj.Add(new JProperty(nameof(DefaultListColumnInfo.DataDisplayType), defaultListColumnInfo.DataDisplayType));
+            jObj.Add(new JProperty(nameof(DefaultListColumnInfo.DefaultSubItem), DefaultSubItemInfoConverter.Serialize(defaultListColumnInfo.DefaultSubItem)));
+            jObj.Add(new JProperty(nameof(DefaultListColumnInfo.Header), ListHeaderInfoConverter.Serialize(defaultListColumnInfo.Header)));
+            jObj.Add(new JProperty(nameof(DefaultListColumnInfo.SortOrder), defaultListColumnInfo.SortOrder));
+            jObj.Add(new JProperty(nameof(DefaultListColumnInfo.Visible), defaultListColumnInfo.Visible));
+            jObj.Add(new JProperty(nameof(DefaultListColumnInfo.Width), defaultListColumnInfo.Width));
 
             return jObj;
         }

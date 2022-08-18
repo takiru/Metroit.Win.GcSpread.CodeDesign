@@ -22,12 +22,12 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             var jObj = new JObject();
 
-            jObj.Add(new JProperty(nameof(autoFilterInfo.Enabled), autoFilterInfo.Enabled));
-            jObj.Add(new JProperty(nameof(autoFilterInfo.Interval), autoFilterInfo.Interval));
-            jObj.Add(new JProperty(nameof(autoFilterInfo.MatchingMode), autoFilterInfo.MatchingMode));
-            jObj.Add(new JProperty(nameof(autoFilterInfo.MatchingSource), autoFilterInfo.MatchingSource));
-            jObj.Add(new JProperty(nameof(autoFilterInfo.MaxFilteredItems), autoFilterInfo.MaxFilteredItems));
-            jObj.Add(new JProperty(nameof(autoFilterInfo.MinimumPrefixLength), autoFilterInfo.MinimumPrefixLength));
+            jObj.Add(new JProperty(nameof(AutoFilterInfo.Enabled), autoFilterInfo.Enabled));
+            jObj.Add(new JProperty(nameof(AutoFilterInfo.Interval), autoFilterInfo.Interval));
+            jObj.Add(new JProperty(nameof(AutoFilterInfo.MatchingMode), autoFilterInfo.MatchingMode));
+            jObj.Add(new JProperty(nameof(AutoFilterInfo.MatchingSource), autoFilterInfo.MatchingSource));
+            jObj.Add(new JProperty(nameof(AutoFilterInfo.MaxFilteredItems), autoFilterInfo.MaxFilteredItems));
+            jObj.Add(new JProperty(nameof(AutoFilterInfo.MinimumPrefixLength), autoFilterInfo.MinimumPrefixLength));
 
             return jObj;
         }

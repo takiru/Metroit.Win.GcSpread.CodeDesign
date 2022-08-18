@@ -23,8 +23,8 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             var jObj = new JObject();
 
-            jObj.Add(new JProperty(nameof(alternateTextInfo.ForeColor), ColorTranslator.ToHtml(alternateTextInfo.ForeColor)));
-            jObj.Add(new JProperty(nameof(alternateTextInfo.Text), alternateTextInfo.Text));
+            jObj.Add(new JProperty(nameof(AlternateTextInfo.ForeColor), ColorTranslator.ToHtml(alternateTextInfo.ForeColor)));
+            jObj.Add(new JProperty(nameof(AlternateTextInfo.Text), alternateTextInfo.Text));
 
             return jObj;
         }

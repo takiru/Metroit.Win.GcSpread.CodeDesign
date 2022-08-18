@@ -22,17 +22,17 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             var jObj = new JObject();
 
-            jObj.Add(new JProperty(nameof(comboDropDownInfo.AllowDrop), comboDropDownInfo.AllowDrop));
-            jObj.Add(new JProperty(nameof(comboDropDownInfo.AllowResize), comboDropDownInfo.AllowResize));
-            jObj.Add(new JProperty(nameof(comboDropDownInfo.AutoDropDown), comboDropDownInfo.AutoDropDown));
-            jObj.Add(new JProperty(nameof(comboDropDownInfo.AutoHideTouchKeyboard), comboDropDownInfo.AutoHideTouchKeyboard));
-            jObj.Add(new JProperty(nameof(comboDropDownInfo.AutoWidth), comboDropDownInfo.AutoWidth));
-            jObj.Add(new JProperty(nameof(comboDropDownInfo.ClosingAnimation), comboDropDownInfo.ClosingAnimation));
-            jObj.Add(new JProperty(nameof(comboDropDownInfo.Direction), comboDropDownInfo.Direction));
-            jObj.Add(new JProperty(nameof(comboDropDownInfo.Height), comboDropDownInfo.Height));
-            jObj.Add(new JProperty(nameof(comboDropDownInfo.OpeningAnimation), comboDropDownInfo.OpeningAnimation));
-            jObj.Add(new JProperty(nameof(comboDropDownInfo.ShowShadow), comboDropDownInfo.ShowShadow));
-            jObj.Add(new JProperty(nameof(comboDropDownInfo.Width), comboDropDownInfo.Width));
+            jObj.Add(new JProperty(nameof(ComboDropDownInfo.AllowDrop), comboDropDownInfo.AllowDrop));
+            jObj.Add(new JProperty(nameof(ComboDropDownInfo.AllowResize), comboDropDownInfo.AllowResize));
+            jObj.Add(new JProperty(nameof(ComboDropDownInfo.AutoDropDown), comboDropDownInfo.AutoDropDown));
+            jObj.Add(new JProperty(nameof(ComboDropDownInfo.AutoHideTouchKeyboard), comboDropDownInfo.AutoHideTouchKeyboard));
+            jObj.Add(new JProperty(nameof(ComboDropDownInfo.AutoWidth), comboDropDownInfo.AutoWidth));
+            jObj.Add(new JProperty(nameof(ComboDropDownInfo.ClosingAnimation), comboDropDownInfo.ClosingAnimation));
+            jObj.Add(new JProperty(nameof(ComboDropDownInfo.Direction), comboDropDownInfo.Direction));
+            jObj.Add(new JProperty(nameof(ComboDropDownInfo.Height), comboDropDownInfo.Height));
+            jObj.Add(new JProperty(nameof(ComboDropDownInfo.OpeningAnimation), comboDropDownInfo.OpeningAnimation));
+            jObj.Add(new JProperty(nameof(ComboDropDownInfo.ShowShadow), comboDropDownInfo.ShowShadow));
+            jObj.Add(new JProperty(nameof(ComboDropDownInfo.Width), comboDropDownInfo.Width));
 
             return jObj;
         }
