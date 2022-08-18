@@ -134,12 +134,19 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
             }
 
             var backgroundImage = prop.SelectToken(nameof(DropDownCalendarInfo.BackgroundImage));
-            if (backgroundImage != null && backgroundImage.HasValues)
+            if (backgroundImage != null)
             {
-                var imageValue = Convert.FromBase64String(backgroundImage.ToObject<string>());
-                ImageConverter imgConverter = new ImageConverter();
-                var imageObj = (Image)imgConverter.ConvertFrom(imageValue);
-                dropDownCalendarInfo.BackgroundImage = imageObj;
+                if (backgroundImage.HasValues)
+                {
+                    var imageValue = Convert.FromBase64String(backgroundImage.ToObject<string>());
+                    ImageConverter imgConverter = new ImageConverter();
+                    var imageObj = (Image)imgConverter.ConvertFrom(imageValue);
+                    dropDownCalendarInfo.BackgroundImage = imageObj;
+                }
+                else
+                {
+                    dropDownCalendarInfo.BackgroundImage = null;
+                }
             }
 
             var backgroundImageLayout = prop.SelectToken(nameof(DropDownCalendarInfo.BackgroundImageLayout));
@@ -393,12 +400,19 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
             }
 
             var todayImage = prop.SelectToken(nameof(DropDownCalendarInfo.TodayImage));
-            if (todayImage != null && todayImage.HasValues)
+            if (todayImage != null)
             {
-                var imageValue = Convert.FromBase64String(todayImage.ToObject<string>());
-                ImageConverter imgConverter = new ImageConverter();
-                var imageObj = (Image)imgConverter.ConvertFrom(imageValue);
-                dropDownCalendarInfo.TodayImage = imageObj;
+                if (todayImage.HasValues)
+                {
+                    var imageValue = Convert.FromBase64String(todayImage.ToObject<string>());
+                    ImageConverter imgConverter = new ImageConverter();
+                    var imageObj = (Image)imgConverter.ConvertFrom(imageValue);
+                    dropDownCalendarInfo.TodayImage = imageObj;
+                }
+                else
+                {
+                    dropDownCalendarInfo.TodayImage = null;
+                }
             }
 
             var todayMarkColor = prop.SelectToken(nameof(DropDownCalendarInfo.TodayMarkColor));

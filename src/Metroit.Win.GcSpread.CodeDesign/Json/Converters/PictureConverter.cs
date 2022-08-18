@@ -93,10 +93,17 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
             var image = prop.SelectToken(nameof(Picture.Image));
             if (image != null)
             {
-                var imageValue = System.Convert.FromBase64String(image.ToObject<string>());
-                ImageConverter imgConverter = new ImageConverter();
-                var imageObj = (Image)imgConverter.ConvertFrom(imageValue);
-                result.Image = imageObj;
+                if (image.HasValues)
+                {
+                    var imageValue = System.Convert.FromBase64String(image.ToObject<string>());
+                    ImageConverter imgConverter = new ImageConverter();
+                    var imageObj = (Image)imgConverter.ConvertFrom(imageValue);
+                    result.Image = imageObj;
+                }
+                else
+                {
+                    result.Image = null;
+                }
             }
 
             var style = prop.SelectToken(nameof(Picture.Style));

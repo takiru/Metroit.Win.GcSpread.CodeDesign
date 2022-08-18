@@ -82,12 +82,16 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
             var backgroundImage = prop.SelectToken(nameof(PopUpCalculatorInfo.BackgroundImage));
             if (backgroundImage != null)
             {
-                if (!string.IsNullOrWhiteSpace(backgroundImage.ToObject<string>()))
+                if (backgroundImage.HasValues)
                 {
                     var imageValue = System.Convert.FromBase64String(backgroundImage.ToObject<string>());
                     ImageConverter imgConverter = new ImageConverter();
-                    var imageObj = imgConverter.ConvertFrom(imageValue);
-                    popUpCalculatorInfo.BackgroundImage = (Image)imageObj;
+                    var imageObj = (Image)imgConverter.ConvertFrom(imageValue);
+                    popUpCalculatorInfo.BackgroundImage = imageObj;
+                }
+                else
+                {
+                    popUpCalculatorInfo.BackgroundImage = null;
                 }
             }
 

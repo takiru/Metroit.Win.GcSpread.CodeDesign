@@ -74,12 +74,16 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
             var backgroundImage = prop.SelectToken(nameof(DropDownEditorInfo.BackgroundImage));
             if (backgroundImage != null)
             {
-                if (!string.IsNullOrEmpty(backgroundImage.ToObject<string>()))
+                if (backgroundImage.HasValues)
                 {
                     var imageValue = System.Convert.FromBase64String(backgroundImage.ToObject<string>());
                     ImageConverter imgConverter = new ImageConverter();
                     var imageObj = (Image)imgConverter.ConvertFrom(imageValue);
                     dropDownEditorInfo.BackgroundImage = imageObj;
+                }
+                else
+                {
+                    dropDownEditorInfo.BackgroundImage = null;
                 }
             }
 

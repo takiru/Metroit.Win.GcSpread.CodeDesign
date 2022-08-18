@@ -145,10 +145,17 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
                 var image = prop.SelectToken(nameof(ItemTemplateInfo.Image));
                 if (image != null)
                 {
-                    var imageValue = System.Convert.FromBase64String(image.ToObject<string>());
-                    ImageConverter imgConverter = new ImageConverter();
-                    var imageObj = imgConverter.ConvertFrom(imageValue);
-                    result[i].Image = imageObj;
+                    if (image.HasValues)
+                    {
+                        var imageValue = System.Convert.FromBase64String(image.ToObject<string>());
+                        ImageConverter imgConverter = new ImageConverter();
+                        var imageObj = imgConverter.ConvertFrom(imageValue);
+                        result[i].Image = imageObj;
+                    }
+                    else
+                    {
+                        result[i].Image = null;
+                    }
                 }
 
                 var indent = prop.SelectToken(nameof(ItemTemplateInfo.Indent));

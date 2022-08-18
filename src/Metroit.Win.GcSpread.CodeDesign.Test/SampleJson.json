@@ -1025,7 +1025,8 @@
     {
       "CellType": "DateTimeCellType",
       "CellTypeProps": {
-        "Calendar": "Japanese"
+        "Calendar": "Japanese",
+        "EnableSubEditor": true
       }
     },
     {
