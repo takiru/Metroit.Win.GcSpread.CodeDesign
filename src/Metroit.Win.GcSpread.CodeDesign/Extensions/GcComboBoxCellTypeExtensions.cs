@@ -1,7 +1,7 @@
 ﻿using GrapeCity.Win.Spread.InputMan.CellType;
 using Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters;
 
-namespace Metroit.Win.GcSpread.CodeDesign
+namespace Metroit.Win.GcSpread.CodeDesign.Extensions
 {
     /// <summary>
     /// GcComboBoxCellType のJSONシリアライズ、デシリアライズを提供します。

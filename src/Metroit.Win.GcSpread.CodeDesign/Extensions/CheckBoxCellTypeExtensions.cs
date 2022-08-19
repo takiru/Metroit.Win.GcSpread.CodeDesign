@@ -1,7 +1,7 @@
 ﻿using FarPoint.Win.Spread.CellType;
 using Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters;
 
-namespace Metroit.Win.GcSpread.CodeDesign
+namespace Metroit.Win.GcSpread.CodeDesign.Extensions
 {
     /// <summary>
     /// CheckBoxCellType のJSONシリアライズ、デシリアライズを提供します。

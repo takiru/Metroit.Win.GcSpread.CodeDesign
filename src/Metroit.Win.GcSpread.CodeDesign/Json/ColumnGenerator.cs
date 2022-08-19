@@ -1,7 +1,9 @@
 ﻿using FarPoint.Win.Spread;
 using FarPoint.Win.Spread.CellType;
 using GrapeCity.Win.Spread.InputMan.CellType;
+using Metroit.Win.GcSpread.CodeDesign.Extensions;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -185,7 +187,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
 
                 if (outputCellTypeProps)
                 {
-                    column.CellTypeProps = svColumn.CellType.SerializeJson();
+                    column.CellTypeProps = JObject.Parse(svColumn.CellType.SerializeJson());
                 }
                 if (outputOptions)
                 {
