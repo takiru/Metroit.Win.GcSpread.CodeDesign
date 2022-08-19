@@ -255,7 +255,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters
                 c.FocusPosition = prop.Value.ToObject<EditorBaseFocusCursorPosition>();
                 return;
             }
-            if (string.Compare(prop.Key, nameof(GcComboBoxCellType.FormatString), true) == 0)
+            if (string.Compare(prop.Key, nameof(GcTextBoxCellType.FormatString), true) == 0)
             {
                 c.FormatString = prop.Value.ToObject<string>();
                 return;
