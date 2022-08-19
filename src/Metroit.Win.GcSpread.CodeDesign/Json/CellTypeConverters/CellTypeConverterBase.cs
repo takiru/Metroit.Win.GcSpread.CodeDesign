@@ -1,4 +1,5 @@
 ﻿using FarPoint.Win.Spread.CellType;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 
@@ -32,7 +33,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters
         {
             var result = new JObject();
             SerializeProp(result, includeProps);
-            return Newtonsoft.Json.JsonConvert.SerializeObject(result);
+            return JsonConvert.SerializeObject(result);
         }
 
         /// <summary>

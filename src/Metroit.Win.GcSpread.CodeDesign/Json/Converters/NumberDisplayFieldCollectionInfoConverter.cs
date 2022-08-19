@@ -1,5 +1,6 @@
 ﻿using GrapeCity.Win.Spread.InputMan.CellType;
 using GrapeCity.Win.Spread.InputMan.CellType.Fields;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
@@ -25,7 +26,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             foreach (NumberDisplayFieldInfo field in numberDisplayFieldCollectionInfo)
             {
-                var jobj = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(field));
+                var jobj = JObject.Parse(JsonConvert.SerializeObject(field));
                 jobj.AddFirst(new JProperty("Type", field.GetType().Name));
                 result.Add(jobj);
             }

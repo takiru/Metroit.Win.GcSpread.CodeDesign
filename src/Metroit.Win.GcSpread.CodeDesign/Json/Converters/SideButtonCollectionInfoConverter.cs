@@ -1,4 +1,5 @@
 ﻿using GrapeCity.Win.Spread.InputMan.CellType;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
@@ -24,7 +25,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
 
             foreach (SideButtonBaseInfo sideButtonBaseInfo in sideButtonCollectionInfo)
             {
-                var jobj = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(sideButtonBaseInfo));
+                var jobj = JObject.Parse(JsonConvert.SerializeObject(sideButtonBaseInfo));
                 jobj.AddFirst(new JProperty("Type", sideButtonBaseInfo.GetType().Name));
                 displayFieldsArray.Add(jobj);
             }

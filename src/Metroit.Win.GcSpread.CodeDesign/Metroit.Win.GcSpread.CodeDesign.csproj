@@ -62,6 +62,7 @@
     <Compile Include="Json\CellTypeConverters\DateTimeCellTypeConverter.cs" />
     <Compile Include="DateTimeCellTypeExtensions.cs" />
     <Compile Include="Json\CellTypeConverters\NumberCellTypeConverter.cs" />
+    <Compile Include="Json\SheetViewGenerator.cs" />
     <Compile Include="Json\Converters\CheckBoxPictureConverter.cs" />
     <Compile Include="NumberCellTypeExtensions.cs" />
     <Compile Include="ComboBoxCellTypeExtensions.cs" />
@@ -84,7 +85,7 @@
     <Compile Include="Json\CellTypeConverters\ButtonCellTypeConverter.cs" />
     <Compile Include="Json\CellTypeConverters\InputManCellTypeBaseConverter.cs" />
     <Compile Include="Json\ColumnDefinitionsBase.cs" />
-    <Compile Include="Json\ColumnsSetupProvider.cs" />
+    <Compile Include="Json\ColumnGenerator.cs" />
     <Compile Include="Json\CellTypeConverters\CellTypeConverterBase.cs" />
     <Compile Include="Json\CellTypeConverters\BaseCellTypeConverter.cs" />
     <Compile Include="Json\Converters\DateTimeDropDownPickerInfoConverter.cs" />
@@ -104,8 +105,7 @@
     <Compile Include="Json\Converters\HolidayStyleCollectionConverter.cs" />
     <Compile Include="Json\Converters\StyleConverter.cs" />
     <Compile Include="Json\Converters\TextBoxAlternateTextInfoConverter.cs" />
-    <Compile Include="Json\JsonConvert.cs" />
-    <Compile Include="Json\ColumnHeaderSetupProvider.cs" />
+    <Compile Include="Json\ColumnHeaderGenerator.cs" />
     <Compile Include="Json\TemplateHeaderCellDefinitions.cs" />
     <Compile Include="Json\TemplateHeaderRowDefinitions.cs" />
     <Compile Include="Json\TemplateColumnHeaderDefinitions.cs" />
