@@ -10,6 +10,12 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
     public class HeaderRowDefinitions
     {
         /// <summary>
+        /// テンプレート名を取得または設定します。
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string BaseTemplate { get; set; }
+
+        /// <summary>
         /// 高さを取得または設定します。
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
@@ -26,11 +32,5 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public CellVerticalAlignment? VerticalAlignment { get; set; }
-
-        /// <summary>
-        /// 列ヘッダーの列情報を取得または設定します。
-        /// </summary>
-        [JsonProperty(Required = Required.Always)]
-        public HeaderColumnDefinitions[] Columns { get; set; }
     }
 }

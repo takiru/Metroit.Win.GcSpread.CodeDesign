@@ -29,6 +29,23 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
         /// </summary>
         private void InitializeComponent()
         {
+            GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo dropDownButtonInfo1 = new GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.GcDateTimeCellType gcDateTimeCellType1 = new GrapeCity.Win.Spread.InputMan.CellType.GcDateTimeCellType();
+            GrapeCity.Win.Spread.InputMan.CellType.Fields.DateYearFieldInfo dateYearFieldInfo1 = new GrapeCity.Win.Spread.InputMan.CellType.Fields.DateYearFieldInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.Fields.DateLiteralFieldInfo dateLiteralFieldInfo1 = new GrapeCity.Win.Spread.InputMan.CellType.Fields.DateLiteralFieldInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.Fields.DateMonthFieldInfo dateMonthFieldInfo1 = new GrapeCity.Win.Spread.InputMan.CellType.Fields.DateMonthFieldInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.Fields.DateLiteralFieldInfo dateLiteralFieldInfo2 = new GrapeCity.Win.Spread.InputMan.CellType.Fields.DateLiteralFieldInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.Fields.DateDayFieldInfo dateDayFieldInfo1 = new GrapeCity.Win.Spread.InputMan.CellType.Fields.DateDayFieldInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.Fields.DateLiteralFieldInfo dateLiteralFieldInfo3 = new GrapeCity.Win.Spread.InputMan.CellType.Fields.DateLiteralFieldInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.Fields.DateHourFieldInfo dateHourFieldInfo1 = new GrapeCity.Win.Spread.InputMan.CellType.Fields.DateHourFieldInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.Fields.DateLiteralFieldInfo dateLiteralFieldInfo4 = new GrapeCity.Win.Spread.InputMan.CellType.Fields.DateLiteralFieldInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.Fields.DateMinuteFieldInfo dateMinuteFieldInfo1 = new GrapeCity.Win.Spread.InputMan.CellType.Fields.DateMinuteFieldInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.Fields.DateLiteralFieldInfo dateLiteralFieldInfo5 = new GrapeCity.Win.Spread.InputMan.CellType.Fields.DateLiteralFieldInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.Fields.DateSecondFieldInfo dateSecondFieldInfo1 = new GrapeCity.Win.Spread.InputMan.CellType.Fields.DateSecondFieldInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo dropDownButtonInfo2 = new GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo dropDownButtonInfo3 = new GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo dropDownButtonInfo4 = new GrapeCity.Win.Spread.InputMan.CellType.DropDownButtonInfo();
+            GrapeCity.Win.Spread.InputMan.CellType.GcTextBoxCellType gcTextBoxCellType1 = new GrapeCity.Win.Spread.InputMan.CellType.GcTextBoxCellType();
             this.fpSpread1 = new FarPoint.Win.Spread.FpSpread();
             this.fpSpread1_Sheet1 = new FarPoint.Win.Spread.SheetView();
             this.button1 = new System.Windows.Forms.Button();
@@ -41,7 +58,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             // 
             // fpSpread1
             // 
-            this.fpSpread1.AccessibleDescription = "";
+            this.fpSpread1.AccessibleDescription = "fpSpread1, Sheet1, Row 0, Column 0";
             this.fpSpread1.AllowColumnMove = true;
             this.fpSpread1.Location = new System.Drawing.Point(12, 41);
             this.fpSpread1.Name = "fpSpread1";
@@ -54,6 +71,45 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             // 
             this.fpSpread1_Sheet1.Reset();
             this.fpSpread1_Sheet1.SheetName = "Sheet1";
+            // Formulas and custom names must be loaded with R1C1 reference style
+            this.fpSpread1_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.R1C1;
+            this.fpSpread1_Sheet1.ColumnFooterSheetCornerStyle.BackColor = System.Drawing.Color.Empty;
+            this.fpSpread1_Sheet1.ColumnFooterSheetCornerStyle.ForeColor = System.Drawing.Color.Empty;
+            this.fpSpread1_Sheet1.ColumnFooterSheetCornerStyle.Parent = "CornerDefaultEnhanced";
+            gcDateTimeCellType1.BackgroundImage = new FarPoint.Win.Picture(null, FarPoint.Win.RenderStyle.Normal, System.Drawing.Color.Empty, 0, FarPoint.Win.HorizontalAlignment.Left, FarPoint.Win.VerticalAlignment.Top);
+            gcDateTimeCellType1.ClearCollection = true;
+            dateLiteralFieldInfo1.Text = "/";
+            dateLiteralFieldInfo2.Text = "/";
+            dateLiteralFieldInfo4.Text = ":";
+            dateLiteralFieldInfo5.Text = ":";
+            gcDateTimeCellType1.Fields.AddRange(new GrapeCity.Win.Spread.InputMan.CellType.Fields.DateFieldInfo[] {
+            dateYearFieldInfo1,
+            dateLiteralFieldInfo1,
+            dateMonthFieldInfo1,
+            dateLiteralFieldInfo2,
+            dateDayFieldInfo1,
+            dateLiteralFieldInfo3,
+            dateHourFieldInfo1,
+            dateLiteralFieldInfo4,
+            dateMinuteFieldInfo1,
+            dateLiteralFieldInfo5,
+            dateSecondFieldInfo1});
+            gcDateTimeCellType1.SerializationDefaultActiveFieldIndex = 0;
+            gcDateTimeCellType1.ShortcutKeys.AddRange(new GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionaryEntry[] {
+            new GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionaryEntry(System.Windows.Forms.Keys.F2, "ShortcutClear"),
+            new GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionaryEntry(System.Windows.Forms.Keys.F5, "SetNow"),
+            new GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionaryEntry(((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Return))), "ApplyRecommendedValue")});
+            gcDateTimeCellType1.SideButtons.AddRange(new GrapeCity.Win.Spread.InputMan.CellType.SideButtonBaseInfo[] {
+            dropDownButtonInfo2});
+            this.fpSpread1_Sheet1.Columns.Get(4).CellType = gcDateTimeCellType1;
+            gcTextBoxCellType1.BackgroundImage = new FarPoint.Win.Picture(null, FarPoint.Win.RenderStyle.Normal, System.Drawing.Color.Empty, 0, FarPoint.Win.HorizontalAlignment.Left, FarPoint.Win.VerticalAlignment.Top);
+            gcTextBoxCellType1.ClearCollection = true;
+            gcTextBoxCellType1.FormatString = "A9N@^ｰﾞﾟ!\"\\#$%&\'()=\\^~\\\\|\\@`[{;+:*]},<.>/?";
+            gcTextBoxCellType1.ShortcutKeys.AddRange(new GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionaryEntry[] {
+            new GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionaryEntry(System.Windows.Forms.Keys.F2, "ShortcutClear")});
+            this.fpSpread1_Sheet1.Columns.Get(7).CellType = gcTextBoxCellType1;
+            this.fpSpread1_Sheet1.RowHeader.Columns.Default.Resizable = false;
+            this.fpSpread1_Sheet1.ReferenceStyle = FarPoint.Win.Spread.Model.ReferenceStyle.A1;
             // 
             // button1
             // 

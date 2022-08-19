@@ -1,11 +1,12 @@
 ﻿using FarPoint.Win.Spread;
 using FarPoint.Win.Spread.CellType;
-using Metroit.Win.GcSpread.CodeDesign;
 using Metroit.Win.GcSpread.CodeDesign.Json;
+using Metroit.Win.GcSpread.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -42,12 +43,10 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
                 new ListItem() { Column1 = DateTime.Today, Column2=123, Column3="Row3", Column4="item3", Column5="ccc", Column6="zzz", Column7=1 }
             };
 
-            // JSONからレイアウトオブジェクトを取得
-            var json = SampleRex.SampleJson;
-            var root = JsonConvert.DeserializeSheetView(json);
-
             // レイアウトオブジェクトからレイアウトをバインドする
-            fpSpread1.ActiveSheet.BindJsonLayout(root,
+            var generator = new SheetViewGenerator(fpSpread1.ActiveSheet);
+            generator.GenerateLayout(SampleRex.SampleJson,
+                SampleRex.Template,
                 null,
                 (sheet, root2) =>
                 {
@@ -113,24 +112,28 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var root = fpSpread1.ActiveSheet.CreateSpecialColumnDefinitions();
+            var provider = new ColumnGenerator(fpSpread1.ActiveSheet);
+            var defs = provider.CreateColumnsDefinitions(null, new[] { nameof(Column.Width), nameof(Column.Visible), nameof(Column.DataField) }, false, false);
+            var json = ColumnGenerator.SerializeJson(defs);
+            var obj = ColumnGenerator.DeserializeJson(json);
 
-            var json = JsonConvert.SerializeSpecialColumn(root);
-            var deserialize = JsonConvert.DeserializeSpecialColumn(json);
             MessageBox.Show(json);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var root = fpSpread1.ActiveSheet.CreateSpecialColumnHeaderDefinitions();
-            var json = JsonConvert.SerializeSpecialColumnHeader(root);
-            var deserialize = JsonConvert.DeserializeSpecialColumnHeader(json);
+            var provider = new ColumnHeaderGenerator(fpSpread1.ActiveSheet);
+            var defs = provider.CreateCellDefinitions(new[] { nameof(Cell.Value) });
+            var json = ColumnHeaderGenerator.SerializeCellJson(defs);
+            var obj = ColumnHeaderGenerator.DeserializeCellJson(json);
+
             MessageBox.Show(json);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            var root = fpSpread1.ActiveSheet.CreateSheetDefinitions((column) =>
+            var generator = new SheetViewGenerator(fpSpread1.ActiveSheet);
+            var root = generator.CreateSheetDefinitions((column) =>
             {
                 // ここでオプション情報の設定などをする
                 // オプション情報と仮定
@@ -156,7 +159,8 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
 
                 return result;
             });
-            var json = JsonConvert.SerializeSheetView(root);
+            var json = SheetViewGenerator.SerializeJson(root);
+            var obj = SheetViewGenerator.DeserializeJson(json);
             MessageBox.Show(json);
         }
     }

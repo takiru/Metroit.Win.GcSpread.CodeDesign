@@ -4,13 +4,19 @@ using Newtonsoft.Json;
 namespace Metroit.Win.GcSpread.CodeDesign.Json
 {
     /// <summary>
-    /// GrapeCity SPREAD SheetView のレイアウトを構成する列ヘッダーの列要素を提供します。
+    /// GrapeCity SPREAD SheetView のレイアウトを構成する列ヘッダーのセル要素を提供します。
     /// </summary>
-    [JsonObject("Column")]
-    public class HeaderColumnDefinitions
+    [JsonObject("Cell")]
+    public class HeaderCellDefinitions
     {
         /// <summary>
-        /// 列タイトルを取得または設定します。
+        /// テンプレート名を取得または設定します。
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string BaseTemplate { get; set; }
+
+        /// <summary>
+        /// セルタイトルを取得または設定します。
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string Value { get; set; }

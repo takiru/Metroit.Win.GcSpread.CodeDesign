@@ -1,0 +1,69 @@
+﻿{
+  "ColumnHeader": {
+    "Rows": [
+      {
+        "TemplateName": "DefaultRow",
+        "Height": 40,
+        "HorizontalAlignment": "Right",
+        "VerticalAlignment": "Bottom"
+      }
+    ],
+    "Cells": [
+      {
+        "TemplateName": "DefaultCell",
+        "Value": "タイトル6",
+        "HorizontalAlignment": "Left",
+        "VerticalAlignment": "Bottom"
+      }
+    ]
+  },
+  // 列の設定
+  "Columns": [
+    {
+      "TemplateName": "BaseNumberTemplate",
+      "HorizontalAlignment": "Right",
+      "VerticalAlignment": "Bottom",
+      "AllowAutoFilter": false,
+      "AllowAutoSort": false,
+      "Width": 150,
+      "Visible": true,
+      "CellType": "NumberCellType"
+    },
+    {
+      "TemplateName": "NumberTemplate",
+      "BaseTemplate": "BaseNumberTemplate",
+      "CellType": "NumberCellType",
+      "CellTypeProps": {
+        "AcceptsArrowKeys": 3,
+        "FocusPosition": 0,
+        "MaximumValue": 10000.99,
+        "MinimumValue": -10000.99,
+        "NegativeRed": true,
+        "PaintByControl": false,
+        "PopUpCalculator": {
+          "Align": 0,
+          "AllowPopUp": true,
+          "BackColor": "window",
+          "BackgroundImage": "",
+          "BackgroundImageLayout": 1,
+          "BorderStyle": 1,
+          "DecimalDigit": 2,
+          "Font": null,
+          "ForeColor": "windowtext",
+          "Lines": 12,
+          "Padding": "1, 2, 3, 4",
+          "TextHAlign": 1,
+          "UseDecimalDigit": false,
+          "Width": 0
+        },
+        "ReadOnly": false
+      },
+      "ImeMode": "Off",
+      "Locked": false,
+      "Options": {
+        "UseFreeWords": false,
+        "ExtendWordsEnabled": false
+      }
+    }
+  ]
+}
