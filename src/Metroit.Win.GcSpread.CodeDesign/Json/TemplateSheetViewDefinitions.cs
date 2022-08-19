@@ -3,7 +3,7 @@
 namespace Metroit.Win.GcSpread.CodeDesign.Json
 {
     /// <summary>
-    /// GrapeCity SPREAD SheetView のレイアウトを構成するルート要素を提供します。
+    /// GrapeCity SPREAD SheetView のテンプレートレイアウトを構成するルート要素を提供します。
     /// </summary>
     [JsonObject]
     public class TemplateSheetViewDefinitions

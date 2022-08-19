@@ -2,6 +2,7 @@
 using FarPoint.Win.Spread.CellType;
 using GrapeCity.Win.Spread.InputMan.CellType;
 using Metroit.Win.GcSpread.CodeDesign.Json;
+using Metroit.Win.GcSpread.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

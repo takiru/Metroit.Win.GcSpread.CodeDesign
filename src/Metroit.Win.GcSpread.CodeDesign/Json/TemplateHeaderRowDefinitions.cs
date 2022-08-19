@@ -3,7 +3,7 @@
 namespace Metroit.Win.GcSpread.CodeDesign.Json
 {
     /// <summary>
-    /// GrapeCity SPREAD SheetView のレイアウトを構成する列ヘッダーの行要素を提供します。
+    /// GrapeCity SPREAD SheetView のテンプレートレイアウトを構成する列ヘッダーの行要素を提供します。
     /// </summary>
     [JsonObject("Row")]
     public class TemplateHeaderRowDefinitions: HeaderRowDefinitions

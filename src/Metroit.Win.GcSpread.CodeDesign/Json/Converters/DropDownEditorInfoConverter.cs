@@ -14,7 +14,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// シリアライズを行います。
         /// TouchToolBar はシリアライズを行いません。
         /// </summary>
-        /// <param name="dropDownInfo">DropDownInfo オブジェクト。</param>
+        /// <param name="dropDownEditorInfo">DropDownEditorInfo オブジェクト。</param>
         /// <returns>シリアライズオブジェクト。</returns>
         // NOTE: 下記はシリアライズ化対象外。
         //         TouchToolBar: 大量のプロパティがあるため。
@@ -59,7 +59,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// デシリアライズを行います。
         /// TouchToolBar はデシリアライズを行いません。
         /// </summary>
-        /// <param name="dropDownInfo">DropDownInfo オブジェクト。</param>
+        /// <param name="dropDownEditorInfo">DropDownEditorInfo オブジェクト。</param>
         /// <param name="prop">デシリアライズオブジェクト。</param>
         // NOTE: 下記はシリアライズ化対象外。
         //         TouchToolBar: 大量のプロパティがあるため。

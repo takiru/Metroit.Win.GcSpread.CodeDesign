@@ -37,8 +37,8 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// <summary>
         /// デシリアライズを行います。
         /// </summary>
-        /// <param name="prop">デシリアライズオブジェクト。</param>
-        /// <returns>NumberFieldsInfo オブジェクト。</returns>
+        /// <param name="numberFieldInfos">NumberFieldsInfo オブジェクト。</param>
+        /// <param name="props">デシリアライズオブジェクト。</param>
         public static void Deserialize(NumberFieldsInfo numberFieldInfos, JArray props)
         {
             foreach (JToken prop in props)

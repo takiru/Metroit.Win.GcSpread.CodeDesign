@@ -37,7 +37,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// <summary>
         /// デシリアライズを行います。
         /// </summary>
-        /// <param name="prop">デシリアライズオブジェクト。</param>
+        /// <param name="props">デシリアライズオブジェクト。</param>
         /// <returns>DateTimeDisplayFieldCollectionInfo オブジェクト。</returns>
         public static DateTimeDisplayFieldCollectionInfo Deserialize(JArray props)
         {

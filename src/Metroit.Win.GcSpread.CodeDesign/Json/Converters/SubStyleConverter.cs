@@ -12,7 +12,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// <summary>
         /// シリアライズを行います。
         /// </summary>
-        /// <param name="holidayCollection">SubStyle オブジェクト。</param>
+        /// <param name="subStyle">SubStyle オブジェクト。</param>
         /// <returns>シリアライズオブジェクト。</returns>
         public static JObject Serialize(SubStyle subStyle)
         {

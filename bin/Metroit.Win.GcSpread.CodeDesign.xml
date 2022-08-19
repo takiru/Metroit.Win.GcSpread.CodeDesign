@@ -4,39 +4,2002 @@
         <name>Metroit.Win.GcSpread.CodeDesign</name>
     </assembly>
     <members>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult">
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.CheckBoxCellTypeConverter">
             <summary>
-            列の移動を行った情報を提供します。
+            CheckBoxCellType のコンバーターを提供します。
             </summary>
         </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult.#ctor(System.Int32,System.Int32,System.Int32,System.String)">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.CheckBoxCellTypeConverter.#ctor(FarPoint.Win.Spread.CellType.CheckBoxCellType)">
             <summary>
-            新しいインスタンスを生成します。
+            新しい CheckBoxCellTypeConverter インスタンスを生成します。
             </summary>
-            <param name="originalColumnIndex">オリジナルの列インデックス。</param>
-            <param name="beforeColumnIndex">移動前列インデックス。</param>
-            <param name="afterColumnIndex">移動後列インデックス。</param>
-            <param name="dataField">列の DataField プロパティ値。</param>
+            <param name="cellType">セルタイプ。</param>
         </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult.OriginalColumnIndex">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.CheckBoxCellTypeConverter.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
             <summary>
-            オリジナルの列インデックスを取得します。
-            MoveColumnKeepDataField() の実行結果では、かならず BeforeColumnIndex と同一になります。
+            セルタイプのプロパティをシリアライズします。
+            </summary>
+            <param name="propsObj">プロパティオブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.CheckBoxCellTypeConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            現在のプロパティをデシリアライズします。
+            </summary>
+            <param name="prop">プロパティのトークンオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.ComboBoxCellTypeConverter">
+            <summary>
+            ComboBoxCellType のコンバーターを提供します。
             </summary>
         </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult.BeforeColumnIndex">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.ComboBoxCellTypeConverter.#ctor(FarPoint.Win.Spread.CellType.ComboBoxCellType)">
             <summary>
-            移動前の列インデックスを取得します。
+            新しい ComboBoxCellTypeConverter インスタンスを生成します。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.ComboBoxCellTypeConverter.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
+            <summary>
+            セルタイプのプロパティをシリアライズします。
+            ImageList, ListControl はシリアライズを行いません。
+            </summary>
+            <param name="propsObj">プロパティオブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.ComboBoxCellTypeConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            現在のプロパティをデシリアライズします。
+            ImageList, ListControl はデシリアライズを行いません。
+            </summary>
+            <param name="prop">プロパティのトークンオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.DateTimeCellTypeConverter">
+            <summary>
+            DateTimeCellType のコンバーターを提供します。
             </summary>
         </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult.AfterColumnIndex">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.DateTimeCellTypeConverter.#ctor(FarPoint.Win.Spread.CellType.DateTimeCellType)">
             <summary>
-            移動後の列インデックスを取得します。
+            新しい DateTimeCellTypeConverter インスタンスを生成します。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.DateTimeCellTypeConverter.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
+            <summary>
+            セルタイプのプロパティをシリアライズします。
+            </summary>
+            <param name="propsObj">プロパティオブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.DateTimeCellTypeConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            現在のプロパティをデシリアライズします。
+            </summary>
+            <param name="prop">プロパティのトークンオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.NumberCellTypeConverter">
+            <summary>
+            NumberCellType のコンバーターを提供します。
             </summary>
         </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult.DataField">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.NumberCellTypeConverter.#ctor(FarPoint.Win.Spread.CellType.NumberCellType)">
             <summary>
-            列の DataField プロパティ値を取得します。
+            新しい NumberCellTypeConverter インスタンスを生成します。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.NumberCellTypeConverter.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
+            <summary>
+            セルタイプのプロパティをシリアライズします。
+            </summary>
+            <param name="propsObj">プロパティオブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.NumberCellTypeConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            現在のプロパティをデシリアライズします。
+            </summary>
+            <param name="prop">プロパティのトークンオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.TextCellTypeConverter">
+            <summary>
+            TextCellType のコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.TextCellTypeConverter.#ctor(FarPoint.Win.Spread.CellType.TextCellType)">
+            <summary>
+            新しい TextCellTypeConverter インスタンスを生成します。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.TextCellTypeConverter.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
+            <summary>
+            セルタイプのプロパティをシリアライズします。
+            </summary>
+            <param name="propsObj">プロパティオブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.TextCellTypeConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            現在のプロパティをデシリアライズします。
+            </summary>
+            <param name="prop">プロパティのトークンオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.EditBaseCellTypeConverter">
+            <summary>
+            EditBaseCellType のコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.EditBaseCellTypeConverter.#ctor(FarPoint.Win.Spread.CellType.EditBaseCellType)">
+            <summary>
+            新しい EditBaseCellTypeConverter インスタンスを生成します。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.EditBaseCellTypeConverter.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
+            <summary>
+            セルタイプのプロパティをシリアライズします。
+            </summary>
+            <param name="propsObj">プロパティオブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.EditBaseCellTypeConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            現在のプロパティをデシリアライズします。
+            </summary>
+            <param name="prop">プロパティのトークンオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcComboBoxCellTypeConverter">
+            <summary>
+            GcComboBoxCellType のコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcComboBoxCellTypeConverter.#ctor(GrapeCity.Win.Spread.InputMan.CellType.GcComboBoxCellType)">
+            <summary>
+            新しい GcComboBoxCellTypeConverter インスタンスを生成します。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcComboBoxCellTypeConverter.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
+            <summary>
+            セルタイプのプロパティをシリアライズします。
+            DataSource, ImageList, Items, ListColumns はシリアライズを行いません。
+            </summary>
+            <param name="propsObj">プロパティオブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcComboBoxCellTypeConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            現在のプロパティをデシリアライズします。
+            DataSource, ImageList, Items, ListColumns はデシリアライズを行いません。
+            </summary>
+            <param name="prop">プロパティのトークンオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcDateTimeCellTypeConverter">
+            <summary>
+            GcDateTimeCellType のコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcDateTimeCellTypeConverter.#ctor(GrapeCity.Win.Spread.InputMan.CellType.GcDateTimeCellType)">
+            <summary>
+            新しい GcDateTimeCellTypeConverter インスタンスを生成します。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcDateTimeCellTypeConverter.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
+            <summary>
+            セルタイプのプロパティをシリアライズします。
+            </summary>
+            <param name="propsObj">プロパティオブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcDateTimeCellTypeConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            現在のプロパティをデシリアライズします。
+            </summary>
+            <param name="prop">プロパティのトークンオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcNumberCellTypeConverter">
+            <summary>
+            GcNumberCellType のコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcNumberCellTypeConverter.#ctor(GrapeCity.Win.Spread.InputMan.CellType.GcNumberCellType)">
+            <summary>
+            新しい GcNumberCellTypeConverter インスタンスを生成します。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcNumberCellTypeConverter.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
+            <summary>
+            セルタイプのプロパティをシリアライズします。
+            </summary>
+            <param name="propsObj">プロパティオブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcNumberCellTypeConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            現在のプロパティをデシリアライズします。
+            </summary>
+            <param name="prop">プロパティのトークンオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.FieldsEditorControlCellTypeConverter">
+            <summary>
+            FieldsEditorControlCellType のコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.FieldsEditorControlCellTypeConverter.#ctor(GrapeCity.Win.Spread.InputMan.CellType.FieldsEditorControlCellType)">
+            <summary>
+            新しい FieldsEditorControlCellTypeConverter インスタンスを生成します。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.FieldsEditorControlCellTypeConverter.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
+            <summary>
+            セルタイプのプロパティをシリアライズします。
+            </summary>
+            <param name="propsObj">プロパティオブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.FieldsEditorControlCellTypeConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            現在のプロパティをデシリアライズします。
+            </summary>
+            <param name="prop">プロパティのトークンオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcTextBoxCellTypeConverter">
+            <summary>
+            GcTextBoxCellType のコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcTextBoxCellTypeConverter.#ctor(GrapeCity.Win.Spread.InputMan.CellType.GcTextBoxCellType)">
+            <summary>
+            新しい GcTextBoxCellTypeConverter インスタンスを生成します。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcTextBoxCellTypeConverter.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
+            <summary>
+            セルタイプのプロパティをシリアライズします。
+            </summary>
+            <param name="propsObj">プロパティオブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcTextBoxCellTypeConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            現在のプロパティをデシリアライズします。
+            </summary>
+            <param name="prop">プロパティのトークンオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.ButtonCellTypeConverter">
+            <summary>
+            ButtonCellType のコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.ButtonCellTypeConverter.#ctor(FarPoint.Win.Spread.CellType.ButtonCellType)">
+            <summary>
+            新しい ButtonCellTypeConverter インスタンスを生成します。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.ButtonCellTypeConverter.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
+            <summary>
+            セルタイプのプロパティをシリアライズします。
+            </summary>
+            <param name="propsObj">プロパティオブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.ButtonCellTypeConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            現在のプロパティをデシリアライズします。
+            </summary>
+            <param name="prop">プロパティのトークンオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.InputManCellTypeBaseConverter">
+            <summary>
+            InputManCellTypeBase のコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.InputManCellTypeBaseConverter.#ctor(GrapeCity.Win.Spread.InputMan.CellType.InputManCellTypeBase)">
+            <summary>
+            新しい InputManCellTypeBaseConverter インスタンスを生成します。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.InputManCellTypeBaseConverter.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
+            <summary>
+            セルタイプのプロパティをシリアライズします。
+            TouchToolBar はシリアライズを行いません。
+            </summary>
+            <param name="propsObj">プロパティオブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.InputManCellTypeBaseConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            現在のプロパティをデシリアライズします。
+            TouchToolBar はデシリアライズを行いません。
+            </summary>
+            <param name="prop">プロパティのトークンオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.CellTypeConverterBase">
+            <summary>
+            CellType のコンバーターインターフェースを提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.CellTypeConverterBase.CellType">
+            <summary>
+            コンバーターの対象となるセルタイプを取得します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.CellTypeConverterBase.#ctor(FarPoint.Win.Spread.CellType.ICellType)">
+            <summary>
+            新しい CellTypeConverterBase インスタンスを生成します。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.CellTypeConverterBase.SerializeJson(System.String[])">
+            <summary>
+            セルタイプをシリアライズします。
+            </summary>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns></returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.CellTypeConverterBase.DeserializeJson(System.String)">
+            <summary>
+            セルタイプをデシリアライズします。
+            </summary>
+            <param name="cellTypeProps">セルタイププロパティJSON文字列。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.CellTypeConverterBase.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
+            <summary>
+            セルタイプのプロパティをシリアライズします。
+            </summary>
+            <param name="propsObj">プロパティオブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.CellTypeConverterBase.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            現在のプロパティをデシリアライズします。
+            </summary>
+            <param name="prop">プロパティのトークンオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.BaseCellTypeConverter">
+            <summary>
+            BaseCellType のコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.BaseCellTypeConverter.#ctor(FarPoint.Win.Spread.CellType.BaseCellType)">
+            <summary>
+            新しい BaseCellTypeConverter インスタンスを生成します。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.BaseCellTypeConverter.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
+            <summary>
+            セルタイプのプロパティをシリアライズします。
+            SubEditor はシリアライズを行いません。
+            </summary>
+            <param name="propsObj">プロパティオブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.BaseCellTypeConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            現在のプロパティをデシリアライズします。
+            SubEditor はデシリアライズを行いません。
+            </summary>
+            <param name="prop">プロパティのトークンオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator">
+            <summary>
+            SheetView の生成操作を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.SheetView">
+            <summary>
+            処理の対象となる SheetView。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.#ctor(FarPoint.Win.Spread.SheetView)">
+            <summary>
+            新しい SheetViewGenerator インスタンスを生成します。
+            </summary>
+            <param name="sheetView">処理対象とする SheetView。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.SerializeJson(Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions)">
+            <summary>
+            シート定義オブジェクトからJSON文字列にシリアライズします。
+            </summary>
+            <param name="def">シート定義オブジェクト。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.DeserializeJson(System.String)">
+            <summary>
+            JSON文字列からシート定義オブジェクトにデシリアライズします。
+            </summary>
+            <param name="json">シート定義JSON文字列。</param>
+            <returns>シート定義オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutFrom(System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSONファイルでシートレイアウトを生成します。
+            </summary>
+            <param name="layoutPath">JSONファイルパス。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutFrom(System.String,System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSONファイルでシートレイアウトを生成します。
+            </summary>
+            <param name="layoutPath">JSONファイルパス。</param>
+            <param name="templateLayoutPath">テンプレートJSONファイルパス。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutFrom(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSONファイルでシートレイアウトを生成します。
+            </summary>
+            <param name="layoutPath">JSONファイルパス。</param>
+            <param name="templateLayoutPaths">テンプレートJSONファイルパス。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayout(System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSON文字列でシートレイアウトを生成します。
+            </summary>
+            <param name="layout">JSON文字列。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayout(System.String,System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSON文字列でシートレイアウトを生成します。
+            </summary>
+            <param name="layout">JSON文字列。</param>
+            <param name="templateLayout">テンプレートJSON文字列。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayout(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSON文字列でシートレイアウトを生成します。
+            </summary>
+            <param name="layout">JSON文字列。</param>
+            <param name="templateLayouts">テンプレートJSON文字列。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumnsFrom(System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSONファイルでヘッダー部のみのシートレイアウトを生成します。
+            </summary>
+            <param name="layoutPath">JSONファイルパス。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumnsFrom(System.String,System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSONファイルでヘッダー部のみのシートレイアウトを生成します。
+            </summary>
+            <param name="layoutPath">JSONファイルパス。</param>
+            <param name="templateLayoutPath">テンプレートJSONファイルパス。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumnsFrom(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSONファイルでヘッダー部のみのシートレイアウトを生成します。
+            </summary>
+            <param name="layoutPath">JSONファイルパス。</param>
+            <param name="templateLayoutPaths">テンプレートJSONファイルパス。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumns(System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSON文字列でヘッダー部のみのシートレイアウトを生成します。
+            </summary>
+            <param name="layout">JSON文字列。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumns(System.String,System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSON文字列でヘッダー部のみのシートレイアウトを生成します。
+            </summary>
+            <param name="layout">JSON文字列。</param>
+            <param name="templateLayout">テンプレートJSON文字列。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumns(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSONオブジェクトでヘッダー部のみのシートレイアウトを生成します。
+            </summary>
+            <param name="layout">JSON文字列。</param>
+            <param name="templateLayouts">テンプレートJSON文字列。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutFrom(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}},System.Boolean)">
+            <summary>
+            指定したJSONファイルでヘッダー部のみのシートレイアウトを生成します。
+            </summary>
+            <param name="layoutPath">JSONファイルパス。</param>
+            <param name="templateLayoutPaths">テンプレートJSONファイルパス。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <param name="generateColumns">列定義をバインドするかどうか。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayout(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}},System.Boolean)">
+            <summary>
+            指定したJSON文字列でシートレイアウトを生成する。
+            </summary>
+            <param name="layout">JSON文字列。</param>
+            <param name="templateLayouts">テンプレートJSON文字列。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <param name="generateColumns">列定義をバインドするかどうか。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.PrepareGenerating">
+            <summary>
+            ジェネレート準備を行う。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.DeserializeTemplateLayouts(System.String[])">
+            <summary>
+            テンプレートJSONをデシリアライズする。
+            </summary>
+            <param name="templateLayouts">テンプレートJSON文字列。</param>
+            <returns></returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.CreateSheetDefinitions(System.Func{FarPoint.Win.Spread.Column,System.Collections.Generic.Dictionary{System.String,System.Object}},System.String[],System.String[],System.String[],System.Boolean,System.Boolean)">
+            <summary>
+            シート情報からシート定義オブジェクトを生成します。
+            </summary>
+            <param name="columnOptions">列のオプション情報設定アクションデリゲート。</param>
+            <param name="includeHeaderRowProps">ヘッダー行情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+            <param name="includeHeaderCellProps">ヘッダーセル情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+            <param name="includeColumnProps">列情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+            <param name="outputCellTypeProps">セルタイププロパティを生成するかどうか。</param>
+            <param name="outputOptions">オプション情報を生成するかどうか。false の場合、第一引数は動作しません。</param>
+            <returns>JSONデータオブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.CheckBoxPictureConverter">
+            <summary>
+            CheckBoxPicture オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.CheckBoxPictureConverter.Serialize(FarPoint.Win.CheckBoxPicture)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="checkBoxPicture">CheckBoxPicture オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.CheckBoxPictureConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>CheckBoxPicture オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.CheckBoxPictureConverter.Deserialize(Newtonsoft.Json.Linq.JToken,FarPoint.Win.CheckBoxPicture)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする CheckBoxPicture オブジェクト。</param>
+            <returns>CheckBoxPicture オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateTimeDropDownPickerInfoConverter">
+            <summary>
+            DateTimeDropDownPickerInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateTimeDropDownPickerInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.DateTimeDropDownPickerInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="dateTimeDropDownPickerInfo">DateTimeDropDownPickerInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateTimeDropDownPickerInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.DateTimeDropDownPickerInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="dateTimeDropDownPickerInfo">DateTimeDropDownPickerInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateTimeFieldCollectionInfoConverter">
+            <summary>
+            DateTimeFieldCollectionInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateTimeFieldCollectionInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.DateTimeFieldCollectionInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="dateTimeFieldCollectionInfo">DateTimeFieldCollectionInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateTimeFieldCollectionInfoConverter.Deserialize(Newtonsoft.Json.Linq.JArray)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="props">デシリアライズオブジェクト。</param>
+            <returns>DateTimeFieldCollectionInfo オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.YearMonthFormatConverter">
+            <summary>
+            YearMonthFormat オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.YearMonthFormatConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.YearMonthFormat)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="yearMonthFormat">YearMonthFormat オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.YearMonthFormatConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>YearMonthFormat オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.YearMonthFormatConverter.Deserialize(Newtonsoft.Json.Linq.JToken,GrapeCity.Win.Spread.InputMan.CellType.YearMonthFormat)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする YearMonthFormat オブジェクト。</param>
+            <returns>YearMonthFormat オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DropDownEditorInfoConverter">
+            <summary>
+            DropDownEditorInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DropDownEditorInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.DropDownEditorInfo)">
+            <summary>
+            シリアライズを行います。
+            TouchToolBar はシリアライズを行いません。
+            </summary>
+            <param name="dropDownEditorInfo">DropDownEditorInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DropDownEditorInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.DropDownEditorInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            TouchToolBar はデシリアライズを行いません。
+            </summary>
+            <param name="dropDownEditorInfo">DropDownEditorInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateTimeDropDownInfoConverter">
+            <summary>
+            DateTimeDropDownInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateTimeDropDownInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.DateTimeDropDownInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="dateTimeDropDownInfo">DateTimeDropDownInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateTimeDropDownInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.DateTimeDropDownInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="dateTimeDropDownInfo">DateTimeDropDownInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateAlternateTextInfoConverter">
+            <summary>
+            DateAlternateTextInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateAlternateTextInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.DateAlternateTextInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="dateAlternateTextInfo">DateAlternateTextInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateAlternateTextInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.DateAlternateTextInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="dateAlternateTextInfo">DateAlternateTextInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateTimeDisplayFieldCollectionInfoConverter">
+            <summary>
+            DateTimeDisplayFieldCollectionInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateTimeDisplayFieldCollectionInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.DateTimeDisplayFieldCollectionInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="dateTimeDisplayFieldCollectionInfo">DateTimeDisplayFieldCollectionInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateTimeDisplayFieldCollectionInfoConverter.Deserialize(Newtonsoft.Json.Linq.JArray)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="props">デシリアライズオブジェクト。</param>
+            <returns>DateTimeDisplayFieldCollectionInfo オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateSpinConverter">
+            <summary>
+            DateSpin オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateSpinConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.DateSpin)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="dateSpin">DateSpin オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DateSpinConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.DateSpin,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="dateSpin">DateSpin オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DropDownCalendarInfoConverter">
+            <summary>
+            DropDownCalendarInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DropDownCalendarInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.DropDownCalendarInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="dropDownCalendarInfo">DropDownCalendarInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DropDownCalendarInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.DropDownCalendarInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="dropDownCalendarInfo">DropDownCalendarInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DayOfWeekStyleConverter">
+            <summary>
+            DayOfWeekStyle オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DayOfWeekStyleConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.DayOfWeekStyle)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="dayOfWeekStyle">DayOfWeekStyle オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DayOfWeekStyleConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>DayOfWeekStyle オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DayOfWeekStyleConverter.Deserialize(Newtonsoft.Json.Linq.JToken,GrapeCity.Win.Spread.InputMan.CellType.DayOfWeekStyle)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする DayOfWeekStyle オブジェクト。</param>
+            <returns>DayOfWeekStyle オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.WeekdaysStyleConverter">
+            <summary>
+            WeekdaysStyle オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.WeekdaysStyleConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.WeekdaysStyle)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="weekdaysStyle">WeekdaysStyle オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.WeekdaysStyleConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>WeekdaysStyle オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.WeekdaysStyleConverter.Deserialize(Newtonsoft.Json.Linq.JToken,GrapeCity.Win.Spread.InputMan.CellType.WeekdaysStyle)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする WeekdaysStyle オブジェクト。</param>
+            <returns>WeekdaysStyle オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.GridConverter">
+            <summary>
+            Grid オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.GridConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.Grid)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="grid">Grid オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.GridConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>Style オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.GridConverter.Deserialize(Newtonsoft.Json.Linq.JToken,GrapeCity.Win.Spread.InputMan.CellType.Grid)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする Grid オブジェクト。</param>
+            <returns>Grid オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.SubStyleConverter">
+            <summary>
+            SubStyle オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.SubStyleConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.SubStyle)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="subStyle">SubStyle オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.SubStyleConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>SubStyle オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.SubStyleConverter.Deserialize(Newtonsoft.Json.Linq.JToken,GrapeCity.Win.Spread.InputMan.CellType.SubStyle)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする SubStyle オブジェクト。</param>
+            <returns>SubStyle オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.HolidayCollectionConverter">
+            <summary>
+            HolidayCollection オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.HolidayCollectionConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.HolidayCollection)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="holidayCollection">HolidayCollection オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.HolidayCollectionConverter.Deserialize(Newtonsoft.Json.Linq.JArray)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="props">デシリアライズオブジェクト。</param>
+            <returns>HolidayStyleCollection オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.HolidayCollectionConverter.Deserialize(Newtonsoft.Json.Linq.JArray,GrapeCity.Win.Spread.InputMan.CellType.HolidayCollection)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="props">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする HolidayStyleCollection オブジェクト。</param>
+            <returns>HolidayStyleCollection オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.HolidayStyleCollectionConverter">
+            <summary>
+            HolidayStyleCollection オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.HolidayStyleCollectionConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.HolidayStyleCollection)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="holidayStyleCollection">HolidayStyleCollection オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.HolidayStyleCollectionConverter.Deserialize(Newtonsoft.Json.Linq.JArray)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="props">デシリアライズオブジェクト。</param>
+            <returns>HolidayStyleCollection オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.HolidayStyleCollectionConverter.Deserialize(Newtonsoft.Json.Linq.JArray,GrapeCity.Win.Spread.InputMan.CellType.HolidayStyleCollection)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="props">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする HolidayStyleCollection オブジェクト。</param>
+            <returns>HolidayStyleCollection オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.StyleConverter">
+            <summary>
+            Style オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.StyleConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.Style)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="style">Style オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.StyleConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>Style オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.StyleConverter.Deserialize(Newtonsoft.Json.Linq.JToken,GrapeCity.Win.Spread.InputMan.CellType.Style)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする Style オブジェクト。</param>
+            <returns>Style オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.TextBoxAlternateTextInfoConverter">
+            <summary>
+            TextBoxAlternateTextInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.TextBoxAlternateTextInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.TextBoxAlternateTextInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="textBoxAlternateTextInfo">TextBoxAlternateTextInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.TextBoxAlternateTextInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.TextBoxAlternateTextInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="textBoxAlternateTextInfo">TextBoxAlternateTextInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.AlternateTextInfoConverter">
+            <summary>
+            AlternateTextInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.AlternateTextInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.AlternateTextInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="alternateTextInfo">AlternateTextInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.AlternateTextInfoConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>AlternateTextInfo オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.AlternateTextInfoConverter.Deserialize(Newtonsoft.Json.Linq.JToken,GrapeCity.Win.Spread.InputMan.CellType.AlternateTextInfo)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする AlternateTextInfo オブジェクト。</param>
+            <returns>AlternateTextInfo オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.AutoCompleteHighlightStyleInfoConverter">
+            <summary>
+            AutoCompleteHighlightStyleInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.AutoCompleteHighlightStyleInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.AutoCompleteHighlightStyleInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="autoCompleteHighlightStyleInfo">AutoCompleteHighlightStyleInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.AutoCompleteHighlightStyleInfoConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>AutoCompleteHighlightStyleInfo オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.AutoCompleteHighlightStyleInfoConverter.Deserialize(Newtonsoft.Json.Linq.JToken,GrapeCity.Win.Spread.InputMan.CellType.AutoCompleteHighlightStyleInfo)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする AutoCompleteHighlightStyleInfo オブジェクト。</param>
+            <returns>AutoCompleteHighlightStyleInfo オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.AutoCompleteInfoConverter">
+            <summary>
+            AutoCompleteInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.AutoCompleteInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.AutoCompleteInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="autoCompleteInfo">AutoCompleteInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.AutoCompleteInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.AutoCompleteInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="autoCompleteInfo">AutoCompleteInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.AutoFilterInfoConverter">
+            <summary>
+            AutoFilterInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.AutoFilterInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.AutoFilterInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="autoFilterInfo">AutoFilterInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.AutoFilterInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.AutoFilterInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="autoFilterInfo">AutoFilterInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.CalculatorButtonStyleInfoConverter">
+            <summary>
+            CalculatorButtonStyleInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.CalculatorButtonStyleInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.CalculatorButtonStyleInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="calculatorButtonStyleInfo">CalculatorButtonStyleInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.CalculatorButtonStyleInfoConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>CalculatorButtonStyleInfo オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.CalculatorButtonStyleInfoConverter.Deserialize(Newtonsoft.Json.Linq.JToken,GrapeCity.Win.Spread.InputMan.CellType.CalculatorButtonStyleInfo)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする CalculatorButtonStyleInfo オブジェクト。</param>
+            <returns>CalculatorButtonStyleInfo オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.PopUpCalculatorInfoConverter">
+            <summary>
+            PopUpCalculatorInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.PopUpCalculatorInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.PopUpCalculatorInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="popUpCalculatorInfo">PopUpCalculatorInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.PopUpCalculatorInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.PopUpCalculatorInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="popUpCalculatorInfo">PopUpCalculatorInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DropDownInfoConverter">
+            <summary>
+            DropDownInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DropDownInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.DropDownInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="dropDownInfo">DropDownInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DropDownInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.DropDownInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="dropDownInfo">DropDownInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.NumberAlternateTextInfoConverter">
+            <summary>
+            NumberAlternateTextInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.NumberAlternateTextInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.NumberAlternateTextInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="numberAlternateTextInfo">NumberAlternateTextInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.NumberAlternateTextInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.NumberAlternateTextInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="numberAlternateTextInfo">NumberAlternateTextInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ComboBoxAlternateTextInfoConverter">
+            <summary>
+            ComboBoxAlternateTextInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ComboBoxAlternateTextInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.ComboBoxAlternateTextInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="comboBoxAlternateTextInfo">ComboBoxAlternateTextInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ComboBoxAlternateTextInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.ComboBoxAlternateTextInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="comboBoxAlternateTextInfo">ComboBoxAlternateTextInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ComboDropDownInfoConverter">
+            <summary>
+            ComboDropDownInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ComboDropDownInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.ComboDropDownInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="comboDropDownInfo">ComboDropDownInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ComboDropDownInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.ComboDropDownInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="comboDropDownInfo">ComboDropDownInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DefaultListColumnInfoConverter">
+            <summary>
+            DefaultListColumnInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DefaultListColumnInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.DefaultListColumnInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="defaultListColumnInfo">DefaultListColumnInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DefaultListColumnInfoConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>DefaultListColumnInfo オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DefaultListColumnInfoConverter.Deserialize(Newtonsoft.Json.Linq.JToken,GrapeCity.Win.Spread.InputMan.CellType.DefaultListColumnInfo)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする DefaultListColumnInfo オブジェクト。</param>
+            <returns>DefaultListColumnInfo オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DefaultSubItemInfoConverter">
+            <summary>
+            DefaultSubItemInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DefaultSubItemInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.DefaultSubItemInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="defaultSubItemInfo">DefaultSubItemInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DefaultSubItemInfoConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>DefaultSubItemInfo オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DefaultSubItemInfoConverter.Deserialize(Newtonsoft.Json.Linq.JToken,GrapeCity.Win.Spread.InputMan.CellType.DefaultSubItemInfo)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする DefaultSubItemInfo オブジェクト。</param>
+            <returns>DefaultSubItemInfo オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.FontConverter">
+            <summary>
+            Font オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.FontConverter.Serialize(System.Drawing.Font)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="font">Font オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.FontConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>Font オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.GradientEffectConverter">
+            <summary>
+            GradientEffect オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.GradientEffectConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.GradientEffect)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="gradientEffect">GradientEffect オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.GradientEffectConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>GradientEffect オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.GradientEffectConverter.Deserialize(Newtonsoft.Json.Linq.JToken,GrapeCity.Win.Spread.InputMan.CellType.GradientEffect)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする GradientEffect オブジェクト。</param>
+            <returns>GradientEffect オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ItemStyleInfoConverter">
+            <summary>
+            ItemStyleInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ItemStyleInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.ItemStyleInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="itemStyleInfo">ItemStyleInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ItemStyleInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.ItemStyleInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="itemStyleInfo">ItemStyleInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.NumberFieldsInfoConverter">
+            <summary>
+            NumberFieldsInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.NumberFieldsInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.NumberFieldsInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="numberFieldInfos">NumberFieldsInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.NumberFieldsInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.NumberFieldsInfo,Newtonsoft.Json.Linq.JArray)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="numberFieldInfos">NumberFieldsInfo オブジェクト。</param>
+            <param name="props">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.NumberDisplayFieldCollectionInfoConverter">
+            <summary>
+            NumberDisplayFieldCollectionInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.NumberDisplayFieldCollectionInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.NumberDisplayFieldCollectionInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="numberDisplayFieldCollectionInfo">NumberDisplayFieldCollectionInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.NumberDisplayFieldCollectionInfoConverter.Deserialize(Newtonsoft.Json.Linq.JArray)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="props">デシリアライズオブジェクト。</param>
+            <returns>NumberDisplayFieldCollectionInfo オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.PictureConverter">
+            <summary>
+            Picture オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.PictureConverter.Serialize(FarPoint.Win.Picture)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="picture">Picture オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.PictureConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>Picture オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.PictureConverter.Deserialize(Newtonsoft.Json.Linq.JToken,FarPoint.Win.Picture)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする Picture オブジェクト。</param>
+            <returns>Picture オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ItemTemplateCollectionInfoConverter">
+            <summary>
+            ItemTemplateCollectionInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ItemTemplateCollectionInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.ItemTemplateCollectionInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="itemTemplateCollectionInfo">ItemTemplateCollectionInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ItemTemplateCollectionInfoConverter.Deserialize(Newtonsoft.Json.Linq.JArray)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="props">デシリアライズオブジェクト。</param>
+            <returns>ItemTemplateCollectionInfo オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ItemTemplateCollectionInfoConverter.Deserialize(Newtonsoft.Json.Linq.JArray,GrapeCity.Win.Spread.InputMan.CellType.ItemTemplateCollectionInfo)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="props">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする ItemTemplateCollectionInfo オブジェクト。</param>
+            <returns>ItemTemplateCollectionInfo オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.LineConverter">
+            <summary>
+            Line オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.LineConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.Line)">
+            <summary>
+            シリアライズを行います。
+            LineWidth はシリアライズを行いません。
+            </summary>
+            <param name="line">Line オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.LineConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>Line オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.LineConverter.Deserialize(Newtonsoft.Json.Linq.JToken,GrapeCity.Win.Spread.InputMan.CellType.Line)">
+            <summary>
+            デシリアライズを行います。
+            LineWidth はデシリアライズを行いません。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする Line オブジェクト。</param>
+            <returns>Line オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListGridLinesInfoConverter">
+            <summary>
+            ListGridLinesInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListGridLinesInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.ListGridLinesInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="listGridLinesInfo">ListGridLinesInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListGridLinesInfoConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>ListGridLinesInfo オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListGridLinesInfoConverter.Deserialize(Newtonsoft.Json.Linq.JToken,GrapeCity.Win.Spread.InputMan.CellType.ListGridLinesInfo)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする ListGridLinesInfo オブジェクト。</param>
+            <returns>ListGridLinesInfo オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListHeaderInfoConverter">
+            <summary>
+            ListHeaderInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListHeaderInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.ListHeaderInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="listHeaderInfo">ListHeaderInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListHeaderInfoConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>ListHeaderInfo オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListHeaderInfoConverter.Deserialize(Newtonsoft.Json.Linq.JToken,GrapeCity.Win.Spread.InputMan.CellType.ListHeaderInfo)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする ListHeaderInfo オブジェクト。</param>
+            <returns>ListHeaderInfo オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListHeaderPaneInfoConverter">
+            <summary>
+            ListHeaderPaneInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListHeaderPaneInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.ListHeaderPaneInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="listHeaderPaneInfo">ListHeaderPaneInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListHeaderPaneInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.ListHeaderPaneInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="listHeaderPaneInfo">ListHeaderPaneInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ShortcutDictionaryConverter">
+            <summary>
+            ShortcutDictionary オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ShortcutDictionaryConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionary)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="shortcutDictionary">ShortcutDictionary オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ShortcutDictionaryConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.ShortcutDictionary,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="shortcutDictionary">ShortcutDictionary オブジェクト。</param>
+            <param name="props">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.SideButtonCollectionInfoConverter">
+            <summary>
+            SideButtonCollectionInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.SideButtonCollectionInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.SideButtonCollectionInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="sideButtonCollectionInfo">SideButtonCollectionInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.SideButtonCollectionInfoConverter.Deserialize(Newtonsoft.Json.Linq.JArray)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="props">デシリアライズオブジェクト。</param>
+            <returns>SideButtonCollectionInfo オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.NumberSpinConverter">
+            <summary>
+            NumberSpin オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.NumberSpinConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.NumberSpin)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="numberSpin">NumberSpin オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.NumberSpinConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.NumberSpin,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="numberSpin">NumberSpin オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.SpinConverter">
+            <summary>
+            Spin オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.SpinConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.Spin)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="spin">Spin オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.SpinConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.Spin,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="spin">Spin オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DropDownCalculatorInfoConverter">
+            <summary>
+            DropDownCalculatorInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DropDownCalculatorInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.DropDownCalculatorInfo)">
+            <summary>
+            シリアライズを行います。
+            ButtonKeys, ButtonText はシリアライズを行いません。
+            </summary>
+            <param name="dropDownCalculatorInfo">DropDownCalculatorInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.DropDownCalculatorInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.DropDownCalculatorInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            ButtonKeys, ButtonText はデシリアライズを行いません。
+            </summary>
+            <param name="dropDownCalculatorInfo">DropDownCalculatorInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.StatusBarInfoConverter">
+            <summary>
+            StatusBarInfo オブジェクトのコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.StatusBarInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.StatusBarInfo)">
+            <summary>
+            シリアライズを行います。
+            </summary>
+            <param name="statusBarInfo">StatusBarInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.StatusBarInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.StatusBarInfo,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            </summary>
+            <param name="statusBarInfo">StatusBarInfo オブジェクト。</param>
+            <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitionsBase">
+            <summary>
+            GrapeCity SPREAD SheetView のレイアウトを構成する列要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitionsBase.HorizontalAlignment">
+            <summary>
+            水平位置を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitionsBase.VerticalAlignment">
+            <summary>
+            垂直位置を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitionsBase.AllowAutoFilter">
+            <summary>
+            自動フィルター機能を利用するかどうかを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitionsBase.AllowAutoSort">
+            <summary>
+            自動ソート機能を利用するかどうかを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitionsBase.Width">
+            <summary>
+            幅を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitionsBase.Visible">
+            <summary>
+            表示状態を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitionsBase.ImeMode">
+            <summary>
+            IMEモードを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitionsBase.Locked">
+            <summary>
+            ロック状態を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.ColumnGenerator">
+            <summary>
+            Column の生成操作を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnGenerator.SheetView">
+            <summary>
+            処理の対象となる SheetView。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnGenerator.#ctor(FarPoint.Win.Spread.SheetView)">
+            <summary>
+            新しい ColumnGenerator インスタンスを生成します。
+            </summary>
+            <param name="sheetView">処理対象とする SheetView。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnGenerator.SerializeJson(Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions[])">
+            <summary>
+            列定義オブジェクトからJSON文字列にシリアライズします。
+            </summary>
+            <param name="defs">列定義オブジェクト。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnGenerator.DeserializeJson(System.String)">
+            <summary>
+            JSON文字列から列定義オブジェクトにデシリアライズします。
+            </summary>
+            <param name="json">列定義JSON文字列。</param>
+            <returns>列定義オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnGenerator.GenerateColumns(Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions[],Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions)">
+            <summary>
+            列定義オブジェクトから列をセットアップします。
+            列は必ず1列目から設定されます。
+            </summary>
+            <param name="defs">列定義オブジェクト。</param>
+            <param name="allColumnDef">全列定義オブジェクト。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnGenerator.GenerateColumns(Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions[],System.Collections.Generic.List{Metroit.Win.GcSpread.CodeDesign.Json.TemplateSheetViewDefinitions},Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions)">
+            <summary>
+            列定義オブジェクトから列をセットアップします。
+            列は必ず1列目から設定されます。
+            </summary>
+            <param name="defs">列定義オブジェクト。</param>
+            <param name="templateDefs">テンプレート定義オブジェクト。</param>
+            <param name="allColumnDef">全列定義オブジェクト。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnGenerator.CreateColumnsDefinitions(System.Func{FarPoint.Win.Spread.Column,System.Collections.Generic.Dictionary{System.String,System.Object}},System.String[],System.Boolean,System.Boolean)">
+            <summary>
+            列定義オブジェクトを生成します。
+            </summary>
+            <param name="columnOptions">列のオプション情報設定アクションデリゲート。</param>
+            <param name="includeProps">生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+            <param name="outputCellTypeProps">セルタイププロパティを生成するかどうか。</param>
+            <param name="outputOptions">オプション情報を生成するかどうか。false の場合、第一引数は動作しません。</param>
+            <returns>ColumnDefinitions[] オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnGenerator.SetColumnBaseProps(FarPoint.Win.Spread.Column,Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitionsBase)">
+            <summary>
+            列全体の定義を反映する。
+            </summary>
+            <param name="column">列オブジェクト。</param>
+            <param name="def">列定義オブジェクト。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnGenerator.SetColumnProps(FarPoint.Win.Spread.Column,Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions)">
+            <summary>
+            列の定義を反映する。
+            </summary>
+            <param name="column">列オブジェクト。</param>
+            <param name="def">列定義オブジェクト。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnGenerator.CreateCellType(System.String)">
+            <summary>
+            セルタイプを生成する。
+            </summary>
+            <param name="cellTypeName">セルタイプ名。</param>
+            <returns>セルタイプ。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnGenerator.ReadColumnTemplates(System.Collections.Generic.List{Metroit.Win.GcSpread.CodeDesign.Json.TemplateSheetViewDefinitions},Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions,System.Collections.Generic.List{Metroit.Win.GcSpread.CodeDesign.Json.TemplateColumnDefinitions})">
+            <summary>
+            全テンプレート情報から対象の列定義テンプレート情報を取得する。
+            </summary>
+            <param name="templateDefs">テンプレート定義オブジェクト。</param>
+            <param name="def">列定義オブジェクト。</param>
+            <param name="targetTemplateDefs">対象となった列定義オブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator">
+            <summary>
+            ColumnHeader の生成操作を提供します。
+            </summary>
+        </member>
+        <member name="F:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.HeaderCellTagPrefix">
+            <summary>
+            列ヘッダーセルに自動付与される Tag の接頭辞。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.SheetView">
+            <summary>
+            処理の対象となる SheetView。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.#ctor(FarPoint.Win.Spread.SheetView)">
+            <summary>
+            新しい ColumnHeaderGenerator インスタンスを生成します。
+            </summary>
+            <param name="sheetView">処理対象とする SheetView。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.SerializeRowJson(Metroit.Win.GcSpread.CodeDesign.Json.HeaderRowDefinitions[])">
+            <summary>
+            列ヘッダー行定義オブジェクトからJSON文字列にシリアライズします。
+            </summary>
+            <param name="defs">列ヘッダー行定義オブジェクト。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.DeserializeRowJson(System.String)">
+            <summary>
+            JSON文字列から列ヘッダー行定義オブジェクトにデシリアライズします。
+            </summary>
+            <param name="json">列ヘッダー行定義JSON文字列。</param>
+            <returns>列ヘッダー行定義オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.SerializeCellJson(Metroit.Win.GcSpread.CodeDesign.Json.HeaderCellDefinitions[][])">
+            <summary>
+            列ヘッダーセル定義オブジェクトからJSON文字列にシリアライズします。
+            </summary>
+            <param name="defs">列ヘッダーセル定義オブジェクト。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.DeserializeCellJson(System.String)">
+            <summary>
+            JSON文字列から列ヘッダーセル定義オブジェクトにデシリアライズします。
+            </summary>
+            <param name="json">列ヘッダーセル定義JSON文字列。</param>
+            <returns>列ヘッダーセル定義オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.SerializeSpanJson(Metroit.Win.GcSpread.CodeDesign.Json.SpanDefinitions[])">
+            <summary>
+            列ヘッダースパン定義オブジェクトからJSON文字列にシリアライズします。
+            </summary>
+            <param name="defs">列ヘッダーセル定義オブジェクト。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.DeserializeSpanJson(System.String)">
+            <summary>
+            JSON文字列から列ヘッダースパン定義オブジェクトにデシリアライズします。
+            </summary>
+            <param name="json">列ヘッダースパン定義JSON文字列。</param>
+            <returns>列ヘッダースパン定義オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.GenerateRows(Metroit.Win.GcSpread.CodeDesign.Json.HeaderRowDefinitions[],System.Collections.Generic.List{Metroit.Win.GcSpread.CodeDesign.Json.TemplateSheetViewDefinitions})">
+            <summary>
+            列ヘッダー行定義から列ヘッダー行をセットアップします。
+            行は必ず1行目から追加されます。
+            </summary>
+            <param name="defs">列ヘッダー行定義オブジェクト。</param>
+            <param name="templateDefs">テンプレート定義オブジェクト。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.GenerateCells(Metroit.Win.GcSpread.CodeDesign.Json.HeaderCellDefinitions[][],System.Func{FarPoint.Win.Spread.Cell,System.Object})">
+            <summary>
+            列ヘッダーセル定義から列ヘッダーセルをセットアップします。
+            列は必ず1列目から追加されます。
+            </summary>
+            <param name="defs">列ヘッダーセル定義オブジェクト。</param>
+            <param name="cellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.GenerateCells(Metroit.Win.GcSpread.CodeDesign.Json.HeaderCellDefinitions[][],System.Collections.Generic.List{Metroit.Win.GcSpread.CodeDesign.Json.TemplateSheetViewDefinitions},System.Func{FarPoint.Win.Spread.Cell,System.Object})">
+            <summary>
+            列ヘッダーセル定義から列ヘッダーセルをセットアップします。
+            列は必ず1列目から追加されます。
+            </summary>
+            <param name="defs">列ヘッダーセル定義オブジェクト。</param>
+            <param name="templateDefs">テンプレート定義オブジェクト。</param>
+            <param name="cellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.GenerateSpans(Metroit.Win.GcSpread.CodeDesign.Json.SpanDefinitions[],System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult})">
+            <summary>
+            列ヘッダースパン定義から列ヘッダーセルスパンを生成します。
+            </summary>
+            <param name="defs">列ヘッダースパン定義オブジェクト。</param>
+            <param name="columnMoveResults">列移動によって defs の定義情報と合致しない列情報。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.CreateRowDefinitions(System.String[])">
+            <summary>
+            列ヘッダー行定義を生成します。
+            </summary>
+            <param name="includeProps">生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+            <returns>列ヘッダー行定義オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.CreateCellDefinitions(System.String[])">
+            <summary>
+            列ヘッダーセル定義を生成します。
+            </summary>
+            <param name="includeProps">生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+            <returns>列ヘッダーセル定義オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.CreateSpanDefinitions">
+            <summary>
+            列ヘッダースパン定義を生成します。
+            </summary>
+            <returns>列ヘッダースパン定義オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.ReadRowTemplates(System.Collections.Generic.List{Metroit.Win.GcSpread.CodeDesign.Json.TemplateSheetViewDefinitions},Metroit.Win.GcSpread.CodeDesign.Json.HeaderRowDefinitions,System.Collections.Generic.List{Metroit.Win.GcSpread.CodeDesign.Json.TemplateHeaderRowDefinitions})">
+            <summary>
+            テンプレートから対象のテンプレート列ヘッダー行定義オブジェクトを取得する。
+            </summary>
+            <param name="templateDefs">テンプレート定義オブジェクト。</param>
+            <param name="def">列ヘッダー行定義オブジェクト。</param>
+            <param name="targetTemplateDefs">対象となったテンプレート列ヘッダー行定義オブジェクト。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.ReadCellTemplates(System.Collections.Generic.List{Metroit.Win.GcSpread.CodeDesign.Json.TemplateSheetViewDefinitions},Metroit.Win.GcSpread.CodeDesign.Json.HeaderCellDefinitions,System.Collections.Generic.List{Metroit.Win.GcSpread.CodeDesign.Json.TemplateHeaderCellDefinitions})">
+            <summary>
+            テンプレートから対象のテンプレート列ヘッダーセル定義オブジェクトを取得する。
+            </summary>
+            <param name="templateDefs">テンプレート定義オブジェクト。</param>
+            <param name="def">列ヘッダーセル定義オブジェクト。</param>
+            <param name="targetTemplateDefs">対象となったテンプレート列ヘッダーセル定義オブジェクト。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.SetColumnHeaderRowProps(FarPoint.Win.Spread.Row,Metroit.Win.GcSpread.CodeDesign.Json.HeaderRowDefinitions)">
+            <summary>
+            列ヘッダー行のプロパティを設定する。
+            </summary>
+            <param name="row">行オブジェクト。</param>
+            <param name="def">列ヘッダー行定義オブジェクト。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderGenerator.SetColumnHeaderCellProps(FarPoint.Win.Spread.Cell,Metroit.Win.GcSpread.CodeDesign.Json.HeaderCellDefinitions)">
+            <summary>
+            列ヘッダーセルのプロパティを設定する。
+            </summary>
+            <param name="cell">セルオブジェクト。</param>
+            <param name="def">列ヘッダーセル定義オブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.TemplateHeaderCellDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView のテンプレートレイアウトを構成する列ヘッダーのセル要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.TemplateHeaderCellDefinitions.TemplateName">
+            <summary>
+            テンプレート名を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.TemplateHeaderRowDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView のテンプレートレイアウトを構成する列ヘッダーの行要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.TemplateHeaderRowDefinitions.TemplateName">
+            <summary>
+            テンプレート名を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.TemplateColumnHeaderDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView のテンプレートレイアウトを構成する列ヘッダー要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.TemplateColumnHeaderDefinitions.Rows">
+            <summary>
+            列ヘッダーの行情報を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.TemplateColumnHeaderDefinitions.Cells">
+            <summary>
+            列ヘッダーのセル情報を提供します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.HeaderCellDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView のレイアウトを構成する列ヘッダーのセル要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderCellDefinitions.BaseTemplate">
+            <summary>
+            テンプレート名を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderCellDefinitions.Value">
+            <summary>
+            セルタイトルを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderCellDefinitions.HorizontalAlignment">
+            <summary>
+            水平位置を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderCellDefinitions.VerticalAlignment">
+            <summary>
+            垂直位置を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.TemplateSheetViewDefinitions">
+            <summary>
+            GrapeCity SPREAD SheetView のテンプレートレイアウトを構成するルート要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.TemplateSheetViewDefinitions.ColumnHeader">
+            <summary>
+            列ヘッダー情報を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.TemplateSheetViewDefinitions.Columns">
+            <summary>
+            列情報を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.TemplateColumnDefinitions">
+            <summary>
+            GrapeCity SPREAD Column 定義のテンプレートテンプレートレイアウトを構成する列要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.TemplateColumnDefinitions.TemplateName">
+            <summary>
+            テンプレート名を取得または設定します。
             </summary>
         </member>
         <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions">
@@ -44,49 +2007,14 @@
             GrapeCity SPREAD SheetView のレイアウトを構成する列の全体要素を提供します。
             </summary>
         </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions.HorizontalAlignment">
-            <summary>
-            水平位置を取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions.VerticalAlignment">
-            <summary>
-            垂直位置を取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions.AllowAutoFilter">
-            <summary>
-            自動フィルター機能を利用するかどうかを取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions.AllowAutoSort">
-            <summary>
-            自動ソート機能を利用するかどうかを取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions.Width">
-            <summary>
-            幅を取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions.Visible">
-            <summary>
-            表示状態を取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions.ImeMode">
-            <summary>
-            IMEモードを取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.AllColumnDefinitions.Locked">
-            <summary>
-            ロック状態を取得または設定します。
-            </summary>
-        </member>
         <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions">
             <summary>
             GrapeCity SPREAD SheetView のレイアウトを構成する列要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.BaseTemplate">
+            <summary>
+            利用するテンプレート名を取得または設定します。
             </summary>
         </member>
         <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.DataField">
@@ -94,56 +2022,15 @@
             データバインドするフィールド名を取得または設定します。
             </summary>
         </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.HorizontalAlignment">
-            <summary>
-            水平位置を取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.VerticalAlignment">
-            <summary>
-            垂直位置を取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.AllowAutoFilter">
-            <summary>
-            自動フィルター機能を利用するかどうかを取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.AllowAutoSort">
-            <summary>
-            自動ソート機能を利用するかどうかを取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.Width">
-            <summary>
-            幅を取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.Visible">
-            <summary>
-            表示状態を取得または設定します。
-            </summary>
-        </member>
         <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.CellType">
             <summary>
             セルタイプを取得または設定します。
-            TextCellType, DateTimeCellType, NumberCellType, ComboBoxCellType をサポートします。
             </summary>
         </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.CellTypeProperties">
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.CellTypeProps">
             <summary>
             セルタイプのプロパティを取得または設定します。
             サポートするプロパティはセルタイプによって異なります。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.ImeMode">
-            <summary>
-            IMEモードを取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.Locked">
-            <summary>
-            ロック状態を取得または設定します。
             </summary>
         </member>
         <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitions.Options">
@@ -161,34 +2048,24 @@
             列ヘッダーの行情報を提供します。
             </summary>
         </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderDefinitions.Cells">
+            <summary>
+            列ヘッダーのセル情報を提供します。
+            </summary>
+        </member>
         <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderDefinitions.Spans">
             <summary>
             セル結合情報を提供します。
             </summary>
         </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.HeaderColumnDefinitions">
-            <summary>
-            GrapeCity SPREAD SheetView のレイアウトを構成する列ヘッダーの列要素を提供します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderColumnDefinitions.Value">
-            <summary>
-            列タイトルを取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderColumnDefinitions.HorizontalAlignment">
-            <summary>
-            水平位置を取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderColumnDefinitions.VerticalAlignment">
-            <summary>
-            垂直位置を取得または設定します。
-            </summary>
-        </member>
         <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.HeaderRowDefinitions">
             <summary>
             GrapeCity SPREAD SheetView のレイアウトを構成する列ヘッダーの行要素を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderRowDefinitions.BaseTemplate">
+            <summary>
+            テンプレート名を取得または設定します。
             </summary>
         </member>
         <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderRowDefinitions.Height">
@@ -205,58 +2082,6 @@
             <summary>
             垂直位置を取得または設定します。
             </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.HeaderRowDefinitions.Columns">
-            <summary>
-            列ヘッダーの列情報を取得または設定します。
-            </summary>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.JsonConvert">
-            <summary>
-            GrapeCity SPREAD SheetView に対応したJSONデータのシリアライザーを提供します。
-            </summary>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.JsonConvert.SerializeSheetView(Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions)">
-            <summary>
-            シートの定義情報 SheetViewDefinitions をシリアライズします。
-            </summary>
-            <param name="data">SheetViewRootJson オブジェクト。</param>
-            <returns>JSONデータ文字列。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.JsonConvert.DeserializeSheetView(System.String)">
-            <summary>
-            シートの定義情報 SheetViewDefinitions にデシリアライズします。
-            </summary>
-            <param name="json">JSONデータ文字列。</param>
-            <returns>SheetViewRootJson オブジェクト。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.JsonConvert.SerializeSpecialColumnHeader(Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnHeaderDefinitions)">
-            <summary>
-            列ヘッダーの特定定義情報 SpecialColumnHeaderDefinitions をシリアライズします。
-            </summary>
-            <param name="data">列の特定要素のみを構成する SpecialColumnHeaderRootJson オブジェクト。</param>
-            <returns>JSONデータ文字列。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.JsonConvert.DeserializeSpecialColumnHeader(System.String)">
-            <summary>
-            列ヘッダーの特定定義情報 SpecialColumnHeaderDefinitions にデシリアライズします。
-            </summary>
-            <param name="json">列の特定要素のみを構成するJSONデータ文字列。</param>
-            <returns>SpecialColumnHeaderRootJson オブジェクト。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.JsonConvert.SerializeSpecialColumn(Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnsDefinitions)">
-            <summary>
-            列の特定定義情報 SpecialColumnsDefinitions をシリアライズします。
-            </summary>
-            <param name="data">列の特定要素のみを構成する SpecialColumnRootJson オブジェクト。</param>
-            <returns>JSONデータ文字列。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.JsonConvert.DeserializeSpecialColumn(System.String)">
-            <summary>
-            列の特定定義情報 SpecialColumnsDefinitions にデシリアライズします。
-            </summary>
-            <param name="json">列の特定要素のみを構成するJSONデータ文字列。</param>
-            <returns>SpecialColumnRootJson オブジェクト。</returns>
         </member>
         <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions">
             <summary>
@@ -303,292 +2128,244 @@
             列数を取得または設定します。
             </summary>
         </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnDefinitions">
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.DateTimeCellTypeExtensions">
             <summary>
-            GrapeCity SPREAD SheetView の特定要素のみを構成する列要素を提供します。
+            DateTimeCellType のJSONシリアライズ、デシリアライズを提供します。
             </summary>
         </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnDefinitions.DataField">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.DateTimeCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.DateTimeCellType,System.String[])">
             <summary>
-            データバインドするフィールド名を取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnDefinitions.Width">
-            <summary>
-            幅を取得または設定します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnDefinitions.Visible">
-            <summary>
-            表示状態を取得または設定します。
-            </summary>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnHeaderDefinitions">
-            <summary>
-            GrapeCity SPREAD SheetView の列ヘッダーの特定要素のみを構成するルート要素を提供します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnHeaderDefinitions.Rows">
-            <summary>
-            列ヘッダーの行情報を提供します。
-            </summary>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnsDefinitions">
-            <summary>
-            GrapeCity SPREAD SheetView の列の特定要素のみを構成するルート要素を提供します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpecialColumnsDefinitions.Columns">
-            <summary>
-            列情報を取得または設定します。
-            </summary>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.SpecialHeaderColumnDefinitions">
-            <summary>
-            GrapeCity SPREAD SheetView の列ヘッダーの特定列要素のみを提供します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpecialHeaderColumnDefinitions.Value">
-            <summary>
-            列タイトルを取得または設定します。
-            </summary>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.SpecialHeaderRowDefinitions">
-            <summary>
-            GrapeCity SPREAD SheetView の列ヘッダーの特定行要素のみを提供します。
-            </summary>
-        </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SpecialHeaderRowDefinitions.Columns">
-            <summary>
-            列ヘッダーの列情報を取得または設定します。
-            </summary>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions">
-            <summary>
-            GrapeCity SPREAD SheetView の拡張メソッドを提供します。
-            </summary>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.BindJsonLayout(FarPoint.Win.Spread.SheetView,System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult}})">
-            <summary>
-            指定したJSONファイルでシートをバインドします。
-            </summary>
-            <param name="sheetView">SheetView オブジェクト。</param>
-            <param name="path">JSONファイルパス。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.BindJsonLayout(FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult}})">
-            <summary>
-            指定したJSONオブジェクトでシートをバインドします。
-            </summary>
-            <param name="sheetView">SheetView オブジェクト。</param>
-            <param name="jsonObj">バインドするJSONオブジェクト。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.BindJsonLayoutWithoutColumns(FarPoint.Win.Spread.SheetView,System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult}})">
-            <summary>
-            指定したJSONファイルでシートのヘッダー部のみをバインドします。
-            </summary>
-            <param name="sheetView">SheetView オブジェクト。</param>
-            <param name="path">JSONファイルパス。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.BindJsonLayoutWithoutColumns(FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult}})">
-            <summary>
-            指定したJSONオブジェクトでシートのヘッダー部のみをバインドします。
-            </summary>
-            <param name="sheetView">SheetView オブジェクト。</param>
-            <param name="jsonObj">バインドするJSONオブジェクト。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.MoveColumnKeepDataField(FarPoint.Win.Spread.SheetView,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            DataField プロパティを保持したまま列の移動を行います。
-            列タイトルのセル結合を保持するため、SheetView.MoveColumn() の第四引数 moveContent は true として実行されます。
-            </summary>
-            <param name="sheetView">SheetView オブジェクト。</param>
-            <param name="fromIndex">移動元の列インデックス。</param>
-            <param name="toIndex">移動先の列インデックス。</param>
-            <param name="columnCount">移動する列数。</param>
-            <returns>列の移動を行った情報のリスト。移動が行われなかった時は空のリストを返却します。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CreateSheetDefinitions(FarPoint.Win.Spread.SheetView,System.Func{FarPoint.Win.Spread.Column,System.Collections.Generic.Dictionary{System.String,System.Object}})">
-            <summary>
-            シート情報からJSONデータオブジェクトを生成します。
-            </summary>
-            <param name="sheetView">SheetView オブジェクト。</param>
-            <param name="columnOptions">列のオプション情報設定アクションデリゲート。</param>
-            <returns>JSONデータオブジェクト。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CreateSpecialColumnHeaderDefinitions(FarPoint.Win.Spread.SheetView)">
-            <summary>
-            シート情報から列ヘッダーの特定のみのJSONデータオブジェクトを生成します。
-            </summary>
-            <param name="sheetView">SheetView オブジェクト。</param>
-            <returns>JSONデータオブジェクト。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CreateSpecialColumnDefinitions(FarPoint.Win.Spread.SheetView)">
-            <summary>
-            シート情報から列の特定のみのJSONデータオブジェクトを生成します。
-            </summary>
-            <param name="sheetView">SheetView オブジェクト。</param>
-            <returns>JSONデータオブジェクト。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.PrepareCompilation(FarPoint.Win.Spread.SheetView)">
-            <summary>
-            バインド準備を行う。
-            </summary>
-            <param name="sheetView">SheetView オブジェクト。</param>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.ComplieColumnHeader(FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.ColumnHeaderDefinitions,System.Func{FarPoint.Win.Spread.Cell,System.Object})">
-            <summary>
-            ヘッダー情報をコンパイルする。
-            </summary>
-            <param name="sheetView">SheetView オブジェクト。</param>
-            <param name="columnHeader">Json.ColumnHeader オブジェクト。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CompileColumnHeaderSpans(FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SpanDefinitions[],System.Collections.Generic.IList{Metroit.Win.GcSpread.CodeDesign.ColumnMoveResult})">
-            <summary>
-            ヘッダースパン情報をコンパイルする。
-            </summary>
-            <param name="sheetView">SheetView オブジェクト。</param>
-            <param name="spans">Span[] オブジェクト。</param>
-            <param name="columnMoveResults">列の移動を行った情報のリスト。</param>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CompileColumns(FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions)">
-            <summary>
-            列情報をコンパイルする。
-            </summary>
-            <param name="sheetView">SheetView オブジェクト。</param>
-            <param name="root">Root オブジェクト。</param>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CompileTextCellType(FarPoint.Win.Spread.CellType.TextCellType,System.Collections.Generic.Dictionary{System.String,System.Object})">
-            <summary>
-            TextCellType をコンパイルする。
-            </summary>
-            <param name="cellType">TextCellType オブジェクト。</param>
-            <param name="cellTypeProperties">セルタイプ情報。</param>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CompileDateTimeCellType(FarPoint.Win.Spread.CellType.DateTimeCellType,System.Collections.Generic.Dictionary{System.String,System.Object})">
-            <summary>
-            DateTimeCellType をコンパイルする。
+            DateTimeCellType をJSONシリアライズします。
+            SubEditor はシリアライズを行いません。
             </summary>
             <param name="cellType">DateTimeCellType オブジェクト。</param>
-            <param name="cellTypeProperties">セルタイプ情報。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
         </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CompileNumberCellType(FarPoint.Win.Spread.CellType.NumberCellType,System.Collections.Generic.Dictionary{System.String,System.Object})">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.DateTimeCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.DateTimeCellType,System.String)">
             <summary>
-            NumberCellType をコンパイルする。
+            DateTimeCellType をJSONデシリアライズします。
+            SubEditor はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">DateTimeCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.NumberCellTypeExtensions">
+            <summary>
+            NumberCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.NumberCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.NumberCellType,System.String[])">
+            <summary>
+            NumberCellType をJSONシリアライズします。
+            SubEditor はシリアライズを行いません。
             </summary>
             <param name="cellType">NumberCellType オブジェクト。</param>
-            <param name="cellTypeProperties">セルタイプ情報。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
         </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CompileComboBoxCellType(FarPoint.Win.Spread.CellType.ComboBoxCellType,System.Collections.Generic.Dictionary{System.String,System.Object})">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.NumberCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.NumberCellType,System.String)">
             <summary>
-            ComboBoxCellType をコンパイルする。
+            NumberCellType をJSONデシリアライズします。
+            SubEditor はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">NumberCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.ComboBoxCellTypeExtensions">
+            <summary>
+            ComboBoxCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.ComboBoxCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.ComboBoxCellType,System.String[])">
+            <summary>
+            ComboBoxCellType をJSONシリアライズします。
+            SubEditor, ImageList, ListControl はシリアライズを行いません。
             </summary>
             <param name="cellType">ComboBoxCellType オブジェクト。</param>
-            <param name="cellTypeProperties">セルタイプ情報。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
         </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CompileCheckBoxCellType(FarPoint.Win.Spread.CellType.CheckBoxCellType,System.Collections.Generic.Dictionary{System.String,System.Object})">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.ComboBoxCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.ComboBoxCellType,System.String)">
             <summary>
-            CheckBoxCellType をコンパイルする。
+            ComboBoxCellType をJSONデシリアライズします。
+            SubEditor, ImageList, ListControl はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">ComboBoxCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.CheckBoxCellTypeExtensions">
+            <summary>
+            CheckBoxCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.CheckBoxCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.CheckBoxCellType,System.String[])">
+            <summary>
+            CheckBoxCellType をJSONシリアライズします。
+            SubEditor はシリアライズを行いません。
             </summary>
             <param name="cellType">CheckBoxCellType オブジェクト。</param>
-            <param name="cellTypeProperties">セルタイプ情報。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
         </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.CompileButtonCellType(FarPoint.Win.Spread.CellType.ButtonCellType,System.Collections.Generic.Dictionary{System.String,System.Object})">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.CheckBoxCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.CheckBoxCellType,System.String)">
             <summary>
-            ButtonCellType をコンパイルする。
+            CheckBoxCellType をJSONデシリアライズします。
+            SubEditor はデシリアライズを行いません。
             </summary>
-            <param name="cellType">ButtonCellType オブジェクト。</param>
-            <param name="cellTypeProperties">セルタイプ情報。</param>
+            <param name="cellType">CheckBoxCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
         </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileColumnHeaderRows(FarPoint.Win.Spread.SheetView)">
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.TextCellTypeExtensions">
             <summary>
-            現在のシートからヘッダー行/列情報を逆コンパイルする。
+            TextCellType のJSONシリアライズ、デシリアライズを提供します。
             </summary>
-            <param name="sheetView">SheetView オブジェクト。</param>
-            <returns>HeaderRowJson[] オブジェクト。</returns>
         </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileColumnHeaderSpans(FarPoint.Win.Spread.SheetView)">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.TextCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.TextCellType,System.String[])">
             <summary>
-            現在のシートからヘッダースパン情報を逆コンパイルする。
-            </summary>
-            <param name="sheetView">SheetView オブジェクト。</param>
-            <returns>SpanJson[] オブジェクト。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileColumns(FarPoint.Win.Spread.SheetView,System.Func{FarPoint.Win.Spread.Column,System.Collections.Generic.Dictionary{System.String,System.Object}})">
-            <summary>
-            現在のシートから列情報を逆コンパイルする。
-            </summary>
-            <param name="sheetView">SheetView オブジェクト。</param>
-            <param name="columnOptions">列のオプション情報設定アクションデリゲート。</param>
-            <returns>ColumnJson[] オブジェクト</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileTextCellTypeProperties(FarPoint.Win.Spread.CellType.TextCellType)">
-            <summary>
-            TextCellType からプロパティ情報を逆コンパイルする。
+            TextCellType をJSONシリアライズします。
+            SubEditor はシリアライズを行いません。
             </summary>
             <param name="cellType">TextCellType オブジェクト。</param>
-            <returns>プロパティ情報。</returns>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
         </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileDateTimeCellTypeProperties(FarPoint.Win.Spread.CellType.DateTimeCellType)">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.TextCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.TextCellType,System.String)">
             <summary>
-            DateTieCellType からプロパティ情報を逆コンパイルする。
+            TextCellType をJSONデシリアライズします。
+            SubEditor はデシリアライズを行いません。
             </summary>
-            <param name="cellType">DateTieCellType オブジェクト。</param>
-            <returns>プロパティ情報。</returns>
+            <param name="cellType">TextCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
         </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileNumberCellTypeProperties(FarPoint.Win.Spread.CellType.NumberCellType)">
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.ButtonCellTypeExtensions">
             <summary>
-            NumberCellType からプロパティ情報を逆コンパイルする。
+            ButtonCellType のJSONシリアライズ、デシリアライズを提供します。
             </summary>
-            <param name="cellType">NumberCellType オブジェクト。</param>
-            <returns>プロパティ情報。</returns>
         </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileComboBoxCellTypeProperties(FarPoint.Win.Spread.CellType.ComboBoxCellType)">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.ButtonCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.ButtonCellType,System.String[])">
             <summary>
-            ComboBoxCellType からプロパティ情報を逆コンパイルする。
-            </summary>
-            <param name="cellType">ComboBoxCellType オブジェクト。</param>
-            <returns>プロパティ情報。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileCheckBoxCellTypeProperties(FarPoint.Win.Spread.CellType.CheckBoxCellType)">
-            <summary>
-            CheckCellType からプロパティ情報を逆コンパイルする。
-            </summary>
-            <param name="cellType">CheckBoxCellType オブジェクト。</param>
-            <returns>プロパティ情報。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.DecompileButtonCellTypeProperties(FarPoint.Win.Spread.CellType.ButtonCellType)">
-            <summary>
-            ButtonCellType からプロパティ情報を逆コンパイルする。
+            ButtonCellType をJSONシリアライズします。
+            SubEditor はシリアライズを行いません。
             </summary>
             <param name="cellType">ButtonCellType オブジェクト。</param>
-            <returns>プロパティ情報。</returns>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
         </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.EnumExt">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.ButtonCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.ButtonCellType,System.String)">
             <summary>
-            Enum の安全な型変換を提供する。
+            ButtonCellType をJSONデシリアライズします。
+            SubEditor はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">ButtonCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.GcDateTimeCellTypeExtensions">
+            <summary>
+            GcDateTimeCellType のJSONシリアライズ、デシリアライズを提供します。
             </summary>
         </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.SheetViewExtensions.EnumExt.TryParse``1(System.String,``0@)">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.GcDateTimeCellTypeExtensions.SerializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcDateTimeCellType,System.String[])">
             <summary>
-            Enum の安全な型変換を検証する。
+            GcDateTimeCellType をJSONシリアライズします。
+            SubEditor, TouchToolBar はシリアライズを行いません。
             </summary>
-            <typeparam name="TEnum">Enum 型。</typeparam>
-            <param name="value">Enum に変換する文字列。</param>
-            <param name="enumValue">変換された Enum 型の値。</param>
-            <returns>true:成功, false:失敗。</returns>
+            <param name="cellType">GcDateTimeCellType オブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.GcDateTimeCellTypeExtensions.DeserializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcDateTimeCellType,System.String)">
+            <summary>
+            GcDateTimeCellType をJSONデシリアライズします。
+            SubEditor, TouchToolBar はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">GcDateTimeCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.GcTextBoxCellTypeExtensions">
+            <summary>
+            GcTextBoxCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.GcTextBoxCellTypeExtensions.SerializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcTextBoxCellType,System.String[])">
+            <summary>
+            GcTextBoxCellType をJSONシリアライズします。
+            SubEditor, TouchToolBar はシリアライズを行いません。
+            </summary>
+            <param name="cellType">GcTextBoxCellType オブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.GcTextBoxCellTypeExtensions.DeserializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcTextBoxCellType,System.String)">
+            <summary>
+            GcTextBoxCellType をJSONデシリアライズします。
+            SubEditor, TouchToolBar はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">GcTextBoxCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.GcNumberCellTypeExtensions">
+            <summary>
+            GcNumberCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.GcNumberCellTypeExtensions.SerializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcNumberCellType,System.String[])">
+            <summary>
+            GcNumberCellType をJSONシリアライズします。
+            SubEditor, TouchToolBar はシリアライズを行いません。
+            </summary>
+            <param name="cellType">GcNumberCellType オブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.GcNumberCellTypeExtensions.DeserializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcNumberCellType,System.String)">
+            <summary>
+            GcNumberCellType をJSONデシリアライズします。
+            SubEditor, TouchToolBar はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">GcNumberCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.GcComboBoxCellTypeExtensions">
+            <summary>
+            GcComboBoxCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.GcComboBoxCellTypeExtensions.SerializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcComboBoxCellType,System.String[])">
+            <summary>
+            GcComboBoxCellType をJSONシリアライズします。
+            DataSource, ImageList, Items, ListColumns, SubEditor, TouchToolBar はシリアライズを行いません。
+            </summary>
+            <param name="cellType">GcComboBoxCellType オブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.GcComboBoxCellTypeExtensions.DeserializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcComboBoxCellType,System.String)">
+            <summary>
+            GcComboBoxCellType をJSONデシリアライズします。
+            DataSource, ImageList, Items, ListColumns, SubEditor, TouchToolBar はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">GcComboBoxCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.ICellTypeExtensions">
+            <summary>
+            セルタイプの拡張メソッドを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.ICellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.ICellType,System.String)">
+            <summary>
+            セルタイプごとにオブジェクトをデシリアライズします。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+            <param name="cellTypeProps">セルタイプのプロパティJSON文字列。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.ICellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.ICellType,System.String[])">
+            <summary>
+            セルタイプごとにオブジェクトをデシリアライズします。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
         </member>
     </members>
 </doc>

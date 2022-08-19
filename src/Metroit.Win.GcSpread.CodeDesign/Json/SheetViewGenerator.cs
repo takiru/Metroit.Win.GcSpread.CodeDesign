@@ -158,7 +158,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// 指定したJSONファイルでヘッダー部のみのシートレイアウトを生成します。
         /// </summary>
         /// <param name="layoutPath">JSONファイルパス。</param>
-        /// <param name="templatePaths">テンプレートJSONファイルパス。</param>
+        /// <param name="templateLayoutPaths">テンプレートJSONファイルパス。</param>
         /// <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
         /// <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
         /// <exception cref="InvalidOperationException"></exception>
@@ -199,6 +199,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// 指定したJSONオブジェクトでヘッダー部のみのシートレイアウトを生成します。
         /// </summary>
         /// <param name="layout">JSON文字列。</param>
+        /// <param name="templateLayouts">テンプレートJSON文字列。</param>
         /// <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
         /// <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
         /// <exception cref="InvalidOperationException"></exception>
@@ -212,7 +213,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// 指定したJSONファイルでヘッダー部のみのシートレイアウトを生成します。
         /// </summary>
         /// <param name="layoutPath">JSONファイルパス。</param>
-        /// <param name="templatePaths">テンプレートJSONファイルパス。</param>
+        /// <param name="templateLayoutPaths">テンプレートJSONファイルパス。</param>
         /// <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
         /// <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
         /// <param name="generateColumns">列定義をバインドするかどうか。</param>

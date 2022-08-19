@@ -29,7 +29,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.Converters
         /// <summary>
         /// デシリアライズを行います。
         /// </summary>
-        /// <param name="autoCompleteInfo">ShortcutDictionary オブジェクト。</param>
+        /// <param name="shortcutDictionary">ShortcutDictionary オブジェクト。</param>
         /// <param name="props">デシリアライズオブジェクト。</param>
         public static void Deserialize(ShortcutDictionary shortcutDictionary, JToken props)
         {

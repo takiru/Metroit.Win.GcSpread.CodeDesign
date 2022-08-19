@@ -24,8 +24,6 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// <summary>
         /// セルタイプを取得または設定します。
         /// </summary>
-        // TODO: ColumnsSetupProvider::CreateColumnsDefinitions()で任意のプロパティを生成したいので強制をやめてよいか？
-        //[JsonProperty(Required = Required.Always)]
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string CellType { get; set; }
 

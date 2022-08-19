@@ -12,8 +12,8 @@ namespace Metroit.Win.GcSpread.CodeDesign
         /// <summary>
         /// セルタイプごとにオブジェクトをデシリアライズします。
         /// </summary>
-        /// <param name="cellType"></param>
-        /// <param name="cellTypeProps"></param>
+        /// <param name="cellType">セルタイプ。</param>
+        /// <param name="cellTypeProps">セルタイプのプロパティJSON文字列。</param>
         public static void DeserializeJson(this ICellType cellType, string cellTypeProps)
         {
             // 通常セルタイプ
@@ -74,7 +74,8 @@ namespace Metroit.Win.GcSpread.CodeDesign
         /// <summary>
         /// セルタイプごとにオブジェクトをデシリアライズします。
         /// </summary>
-        /// <param name="cellType"></param>
+        /// <param name="cellType">セルタイプ。</param>
+        /// <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
         public static JObject SerializeJson(this ICellType cellType, string[] includeProps = null)
         {
             // 通常セルタイプ
