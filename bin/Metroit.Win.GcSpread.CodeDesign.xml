@@ -164,7 +164,7 @@
         <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcComboBoxCellTypeConverter.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
             <summary>
             セルタイプのプロパティをシリアライズします。
-            DataSource, ImageList, Items, ListColumns はシリアライズを行いません。
+            DataSource, ImageList, Items, ListColumns[].DefaultSubItem, ListColumns[].SortComparer はシリアライズを行いません。
             </summary>
             <param name="propsObj">プロパティオブジェクト。</param>
             <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
@@ -172,7 +172,7 @@
         <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.GcComboBoxCellTypeConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
             <summary>
             現在のプロパティをデシリアライズします。
-            DataSource, ImageList, Items, ListColumns はデシリアライズを行いません。
+            DataSource, ImageList, Items, ListColumns[].DefaultSubItem, ListColumns[].SortComparer はシリアライズを行いません。
             </summary>
             <param name="prop">プロパティのトークンオブジェクト。</param>
         </member>
@@ -390,197 +390,55 @@
             </summary>
             <param name="prop">プロパティのトークンオブジェクト。</param>
         </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator">
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListColumnInfoConverter">
             <summary>
-            SheetView の生成操作を提供します。
+            ListColumnInfo オブジェクトのコンバーターを提供します。
             </summary>
         </member>
-        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.SheetView">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListColumnInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.ListColumnInfo)">
             <summary>
-            処理の対象となる SheetView。
+            シリアライズを行います。
+            DefaultSubItem, SortComparer はシリアライズを行いません。
+            </summary>
+            <param name="listColumnInfo">ListColumnInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListColumnInfoConverter.Deserialize(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            デシリアライズを行います。
+            DefaultSubItem, SortComparer はデシリアライズを行いません。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <returns>ListColumnInfo オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListColumnInfoConverter.Deserialize(Newtonsoft.Json.Linq.JToken,GrapeCity.Win.Spread.InputMan.CellType.ListColumnInfo)">
+            <summary>
+            デシリアライズを行います。
+            DefaultSubItem, SortComparer はデシリアライズを行いません。
+            </summary>
+            <param name="prop">デシリアライズオブジェクト。</param>
+            <param name="source">ベースにする ListColumnInfo オブジェクト。</param>
+            <returns>ListColumnInfo オブジェクト。</returns>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListColumnCollectionInfoConverter">
+            <summary>
+            ListColumnCollectionInfo オブジェクトのコンバーターを提供します。
             </summary>
         </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.#ctor(FarPoint.Win.Spread.SheetView)">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListColumnCollectionInfoConverter.Serialize(GrapeCity.Win.Spread.InputMan.CellType.ListColumnCollectionInfo)">
             <summary>
-            新しい SheetViewGenerator インスタンスを生成します。
+            シリアライズを行います。
             </summary>
-            <param name="sheetView">処理対象とする SheetView。</param>
+            <param name="listColumnCollectionInfo">ListColumnCollectionInfo オブジェクト。</param>
+            <returns>シリアライズオブジェクト。</returns>
         </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.SerializeJson(Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions)">
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.Converters.ListColumnCollectionInfoConverter.Deserialize(GrapeCity.Win.Spread.InputMan.CellType.ListColumnCollectionInfo,Newtonsoft.Json.Linq.JArray)">
             <summary>
-            シート定義オブジェクトからJSON文字列にシリアライズします。
+            デシリアライズを行います。
             </summary>
-            <param name="def">シート定義オブジェクト。</param>
-            <returns>JSON文字列。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.DeserializeJson(System.String)">
-            <summary>
-            JSON文字列からシート定義オブジェクトにデシリアライズします。
-            </summary>
-            <param name="json">シート定義JSON文字列。</param>
-            <returns>シート定義オブジェクト。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutFrom(System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
-            <summary>
-            指定したJSONファイルでシートレイアウトを生成します。
-            </summary>
-            <param name="layoutPath">JSONファイルパス。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutFrom(System.String,System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
-            <summary>
-            指定したJSONファイルでシートレイアウトを生成します。
-            </summary>
-            <param name="layoutPath">JSONファイルパス。</param>
-            <param name="templateLayoutPath">テンプレートJSONファイルパス。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutFrom(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
-            <summary>
-            指定したJSONファイルでシートレイアウトを生成します。
-            </summary>
-            <param name="layoutPath">JSONファイルパス。</param>
-            <param name="templateLayoutPaths">テンプレートJSONファイルパス。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayout(System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
-            <summary>
-            指定したJSON文字列でシートレイアウトを生成します。
-            </summary>
-            <param name="layout">JSON文字列。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayout(System.String,System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
-            <summary>
-            指定したJSON文字列でシートレイアウトを生成します。
-            </summary>
-            <param name="layout">JSON文字列。</param>
-            <param name="templateLayout">テンプレートJSON文字列。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayout(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
-            <summary>
-            指定したJSON文字列でシートレイアウトを生成します。
-            </summary>
-            <param name="layout">JSON文字列。</param>
-            <param name="templateLayouts">テンプレートJSON文字列。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumnsFrom(System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
-            <summary>
-            指定したJSONファイルでヘッダー部のみのシートレイアウトを生成します。
-            </summary>
-            <param name="layoutPath">JSONファイルパス。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumnsFrom(System.String,System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
-            <summary>
-            指定したJSONファイルでヘッダー部のみのシートレイアウトを生成します。
-            </summary>
-            <param name="layoutPath">JSONファイルパス。</param>
-            <param name="templateLayoutPath">テンプレートJSONファイルパス。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumnsFrom(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
-            <summary>
-            指定したJSONファイルでヘッダー部のみのシートレイアウトを生成します。
-            </summary>
-            <param name="layoutPath">JSONファイルパス。</param>
-            <param name="templateLayoutPaths">テンプレートJSONファイルパス。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumns(System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
-            <summary>
-            指定したJSON文字列でヘッダー部のみのシートレイアウトを生成します。
-            </summary>
-            <param name="layout">JSON文字列。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumns(System.String,System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
-            <summary>
-            指定したJSON文字列でヘッダー部のみのシートレイアウトを生成します。
-            </summary>
-            <param name="layout">JSON文字列。</param>
-            <param name="templateLayout">テンプレートJSON文字列。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumns(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
-            <summary>
-            指定したJSONオブジェクトでヘッダー部のみのシートレイアウトを生成します。
-            </summary>
-            <param name="layout">JSON文字列。</param>
-            <param name="templateLayouts">テンプレートJSON文字列。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutFrom(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}},System.Boolean)">
-            <summary>
-            指定したJSONファイルでヘッダー部のみのシートレイアウトを生成します。
-            </summary>
-            <param name="layoutPath">JSONファイルパス。</param>
-            <param name="templateLayoutPaths">テンプレートJSONファイルパス。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <param name="generateColumns">列定義をバインドするかどうか。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayout(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}},System.Boolean)">
-            <summary>
-            指定したJSON文字列でシートレイアウトを生成する。
-            </summary>
-            <param name="layout">JSON文字列。</param>
-            <param name="templateLayouts">テンプレートJSON文字列。</param>
-            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
-            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
-            <param name="generateColumns">列定義をバインドするかどうか。</param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.PrepareGenerating">
-            <summary>
-            ジェネレート準備を行う。
-            </summary>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.DeserializeTemplateLayouts(System.String[])">
-            <summary>
-            テンプレートJSONをデシリアライズする。
-            </summary>
-            <param name="templateLayouts">テンプレートJSON文字列。</param>
-            <returns></returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.CreateSheetDefinitions(System.Func{FarPoint.Win.Spread.Column,System.Collections.Generic.Dictionary{System.String,System.Object}},System.String[],System.String[],System.String[],System.Boolean,System.Boolean)">
-            <summary>
-            シート情報からシート定義オブジェクトを生成します。
-            </summary>
-            <param name="columnOptions">列のオプション情報設定アクションデリゲート。</param>
-            <param name="includeHeaderRowProps">ヘッダー行情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
-            <param name="includeHeaderCellProps">ヘッダーセル情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
-            <param name="includeColumnProps">列情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
-            <param name="outputCellTypeProps">セルタイププロパティを生成するかどうか。</param>
-            <param name="outputOptions">オプション情報を生成するかどうか。false の場合、第一引数は動作しません。</param>
-            <returns>JSONデータオブジェクト。</returns>
+            <param name="listColumnCollectionInfo">ListColumnCollectionInfo オブジェクト。</param>
+            <param name="props">デシリアライズオブジェクト。</param>
+            <returns>ListColumnCollectionInfo オブジェクト。</returns>
         </member>
         <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.Converters.CheckBoxPictureConverter">
             <summary>
@@ -1640,6 +1498,198 @@
             </summary>
             <param name="statusBarInfo">StatusBarInfo オブジェクト。</param>
             <param name="prop">デシリアライズオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator">
+            <summary>
+            SheetView の生成操作を提供します。
+            </summary>
+        </member>
+        <member name="P:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.SheetView">
+            <summary>
+            処理の対象となる SheetView。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.#ctor(FarPoint.Win.Spread.SheetView)">
+            <summary>
+            新しい SheetViewGenerator インスタンスを生成します。
+            </summary>
+            <param name="sheetView">処理対象とする SheetView。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.SerializeJson(Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions)">
+            <summary>
+            シート定義オブジェクトからJSON文字列にシリアライズします。
+            </summary>
+            <param name="def">シート定義オブジェクト。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.DeserializeJson(System.String)">
+            <summary>
+            JSON文字列からシート定義オブジェクトにデシリアライズします。
+            </summary>
+            <param name="json">シート定義JSON文字列。</param>
+            <returns>シート定義オブジェクト。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutFrom(System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSONファイルでシートレイアウトを生成します。
+            </summary>
+            <param name="layoutPath">JSONファイルパス。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutFrom(System.String,System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSONファイルでシートレイアウトを生成します。
+            </summary>
+            <param name="layoutPath">JSONファイルパス。</param>
+            <param name="templateLayoutPath">テンプレートJSONファイルパス。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutFrom(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSONファイルでシートレイアウトを生成します。
+            </summary>
+            <param name="layoutPath">JSONファイルパス。</param>
+            <param name="templateLayoutPaths">テンプレートJSONファイルパス。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayout(System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSON文字列でシートレイアウトを生成します。
+            </summary>
+            <param name="layout">JSON文字列。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayout(System.String,System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSON文字列でシートレイアウトを生成します。
+            </summary>
+            <param name="layout">JSON文字列。</param>
+            <param name="templateLayout">テンプレートJSON文字列。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayout(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSON文字列でシートレイアウトを生成します。
+            </summary>
+            <param name="layout">JSON文字列。</param>
+            <param name="templateLayouts">テンプレートJSON文字列。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumnsFrom(System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSONファイルでヘッダー部のみのシートレイアウトを生成します。
+            </summary>
+            <param name="layoutPath">JSONファイルパス。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumnsFrom(System.String,System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSONファイルでヘッダー部のみのシートレイアウトを生成します。
+            </summary>
+            <param name="layoutPath">JSONファイルパス。</param>
+            <param name="templateLayoutPath">テンプレートJSONファイルパス。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumnsFrom(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSONファイルでヘッダー部のみのシートレイアウトを生成します。
+            </summary>
+            <param name="layoutPath">JSONファイルパス。</param>
+            <param name="templateLayoutPaths">テンプレートJSONファイルパス。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumns(System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSON文字列でヘッダー部のみのシートレイアウトを生成します。
+            </summary>
+            <param name="layout">JSON文字列。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumns(System.String,System.String,System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSON文字列でヘッダー部のみのシートレイアウトを生成します。
+            </summary>
+            <param name="layout">JSON文字列。</param>
+            <param name="templateLayout">テンプレートJSON文字列。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutWithoutColumns(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}})">
+            <summary>
+            指定したJSONオブジェクトでヘッダー部のみのシートレイアウトを生成します。
+            </summary>
+            <param name="layout">JSON文字列。</param>
+            <param name="templateLayouts">テンプレートJSON文字列。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayoutFrom(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}},System.Boolean)">
+            <summary>
+            指定したJSONファイルでヘッダー部のみのシートレイアウトを生成します。
+            </summary>
+            <param name="layoutPath">JSONファイルパス。</param>
+            <param name="templateLayoutPaths">テンプレートJSONファイルパス。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する特に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <param name="generateColumns">列定義をバインドするかどうか。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.GenerateLayout(System.String,System.String[],System.Func{FarPoint.Win.Spread.Cell,System.Object},System.Func{FarPoint.Win.Spread.SheetView,Metroit.Win.GcSpread.CodeDesign.Json.SheetViewDefinitions,System.Collections.Generic.IList{Metroit.Win.GcSpread.ColumnMoveResult}},System.Boolean)">
+            <summary>
+            指定したJSON文字列でシートレイアウトを生成する。
+            </summary>
+            <param name="layout">JSON文字列。</param>
+            <param name="templateLayouts">テンプレートJSON文字列。</param>
+            <param name="columnHeaderCellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
+            <param name="interceptor">列情報を変更するためのインターセプターデリゲート。ヘッダーのセル結合が行われる前に呼び出されます。</param>
+            <param name="generateColumns">列定義をバインドするかどうか。</param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.PrepareGenerating">
+            <summary>
+            ジェネレート準備を行う。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.DeserializeTemplateLayouts(System.String[])">
+            <summary>
+            テンプレートJSONをデシリアライズする。
+            </summary>
+            <param name="templateLayouts">テンプレートJSON文字列。</param>
+            <returns></returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.SheetViewGenerator.CreateSheetDefinitions(System.Func{FarPoint.Win.Spread.Column,System.Collections.Generic.Dictionary{System.String,System.Object}},System.String[],System.String[],System.String[],System.Boolean,System.Boolean)">
+            <summary>
+            シート情報からシート定義オブジェクトを生成します。
+            </summary>
+            <param name="columnOptions">列のオプション情報設定アクションデリゲート。</param>
+            <param name="includeHeaderRowProps">ヘッダー行情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+            <param name="includeHeaderCellProps">ヘッダーセル情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+            <param name="includeColumnProps">列情報の生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+            <param name="outputCellTypeProps">セルタイププロパティを生成するかどうか。</param>
+            <param name="outputOptions">オプション情報を生成するかどうか。false の場合、第一引数は動作しません。</param>
+            <returns>JSONデータオブジェクト。</returns>
         </member>
         <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.ColumnDefinitionsBase">
             <summary>

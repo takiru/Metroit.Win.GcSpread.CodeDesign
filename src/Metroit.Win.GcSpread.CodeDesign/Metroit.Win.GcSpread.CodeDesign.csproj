@@ -62,6 +62,8 @@
     <Compile Include="Json\CellTypeConverters\DateTimeCellTypeConverter.cs" />
     <Compile Include="Extensions\DateTimeCellTypeExtensions.cs" />
     <Compile Include="Json\CellTypeConverters\NumberCellTypeConverter.cs" />
+    <Compile Include="Json\Converters\ListColumnInfoConverter.cs" />
+    <Compile Include="Json\Converters\ListColumnCollectionInfoConverter.cs" />
     <Compile Include="Json\SheetViewGenerator.cs" />
     <Compile Include="Json\Converters\CheckBoxPictureConverter.cs" />
     <Compile Include="Extensions\NumberCellTypeExtensions.cs" />

@@ -476,7 +476,40 @@
     },
     {
       "BaseTemplate": "ComboBoxTemplate",
-      "CellType": "GcComboBoxCellType"
+      "CellType": "GcComboBoxCellType",
+      "CellTypeProps": {
+        "DropDownStyle": "DropDownList",
+        "EditorValue": "Value",
+        "ListGridLines": {
+          "HorizontalLines": {
+            "Style": "None"
+          },
+          "VerticalLines": {
+            "Style": "None"
+          }
+        },
+        "ListHeaderPane": {
+          "Visible": false
+        },
+        "DropDown": {
+          "AutoWidth": true,
+          "AllowResize": false
+        },
+        "UseCompatibleDrawing": true,
+        "AutoGenerateColumns": false,
+        "ListColumns": [
+          {
+            "DataPropertyName": "Value",
+            "Visible": false
+          },
+          {
+            "DataPropertyName": "Display",
+            "Visible": true
+          }
+        ],
+        "ValueSubItemIndex": 0,
+        "TextSubItemIndex": 1
+      }
     },
     {
       "CellType": "GcTextBoxCellType",

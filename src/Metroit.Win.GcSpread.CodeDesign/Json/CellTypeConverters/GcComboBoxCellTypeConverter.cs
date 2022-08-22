@@ -23,7 +23,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters
 
         /// <summary>
         /// セルタイプのプロパティをシリアライズします。
-        /// DataSource, ImageList, Items, ListColumns はシリアライズを行いません。
+        /// DataSource, ImageList, Items, ListColumns[].DefaultSubItem, ListColumns[].SortComparer はシリアライズを行いません。
         /// </summary>
         /// <param name="propsObj">プロパティオブジェクト。</param>
         /// <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
@@ -31,7 +31,8 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters
         //         DataSource: 様々なオブジェクトが指定されるため。
         //         ImageList: 複数のオブジェクトが対象になる、デザイナで指定不可なため。
         //         Items: DataSource 指定もしくは直接指定があるため。
-        //         ListColumns: DataSource 指定もしくは直接指定があるため。
+        //         ListColumns[].DefaultSubItem: 既定値設定？のため。
+        //         ListColumns[].SortComparer: ソート制御用クラスのため。
         protected override void SerializeProp(JObject propsObj, string[] includeProps)
         {
             base.SerializeProp(propsObj, includeProps);
@@ -133,6 +134,10 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters
             if (includeProps == null || includeProps.Any(x => x.Contains(nameof(GcComboBoxCellType.ImageWidth))))
             {
                 propsObj.Add(new JProperty(nameof(GcComboBoxCellType.ImageWidth), c.ImageWidth));
+            }
+            if (includeProps == null || includeProps.Any(x => x.Contains(nameof(GcComboBoxCellType.ListColumns))))
+            {
+                propsObj.Add(new JProperty(nameof(GcComboBoxCellType.ListColumns), ListColumnCollectionInfoConverter.Serialize(c.ListColumns)));
             }
             if (includeProps == null || includeProps.Any(x => x.Contains(nameof(GcComboBoxCellType.ListDefaultColumn))))
             {
@@ -262,14 +267,15 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters
 
         /// <summary>
         /// 現在のプロパティをデシリアライズします。
-        /// DataSource, ImageList, Items, ListColumns はデシリアライズを行いません。
+        /// DataSource, ImageList, Items, ListColumns[].DefaultSubItem, ListColumns[].SortComparer はシリアライズを行いません。
         /// </summary>
         /// <param name="prop">プロパティのトークンオブジェクト。</param>
         // NOTE: 下記はデシリアライズ化対象外。
         //         DataSource: 様々なオブジェクトが指定されるため。
         //         ImageList: 複数のオブジェクトが対象になる、デザイナで指定不可なため。
         //         Items: DataSource 指定もしくは直接指定があるため。
-        //         ListColumns: DataSource 指定もしくは直接指定があるため。
+        //         ListColumns[].DefaultSubItem: 既定値設定？のため。
+        //         ListColumns[].SortComparer: ソート制御用クラスのため。
         protected override void DeserializeProp(KeyValuePair<string, JToken> prop)
         {
             base.DeserializeProp(prop);
@@ -387,13 +393,18 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters
             }
             if (string.Compare(prop.Key, nameof(GcComboBoxCellType.ImageAlign), true) == 0)
             {
-                c.ImageAlign = prop.Value.ToObject<System.Windows.Forms.HorizontalAlignment>();
+                c.ImageAlign = prop.Value.ToObject<HorizontalAlignment>();
                 return;
             }
             if (string.Compare(prop.Key, nameof(GcComboBoxCellType.ImageWidth), true) == 0)
             {
                 c.ImageWidth = prop.Value.ToObject<int>();
                 return;
+            }
+            if (string.Compare(prop.Key, nameof(GcComboBoxCellType.ListColumns), true) == 0)
+            {
+                c.ListColumns.Clear();
+                ListColumnCollectionInfoConverter.Deserialize(c.ListColumns, (JArray)prop.Value);
             }
             if (string.Compare(prop.Key, nameof(GcComboBoxCellType.ListDefaultColumn), true) == 0)
             {

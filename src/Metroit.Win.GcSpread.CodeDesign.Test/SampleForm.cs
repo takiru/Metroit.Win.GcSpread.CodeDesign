@@ -111,27 +111,31 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             // GcComboBox のアイテム設定
             var cellType = fpSpread1.ActiveSheet.Columns[10].CellType as GcComboBoxCellType;
 
-            cellType.DropDownStyle = ComboBoxStyle.DropDownList;
-            cellType.EditorValue = GcComboBoxEditorValue.Value; // 実際の値はValueとする
+            //cellType.DropDownStyle = ComboBoxStyle.DropDownList;
+            //cellType.EditorValue = GcComboBoxEditorValue.Value; // 実際の値はValueとする
 
-            // 列や行の境界線が邪魔なので消す
-            cellType.ListGridLines.HorizontalLines.Style = LineStyle.None;
-            cellType.ListGridLines.VerticalLines.Style = LineStyle.None;
+            //// 列や行の境界線が邪魔なので消す
+            //cellType.ListGridLines.HorizontalLines.Style = LineStyle.None;
+            //cellType.ListGridLines.VerticalLines.Style = LineStyle.None;
 
-            cellType.ListHeaderPane.Visible = false;    // ヘッダー列名を表示しない
+            //cellType.ListHeaderPane.Visible = false;    // ヘッダー列名を表示しない
             //cellType.DropDown.AutoWidth = true; // 列非表示に伴い、幅調整されるようにする
             //cellType.DropDown.AllowResize = false;  // ユーザーによってドロップダウンのサイズを変更することを許可しない
-            cellType.UseCompatibleDrawing = true;   // ドロップダウンを開いているときに入力エリア部分が灰色にならないようにする
+            //cellType.UseCompatibleDrawing = true;   // ドロップダウンを開いているときに入力エリア部分が灰色にならないようにする
 
-            cellType.AutoGenerateColumns = true;
+            //cellType.AutoGenerateColumns = false;
             cellType.DataSource = comboItems;
 
-            // 内部の値と画面に表示される値を設定
-            cellType.ValueSubItemIndex = cellType.ListColumns.IndexOf(cellType.ListColumns.Cast<ListColumnInfo>().Where(x => x.DataPropertyName == "Value").First());
-            cellType.TextSubItemIndex = cellType.ListColumns.IndexOf(cellType.ListColumns.Cast<ListColumnInfo>().Where(x => x.DataPropertyName == "Display").First());
+            //cellType.ListDefaultColumn.Visible = false; // 何もリスト表示しない状態をデフォルトにする
+            //cellType.ListColumns.Cast<ListColumnInfo>().Where(x => x.DataPropertyName == "Display").First().Visible = true;  // 表示したい列だけ表示する
+            //cellType.ListColumns.Add(new ListColumnInfo() { DataPropertyName = "Display", DataDisplayType = DataDisplayType.Text, Visible = true });
+            //cellType.ListColumns.Add(new ListColumnInfo() { DataPropertyName = "Value", DataDisplayType = DataDisplayType.Text, Visible = false });
 
-            cellType.ListDefaultColumn.Visible = false; // 何もリスト表示しない状態をデフォルトにする
-            cellType.ListColumns.Cast<ListColumnInfo>().Where(x => x.DataPropertyName == "Display").First().Visible = true;  // 表示したい列だけ表示する
+            // 内部の値と画面に表示される値を設定
+            //cellType.ValueSubItemIndex = cellType.ListColumns.IndexOf(cellType.ListColumns.Cast<ListColumnInfo>().Where(x => x.DataPropertyName == "Value").First());
+            //cellType.TextSubItemIndex = cellType.ListColumns.IndexOf(cellType.ListColumns.Cast<ListColumnInfo>().Where(x => x.DataPropertyName == "Display").First());
+            //cellType.ValueSubItemIndex = 0;
+            //cellType.TextSubItemIndex = 1;
 
             //cellType.ListItemTemplates.Add(new ItemTemplateInfo() { AutoItemHeight = false, BackColor = Color.Red, Font = new Font(FontFamily.GenericSansSerif, 10), Height = 20, Image = Image.FromFile(@"C:\App\sample.png") });
             cellType.BackgroundImage = new FarPoint.Win.Picture(Image.FromFile(@"C:\App\sample.png"));
@@ -191,6 +195,12 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             var json = SheetViewGenerator.SerializeJson(root);
             var obj = SheetViewGenerator.DeserializeJson(json);
             MessageBox.Show(json);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var value = fpSpread1.ActiveSheet.Cells[0, 10].Value;
+            MessageBox.Show($"{value}");
         }
     }
 
