@@ -10,7 +10,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Extensions
     {
         /// <summary>
         /// GcComboBoxCellType をJSONシリアライズします。
-        /// DataSource, ImageList, Items, ListColumns, SubEditor, TouchToolBar はシリアライズを行いません。
+        /// DataSource, ImageList, Items, ListColumns[].DefaultSubItem, ListColumns[].SortComparer, SubEditor, TouchToolBar はシリアライズを行いません。
         /// </summary>
         /// <param name="cellType">GcComboBoxCellType オブジェクト。</param>
         /// <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
@@ -19,7 +19,8 @@ namespace Metroit.Win.GcSpread.CodeDesign.Extensions
         //         DataSource: 様々なオブジェクトが指定されるため。
         //         ImageList: 複数のオブジェクトが対象になる、デザイナで指定不可なため。
         //         Items: DataSource 指定もしくは直接指定があるため。
-        //         ListColumns: DataSource 指定もしくは直接指定があるため。
+        //         ListColumns[].DefaultSubItem: 既定値設定？のため。
+        //         ListColumns[].SortComparer: ソート制御用クラスのため。
         //         SubEditor: 様々なオブジェクトが指定される、デザイナで指定不可なため。
         //         TouchToolBar: 大量のプロパティがある、デザイナで指定不可なため。また、再帰情報により StackOverFlow になる。
         public static string SerializeJson(this GcComboBoxCellType cellType, string[] includeProps = null)
@@ -30,7 +31,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Extensions
 
         /// <summary>
         /// GcComboBoxCellType をJSONデシリアライズします。
-        /// DataSource, ImageList, Items, ListColumns, SubEditor, TouchToolBar はデシリアライズを行いません。
+        /// DataSource, ImageList, Items, ListColumns[].DefaultSubItem, ListColumns[].SortComparer, SubEditor, TouchToolBar はデシリアライズを行いません。
         /// </summary>
         /// <param name="cellType">GcComboBoxCellType オブジェクト。</param>
         /// <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
@@ -38,7 +39,8 @@ namespace Metroit.Win.GcSpread.CodeDesign.Extensions
         //         DataSource: 様々なオブジェクトが指定されるため。
         //         ImageList: 複数のオブジェクトが対象になる、デザイナで指定不可なため。
         //         Items: DataSource 指定もしくは直接指定があるため。
-        //         ListColumns: DataSource 指定もしくは直接指定があるため。
+        //         ListColumns[].DefaultSubItem: 既定値設定？のため。
+        //         ListColumns[].SortComparer: ソート制御用クラスのため。
         //         SubEditor: 様々なオブジェクトが指定される、デザイナで指定不可なため。
         //         TouchToolBar: 大量のプロパティがある、デザイナで指定不可なため。また、再帰情報により StackOverFlow になる。
         public static void DeserializeJson(this GcComboBoxCellType cellType, string cellTypeProps)

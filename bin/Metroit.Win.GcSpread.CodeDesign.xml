@@ -2384,7 +2384,7 @@
         <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcComboBoxCellTypeExtensions.SerializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcComboBoxCellType,System.String[])">
             <summary>
             GcComboBoxCellType をJSONシリアライズします。
-            DataSource, ImageList, Items, ListColumns, SubEditor, TouchToolBar はシリアライズを行いません。
+            DataSource, ImageList, Items, ListColumns[].DefaultSubItem, ListColumns[].SortComparer, SubEditor, TouchToolBar はシリアライズを行いません。
             </summary>
             <param name="cellType">GcComboBoxCellType オブジェクト。</param>
             <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
@@ -2393,7 +2393,7 @@
         <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcComboBoxCellTypeExtensions.DeserializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcComboBoxCellType,System.String)">
             <summary>
             GcComboBoxCellType をJSONデシリアライズします。
-            DataSource, ImageList, Items, ListColumns, SubEditor, TouchToolBar はデシリアライズを行いません。
+            DataSource, ImageList, Items, ListColumns[].DefaultSubItem, ListColumns[].SortComparer, SubEditor, TouchToolBar はデシリアライズを行いません。
             </summary>
             <param name="cellType">GcComboBoxCellType オブジェクト。</param>
             <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
