@@ -330,6 +330,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         {
             foreach (var templateDef in templateDefs)
             {
+                if (templateDef.Columns == null)
+                {
+                    continue;
+                }
+
                 var columnDef = templateDef.Columns.Where(x => x.TemplateName == def.BaseTemplate).FirstOrDefault();
                 if (columnDef == null)
                 {

@@ -341,6 +341,15 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         {
             foreach (var templateDef in templateDefs)
             {
+                if (templateDef.ColumnHeader == null)
+                {
+                    continue;
+                }
+                if (templateDef.ColumnHeader.Rows == null)
+                {
+                    continue;
+                }
+
                 var rowDef = templateDef.ColumnHeader.Rows.Where(x => x.TemplateName == def.BaseTemplate).FirstOrDefault();
                 if (rowDef == null)
                 {
@@ -364,6 +373,15 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         {
             foreach (var templateDef in templateDefs)
             {
+                if (templateDef.ColumnHeader == null)
+                {
+                    continue;
+                }
+                if (templateDef.ColumnHeader.Cells == null)
+                {
+                    continue;
+                }
+
                 var cellDef = templateDef.ColumnHeader.Cells.Where(x => x.TemplateName == def.BaseTemplate).FirstOrDefault();
                 if (cellDef == null)
                 {
