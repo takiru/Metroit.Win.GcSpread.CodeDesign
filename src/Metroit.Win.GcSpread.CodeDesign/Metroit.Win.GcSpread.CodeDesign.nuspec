@@ -15,7 +15,7 @@
     <dependencies>
       <group targetFramework=".NETFramework4.5">
         <dependency id="Newtonsoft.Json" version="9.0.1" />
-        <dependency id="Metroit.Win.GcSpread" version="11.0.2.1" />
+        <dependency id="Metroit.Win.GcSpread" version="11.0.4" />
       </group>
     </dependencies>
   </metadata>
