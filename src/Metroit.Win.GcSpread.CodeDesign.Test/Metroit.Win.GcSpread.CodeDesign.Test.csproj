@@ -108,7 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Metroit.Win.GcSpread">
-      <Version>11.0.5.3</Version>
+      <Version>11.0.5.4</Version>
     </PackageReference>
     <PackageReference Include="System.ValueTuple">
       <Version>4.5.0</Version>
