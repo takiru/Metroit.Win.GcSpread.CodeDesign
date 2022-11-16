@@ -155,7 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Metroit.Win.GcSpread">
-      <Version>11.0.5.7</Version>
+      <Version>11.0.5.8</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>9.0.1</Version>
