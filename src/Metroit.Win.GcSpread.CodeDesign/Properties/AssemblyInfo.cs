@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Takeru Yamaguchi")]
 [assembly: AssemblyProduct("Metroit.Win.GcSpread.CodeDesign")]
-[assembly: AssemblyCopyright("Copyright ©  2022 Takeru Yamaguchi")]
+[assembly: AssemblyCopyright("Copyright ©  2024 Takeru Yamaguchi")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,4 +32,4 @@ using System.Runtime.InteropServices;
 // すべての値を指定するか、次を使用してビルド番号とリビジョン番号を既定に設定できます
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("11.0.5.8")]
+[assembly: AssemblyVersion("15.0.0.0")]

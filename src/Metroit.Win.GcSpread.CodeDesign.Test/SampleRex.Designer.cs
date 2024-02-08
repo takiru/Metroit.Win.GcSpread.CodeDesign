@@ -19,7 +19,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test {
     // または Visual Studio のようなツールを使用して自動生成されました。
     // メンバーを追加または削除するには、.ResX ファイルを編集して、/str オプションと共に
     // ResGen を実行し直すか、または VS プロジェクトをビルドし直します。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class SampleRex {
@@ -67,21 +67,25 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test {
         ///    // HorizontalAlignment, VerticalAlignment を指定すると、Columnsより強い
         ///    &quot;Rows&quot;: [
         ///      {
-        ///        &quot;RowProperties&quot;: {
-        ///          &quot;Height&quot;: 40,
-        ///          &quot;HorizontalAlignment&quot;: &quot;Left&quot;,
-        ///          &quot;VerticalAlignment&quot;: &quot;Bottom&quot;
+        ///        &quot;BaseTemplate&quot;: &quot;DefaultRow&quot;
+        ///      },
+        ///      {
+        ///        &quot;Height&quot;: 20,
+        ///        &quot;HorizontalAlignment&quot;: &quot;Left&quot;,
+        ///        &quot;VerticalAlignment&quot;: &quot;Bottom&quot;
+        ///      }
+        ///    ],
+        ///    &quot;Cells&quot;: [
+        ///      [
+        ///        {
+        ///          &quot;Value&quot;: &quot;タイトル3&quot;,
+        ///          &quot;HorizontalAlignment&quot;: &quot;Right&quot;,
+        ///          &quot;VerticalAlignment&quot;: &quot;Top&quot;
         ///        },
-        ///        // 列の設定
-        ///        &quot;Columns&quot;: [
-        ///          {
-        ///            &quot;Value&quot;: &quot;タイトル3&quot;,
-        ///            &quot;HorizontalAlignment&quot;: &quot;Right&quot;,
-        ///            &quot;VerticalAlignment&quot;: &quot;Top&quot;
-        ///          },
-        ///          {
-        ///            &quot;Value&quot;: &quot;タイトル6&quot;,
-        ///            &quot;HorizontalAlignm [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        ///        {
+        ///          &quot;BaseTemplate&quot;: &quot;DefaultCell&quot;
+        ///        },
+        ///        { [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string SampleJson {
             get {
@@ -91,26 +95,30 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test {
         
         /// <summary>
         ///   {
-        ///  // 列ヘッダーの設定
         ///  &quot;ColumnHeader&quot;: {
-        ///    // HorizontalAlignment, VerticalAlignment を指定すると、Columnsより強い
         ///    &quot;Rows&quot;: [
         ///      {
-        ///        &quot;RowProperties&quot;: {
-        ///          &quot;Height&quot;: 40,
-        ///          &quot;HorizontalAlignment&quot;: &quot;Left&quot;,
-        ///          &quot;VerticalAlignment&quot;: &quot;Bottom&quot;
-        ///        },
-        ///        // 列の設定
-        ///        &quot;Columns&quot;: [
-        ///          {
-        ///            &quot;Value&quot;: &quot;タイトル3&quot;,
-        ///            &quot;HorizontalAlignment&quot;: &quot;Right&quot;,
-        ///            &quot;VerticalAlignment&quot;: &quot;Top&quot;
-        ///          },
-        ///          {
-        ///            &quot;Value&quot;: &quot;タイトル6&quot;,
-        ///            &quot;HorizontalAlignm [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        ///        &quot;TemplateName&quot;: &quot;DefaultRow&quot;,
+        ///        &quot;Height&quot;: 40,
+        ///        &quot;HorizontalAlignment&quot;: &quot;Right&quot;,
+        ///        &quot;VerticalAlignment&quot;: &quot;Bottom&quot;
+        ///      }
+        ///    ],
+        ///    &quot;Cells&quot;: [
+        ///      {
+        ///        &quot;TemplateName&quot;: &quot;DefaultCell&quot;,
+        ///        &quot;Value&quot;: &quot;タイトル6&quot;,
+        ///        &quot;HorizontalAlignment&quot;: &quot;Left&quot;,
+        ///        &quot;VerticalAlignment&quot;: &quot;Bottom&quot;
+        ///      }
+        ///    ]
+        ///  },
+        ///  // 列の設定
+        ///  &quot;Columns&quot;: [
+        ///    {
+        ///      &quot;TemplateName&quot;: &quot;BaseNumberTemplate&quot;,
+        ///      &quot;HorizontalAlignment&quot;: &quot;Right&quot;,
+        ///      &quot;VerticalAli [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Template {
             get {
