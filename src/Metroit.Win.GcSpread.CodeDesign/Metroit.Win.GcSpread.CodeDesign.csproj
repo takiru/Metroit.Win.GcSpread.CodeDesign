@@ -57,11 +57,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\RegularExpressionCellTypeExtensions.cs" />
     <Compile Include="Json\CellTypeConverters\CheckBoxCellTypeConverter.cs" />
     <Compile Include="Json\CellTypeConverters\ComboBoxCellTypeConverter.cs" />
     <Compile Include="Json\CellTypeConverters\DateTimeCellTypeConverter.cs" />
     <Compile Include="Extensions\DateTimeCellTypeExtensions.cs" />
     <Compile Include="Json\CellTypeConverters\NumberCellTypeConverter.cs" />
+    <Compile Include="Json\CellTypeConverters\RegularExpressionCellTypeConverter.cs" />
     <Compile Include="Json\Converters\ListColumnInfoConverter.cs" />
     <Compile Include="Json\Converters\ListColumnCollectionInfoConverter.cs" />
     <Compile Include="Json\SheetViewGenerator.cs" />
@@ -158,7 +160,7 @@
       <Version>11.0.5.8</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>9.0.1</Version>
+      <Version>13.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

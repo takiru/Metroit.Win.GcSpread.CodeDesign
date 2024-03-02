@@ -120,6 +120,11 @@
       <Name>Metroit.Win.GcSpread.CodeDesign</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="sample.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

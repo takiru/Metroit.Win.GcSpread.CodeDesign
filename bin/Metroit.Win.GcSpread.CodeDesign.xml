@@ -4,6 +4,267 @@
         <name>Metroit.Win.GcSpread.CodeDesign</name>
     </assembly>
     <members>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.RegularExpressionCellTypeExtensions">
+            <summary>
+            RegularExpressionCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.RegularExpressionCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.RegularExpressionCellType,System.String[])">
+            <summary>
+            RegularExpressionCellType をJSONシリアライズします。
+            SubEditor はシリアライズを行いません。
+            </summary>
+            <param name="cellType">RegularExpressionCellType オブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.RegularExpressionCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.RegularExpressionCellType,System.String)">
+            <summary>
+            RegularExpressionCellType をJSONデシリアライズします。
+            SubEditor はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">RegularExpressionCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.DateTimeCellTypeExtensions">
+            <summary>
+            DateTimeCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.DateTimeCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.DateTimeCellType,System.String[])">
+            <summary>
+            DateTimeCellType をJSONシリアライズします。
+            SubEditor はシリアライズを行いません。
+            </summary>
+            <param name="cellType">DateTimeCellType オブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.DateTimeCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.DateTimeCellType,System.String)">
+            <summary>
+            DateTimeCellType をJSONデシリアライズします。
+            SubEditor はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">DateTimeCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.NumberCellTypeExtensions">
+            <summary>
+            NumberCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.NumberCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.NumberCellType,System.String[])">
+            <summary>
+            NumberCellType をJSONシリアライズします。
+            SubEditor はシリアライズを行いません。
+            </summary>
+            <param name="cellType">NumberCellType オブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.NumberCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.NumberCellType,System.String)">
+            <summary>
+            NumberCellType をJSONデシリアライズします。
+            SubEditor はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">NumberCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.ComboBoxCellTypeExtensions">
+            <summary>
+            ComboBoxCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.ComboBoxCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.ComboBoxCellType,System.String[])">
+            <summary>
+            ComboBoxCellType をJSONシリアライズします。
+            SubEditor, ImageList, ListControl はシリアライズを行いません。
+            </summary>
+            <param name="cellType">ComboBoxCellType オブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.ComboBoxCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.ComboBoxCellType,System.String)">
+            <summary>
+            ComboBoxCellType をJSONデシリアライズします。
+            SubEditor, ImageList, ListControl はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">ComboBoxCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.CheckBoxCellTypeExtensions">
+            <summary>
+            CheckBoxCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.CheckBoxCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.CheckBoxCellType,System.String[])">
+            <summary>
+            CheckBoxCellType をJSONシリアライズします。
+            SubEditor はシリアライズを行いません。
+            </summary>
+            <param name="cellType">CheckBoxCellType オブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.CheckBoxCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.CheckBoxCellType,System.String)">
+            <summary>
+            CheckBoxCellType をJSONデシリアライズします。
+            SubEditor はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">CheckBoxCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.TextCellTypeExtensions">
+            <summary>
+            TextCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.TextCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.TextCellType,System.String[])">
+            <summary>
+            TextCellType をJSONシリアライズします。
+            SubEditor はシリアライズを行いません。
+            </summary>
+            <param name="cellType">TextCellType オブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.TextCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.TextCellType,System.String)">
+            <summary>
+            TextCellType をJSONデシリアライズします。
+            SubEditor はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">TextCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.ButtonCellTypeExtensions">
+            <summary>
+            ButtonCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.ButtonCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.ButtonCellType,System.String[])">
+            <summary>
+            ButtonCellType をJSONシリアライズします。
+            SubEditor はシリアライズを行いません。
+            </summary>
+            <param name="cellType">ButtonCellType オブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.ButtonCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.ButtonCellType,System.String)">
+            <summary>
+            ButtonCellType をJSONデシリアライズします。
+            SubEditor はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">ButtonCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.GcDateTimeCellTypeExtensions">
+            <summary>
+            GcDateTimeCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcDateTimeCellTypeExtensions.SerializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcDateTimeCellType,System.String[])">
+            <summary>
+            GcDateTimeCellType をJSONシリアライズします。
+            SubEditor, TouchToolBar はシリアライズを行いません。
+            </summary>
+            <param name="cellType">GcDateTimeCellType オブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcDateTimeCellTypeExtensions.DeserializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcDateTimeCellType,System.String)">
+            <summary>
+            GcDateTimeCellType をJSONデシリアライズします。
+            SubEditor, TouchToolBar はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">GcDateTimeCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.GcTextBoxCellTypeExtensions">
+            <summary>
+            GcTextBoxCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcTextBoxCellTypeExtensions.SerializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcTextBoxCellType,System.String[])">
+            <summary>
+            GcTextBoxCellType をJSONシリアライズします。
+            SubEditor, TouchToolBar はシリアライズを行いません。
+            </summary>
+            <param name="cellType">GcTextBoxCellType オブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcTextBoxCellTypeExtensions.DeserializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcTextBoxCellType,System.String)">
+            <summary>
+            GcTextBoxCellType をJSONデシリアライズします。
+            SubEditor, TouchToolBar はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">GcTextBoxCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.GcNumberCellTypeExtensions">
+            <summary>
+            GcNumberCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcNumberCellTypeExtensions.SerializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcNumberCellType,System.String[])">
+            <summary>
+            GcNumberCellType をJSONシリアライズします。
+            SubEditor, TouchToolBar はシリアライズを行いません。
+            </summary>
+            <param name="cellType">GcNumberCellType オブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcNumberCellTypeExtensions.DeserializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcNumberCellType,System.String)">
+            <summary>
+            GcNumberCellType をJSONデシリアライズします。
+            SubEditor, TouchToolBar はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">GcNumberCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.GcComboBoxCellTypeExtensions">
+            <summary>
+            GcComboBoxCellType のJSONシリアライズ、デシリアライズを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcComboBoxCellTypeExtensions.SerializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcComboBoxCellType,System.String[])">
+            <summary>
+            GcComboBoxCellType をJSONシリアライズします。
+            DataSource, ImageList, Items, ListColumns[].DefaultSubItem, ListColumns[].SortComparer, SubEditor, TouchToolBar はシリアライズを行いません。
+            </summary>
+            <param name="cellType">GcComboBoxCellType オブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+            <returns>JSON文字列。</returns>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcComboBoxCellTypeExtensions.DeserializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcComboBoxCellType,System.String)">
+            <summary>
+            GcComboBoxCellType をJSONデシリアライズします。
+            DataSource, ImageList, Items, ListColumns[].DefaultSubItem, ListColumns[].SortComparer, SubEditor, TouchToolBar はデシリアライズを行いません。
+            </summary>
+            <param name="cellType">GcComboBoxCellType オブジェクト。</param>
+            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.ICellTypeExtensions">
+            <summary>
+            セルタイプの拡張メソッドを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.ICellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.ICellType,System.String[])">
+            <summary>
+            セルタイプごとにオブジェクトをデシリアライズします。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.ICellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.ICellType,System.String)">
+            <summary>
+            セルタイプごとにオブジェクトをデシリアライズします。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+            <param name="cellTypeProps">セルタイプのプロパティJSON文字列。</param>
+        </member>
         <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.CheckBoxCellTypeConverter">
             <summary>
             CheckBoxCellType のコンバーターを提供します。
@@ -97,6 +358,30 @@
             <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
         </member>
         <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.NumberCellTypeConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            現在のプロパティをデシリアライズします。
+            </summary>
+            <param name="prop">プロパティのトークンオブジェクト。</param>
+        </member>
+        <member name="T:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.RegularExpressionCellTypeConverter">
+            <summary>
+            RegularExpressionCellType のコンバーターを提供します。
+            </summary>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.RegularExpressionCellTypeConverter.#ctor(FarPoint.Win.Spread.CellType.RegularExpressionCellType)">
+            <summary>
+            新しい RegularExpressionCellTypeConverter インスタンスを生成します。
+            </summary>
+            <param name="cellType">セルタイプ。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.RegularExpressionCellTypeConverter.SerializeProp(Newtonsoft.Json.Linq.JObject,System.String[])">
+            <summary>
+            セルタイプのプロパティをシリアライズします。
+            </summary>
+            <param name="propsObj">プロパティオブジェクト。</param>
+            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
+        </member>
+        <member name="M:Metroit.Win.GcSpread.CodeDesign.Json.CellTypeConverters.RegularExpressionCellTypeConverter.DeserializeProp(System.Collections.Generic.KeyValuePair{System.String,Newtonsoft.Json.Linq.JToken})">
             <summary>
             現在のプロパティをデシリアライズします。
             </summary>
@@ -2177,245 +2462,6 @@
             <summary>
             列数を取得または設定します。
             </summary>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.DateTimeCellTypeExtensions">
-            <summary>
-            DateTimeCellType のJSONシリアライズ、デシリアライズを提供します。
-            </summary>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.DateTimeCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.DateTimeCellType,System.String[])">
-            <summary>
-            DateTimeCellType をJSONシリアライズします。
-            SubEditor はシリアライズを行いません。
-            </summary>
-            <param name="cellType">DateTimeCellType オブジェクト。</param>
-            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
-            <returns>JSON文字列。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.DateTimeCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.DateTimeCellType,System.String)">
-            <summary>
-            DateTimeCellType をJSONデシリアライズします。
-            SubEditor はデシリアライズを行いません。
-            </summary>
-            <param name="cellType">DateTimeCellType オブジェクト。</param>
-            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.NumberCellTypeExtensions">
-            <summary>
-            NumberCellType のJSONシリアライズ、デシリアライズを提供します。
-            </summary>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.NumberCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.NumberCellType,System.String[])">
-            <summary>
-            NumberCellType をJSONシリアライズします。
-            SubEditor はシリアライズを行いません。
-            </summary>
-            <param name="cellType">NumberCellType オブジェクト。</param>
-            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
-            <returns>JSON文字列。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.NumberCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.NumberCellType,System.String)">
-            <summary>
-            NumberCellType をJSONデシリアライズします。
-            SubEditor はデシリアライズを行いません。
-            </summary>
-            <param name="cellType">NumberCellType オブジェクト。</param>
-            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.ComboBoxCellTypeExtensions">
-            <summary>
-            ComboBoxCellType のJSONシリアライズ、デシリアライズを提供します。
-            </summary>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.ComboBoxCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.ComboBoxCellType,System.String[])">
-            <summary>
-            ComboBoxCellType をJSONシリアライズします。
-            SubEditor, ImageList, ListControl はシリアライズを行いません。
-            </summary>
-            <param name="cellType">ComboBoxCellType オブジェクト。</param>
-            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
-            <returns>JSON文字列。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.ComboBoxCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.ComboBoxCellType,System.String)">
-            <summary>
-            ComboBoxCellType をJSONデシリアライズします。
-            SubEditor, ImageList, ListControl はデシリアライズを行いません。
-            </summary>
-            <param name="cellType">ComboBoxCellType オブジェクト。</param>
-            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.CheckBoxCellTypeExtensions">
-            <summary>
-            CheckBoxCellType のJSONシリアライズ、デシリアライズを提供します。
-            </summary>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.CheckBoxCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.CheckBoxCellType,System.String[])">
-            <summary>
-            CheckBoxCellType をJSONシリアライズします。
-            SubEditor はシリアライズを行いません。
-            </summary>
-            <param name="cellType">CheckBoxCellType オブジェクト。</param>
-            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
-            <returns>JSON文字列。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.CheckBoxCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.CheckBoxCellType,System.String)">
-            <summary>
-            CheckBoxCellType をJSONデシリアライズします。
-            SubEditor はデシリアライズを行いません。
-            </summary>
-            <param name="cellType">CheckBoxCellType オブジェクト。</param>
-            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.TextCellTypeExtensions">
-            <summary>
-            TextCellType のJSONシリアライズ、デシリアライズを提供します。
-            </summary>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.TextCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.TextCellType,System.String[])">
-            <summary>
-            TextCellType をJSONシリアライズします。
-            SubEditor はシリアライズを行いません。
-            </summary>
-            <param name="cellType">TextCellType オブジェクト。</param>
-            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
-            <returns>JSON文字列。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.TextCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.TextCellType,System.String)">
-            <summary>
-            TextCellType をJSONデシリアライズします。
-            SubEditor はデシリアライズを行いません。
-            </summary>
-            <param name="cellType">TextCellType オブジェクト。</param>
-            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.ButtonCellTypeExtensions">
-            <summary>
-            ButtonCellType のJSONシリアライズ、デシリアライズを提供します。
-            </summary>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.ButtonCellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.ButtonCellType,System.String[])">
-            <summary>
-            ButtonCellType をJSONシリアライズします。
-            SubEditor はシリアライズを行いません。
-            </summary>
-            <param name="cellType">ButtonCellType オブジェクト。</param>
-            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
-            <returns>JSON文字列。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.ButtonCellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.ButtonCellType,System.String)">
-            <summary>
-            ButtonCellType をJSONデシリアライズします。
-            SubEditor はデシリアライズを行いません。
-            </summary>
-            <param name="cellType">ButtonCellType オブジェクト。</param>
-            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.GcDateTimeCellTypeExtensions">
-            <summary>
-            GcDateTimeCellType のJSONシリアライズ、デシリアライズを提供します。
-            </summary>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcDateTimeCellTypeExtensions.SerializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcDateTimeCellType,System.String[])">
-            <summary>
-            GcDateTimeCellType をJSONシリアライズします。
-            SubEditor, TouchToolBar はシリアライズを行いません。
-            </summary>
-            <param name="cellType">GcDateTimeCellType オブジェクト。</param>
-            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
-            <returns>JSON文字列。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcDateTimeCellTypeExtensions.DeserializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcDateTimeCellType,System.String)">
-            <summary>
-            GcDateTimeCellType をJSONデシリアライズします。
-            SubEditor, TouchToolBar はデシリアライズを行いません。
-            </summary>
-            <param name="cellType">GcDateTimeCellType オブジェクト。</param>
-            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.GcTextBoxCellTypeExtensions">
-            <summary>
-            GcTextBoxCellType のJSONシリアライズ、デシリアライズを提供します。
-            </summary>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcTextBoxCellTypeExtensions.SerializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcTextBoxCellType,System.String[])">
-            <summary>
-            GcTextBoxCellType をJSONシリアライズします。
-            SubEditor, TouchToolBar はシリアライズを行いません。
-            </summary>
-            <param name="cellType">GcTextBoxCellType オブジェクト。</param>
-            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
-            <returns>JSON文字列。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcTextBoxCellTypeExtensions.DeserializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcTextBoxCellType,System.String)">
-            <summary>
-            GcTextBoxCellType をJSONデシリアライズします。
-            SubEditor, TouchToolBar はデシリアライズを行いません。
-            </summary>
-            <param name="cellType">GcTextBoxCellType オブジェクト。</param>
-            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.GcNumberCellTypeExtensions">
-            <summary>
-            GcNumberCellType のJSONシリアライズ、デシリアライズを提供します。
-            </summary>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcNumberCellTypeExtensions.SerializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcNumberCellType,System.String[])">
-            <summary>
-            GcNumberCellType をJSONシリアライズします。
-            SubEditor, TouchToolBar はシリアライズを行いません。
-            </summary>
-            <param name="cellType">GcNumberCellType オブジェクト。</param>
-            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
-            <returns>JSON文字列。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcNumberCellTypeExtensions.DeserializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcNumberCellType,System.String)">
-            <summary>
-            GcNumberCellType をJSONデシリアライズします。
-            SubEditor, TouchToolBar はデシリアライズを行いません。
-            </summary>
-            <param name="cellType">GcNumberCellType オブジェクト。</param>
-            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.GcComboBoxCellTypeExtensions">
-            <summary>
-            GcComboBoxCellType のJSONシリアライズ、デシリアライズを提供します。
-            </summary>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcComboBoxCellTypeExtensions.SerializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcComboBoxCellType,System.String[])">
-            <summary>
-            GcComboBoxCellType をJSONシリアライズします。
-            DataSource, ImageList, Items, ListColumns[].DefaultSubItem, ListColumns[].SortComparer, SubEditor, TouchToolBar はシリアライズを行いません。
-            </summary>
-            <param name="cellType">GcComboBoxCellType オブジェクト。</param>
-            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
-            <returns>JSON文字列。</returns>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.GcComboBoxCellTypeExtensions.DeserializeJson(GrapeCity.Win.Spread.InputMan.CellType.GcComboBoxCellType,System.String)">
-            <summary>
-            GcComboBoxCellType をJSONデシリアライズします。
-            DataSource, ImageList, Items, ListColumns[].DefaultSubItem, ListColumns[].SortComparer, SubEditor, TouchToolBar はデシリアライズを行いません。
-            </summary>
-            <param name="cellType">GcComboBoxCellType オブジェクト。</param>
-            <param name="cellTypeProps">CellType のプロパティのJSON文字列。</param>
-        </member>
-        <member name="T:Metroit.Win.GcSpread.CodeDesign.Extensions.ICellTypeExtensions">
-            <summary>
-            セルタイプの拡張メソッドを提供します。
-            </summary>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.ICellTypeExtensions.SerializeJson(FarPoint.Win.Spread.CellType.ICellType,System.String[])">
-            <summary>
-            セルタイプごとにオブジェクトをデシリアライズします。
-            </summary>
-            <param name="cellType">セルタイプ。</param>
-            <param name="includeProps">シリアライズに含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみがシリアライズされます。</param>
-        </member>
-        <member name="M:Metroit.Win.GcSpread.CodeDesign.Extensions.ICellTypeExtensions.DeserializeJson(FarPoint.Win.Spread.CellType.ICellType,System.String)">
-            <summary>
-            セルタイプごとにオブジェクトをデシリアライズします。
-            </summary>
-            <param name="cellType">セルタイプ。</param>
-            <param name="cellTypeProps">セルタイプのプロパティJSON文字列。</param>
         </member>
     </members>
 </doc>

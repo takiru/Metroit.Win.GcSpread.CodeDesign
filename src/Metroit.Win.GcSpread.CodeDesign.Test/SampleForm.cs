@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Metroit.Win.GcSpread.CodeDesign.Test
@@ -138,7 +140,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             //cellType.TextSubItemIndex = 1;
 
             //cellType.ListItemTemplates.Add(new ItemTemplateInfo() { AutoItemHeight = false, BackColor = Color.Red, Font = new Font(FontFamily.GenericSansSerif, 10), Height = 20, Image = Image.FromFile(@"C:\App\sample.png") });
-            cellType.BackgroundImage = new FarPoint.Win.Picture(Image.FromFile(@"C:\App\sample.png"));
+            cellType.BackgroundImage = new FarPoint.Win.Picture(Image.FromFile(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"sample.png")));
 
             fpSpread1.ActiveSheet.DataSource = dataSource;
         }

@@ -64,6 +64,9 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             // 
             this.fpSpread1.AccessibleDescription = "fpSpread1, Sheet1, Row 0, Column 0";
             this.fpSpread1.AllowColumnMove = true;
+            this.fpSpread1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.fpSpread1.Location = new System.Drawing.Point(12, 41);
             this.fpSpread1.Name = "fpSpread1";
             this.fpSpread1.Sheets.AddRange(new FarPoint.Win.Spread.SheetView[] {

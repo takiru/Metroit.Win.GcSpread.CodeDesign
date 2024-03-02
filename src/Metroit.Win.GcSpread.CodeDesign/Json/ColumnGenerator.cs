@@ -298,6 +298,10 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
             {
                 return new ButtonCellType();
             }
+            if (string.Compare(cellTypeName, nameof(RegularExpressionCellType), true) == 0)
+            {
+                return new RegularExpressionCellType();
+            }
 
             // InputManセルタイプ
             if (string.Compare(cellTypeName, nameof(GcTextBoxCellType), true) == 0)
