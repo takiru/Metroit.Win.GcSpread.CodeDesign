@@ -126,7 +126,12 @@ Columns セクションの、CellType は、下記のみサポートします。
   - CheckBoxCellType
   - ComboBoxCellType
   - DateTimeCellType
+  - GcComboBoxCellType
+  - GcDateTimeCellType
+  - GcNumberCellType
+  - GcTextBoxCellType
   - NumberCellType
+  - RegularExpressionCellType
   - TextCellType
 
 Columns セクションの、CellTypeProperties は CellType によってサポートされるプロパティが異なります。

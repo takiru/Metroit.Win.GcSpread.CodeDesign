@@ -37,7 +37,7 @@ fpSpread1.ActiveSheet.BindJsonLayout(root,
     null,
     (sheetView, root2) =>
     {
-        // ここで、Meestroテーブルのユーザー単位の列位置、タイトルなどで書き換える。
+        // ここで、列位置保持テーブルのユーザー単位の列位置、タイトルなどで書き換える。
         // Columns[].Options プロパティを Tag に入れるなどもここで行う。
         // 列位置は下記コードによって行い、列移動結果を返却する必要がある。
         // 列移動がない場合は戻り値は null でよい。

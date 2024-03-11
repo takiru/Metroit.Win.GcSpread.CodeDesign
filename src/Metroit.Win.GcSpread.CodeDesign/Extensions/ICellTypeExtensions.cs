@@ -40,6 +40,10 @@ namespace Metroit.Win.GcSpread.CodeDesign.Extensions
             {
                 return ((ButtonCellType)cellType).SerializeJson(includeProps);
             }
+            if (cellType is RegularExpressionCellType)
+            {
+                return ((RegularExpressionCellType)cellType).SerializeJson(includeProps);
+            }
 
             // InputManセルタイプ
             if (cellType is GcTextBoxCellType)
@@ -98,6 +102,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Extensions
             if (cellType is ButtonCellType)
             {
                 ((ButtonCellType)cellType).DeserializeJson(cellTypeProps);
+                return;
+            }
+            if (cellType is RegularExpressionCellType)
+            {
+                ((RegularExpressionCellType)cellType).DeserializeJson(cellTypeProps);
                 return;
             }
 
