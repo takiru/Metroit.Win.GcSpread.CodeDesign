@@ -1,17 +1,11 @@
-ï»¿using FarPoint.Win.Spread;
+using FarPoint.Win.Spread;
 using FarPoint.Win.Spread.CellType;
 using GrapeCity.Win.Spread.InputMan.CellType;
 using Metroit.Win.GcSpread.CodeDesign.Json;
 using Metroit.Win.GcSpread.Extensions;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
+using System.Data.Common;
 using System.Reflection;
-using System.Windows.Forms;
 
 namespace Metroit.Win.GcSpread.CodeDesign.Test
 {
@@ -24,13 +18,13 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // NOTE: ã“ã®4ã¤ã¯ç„¡åŠ¹ã§ãªã‘ã‚Œã°ãªã‚‰ãªã„
+            // NOTE: ‚±‚Ì4‚Â‚Í–³Œø‚Å‚È‚¯‚ê‚Î‚È‚ç‚È‚¢
             fpSpread1.ActiveSheet.AutoGenerateColumns = false;
             fpSpread1.ActiveSheet.DataAutoCellTypes = false;
             fpSpread1.ActiveSheet.DataAutoSizeColumns = false;
             fpSpread1.ActiveSheet.DataAutoHeadings = false;
 
-            // ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ç”¨ã®ã‚¢ã‚¤ãƒ†ãƒ 
+            // ƒRƒ“ƒ{ƒ{ƒbƒNƒX—p‚ÌƒAƒCƒeƒ€
             var comboItems = new BindingList<ComboItem>()
             {
                 new ComboItem() { Display = "item1", Value="value1"},
@@ -38,7 +32,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
                 new ComboItem() { Display = "item3", Value="value3"}
             };
 
-            // ãƒ‡ãƒ¼ã‚¿ã‚½ãƒ¼ã‚¹
+            // ƒf[ƒ^ƒ\[ƒX
             var dataSource = new BindingList<ListItem>()
             {
                 new ListItem() { Column1 = DateTime.Today, Column2=123, Column3="Row1", Column4="item1", Column5="aaa", Column6="xxx", Column7=1 },
@@ -46,30 +40,30 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
                 new ListItem() { Column1 = DateTime.Today, Column2=123, Column3="Row3", Column4="item3", Column5="ccc", Column6="zzz", Column7=1 }
             };
 
-            // ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’ãƒã‚¤ãƒ³ãƒ‰ã™ã‚‹
+            // ƒŒƒCƒAƒEƒgƒIƒuƒWƒFƒNƒg‚©‚çƒŒƒCƒAƒEƒg‚ğƒoƒCƒ“ƒh‚·‚é
             var generator = new SheetViewGenerator(fpSpread1.ActiveSheet);
             generator.GenerateLayout(SampleRex.SampleJson,
                 SampleRex.Template,
                 null,
                 (sheet, root2) =>
                 {
-                    // ã“ã“ã§ã€ãƒ¦ãƒ¼ã‚¶ãƒ¼å˜ä½ã®åˆ—ä½ç½®ã€ã‚¿ã‚¤ãƒˆãƒ«ãªã©ã§æ›¸ãæ›ãˆã‚‹ã“ã¨ãŒã§ãã‚‹ã€‚
-                    // Columns[].Options ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’ Tag ã«å…¥ã‚Œã‚‹ãªã©ã‚‚ã“ã“ã§è¡Œã†ã€‚
-                    // åˆ—ä½ç½®ã¯ä¸‹è¨˜ã‚³ãƒ¼ãƒ‰ã«ã‚ˆã£ã¦è¡Œã„ã€åˆ—ç§»å‹•çµæœã‚’è¿”å´ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã€‚
-                    // åˆ—ç§»å‹•ãŒãªã„å ´åˆã¯æˆ»ã‚Šå€¤ã¯ null ã§ã‚ˆã„ã€‚
+                    // ‚±‚±‚ÅAƒ†[ƒU[’PˆÊ‚Ì—ñˆÊ’uAƒ^ƒCƒgƒ‹‚È‚Ç‚Å‘‚«Š·‚¦‚é‚±‚Æ‚ª‚Å‚«‚éB
+                    // Columns[].Options ƒvƒƒpƒeƒB‚ğ Tag ‚É“ü‚ê‚é‚È‚Ç‚à‚±‚±‚Ås‚¤B
+                    // —ñˆÊ’u‚Í‰º‹LƒR[ƒh‚É‚æ‚Á‚Äs‚¢A—ñˆÚ“®Œ‹‰Ê‚ğ•Ô‹p‚·‚é•K—v‚ª‚ ‚éB
+                    // —ñˆÚ“®‚ª‚È‚¢ê‡‚Í–ß‚è’l‚Í null ‚Å‚æ‚¢B
 
                     var result = new List<ColumnMoveResult>();
 
-                    // 1åˆ—ç›®1è¡Œç›®ãƒ˜ãƒƒãƒ€ãƒ¼ã®ã‚¿ã‚¤ãƒˆãƒ«ã‚’å¤‰æ›´ã™ã‚‹ã€‚
-                    sheet.ColumnHeader.Cells[0, 0].Value = "å€¤å¤‰æ›´";
+                    // 1—ñ–Ú1s–Úƒwƒbƒ_[‚Ìƒ^ƒCƒgƒ‹‚ğ•ÏX‚·‚éB
+                    sheet.ColumnHeader.Cells[0, 0].Value = "’l•ÏX";
 
-                    // Options ã‚’ Tag ã«å…¥ã‚Œã‚‹
+                    // Options ‚ğ Tag ‚É“ü‚ê‚é
                     foreach (var column in root2.Columns.Select((Item, Index) => new { Item, Index }))
                     {
                         sheet.Columns[column.Index].Tag = column.Item.Options;
                     }
 
-                    // åˆ—ç§»å‹•æƒ…å ±ã¨ä»®å®š
+                    // —ñˆÚ“®î•ñ‚Æ‰¼’è
                     var columnMoves = new List<(int beforeIndex, int afterIndex, int columnCount)>()
                     {
                         (0, 3, 1),
@@ -79,11 +73,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
 
                     foreach (var columnMove in columnMoves)
                     {
-                        // åˆ—ç§»å‹•ã‚’ã™ã‚‹
-                        // DataField ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’ä¿æŒã™ã‚‹å¿…è¦ãŒã‚ã‚‹ãŸã‚ã€MoveColumnKeepDataField() ã®å®Ÿè¡ŒãŒå¿…è¦ã€‚
+                        // —ñˆÚ“®‚ğ‚·‚é
+                        // DataField ƒvƒƒpƒeƒB‚ğ•Û‚·‚é•K—v‚ª‚ ‚é‚½‚ßAMoveColumnKeepDataField() ‚ÌÀs‚ª•K—vB
                         var cmrs = sheet.MoveColumnKeepDataField(columnMove.beforeIndex, columnMove.afterIndex, columnMove.columnCount);
 
-                        // æ—¢ã«ç§»å‹•ã—ã¦ã„ã‚‹ã‚‚ã®ãŒã‚ã£ãŸã‚‰ã‚ªãƒªã‚¸ãƒŠãƒ«ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’ä¿æŒã—ã¦æ›¸ãæ›ãˆã¦ã€resultã‹ã‚‰ã¯å‰Šé™¤ã™ã‚‹
+                        // Šù‚ÉˆÚ“®‚µ‚Ä‚¢‚é‚à‚Ì‚ª‚ ‚Á‚½‚çƒIƒŠƒWƒiƒ‹‚ÌƒCƒ“ƒfƒbƒNƒX‚ğ•Û‚µ‚Ä‘‚«Š·‚¦‚ÄAresult‚©‚ç‚Ííœ‚·‚é
                         for (var i = 0; i < cmrs.Count; i++)
                         {
                             var exists = result.Where(x => x.AfterColumnIndex == cmrs[i].BeforeColumnIndex).FirstOrDefault();
@@ -93,7 +87,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
                                 result.Remove(exists);
                             }
                         }
-                        // ç§»å‹•ã—ãŸåˆ†ã‚’æŠŠæ¡ã™ã‚‹
+                        // ˆÚ“®‚µ‚½•ª‚ğ”cˆ¬‚·‚é
                         foreach (var cmr in cmrs)
                         {
                             result.Add(cmr);
@@ -103,37 +97,37 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
                     return result;
                 });
 
-            // ComboBox ã®ã‚¢ã‚¤ãƒ†ãƒ ã‚’è¨­å®š
-            // åˆ—æƒ…å ±ãŒç¢ºå®šã—ã¦ã„ãªã„ãŸã‚ã€ BindJsonLayout() ã‚ˆã‚Šå¾Œã«è¡Œã†å¿…è¦ãŒã‚ã‚‹
+            // ComboBox ‚ÌƒAƒCƒeƒ€‚ğİ’è
+            // —ñî•ñ‚ªŠm’è‚µ‚Ä‚¢‚È‚¢‚½‚ßA BindJsonLayout() ‚æ‚èŒã‚És‚¤•K—v‚ª‚ ‚é
             var comboBoxColumn = fpSpread1.ActiveSheet.Columns.Cast<Column>().Where(x => x.DataField == "Column4").FirstOrDefault();
             var comboBoxCellType = (ComboBoxCellType)comboBoxColumn.CellType;
             comboBoxCellType.Items = new string[] { "item1", "item2", "item3" };
             comboBoxCellType.ItemData = new string[] { "value1", "value2", "value3" };
 
-            // GcComboBox ã®ã‚¢ã‚¤ãƒ†ãƒ è¨­å®š
+            // GcComboBox ‚ÌƒAƒCƒeƒ€İ’è
             var cellType = fpSpread1.ActiveSheet.Columns[10].CellType as GcComboBoxCellType;
 
             //cellType.DropDownStyle = ComboBoxStyle.DropDownList;
-            //cellType.EditorValue = GcComboBoxEditorValue.Value; // å®Ÿéš›ã®å€¤ã¯Valueã¨ã™ã‚‹
+            //cellType.EditorValue = GcComboBoxEditorValue.Value; // ÀÛ‚Ì’l‚ÍValue‚Æ‚·‚é
 
-            //// åˆ—ã‚„è¡Œã®å¢ƒç•Œç·šãŒé‚ªé­”ãªã®ã§æ¶ˆã™
+            //// —ñ‚âs‚Ì‹«ŠEü‚ª×–‚‚È‚Ì‚ÅÁ‚·
             //cellType.ListGridLines.HorizontalLines.Style = LineStyle.None;
             //cellType.ListGridLines.VerticalLines.Style = LineStyle.None;
 
-            //cellType.ListHeaderPane.Visible = false;    // ãƒ˜ãƒƒãƒ€ãƒ¼åˆ—åã‚’è¡¨ç¤ºã—ãªã„
-            //cellType.DropDown.AutoWidth = true; // åˆ—éè¡¨ç¤ºã«ä¼´ã„ã€å¹…èª¿æ•´ã•ã‚Œã‚‹ã‚ˆã†ã«ã™ã‚‹
-            //cellType.DropDown.AllowResize = false;  // ãƒ¦ãƒ¼ã‚¶ãƒ¼ã«ã‚ˆã£ã¦ãƒ‰ãƒ­ãƒƒãƒ—ãƒ€ã‚¦ãƒ³ã®ã‚µã‚¤ã‚ºã‚’å¤‰æ›´ã™ã‚‹ã“ã¨ã‚’è¨±å¯ã—ãªã„
-            //cellType.UseCompatibleDrawing = true;   // ãƒ‰ãƒ­ãƒƒãƒ—ãƒ€ã‚¦ãƒ³ã‚’é–‹ã„ã¦ã„ã‚‹ã¨ãã«å…¥åŠ›ã‚¨ãƒªã‚¢éƒ¨åˆ†ãŒç°è‰²ã«ãªã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹
+            //cellType.ListHeaderPane.Visible = false;    // ƒwƒbƒ_[—ñ–¼‚ğ•\¦‚µ‚È‚¢
+            //cellType.DropDown.AutoWidth = true; // —ñ”ñ•\¦‚É”º‚¢A•’²®‚³‚ê‚é‚æ‚¤‚É‚·‚é
+            //cellType.DropDown.AllowResize = false;  // ƒ†[ƒU[‚É‚æ‚Á‚Äƒhƒƒbƒvƒ_ƒEƒ“‚ÌƒTƒCƒY‚ğ•ÏX‚·‚é‚±‚Æ‚ğ‹–‰Â‚µ‚È‚¢
+            //cellType.UseCompatibleDrawing = true;   // ƒhƒƒbƒvƒ_ƒEƒ“‚ğŠJ‚¢‚Ä‚¢‚é‚Æ‚«‚É“ü—ÍƒGƒŠƒA•”•ª‚ªŠDF‚É‚È‚ç‚È‚¢‚æ‚¤‚É‚·‚é
 
             //cellType.AutoGenerateColumns = false;
             cellType.DataSource = comboItems;
 
-            //cellType.ListDefaultColumn.Visible = false; // ä½•ã‚‚ãƒªã‚¹ãƒˆè¡¨ç¤ºã—ãªã„çŠ¶æ…‹ã‚’ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã«ã™ã‚‹
-            //cellType.ListColumns.Cast<ListColumnInfo>().Where(x => x.DataPropertyName == "Display").First().Visible = true;  // è¡¨ç¤ºã—ãŸã„åˆ—ã ã‘è¡¨ç¤ºã™ã‚‹
+            //cellType.ListDefaultColumn.Visible = false; // ‰½‚àƒŠƒXƒg•\¦‚µ‚È‚¢ó‘Ô‚ğƒfƒtƒHƒ‹ƒg‚É‚·‚é
+            //cellType.ListColumns.Cast<ListColumnInfo>().Where(x => x.DataPropertyName == "Display").First().Visible = true;  // •\¦‚µ‚½‚¢—ñ‚¾‚¯•\¦‚·‚é
             //cellType.ListColumns.Add(new ListColumnInfo() { DataPropertyName = "Display", DataDisplayType = DataDisplayType.Text, Visible = true });
             //cellType.ListColumns.Add(new ListColumnInfo() { DataPropertyName = "Value", DataDisplayType = DataDisplayType.Text, Visible = false });
 
-            // å†…éƒ¨ã®å€¤ã¨ç”»é¢ã«è¡¨ç¤ºã•ã‚Œã‚‹å€¤ã‚’è¨­å®š
+            // “à•”‚Ì’l‚Æ‰æ–Ê‚É•\¦‚³‚ê‚é’l‚ğİ’è
             //cellType.ValueSubItemIndex = cellType.ListColumns.IndexOf(cellType.ListColumns.Cast<ListColumnInfo>().Where(x => x.DataPropertyName == "Value").First());
             //cellType.TextSubItemIndex = cellType.ListColumns.IndexOf(cellType.ListColumns.Cast<ListColumnInfo>().Where(x => x.DataPropertyName == "Display").First());
             //cellType.ValueSubItemIndex = 0;
@@ -151,7 +145,6 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             var defs = provider.CreateColumnsDefinitions(null, new[] { nameof(Column.Width), nameof(Column.Visible), nameof(Column.DataField) }, false, false);
             var json = ColumnGenerator.SerializeJson(defs);
             var obj = ColumnGenerator.DeserializeJson(json);
-
             MessageBox.Show(json);
         }
 
@@ -170,8 +163,8 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             var generator = new SheetViewGenerator(fpSpread1.ActiveSheet);
             var root = generator.CreateSheetDefinitions((column) =>
             {
-                // ã“ã“ã§ã‚ªãƒ—ã‚·ãƒ§ãƒ³æƒ…å ±ã®è¨­å®šãªã©ã‚’ã™ã‚‹
-                // ã‚ªãƒ—ã‚·ãƒ§ãƒ³æƒ…å ±ã¨ä»®å®š
+                // ‚±‚±‚ÅƒIƒvƒVƒ‡ƒ“î•ñ‚Ìİ’è‚È‚Ç‚ğ‚·‚é
+                // ƒIƒvƒVƒ‡ƒ“î•ñ‚Æ‰¼’è
                 var options = new List<(string DataField, bool UseFreeWords, bool ExtendWordsEnabled)?>()
                     {
                         ("Column3", false, false),

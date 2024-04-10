@@ -1,17 +1,16 @@
-﻿
-namespace Metroit.Win.GcSpread.CodeDesign.Test
+﻿namespace Metroit.Win.GcSpread.CodeDesign.Test
 {
     partial class SampleForm
     {
         /// <summary>
-        /// 必要なデザイナー変数です。
+        ///  Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// 使用中のリソースをすべてクリーンアップします。
+        ///  Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">マネージド リソースを破棄する場合は true を指定し、その他の場合は false を指定します。</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -21,11 +20,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             base.Dispose(disposing);
         }
 
-        #region Windows フォーム デザイナーで生成されたコード
+        #region Windows Form Designer generated code
 
         /// <summary>
-        /// デザイナー サポートに必要なメソッドです。このメソッドの内容を
-        /// コード エディターで変更しないでください。
+        ///  Required method for Designer support - do not modify
+        ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -64,8 +63,8 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             // 
             this.fpSpread1.AccessibleDescription = "fpSpread1, Sheet1, Row 0, Column 0";
             this.fpSpread1.AllowColumnMove = true;
-            this.fpSpread1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.fpSpread1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.fpSpread1.Location = new System.Drawing.Point(12, 41);
             this.fpSpread1.Name = "fpSpread1";
@@ -220,7 +219,6 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             ((System.ComponentModel.ISupportInitialize)(this.fpSpread1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fpSpread1_Sheet1)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion
@@ -234,4 +232,3 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
         private System.Windows.Forms.Button button5;
     }
 }
-
