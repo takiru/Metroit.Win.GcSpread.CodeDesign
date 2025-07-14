@@ -8,7 +8,7 @@
     <Authors>Takeru Yamaguchi</Authors>
     <Description>GrapeCity SPREAD for Windows Forms のデザインをJSONで行うライブラリです。</Description>
     <Copyright>Copyright 2024 Takeru Yamaguchi.</Copyright>
-    <VersionPrefix>17.0.1.0</VersionPrefix>
+    <VersionPrefix>17.2.0.0</VersionPrefix>
     <AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
     <FileVersion>$(VersionPrefix)</FileVersion>
     <PackageProjectUrl>https://github.com/takiru/Metroit.Win.GcSpread.CodeDesign</PackageProjectUrl>
@@ -18,11 +18,13 @@
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>$(AssemblyName).ja</PackageId>
-    <PackageReleaseNotes>- 依存するパッケージを最適化しました。</PackageReleaseNotes>
+    <PackageReleaseNotes>
+      - Metroit.Win.GcSpread.ja 17.2.0 に対応。
+    </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Metroit.Win.GcSpread.ja" Version="17.0.1" />
+    <PackageReference Include="Metroit.Win.GcSpread.ja" Version="17.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
