@@ -299,9 +299,9 @@
       "Visible": true,
       "CellType": "CheckBoxCellType",
       "CellTypeProperties": {
-        "TextTrue": "True!",
-        "TextFalse": "False!",
-        "TextIndeterminate": "不確定",
+        "TextTrue": "TextTrue",
+        "TextFalse": "TextFalse",
+        "TextIndeterminate": "TextIndeterminate",
         "ThreeState": true
       },
       "ImeMode": "On",

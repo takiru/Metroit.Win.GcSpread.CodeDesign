@@ -6,7 +6,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
     /// GrapeCity SPREAD SheetView のレイアウトを構成するセル結合要素を提供します。
     /// </summary>
     [JsonObject("Span")]
-    public class SpanDefinitions
+    public class SpanDefinition
     {
         /// <summary>
         /// 行インデックスを取得または設定します。

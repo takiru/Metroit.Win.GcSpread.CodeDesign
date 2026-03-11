@@ -92,6 +92,32 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test {
         }
         
         /// <summary>
+        ///   [
+        ///  {
+        ///    &quot;DataField&quot;: &quot;Column3&quot;,
+        ///    &quot;HorizontalAlignment&quot;: &quot;Center&quot;,
+        ///    &quot;VerticalAlignment&quot;: &quot;Bottom&quot;,
+        ///    &quot;AllowAutoFilter&quot;: true,
+        ///    &quot;AllowAutoSort&quot;: true,
+        ///    &quot;Width&quot;: 100,
+        ///    &quot;Visible&quot;: true,
+        ///    &quot;CellType&quot;: &quot;DateTimeCellType&quot;,
+        ///    &quot;CellTypeProperties&quot;: {
+        ///      &quot;Calendar&quot;: &quot;GregorianLocalized&quot;,
+        ///      &quot;DateTimeFormat&quot;: &quot;LongDate&quot;,
+        ///      &quot;MaximumDate&quot;: &quot;9999/12/31&quot;,
+        ///      &quot;MaximumTime&quot;: &quot;23:59:59&quot;,
+        ///      &quot;MinumumDate&quot;: &quot;0001/01/01&quot;,
+        ///      &quot;MinumumTime&quot;: &quot;00:00:00&quot;,
+        ///      &quot;ReadOnly&quot;:  [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SampleJson2 {
+            get {
+                return ResourceManager.GetString("SampleJson2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {
         ///  &quot;ColumnHeader&quot;: {
         ///    &quot;Rows&quot;: [

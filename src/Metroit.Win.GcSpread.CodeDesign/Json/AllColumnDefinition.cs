@@ -1,5 +1,4 @@
-﻿using FarPoint.Win.Spread;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Metroit.Win.GcSpread.CodeDesign.Json
 {
@@ -7,7 +6,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
     /// GrapeCity SPREAD SheetView のレイアウトを構成する列の全体要素を提供します。
     /// </summary>
     [JsonObject]
-    public class AllColumnDefinitions : ColumnDefinitionsBase
+    public class AllColumnDefinition : ColumnDefinitionBase
     {
     }
 }

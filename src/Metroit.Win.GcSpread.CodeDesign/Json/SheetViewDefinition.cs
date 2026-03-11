@@ -3,21 +3,27 @@
 namespace Metroit.Win.GcSpread.CodeDesign.Json
 {
     /// <summary>
-    /// GrapeCity SPREAD SheetView のテンプレートレイアウトを構成するルート要素を提供します。
+    /// GrapeCity SPREAD SheetView のレイアウトを構成するルート要素を提供します。
     /// </summary>
     [JsonObject]
-    public class TemplateSheetViewDefinitions
+    public class SheetViewDefinition
     {
         /// <summary>
         /// 列ヘッダー情報を取得または設定します。
         /// </summary>
+        [JsonProperty(Required = Required.Always)]
+        public ColumnHeaderDefinition ColumnHeader { get; set; }
+
+        /// <summary>
+        /// 列の全体情報を取得または設定します。
+        /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public TemplateColumnHeaderDefinitions ColumnHeader { get; set; }
+        public AllColumnDefinition AllColumn { get; set; }
 
         /// <summary>
         /// 列情報を取得または設定します。
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public TemplateColumnDefinitions[] Columns { get; set; }
+        public ColumnDefinition[] Columns { get; set; }
     }
 }

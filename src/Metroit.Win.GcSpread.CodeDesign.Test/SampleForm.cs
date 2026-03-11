@@ -5,6 +5,7 @@ using Metroit.Win.GcSpread.CodeDesign.Json;
 using Metroit.Win.GcSpread.Extensions;
 using System.ComponentModel;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace Metroit.Win.GcSpread.CodeDesign.Test
@@ -45,6 +46,10 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
             generator.GenerateLayout(SampleRex.SampleJson,
                 SampleRex.Template,
                 null,
+                (column) =>
+                {
+                    Debug.WriteLine(column.DataField);
+                },
                 (sheet, root2) =>
                 {
                     // ここで、ユーザー単位の列位置、タイトルなどで書き換えることができる。
@@ -196,6 +201,14 @@ namespace Metroit.Win.GcSpread.CodeDesign.Test
         {
             var value = fpSpread1.ActiveSheet.Cells[0, 10].Value;
             MessageBox.Show($"{value}");
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            // レイアウトオブジェクトからレイアウトをバインドする
+            var generator = new ColumnGenerator(fpSpread1.ActiveSheet);
+            generator.GenerateColumnsByDataField(SampleRex.SampleJson2,
+                new string[] { SampleRex.Template });
         }
     }
 

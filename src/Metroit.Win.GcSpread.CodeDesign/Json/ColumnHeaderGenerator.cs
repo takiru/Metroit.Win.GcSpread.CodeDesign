@@ -35,7 +35,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// </summary>
         /// <param name="defs">列ヘッダー行定義オブジェクト。</param>
         /// <returns>JSON文字列。</returns>
-        public static string SerializeRowJson(HeaderRowDefinitions[] defs)
+        public static string SerializeRowJson(HeaderRowDefinition[] defs)
         {
             return JsonConvert.SerializeObject(defs);
         }
@@ -45,9 +45,9 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// </summary>
         /// <param name="json">列ヘッダー行定義JSON文字列。</param>
         /// <returns>列ヘッダー行定義オブジェクト。</returns>
-        public static HeaderRowDefinitions[] DeserializeRowJson(string json)
+        public static HeaderRowDefinition[] DeserializeRowJson(string json)
         {
-            return JsonConvert.DeserializeObject<HeaderRowDefinitions[]>(json);
+            return JsonConvert.DeserializeObject<HeaderRowDefinition[]>(json);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// </summary>
         /// <param name="defs">列ヘッダーセル定義オブジェクト。</param>
         /// <returns>JSON文字列。</returns>
-        public static string SerializeCellJson(HeaderCellDefinitions[][] defs)
+        public static string SerializeCellJson(HeaderCellDefinition[][] defs)
         {
             return JsonConvert.SerializeObject(defs);
         }
@@ -65,9 +65,9 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// </summary>
         /// <param name="json">列ヘッダーセル定義JSON文字列。</param>
         /// <returns>列ヘッダーセル定義オブジェクト。</returns>
-        public static HeaderCellDefinitions[][] DeserializeCellJson(string json)
+        public static HeaderCellDefinition[][] DeserializeCellJson(string json)
         {
-            return JsonConvert.DeserializeObject<HeaderCellDefinitions[][]>(json);
+            return JsonConvert.DeserializeObject<HeaderCellDefinition[][]>(json);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// </summary>
         /// <param name="defs">列ヘッダーセル定義オブジェクト。</param>
         /// <returns>JSON文字列。</returns>
-        public static string SerializeSpanJson(SpanDefinitions[] defs)
+        public static string SerializeSpanJson(SpanDefinition[] defs)
         {
             return JsonConvert.SerializeObject(defs);
         }
@@ -85,9 +85,9 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// </summary>
         /// <param name="json">列ヘッダースパン定義JSON文字列。</param>
         /// <returns>列ヘッダースパン定義オブジェクト。</returns>
-        public static SpanDefinitions[] DeserializeSpanJson(string json)
+        public static SpanDefinition[] DeserializeSpanJson(string json)
         {
-            return JsonConvert.DeserializeObject<SpanDefinitions[]>(json);
+            return JsonConvert.DeserializeObject<SpanDefinition[]>(json);
         }
 
 
@@ -97,7 +97,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// </summary>
         /// <param name="defs">列ヘッダー行定義オブジェクト。</param>
         /// <param name="templateDefs">テンプレート定義オブジェクト。</param>
-        public void GenerateRows(HeaderRowDefinitions[] defs, List<TemplateSheetViewDefinitions> templateDefs = null)
+        public void GenerateRows(HeaderRowDefinition[] defs, List<TemplateSheetViewDefinition> templateDefs = null)
         {
             if (defs == null)
             {
@@ -110,7 +110,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
                 // 列ヘッダー行テンプレートから定義を反映する
                 if (templateDefs != null)
                 {
-                    var targetTemplates = new List<TemplateHeaderRowDefinitions>();
+                    var targetTemplates = new List<TemplateHeaderRowDefinition>();
                     ReadRowTemplates(templateDefs, row.Item, targetTemplates);
                     foreach (var targetTemplate in targetTemplates)
                     {
@@ -128,7 +128,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// </summary>
         /// <param name="defs">列ヘッダーセル定義オブジェクト。</param>
         /// <param name="cellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
-        public void GenerateCells(HeaderCellDefinitions[][] defs, Func<Cell, object> cellTag = null)
+        public void GenerateCells(HeaderCellDefinition[][] defs, Func<Cell, object> cellTag = null)
         {
             GenerateCells(defs, null, cellTag);
         }
@@ -140,7 +140,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// <param name="defs">列ヘッダーセル定義オブジェクト。</param>
         /// <param name="templateDefs">テンプレート定義オブジェクト。</param>
         /// <param name="cellTag">列ヘッダーセルの Tag プロパティを設定する時に呼び出されます。</param>
-        public void GenerateCells(HeaderCellDefinitions[][] defs, List<TemplateSheetViewDefinitions> templateDefs, Func<Cell, object> cellTag = null)
+        public void GenerateCells(HeaderCellDefinition[][] defs, List<TemplateSheetViewDefinition> templateDefs, Func<Cell, object> cellTag = null)
         {
             if (defs == null)
             {
@@ -155,7 +155,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
                     // 列ヘッダーセルテンプレートから定義を反映する
                     if (templateDefs != null)
                     {
-                        var targetTemplates = new List<TemplateHeaderCellDefinitions>();
+                        var targetTemplates = new List<TemplateHeaderCellDefinition>();
                         ReadCellTemplates(templateDefs, cell.Item, targetTemplates);
                         foreach (var targetTemplate in targetTemplates)
                         {
@@ -181,26 +181,26 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// <summary>
         /// 列ヘッダースパン定義から列ヘッダーセルスパンを生成します。
         /// </summary>
-        /// <param name="defs">列ヘッダースパン定義オブジェクト。</param>
-        /// <param name="columnMoveResults">列移動によって defs の定義情報と合致しない列情報。</param>
-        public void GenerateSpans(SpanDefinitions[] defs, IList<ColumnMoveResult> columnMoveResults = null)
+        /// <param name="spanDefinitions">列ヘッダースパン定義オブジェクト。</param>
+        /// <param name="columnMoveResults">列移動によって spanDefinitions の定義情報と合致しない列情報。</param>
+        public void GenerateSpans(SpanDefinition[] spanDefinitions, IList<ColumnMoveResult> columnMoveResults = null)
         {
-            if (defs == null)
+            if (spanDefinitions == null)
             {
                 return;
             }
 
-            SpanDefinitions[] newSpanDefs;
+            SpanDefinition[] newSpanDefinitions;
 
             if (columnMoveResults == null)
             {
-                newSpanDefs = defs;
+                newSpanDefinitions = spanDefinitions;
             }
             else
             {
                 // 列移動情報がある場合は、オリジナルの列インデックスでマッピングして、移動後のインデックスでセル結合を行う
-                var spanList = new List<SpanDefinitions>();
-                foreach (var span in defs)
+                var spanList = new List<SpanDefinition>();
+                foreach (var span in spanDefinitions)
                 {
                     var columnMoveResult = columnMoveResults.Where(x => x.OriginalColumnIndex == span.Column).FirstOrDefault();
                     if (columnMoveResult == null)
@@ -209,7 +209,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
                     }
                     else
                     {
-                        spanList.Add(new SpanDefinitions()
+                        spanList.Add(new SpanDefinition()
                         {
                             Row = span.Row,
                             Column = columnMoveResult.AfterColumnIndex,
@@ -218,36 +218,36 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
                         });
                     }
                 }
-                newSpanDefs = spanList.ToArray();
+                newSpanDefinitions = spanList.ToArray();
             }
 
-            foreach (var spanDef in newSpanDefs)
+            foreach (var spanDefinition in newSpanDefinitions)
             {
-                SheetView.AddColumnHeaderSpanCell(spanDef.Row, spanDef.Column, spanDef.RowCount, spanDef.ColumnCount);
+                SheetView.AddColumnHeaderSpanCell(spanDefinition.Row, spanDefinition.Column, spanDefinition.RowCount, spanDefinition.ColumnCount);
             }
         }
 
         /// <summary>
         /// 列ヘッダー行定義を生成します。
         /// </summary>
-        /// <param name="includeProps">生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+        /// <param name="includeProperties">生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
         /// <returns>列ヘッダー行定義オブジェクト。</returns>
-        public HeaderRowDefinitions[] CreateRowDefinitions(string[] includeProps = null)
+        public HeaderRowDefinition[] CreateRowDefinitions(string[] includeProperties = null)
         {
-            var headerRows = new List<HeaderRowDefinitions>();
+            var headerRows = new List<HeaderRowDefinition>();
             foreach (Row row in SheetView.ColumnHeader.Rows)
             {
-                var headerRow = new HeaderRowDefinitions();
+                var headerRow = new HeaderRowDefinition();
 
-                if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Row.Height))))
+                if (includeProperties == null || includeProperties.Any(x => x.Contains(nameof(Row.Height))))
                 {
                     headerRow.Height = row.Height;
                 }
-                if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Row.HorizontalAlignment))))
+                if (includeProperties == null || includeProperties.Any(x => x.Contains(nameof(Row.HorizontalAlignment))))
                 {
                     headerRow.HorizontalAlignment = row.HorizontalAlignment;
                 }
-                if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Row.VerticalAlignment))))
+                if (includeProperties == null || includeProperties.Any(x => x.Contains(nameof(Row.VerticalAlignment))))
                 {
                     headerRow.VerticalAlignment = row.VerticalAlignment;
                 }
@@ -261,27 +261,27 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// <summary>
         /// 列ヘッダーセル定義を生成します。
         /// </summary>
-        /// <param name="includeProps">生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
+        /// <param name="includeProperties">生成に含めるプロパティ名。nullの場合はすべてのプロパティ、指定した場合は指定したプロパティのみが生成されます。</param>
         /// <returns>列ヘッダーセル定義オブジェクト。</returns>
-        public HeaderCellDefinitions[][] CreateCellDefinitions(string[] includeProps = null)
+        public HeaderCellDefinition[][] CreateCellDefinitions(string[] includeProperties = null)
         {
-            var allCells = new List<HeaderCellDefinitions[]>();
+            var allCells = new List<HeaderCellDefinition[]>();
             foreach (Row row in SheetView.ColumnHeader.Rows)
             {
-                var cells = new List<HeaderCellDefinitions>();
+                var cells = new List<HeaderCellDefinition>();
                 foreach (Column column in SheetView.ColumnHeader.Columns)
                 {
-                    var cell = new HeaderCellDefinitions();
+                    var cell = new HeaderCellDefinition();
 
-                    if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Cell.Value))))
+                    if (includeProperties == null || includeProperties.Any(x => x.Contains(nameof(Cell.Value))))
                     {
                         cell.Value = SheetView.ColumnHeader.Cells[row.Index, column.Index].Value?.ToString();
                     }
-                    if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Cell.HorizontalAlignment))))
+                    if (includeProperties == null || includeProperties.Any(x => x.Contains(nameof(Cell.HorizontalAlignment))))
                     {
                         cell.HorizontalAlignment = SheetView.ColumnHeader.Cells[row.Index, column.Index].HorizontalAlignment;
                     }
-                    if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Cell.VerticalAlignment))))
+                    if (includeProperties == null || includeProperties.Any(x => x.Contains(nameof(Cell.VerticalAlignment))))
                     {
                         cell.VerticalAlignment = SheetView.ColumnHeader.Cells[row.Index, column.Index].VerticalAlignment;
                     }
@@ -298,9 +298,9 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// 列ヘッダースパン定義を生成します。
         /// </summary>
         /// <returns>列ヘッダースパン定義オブジェクト。</returns>
-        public SpanDefinitions[] CreateSpanDefinitions()
+        public SpanDefinition[] CreateSpanDefinitions()
         {
-            var headerSpans = new List<SpanDefinitions>();
+            var headerSpans = new List<SpanDefinition>();
             foreach (Row row in SheetView.ColumnHeader.Rows)
             {
                 foreach (Column column in SheetView.ColumnHeader.Columns)
@@ -318,7 +318,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
                     {
                         continue;
                     }
-                    headerSpans.Add(new SpanDefinitions()
+                    headerSpans.Add(new SpanDefinition()
                     {
                         Row = spanRange.Row,
                         Column = spanRange.Column,
@@ -334,64 +334,68 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// <summary>
         /// テンプレートから対象のテンプレート列ヘッダー行定義オブジェクトを取得する。
         /// </summary>
-        /// <param name="templateDefs">テンプレート定義オブジェクト。</param>
-        /// <param name="def">列ヘッダー行定義オブジェクト。</param>
-        /// <param name="targetTemplateDefs">対象となったテンプレート列ヘッダー行定義オブジェクト。</param>
-        private void ReadRowTemplates(List<TemplateSheetViewDefinitions> templateDefs, HeaderRowDefinitions def, List<TemplateHeaderRowDefinitions> targetTemplateDefs)
+        /// <param name="templateDefinitionList">テンプレート定義オブジェクト。</param>
+        /// <param name="headerRowDefinition">列ヘッダー行定義オブジェクト。</param>
+        /// <param name="targetTemplateHeaderRowDefinitionList">対象となったテンプレート列ヘッダー行定義オブジェクト。</param>
+        private void ReadRowTemplates(List<TemplateSheetViewDefinition> templateDefinitionList, 
+            HeaderRowDefinition headerRowDefinition, List<TemplateHeaderRowDefinition> targetTemplateHeaderRowDefinitionList)
         {
-            foreach (var templateDef in templateDefs)
+            foreach (var templateDefinition in templateDefinitionList)
             {
-                if (templateDef.ColumnHeader == null)
+                if (templateDefinition.ColumnHeader == null)
                 {
                     continue;
                 }
-                if (templateDef.ColumnHeader.Rows == null)
+                if (templateDefinition.ColumnHeader.Rows == null)
                 {
                     continue;
                 }
 
-                var rowDef = templateDef.ColumnHeader.Rows.Where(x => x.TemplateName == def.BaseTemplate).FirstOrDefault();
-                if (rowDef == null)
+                var templateHeaderRowDefinition = templateDefinition.ColumnHeader.Rows
+                    .FirstOrDefault(x => x.TemplateName == headerRowDefinition.BaseTemplate);
+                if (templateHeaderRowDefinition == null)
                 {
                     continue;
                 }
-                if (!string.IsNullOrEmpty(rowDef.TemplateName))
+                if (!string.IsNullOrEmpty(templateHeaderRowDefinition.TemplateName))
                 {
-                    ReadRowTemplates(templateDefs, rowDef, targetTemplateDefs);
+                    ReadRowTemplates(templateDefinitionList, templateHeaderRowDefinition, targetTemplateHeaderRowDefinitionList);
                 }
-                targetTemplateDefs.Add(rowDef);
+                targetTemplateHeaderRowDefinitionList.Add(templateHeaderRowDefinition);
             }
         }
 
         /// <summary>
         /// テンプレートから対象のテンプレート列ヘッダーセル定義オブジェクトを取得する。
         /// </summary>
-        /// <param name="templateDefs">テンプレート定義オブジェクト。</param>
-        /// <param name="def">列ヘッダーセル定義オブジェクト。</param>
-        /// <param name="targetTemplateDefs">対象となったテンプレート列ヘッダーセル定義オブジェクト。</param>
-        private void ReadCellTemplates(List<TemplateSheetViewDefinitions> templateDefs, HeaderCellDefinitions def, List<TemplateHeaderCellDefinitions> targetTemplateDefs)
+        /// <param name="templateDefinitionList">テンプレート定義オブジェクト。</param>
+        /// <param name="headerCellDefinition">列ヘッダーセル定義オブジェクト。</param>
+        /// <param name="targetTemplateHeaderCellDefinitionList">対象となったテンプレート列ヘッダーセル定義オブジェクト。</param>
+        private void ReadCellTemplates(List<TemplateSheetViewDefinition> templateDefinitionList,
+            HeaderCellDefinition headerCellDefinition, List<TemplateHeaderCellDefinition> targetTemplateHeaderCellDefinitionList)
         {
-            foreach (var templateDef in templateDefs)
+            foreach (var templateDefinition in templateDefinitionList)
             {
-                if (templateDef.ColumnHeader == null)
+                if (templateDefinition.ColumnHeader == null)
                 {
                     continue;
                 }
-                if (templateDef.ColumnHeader.Cells == null)
+                if (templateDefinition.ColumnHeader.Cells == null)
                 {
                     continue;
                 }
 
-                var cellDef = templateDef.ColumnHeader.Cells.Where(x => x.TemplateName == def.BaseTemplate).FirstOrDefault();
-                if (cellDef == null)
+                var templateHeaderCellDefinition = templateDefinition.ColumnHeader.Cells
+                    .FirstOrDefault(x => x.TemplateName == headerCellDefinition.BaseTemplate);
+                if (templateHeaderCellDefinition == null)
                 {
                     continue;
                 }
-                if (!string.IsNullOrEmpty(cellDef.TemplateName))
+                if (!string.IsNullOrEmpty(templateHeaderCellDefinition.TemplateName))
                 {
-                    ReadCellTemplates(templateDefs, cellDef, targetTemplateDefs);
+                    ReadCellTemplates(templateDefinitionList, templateHeaderCellDefinition, targetTemplateHeaderCellDefinitionList);
                 }
-                targetTemplateDefs.Add(cellDef);
+                targetTemplateHeaderCellDefinitionList.Add(templateHeaderCellDefinition);
             }
         }
 
@@ -399,20 +403,20 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// 列ヘッダー行のプロパティを設定する。
         /// </summary>
         /// <param name="row">行オブジェクト。</param>
-        /// <param name="def">列ヘッダー行定義オブジェクト。</param>
-        private static void SetColumnHeaderRowProps(Row row, HeaderRowDefinitions def)
+        /// <param name="headerRowDefinition">列ヘッダー行定義オブジェクト。</param>
+        private static void SetColumnHeaderRowProps(Row row, HeaderRowDefinition headerRowDefinition)
         {
-            if (def.Height.HasValue)
+            if (headerRowDefinition.Height.HasValue)
             {
-                row.Height = def.Height.Value;
+                row.Height = headerRowDefinition.Height.Value;
             }
-            if (def.HorizontalAlignment.HasValue)
+            if (headerRowDefinition.HorizontalAlignment.HasValue)
             {
-                row.HorizontalAlignment = def.HorizontalAlignment.Value;
+                row.HorizontalAlignment = headerRowDefinition.HorizontalAlignment.Value;
             }
-            if (def.VerticalAlignment.HasValue)
+            if (headerRowDefinition.VerticalAlignment.HasValue)
             {
-                row.VerticalAlignment = def.VerticalAlignment.Value;
+                row.VerticalAlignment = headerRowDefinition.VerticalAlignment.Value;
             }
         }
 
@@ -420,20 +424,20 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// 列ヘッダーセルのプロパティを設定する。
         /// </summary>
         /// <param name="cell">セルオブジェクト。</param>
-        /// <param name="def">列ヘッダーセル定義オブジェクト。</param>
-        private static void SetColumnHeaderCellProps(Cell cell, HeaderCellDefinitions def)
+        /// <param name="headerCellDefinition">列ヘッダーセル定義オブジェクト。</param>
+        private static void SetColumnHeaderCellProps(Cell cell, HeaderCellDefinition headerCellDefinition)
         {
-            if (!string.IsNullOrEmpty(def.Value))
+            if (!string.IsNullOrEmpty(headerCellDefinition.Value))
             {
-                cell.Value = def.Value;
+                cell.Value = headerCellDefinition.Value;
             }
-            if (def.HorizontalAlignment.HasValue)
+            if (headerCellDefinition.HorizontalAlignment.HasValue)
             {
-                cell.HorizontalAlignment = def.HorizontalAlignment.Value;
+                cell.HorizontalAlignment = headerCellDefinition.HorizontalAlignment.Value;
             }
-            if (def.VerticalAlignment.HasValue)
+            if (headerCellDefinition.VerticalAlignment.HasValue)
             {
-                cell.VerticalAlignment = def.VerticalAlignment.Value;
+                cell.VerticalAlignment = headerCellDefinition.VerticalAlignment.Value;
             }
         }
     }

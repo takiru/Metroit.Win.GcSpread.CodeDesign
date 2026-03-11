@@ -2,10 +2,12 @@
 using FarPoint.Win.Spread.CellType;
 using GrapeCity.Win.Spread.InputMan.CellType;
 using Metroit.Win.GcSpread.CodeDesign.Extensions;
+using Metroit.Win.GcSpread.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Metroit.Win.GcSpread.CodeDesign.Json
@@ -32,11 +34,11 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// <summary>
         /// 列定義オブジェクトからJSON文字列にシリアライズします。
         /// </summary>
-        /// <param name="defs">列定義オブジェクト。</param>
+        /// <param name="columnDefinitions">列定義オブジェクト。</param>
         /// <returns>JSON文字列。</returns>
-        public static string SerializeJson(ColumnDefinitions[] defs)
+        public static string SerializeJson(ColumnDefinition[] columnDefinitions)
         {
-            return JsonConvert.SerializeObject(defs);
+            return JsonConvert.SerializeObject(columnDefinitions);
         }
 
         /// <summary>
@@ -44,86 +46,285 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// </summary>
         /// <param name="json">列定義JSON文字列。</param>
         /// <returns>列定義オブジェクト。</returns>
-        public static ColumnDefinitions[] DeserializeJson(string json)
+        public static ColumnDefinition[] DeserializeJson(string json)
         {
-            return JsonConvert.DeserializeObject<ColumnDefinitions[]>(json);
+            return JsonConvert.DeserializeObject<ColumnDefinition[]>(json);
         }
 
         /// <summary>
         /// 列定義オブジェクトから列をセットアップします。
         /// 列は必ず1列目から設定されます。
         /// </summary>
-        /// <param name="defs">列定義オブジェクト。</param>
-        /// <param name="allColumnDef">全列定義オブジェクト。</param>
-        public void GenerateColumns(ColumnDefinitions[] defs, AllColumnDefinitions allColumnDef = null)
+        /// <param name="columnDefinitions">列定義オブジェクト。</param>
+        /// <param name="allColumnDefinitions">全列定義オブジェクト。</param>
+        /// <param name="generatedColumn">列が生成されたときのデリゲート。</param>
+        public void GenerateColumns(ColumnDefinition[] columnDefinitions, AllColumnDefinition allColumnDefinitions = null,
+            Action<Column> generatedColumn = null)
         {
-            GenerateColumns(defs, null, allColumnDef);
+            GenerateColumns(columnDefinitions, null, allColumnDefinitions, generatedColumn);
         }
 
         /// <summary>
         /// 列定義オブジェクトから列をセットアップします。
         /// 列は必ず1列目から設定されます。
         /// </summary>
-        /// <param name="defs">列定義オブジェクト。</param>
-        /// <param name="templateDefs">テンプレート定義オブジェクト。</param>
-        /// <param name="allColumnDef">全列定義オブジェクト。</param>
-        public void GenerateColumns(ColumnDefinitions[] defs, List<TemplateSheetViewDefinitions> templateDefs, AllColumnDefinitions allColumnDef = null)
+        /// <param name="columnDefinitions">列定義オブジェクト。</param>
+        /// <param name="templateDefinitionsList">テンプレート定義オブジェクト。</param>
+        /// <param name="allColumnDefinitions">全列定義オブジェクト。</param>
+        /// <param name="generatedColumn">列が生成されたときのデリゲート。</param>
+        public void GenerateColumns(ColumnDefinition[] columnDefinitions, List<TemplateSheetViewDefinition> templateDefinitionsList,
+            AllColumnDefinition allColumnDefinitions, Action<Column> generatedColumn)
         {
-            if (defs == null)
+            if (columnDefinitions == null)
             {
                 return;
             }
 
-            foreach (var column in defs.Select((Item, Index) => new { Item, Index }))
+            foreach (var column in columnDefinitions.Select((Item, Index) => new { Item, Index }))
             {
                 // 列テンプレートの定義を取得する
-                var targetTemplates = new List<TemplateColumnDefinitions>();
-                if (templateDefs != null)
+                var targetTemplates = new List<TemplateColumnDefinition>();
+                if (templateDefinitionsList != null)
                 {
-                    ReadColumnTemplates(templateDefs, column.Item, targetTemplates);
+                    ReadColumnTemplates(templateDefinitionsList, column.Item, targetTemplates);
                 }
 
                 // 個別指定のセルタイプとテンプレートのセルタイプに誤差がある場合はエラーとする
-                if (targetTemplates.Where(x => string.Compare(x.CellType, column.Item.CellType, true) != 0).Count() > 0)
+                if (targetTemplates
+                    .Any(x => string.Compare(x.CellType, column.Item.CellType, true) != 0))
                 {
-                    throw new ArgumentException("テンプレートとセルタイプが合致していません。", nameof(ColumnDefinitions.CellType));
+                    throw new ArgumentException("テンプレートとセルタイプが合致していません。", nameof(ColumnDefinition.CellType));
                 }
 
                 // 列全体の定義を反映する
-                if (allColumnDef != null)
+                if (allColumnDefinitions != null)
                 {
-                    SetColumnBaseProps(SheetView.Columns[column.Index], allColumnDef);
+                    SetColumnBaseProps(SheetView.Columns[column.Index], allColumnDefinitions);
                 }
 
                 // 列テンプレートから定義を反映する
                 foreach (var targetTemplate in targetTemplates)
                 {
-                    SetColumnProps(SheetView.Columns[column.Index], targetTemplate);
+                    SetColumnProperties(SheetView.Columns[column.Index], targetTemplate);
                 }
 
                 // 個別指定された列の定義を反映する
-                SetColumnProps(SheetView.Columns[column.Index], column.Item);
+                SetColumnProperties(SheetView.Columns[column.Index], column.Item);
 
-                ICellType cellType = CreateCellType(column.Item.CellType);
+                var cellType = CreateCellType(column.Item.CellType);
                 SheetView.Columns[column.Index].CellType = cellType;
                 if (cellType != null)
                 {
                     // 列テンプレートからセルタイプ定義を反映する
                     foreach (var targetTemplate in targetTemplates)
                     {
-                        if (targetTemplate.CellTypeProps == null)
+                        if (targetTemplate.CellTypeProperties == null)
                         {
                             continue;
                         }
-                        cellType.DeserializeJson(JsonConvert.SerializeObject(targetTemplate.CellTypeProps));
+                        cellType.DeserializeJson(JsonConvert.SerializeObject(targetTemplate.CellTypeProperties));
                     }
 
                     // 個別指定されたセルタイプ定義を反映する
-                    if (column.Item.CellTypeProps != null)
+                    if (column.Item.CellTypeProperties != null)
                     {
-                        cellType.DeserializeJson(JsonConvert.SerializeObject(column.Item.CellTypeProps));
+                        cellType.DeserializeJson(JsonConvert.SerializeObject(column.Item.CellTypeProperties));
                     }
                 }
+
+                generatedColumn?.Invoke(SheetView.Columns[column.Index]);
+            }
+        }
+
+        /// <summary>
+        /// 指定したJSONファイルで DataField に合致する列のレイアウトを生成します。
+        /// </summary>
+        /// <param name="layoutPath">JSONファイルパス。</param>
+        /// <param name="generatedColumn">列が生成されたときのデリゲート。</param>
+        /// <exception cref="ArgumentException">テンプレートのセルタイプが合致していません。</exception>
+        public void GenerateColumnsByDataFieldFrom(string layoutPath, Action<Column> generatedColumn = null)
+        {
+            GenerateColumnsByDataFieldFrom(layoutPath, string.Empty, generatedColumn);
+        }
+
+        /// <summary>
+        /// 指定したJSONファイルで DataField に合致する列のレイアウトを生成します。
+        /// </summary>
+        /// <param name="layoutPath">JSONファイルパス。</param>
+        /// <param name="templateLayoutPath">テンプレートJSONファイルパス。</param>
+        /// <param name="generatedColumn">列が生成されたときのデリゲート。</param>
+        /// <exception cref="ArgumentException">テンプレートのセルタイプが合致していません。</exception>
+        public void GenerateColumnsByDataFieldFrom(string layoutPath, string templateLayoutPath, Action<Column> generatedColumn = null)
+        {
+            GenerateColumnsByDataFieldFromInternal(layoutPath, new[] { templateLayoutPath }, generatedColumn);
+        }
+
+        /// <summary>
+        /// 指定したJSONファイルで DataField に合致する列のレイアウトを生成します。
+        /// </summary>
+        /// <param name="layoutPath">JSONファイルパス。</param>
+        /// <param name="templateLayoutPaths">テンプレートJSONファイルパス。</param>
+        /// <param name="generatedColumn">列が生成されたときのデリゲート。</param>
+        /// <exception cref="ArgumentException">テンプレートのセルタイプが合致していません。</exception>
+        private void GenerateColumnsByDataFieldFromInternal(string layoutPath, string[] templateLayoutPaths, Action<Column> generatedColumn)
+        {
+            string layout = File.ReadAllText(layoutPath);
+            var templateLayouts = new List<string>();
+            if (templateLayoutPaths.Length > 0)
+            {
+                foreach (var templateLayoutPath in templateLayoutPaths)
+                {
+                    if (!string.IsNullOrEmpty(templateLayoutPath))
+                    {
+                        templateLayouts.Add(File.ReadAllText(templateLayoutPath));
+                    }
+                }
+            }
+            GenerateColumnsByDataField(layout, templateLayouts.ToArray(), generatedColumn);
+        }
+
+        /// <summary>
+        /// DataField に合致する列のレイアウトを生成します。
+        /// </summary>
+        /// <param name="layout">JSON文字列。</param>
+        /// <param name="generatedColumn">列が生成されたときのデリゲート。</param>
+        /// <exception cref="ArgumentException">テンプレートのセルタイプが合致していません。</exception>
+        public void GenerateColumnsByDataField(string layout, Action<Column> generatedColumn = null)
+        {
+            GenerateColumnsByDataField(layout, string.Empty, generatedColumn);
+        }
+
+        /// <summary>
+        /// DataField に合致する列のレイアウトを生成します。
+        /// </summary>
+        /// <param name="layout">JSON文字列。</param>
+        /// <param name="templateLayout">テンプレートJSON文字列。</param>
+        /// <param name="generatedColumn">列が生成されたときのデリゲート。</param>
+        /// <exception cref="ArgumentException">テンプレートのセルタイプが合致していません。</exception>
+        public void GenerateColumnsByDataField(string layout, string templateLayout, Action<Column> generatedColumn = null)
+        {
+            GenerateColumnsByDataField(layout, new[] { templateLayout }, generatedColumn);
+        }
+
+        /// <summary>
+        /// DataField に合致する列のレイアウトを生成します。
+        /// </summary>
+        /// <param name="layout">JSON文字列。</param>
+        /// <param name="templateLayouts">テンプレートJSON文字列のリスト。</param>
+        /// <param name="generatedColumn">列が生成されたときのデリゲート。</param>
+        /// <exception cref="ArgumentException">テンプレートのセルタイプが合致していません。</exception>
+        public void GenerateColumnsByDataField(string layout, string[] templateLayouts, Action<Column> generatedColumn = null)
+        {
+            var columnDefinitions = JsonConvert.DeserializeObject<ColumnDefinition[]>(layout);
+            var templateDefinitions = DeserializeTemplateLayouts(templateLayouts);
+
+            GenerateColumnsByDataFieldInternal(columnDefinitions, templateDefinitions, generatedColumn);
+        }
+
+        /// <summary>
+        /// テンプレートJSONをデシリアライズする。
+        /// </summary>
+        /// <param name="templateLayouts">テンプレートJSON文字列。</param>
+        /// <returns>テンプレートオブジェクトのリスト。1つもテンプレートがなかったときは空のリストを返却する。</returns>
+        private static List<TemplateSheetViewDefinition> DeserializeTemplateLayouts(string[] templateLayouts)
+        {
+            var templateDefinitionsList = new List<TemplateSheetViewDefinition>();
+            if (templateLayouts == null)
+            {
+                return templateDefinitionsList;
+            }
+            if (templateLayouts.Length == 0)
+            {
+                return templateDefinitionsList;
+            }
+
+            foreach (var templateLayout in templateLayouts)
+            {
+                if (string.IsNullOrEmpty(templateLayout))
+                {
+                    continue;
+                }
+
+                templateDefinitionsList.Add(JsonConvert.DeserializeObject<TemplateSheetViewDefinition>(templateLayout));
+            }
+
+            return templateDefinitionsList;
+        }
+
+        /// <summary>
+        /// 列定義オブジェクトから列をセットアップします。
+        /// 列は必ず1列目から設定されます。
+        /// </summary>
+        /// <param name="columnDefinitionsArray">列定義オブジェクト。</param>
+        /// <param name="templateDefinitionsList">テンプレート定義オブジェクト。</param>
+        /// <param name="generatedColumn">列が生成されたときのデリゲート。</param>
+        /// <exception cref="ArgumentException">テンプレートのセルタイプが合致していません。</exception>
+        private void GenerateColumnsByDataFieldInternal(ColumnDefinition[] columnDefinitionsArray,
+            List<TemplateSheetViewDefinition> templateDefinitionsList, Action<Column> generatedColumn)
+        {
+            if (columnDefinitionsArray == null)
+            {
+                return;
+            }
+
+            foreach (var columnDefinitions in columnDefinitionsArray)
+            {
+                var columnIndex = SheetView.GetColumnIndexFromDataField(columnDefinitions.DataField);
+
+                // 列テンプレートの定義を取得する
+                var targetTemplatesList = new List<TemplateColumnDefinition>();
+                if (templateDefinitionsList != null)
+                {
+                    ReadColumnTemplates(templateDefinitionsList, columnDefinitions, targetTemplatesList);
+                }
+
+                // 個別指定のセルタイプとテンプレートのセルタイプに誤差がある場合はエラーとする
+                if (targetTemplatesList
+                    .Any(x => string.Compare(x.CellType, columnDefinitions.CellType, true) != 0))
+                {
+                    throw new ArgumentException("テンプレートとセルタイプが合致していません。", nameof(ColumnDefinition.CellType));
+                }
+
+                // 列テンプレートから定義を反映する
+                foreach (var targetTemplate in targetTemplatesList)
+                {
+                    SetColumnProperties(SheetView.Columns[columnIndex], targetTemplate);
+                }
+
+                // 個別指定された列の定義を反映する
+                SetColumnProperties(SheetView.Columns[columnIndex], columnDefinitions);
+
+                ICellType cellType;
+                if (SheetView.Columns[columnIndex].CellType.GetType().Name == columnDefinitions.CellType)
+                {
+                    cellType = SheetView.Columns[columnIndex].CellType;
+                }
+                else
+                {
+                    cellType = CreateCellType(columnDefinitions.CellType);
+                    SheetView.Columns[columnIndex].CellType = cellType;
+                }
+
+                if (cellType != null)
+                {
+                    // 列テンプレートからセルタイプ定義を反映する
+                    foreach (var targetTemplate in targetTemplatesList)
+                    {
+                        if (targetTemplate.CellTypeProperties == null)
+                        {
+                            continue;
+                        }
+                        cellType.DeserializeJson(JsonConvert.SerializeObject(targetTemplate.CellTypeProperties));
+                    }
+
+                    // 個別指定されたセルタイプ定義を反映する
+                    if (columnDefinitions.CellTypeProperties != null)
+                    {
+                        cellType.DeserializeJson(JsonConvert.SerializeObject(columnDefinitions.CellTypeProperties));
+                    }
+                }
+
+                generatedColumn?.Invoke(SheetView.Columns[columnIndex]);
             }
         }
 
@@ -135,14 +336,14 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// <param name="outputCellTypeProps">セルタイププロパティを生成するかどうか。</param>
         /// <param name="outputOptions">オプション情報を生成するかどうか。false の場合、第一引数は動作しません。</param>
         /// <returns>ColumnDefinitions[] オブジェクト。</returns>
-        public ColumnDefinitions[] CreateColumnsDefinitions(Func<Column, Dictionary<string, object>> columnOptions,
+        public ColumnDefinition[] CreateColumnsDefinitions(Func<Column, Dictionary<string, object>> columnOptions,
             string[] includeProps = null, bool outputCellTypeProps = true, bool outputOptions = true)
         {
-            var columns = new List<ColumnDefinitions>();
+            var columns = new List<ColumnDefinition>();
 
             foreach (Column svColumn in SheetView.Columns)
             {
-                var column = new ColumnDefinitions();
+                var column = new ColumnDefinition();
 
                 if (includeProps == null || includeProps.Any(x => x.Contains(nameof(Column.DataField))))
                 {
@@ -187,7 +388,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
 
                 if (outputCellTypeProps)
                 {
-                    column.CellTypeProps = JObject.Parse(svColumn.CellType.SerializeJson());
+                    column.CellTypeProperties = JObject.Parse(svColumn.CellType.SerializeJson());
                 }
                 if (outputOptions)
                 {
@@ -204,45 +405,45 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// 列全体の定義を反映する。
         /// </summary>
         /// <param name="column">列オブジェクト。</param>
-        /// <param name="def">列定義オブジェクト。</param>
-        private void SetColumnBaseProps(Column column, ColumnDefinitionsBase def)
+        /// <param name="columnDefinitions">列定義オブジェクト。</param>
+        private void SetColumnBaseProps(Column column, ColumnDefinitionBase columnDefinitions)
         {
-            if (def == null)
+            if (columnDefinitions == null)
             {
                 return;
             }
 
-            if (def.AllowAutoFilter.HasValue)
+            if (columnDefinitions.AllowAutoFilter.HasValue)
             {
-                column.AllowAutoFilter = def.AllowAutoFilter.Value;
+                column.AllowAutoFilter = columnDefinitions.AllowAutoFilter.Value;
             }
-            if (def.AllowAutoSort.HasValue)
+            if (columnDefinitions.AllowAutoSort.HasValue)
             {
-                column.AllowAutoSort = def.AllowAutoSort.Value;
+                column.AllowAutoSort = columnDefinitions.AllowAutoSort.Value;
             }
-            if (def.HorizontalAlignment.HasValue)
+            if (columnDefinitions.HorizontalAlignment.HasValue)
             {
-                column.HorizontalAlignment = def.HorizontalAlignment.Value;
+                column.HorizontalAlignment = columnDefinitions.HorizontalAlignment.Value;
             }
-            if (def.ImeMode.HasValue)
+            if (columnDefinitions.ImeMode.HasValue)
             {
-                column.ImeMode = def.ImeMode.Value;
+                column.ImeMode = columnDefinitions.ImeMode.Value;
             }
-            if (def.Locked.HasValue)
+            if (columnDefinitions.Locked.HasValue)
             {
-                column.Locked = def.Locked.Value;
+                column.Locked = columnDefinitions.Locked.Value;
             }
-            if (def.VerticalAlignment.HasValue)
+            if (columnDefinitions.VerticalAlignment.HasValue)
             {
-                column.VerticalAlignment = def.VerticalAlignment.Value;
+                column.VerticalAlignment = columnDefinitions.VerticalAlignment.Value;
             }
-            if (def.Visible.HasValue)
+            if (columnDefinitions.Visible.HasValue)
             {
-                column.Visible = def.Visible.Value;
+                column.Visible = columnDefinitions.Visible.Value;
             }
-            if (def.Width.HasValue)
+            if (columnDefinitions.Width.HasValue)
             {
-                column.Width = def.Width.Value;
+                column.Width = columnDefinitions.Width.Value;
             }
         }
 
@@ -250,19 +451,19 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// 列の定義を反映する。
         /// </summary>
         /// <param name="column">列オブジェクト。</param>
-        /// <param name="def">列定義オブジェクト。</param>
-        private void SetColumnProps(Column column, ColumnDefinitions def)
+        /// <param name="columnDefinitions">列定義オブジェクト。</param>
+        private void SetColumnProperties(Column column, ColumnDefinition columnDefinitions)
         {
-            if (def == null)
+            if (columnDefinitions == null)
             {
                 return;
             }
 
-            SetColumnBaseProps(column, def);
+            SetColumnBaseProps(column, columnDefinitions);
 
-            if (!string.IsNullOrEmpty(def.DataField))
+            if (!string.IsNullOrEmpty(columnDefinitions.DataField))
             {
-                SheetView.BindDataColumn(column.Index, def.DataField);
+                SheetView.BindDataColumn(column.Index, columnDefinitions.DataField);
             }
         }
 
@@ -327,28 +528,30 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
         /// <summary>
         /// 全テンプレート情報から対象の列定義テンプレート情報を取得する。
         /// </summary>
-        /// <param name="templateDefs">テンプレート定義オブジェクト。</param>
-        /// <param name="def">列定義オブジェクト。</param>
-        /// <param name="targetTemplateDefs">対象となった列定義オブジェクト。</param>
-        private static void ReadColumnTemplates(List<TemplateSheetViewDefinitions> templateDefs, ColumnDefinitions def, List<TemplateColumnDefinitions> targetTemplateDefs)
+        /// <param name="templateDefinitionsList">テンプレート定義オブジェクト。</param>
+        /// <param name="columnDefinitions">列定義オブジェクト。</param>
+        /// <param name="targetTemplateColumnDefinitionsList">対象となった列定義オブジェクト。</param>
+        private static void ReadColumnTemplates(List<TemplateSheetViewDefinition> templateDefinitionsList,
+            ColumnDefinition columnDefinitions, List<TemplateColumnDefinition> targetTemplateColumnDefinitionsList)
         {
-            foreach (var templateDef in templateDefs)
+            foreach (var templateDefinitions in templateDefinitionsList)
             {
-                if (templateDef.Columns == null)
+                if (templateDefinitions.Columns == null)
                 {
                     continue;
                 }
 
-                var columnDef = templateDef.Columns.Where(x => x.TemplateName == def.BaseTemplate).FirstOrDefault();
-                if (columnDef == null)
+                var templateColumnDefinitions = templateDefinitions.Columns
+                    .FirstOrDefault(x => x.TemplateName == columnDefinitions.BaseTemplate);
+                if (templateColumnDefinitions == null)
                 {
                     continue;
                 }
-                if (!string.IsNullOrEmpty(columnDef.TemplateName))
+                if (!string.IsNullOrEmpty(templateColumnDefinitions.TemplateName))
                 {
-                    ReadColumnTemplates(templateDefs, columnDef, targetTemplateDefs);
+                    ReadColumnTemplates(templateDefinitionsList, templateColumnDefinitions, targetTemplateColumnDefinitionsList);
                 }
-                targetTemplateDefs.Add(columnDef);
+                targetTemplateColumnDefinitionsList.Add(templateColumnDefinitions);
             }
         }
     }

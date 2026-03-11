@@ -1,0 +1,80 @@
+﻿[
+  {
+    "DataField": "Column3",
+    "HorizontalAlignment": "Center",
+    "VerticalAlignment": "Bottom",
+    "AllowAutoFilter": true,
+    "AllowAutoSort": true,
+    "Width": 100,
+    "Visible": true,
+    "CellType": "DateTimeCellType",
+    "CellTypeProperties": {
+      "Calendar": "GregorianLocalized",
+      "DateTimeFormat": "LongDate",
+      "MaximumDate": "9999/12/31",
+      "MaximumTime": "23:59:59",
+      "MinumumDate": "0001/01/01",
+      "MinumumTime": "00:00:00",
+      "ReadOnly": false,
+      "Static": false
+    },
+    "ImeMode": "On",
+    "Locked": false,
+    "Options": {
+      "UseFreeWords": true,
+      "ExtendWordsEnabled": true
+    }
+  },
+  {
+    "DataField": "Column2",
+    "VerticalAlignment": "Top",
+    "AllowAutoFilter": true,
+    "AllowAutoSort": true,
+    "CellType": "NumberCellType",
+    "CellTypeProperties": {
+      "DecimalPlaces": -1,
+      "DecimalSeparator": ".",
+      "FixedPoint": true,
+      "LeadingZero": "Yes",
+      "MaximumValue": 100.00,
+      "MinimumValue": 0.00,
+      "NegativeFormat": "UseRegional",
+      "NegativeRed": false,
+      "ReadOnly": false,
+      "Separator": ",",
+      "ShowSeparator": true,
+      "Static": false
+    },
+    "ImeMode": "Off",
+    "Locked": false
+  },
+  {
+    "DataField": "Column7",
+    "VerticalAlignment": "Bottom",
+    "AllowAutoFilter": false,
+    "AllowAutoSort": false,
+    "Width": 50,
+    "Visible": true,
+    "CellType": "NumberCellType",
+    "CellTypeProperties": {
+      "DecimalPlaces": -1,
+      "DecimalSeparator": ".",
+      "FixedPoint": true,
+      "LeadingZero": "Yes",
+      "MaximumValue": 9999999.99,
+      "MinimumValue": -9999999.99,
+      "NegativeFormat": "UseRegional",
+      "NegativeRed": false,
+      "ReadOnly": false,
+      "Separator": ",",
+      "ShowSeparator": true,
+      "Static": false
+    },
+    "ImeMode": "On",
+    "Locked": false,
+    "Options": {
+      "UseFreeWords": true,
+      "ExtendWordsEnabled": true
+    }
+  }
+]

@@ -7,7 +7,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
     /// GrapeCity SPREAD SheetView のレイアウトを構成する列要素を提供します。
     /// </summary>
     [JsonObject]
-    public abstract class ColumnDefinitionsBase
+    public abstract class ColumnDefinitionBase
     {
         /// <summary>
         /// 水平位置を取得または設定します。
