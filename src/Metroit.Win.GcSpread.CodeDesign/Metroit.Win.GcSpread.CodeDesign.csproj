@@ -8,7 +8,7 @@
 		<Authors>Takeru Yamaguchi</Authors>
 		<Description>GrapeCity SPREAD for Windows Forms のデザインをJSONで行うライブラリです。</Description>
 		<Copyright>Copyright 2024 Takeru Yamaguchi.</Copyright>
-		<VersionPrefix>17.2.0.2</VersionPrefix>
+		<VersionPrefix>17.2.0.3</VersionPrefix>
 		<AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
 		<FileVersion>$(VersionPrefix)</FileVersion>
 		<PackageProjectUrl>https://github.com/takiru/Metroit.Win.GcSpread.CodeDesign</PackageProjectUrl>
@@ -19,9 +19,7 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageId>$(AssemblyName).ja</PackageId>
 		<PackageReleaseNotes>
-      - 各種クラス名の整備。
-      - SheetViewGenerator.GenerateLayout(), GenerateLayoutFrom() に、列が生成された直後に発生する generatedColumn デリゲートの引数を追加。
-      - DataField を利用して、既存の列に任意のプロパティを設定可能にするための ColumnGenerator.GenerateColumnsByDataFieldFrom(), GenerateColumnsByDataField() を追加。
+      - ColumnGenerator.GenerateColumnsByDataFieldFrom(), GenerateColumnsByDataField()で、元の列にCellTypeが設定されていないと NullReferenceException が発生する問題を解消。
     </PackageReleaseNotes>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>

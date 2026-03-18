@@ -295,7 +295,7 @@ namespace Metroit.Win.GcSpread.CodeDesign.Json
                 SetColumnProperties(SheetView.Columns[columnIndex], columnDefinitions);
 
                 ICellType cellType;
-                if (SheetView.Columns[columnIndex].CellType.GetType().Name == columnDefinitions.CellType)
+                if (SheetView.Columns[columnIndex].CellType?.GetType().Name == columnDefinitions.CellType)
                 {
                     cellType = SheetView.Columns[columnIndex].CellType;
                 }
